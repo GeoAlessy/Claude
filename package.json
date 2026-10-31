@@ -1,0 +1,23 @@
+{
+  "name": "en-este-mundo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Canal de YouTube Shorts 'En Este Mundo' animado con Remotion",
+  "scripts": {
+    "studio": "remotion studio",
+    "hoja": "remotion still HojaPersonajes out/hoja_personajes.png",
+    "render": "remotion render Ep01 out/EP01_ya_voy.mp4 --crf=18 --pixel-format=yuv420p"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.539",
+    "@remotion/fonts": "^4.0.539",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "remotion": "^4.0.539"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "typescript": "^7.0.2"
+  }
+}
