@@ -13,7 +13,7 @@ import {Celular} from '../props/Celular';
  * Origen (0,0) = entre los pies, sobre el piso. Altura de pie ≈ 870 px a escala 1.
  */
 
-export type BrazosChato = 'relajado' | 'celular' | 'arriba' | 'baston' | 'bajarCel' | 'apoyo' | 'cuchara';
+export type BrazosChato = 'relajado' | 'celular' | 'arriba' | 'baston' | 'bajarCel' | 'apoyo' | 'cuchara' | 'soloBaston';
 export type MiradaChato = 'celular' | 'frente' | 'izquierda' | 'derecha' | 'arriba' | 'abajo';
 export type ExpresionChato = 'normal' | 'shock' | 'aburrido' | 'emocionado' | 'brilloso' | 'feliz';
 
@@ -35,6 +35,7 @@ const POSES: Record<BrazosChato, PoseBrazos> = {
   bajarCel: {L: [[-120, -455], [-58, -398]], R: [[118, -470], [104, -382]], cel: {p: [-50, -416], rot: -60}},
   apoyo: {L: [[-150, -480], [-150, -392]], R: [[150, -480], [150, -392]]},
   cuchara: {L: [[-120, -450], [-40, -470]], R: [[130, -470], [60, -560]]},
+  soloBaston: {L: [[-116, -470], [-108, -378]], R: [[136, -470], [150, -392]], baston: true},
 };
 
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;

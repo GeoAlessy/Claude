@@ -2,3 +2,5 @@ node_modules
 .DS_Store
 out/*.mp4
 !out/EP01_ya_voy.mp4
+out/qa/
+out/qa_*.png
