@@ -7,3 +7,4 @@ out/qa_*.png
 
 # Clips de terceros (copyright): no se suben al repo
 clips/
+public/porquepaso/p01/*.mp4
