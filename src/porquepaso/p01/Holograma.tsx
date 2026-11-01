@@ -117,7 +117,7 @@ const Escalones: React.FC<{d: number; color: string; opac: number}> = ({d, color
     const contra = Math.max(yTop - yBase, 0.001);
     pasos.push(
       <group key={k}>
-        <Holo geom={caja(PASO - 0.02, 0.03, ANCHO - 0.04)} color={color} relleno={0.06 * opac} linea={0.55 * opac} position={[x + PASO / 2, yTop - 0.015, 0]} />
+        <Holo geom={caja(PASO - 0.02, 0.03, ANCHO - 0.04)} color={color} relleno={0.09 * opac} linea={0.7 * opac} position={[x + PASO / 2, yTop - 0.015, 0]} />
         {contra > 0.02 && (
           <Holo geom={caja(0.02, contra, ANCHO - 0.04)} color={color} relleno={0.05 * opac} linea={0.4 * opac} position={[x + 0.01, yBase + contra / 2, 0]} />
         )}
@@ -174,6 +174,38 @@ const Peine: React.FC<{x: number; y?: number; color: string; opac: number; empuj
 };
 
 // Figura humana simple (holograma); "paso" anima las piernas
+// Maniquí holográfico (cápsulas): se lee como persona incluso en pantallas chicas.
+// Mira hacia +x. "paso" anima la caminata.
+const G = {
+  torso: new THREE.CapsuleGeometry(0.15, 0.34, 3, 10),
+  cadera: new THREE.CapsuleGeometry(0.13, 0.1, 3, 10),
+  cuello: new THREE.CapsuleGeometry(0.045, 0.06, 2, 8),
+  cabeza: new THREE.SphereGeometry(0.11, 12, 10),
+  muslo: new THREE.CapsuleGeometry(0.075, 0.3, 3, 8),
+  pierna: new THREE.CapsuleGeometry(0.06, 0.32, 3, 8),
+  brazo: new THREE.CapsuleGeometry(0.05, 0.24, 3, 8),
+  antebrazo: new THREE.CapsuleGeometry(0.045, 0.22, 3, 8),
+};
+const Parte: React.FC<{g: THREE.BufferGeometry; color: string; fuerte?: boolean} & React.JSX.IntrinsicElements['group']> = ({g, color, fuerte = false, ...p}) => (
+  <Holo geom={g} color={color} relleno={fuerte ? 0.16 : 0.12} linea={0.75} angulo={28} {...p} />
+);
+const Pierna: React.FC<{color: string; z: number; giro: number}> = ({color, z, giro}) => (
+  <group position={[0, 0.92, z]} rotation={[0, 0, giro]}>
+    <Parte g={G.muslo} color={color} position={[0, -0.22, 0]} />
+    <group position={[0, -0.44, 0]} rotation={[0, 0, -Math.max(0, -giro) * 1.2]}>
+      <Parte g={G.pierna} color={color} position={[0, -0.22, 0]} />
+      <Holo geom={caja(0.24, 0.07, 0.11)} color={color} relleno={0.25} linea={0.9} position={[0.06, -0.44, 0]} />
+    </group>
+  </group>
+);
+const Brazo: React.FC<{color: string; z: number; giro: number; adelante?: boolean}> = ({color, z, giro, adelante = false}) => (
+  <group position={[0, 1.42, z]} rotation={[0, 0, adelante ? 1.1 : giro]}>
+    <Parte g={G.brazo} color={color} position={[0, -0.17, 0]} />
+    <group position={[0, -0.33, 0]} rotation={[0, 0, adelante ? 0.6 : 0.15]}>
+      <Parte g={G.antebrazo} color={color} position={[0, -0.15, 0]} />
+    </group>
+  </group>
+);
 const Persona: React.FC<{color: string; paso: number; escala?: number; camara?: boolean} & React.JSX.IntrinsicElements['group']> = ({
   color,
   paso,
@@ -181,20 +213,23 @@ const Persona: React.FC<{color: string; paso: number; escala?: number; camara?: 
   camara = false,
   ...props
 }) => {
-  const a = Math.sin(paso) * 0.45;
+  const a = Math.sin(paso) * 0.4;
   return (
     <group {...props} scale={escala}>
-      <Holo geom={caja(0.26, 0.6, 0.42)} color={color} relleno={0.1} linea={0.85} position={[0, 1.2, 0]} />
-      <Holo geom={useMemo(() => new THREE.SphereGeometry(0.12, 10, 8), [])} color={color} relleno={0.1} linea={0.5} angulo={30} position={[0, 1.65, 0]} />
-      <group position={[0, 0.9, -0.1]} rotation={[0, 0, a]}>
-        <Holo geom={caja(0.12, 0.88, 0.13)} color={color} relleno={0.08} linea={0.8} position={[0, -0.44, 0]} />
-        <Holo geom={caja(0.26, 0.08, 0.12)} color={color} relleno={0.2} linea={0.9} position={[0.07, -0.88, 0]} />
-      </group>
-      <group position={[0, 0.9, 0.1]} rotation={[0, 0, -a]}>
-        <Holo geom={caja(0.12, 0.88, 0.13)} color={color} relleno={0.08} linea={0.8} position={[0, -0.44, 0]} />
-        <Holo geom={caja(0.26, 0.08, 0.12)} color={color} relleno={0.2} linea={0.9} position={[0.07, -0.88, 0]} />
-      </group>
-      {camara && <Holo geom={caja(0.3, 0.2, 0.18)} color={color} relleno={0.2} linea={1} position={[0.3, 1.45, 0]} />}
+      <Parte g={G.cadera} color={color} position={[0, 0.98, 0]} rotation={[Math.PI / 2, 0, 0]} scale={[1, 1.2, 1]} />
+      <Parte g={G.torso} color={color} fuerte position={[0, 1.27, 0]} scale={[0.85, 1, 1.35]} />
+      <Parte g={G.cuello} color={color} position={[0, 1.53, 0]} />
+      <Parte g={G.cabeza} color={color} fuerte position={[0.01, 1.66, 0]} scale={[1, 1.15, 0.95]} />
+      <Pierna color={color} z={-0.1} giro={a} />
+      <Pierna color={color} z={0.1} giro={-a} />
+      <Brazo color={color} z={-0.24} giro={-a * 0.8} adelante={camara} />
+      <Brazo color={color} z={0.24} giro={a * 0.8} adelante={camara} />
+      {camara && (
+        <group position={[0.42, 1.35, 0]}>
+          <Holo geom={caja(0.26, 0.18, 0.16)} color={color} relleno={0.3} linea={1} />
+          <Holo geom={useMemo(() => new THREE.CylinderGeometry(0.06, 0.07, 0.14, 12), [])} color={color} relleno={0.3} linea={1} angulo={30} position={[0.19, 0, 0]} rotation={[0, 0, Math.PI / 2]} />
+        </group>
+      )}
     </group>
   );
 };

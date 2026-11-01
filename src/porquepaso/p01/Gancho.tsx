@@ -84,7 +84,7 @@ export const Gancho: React.FC = () => {
   const barrido = interpolate(tc, [SEG.CONGELADO.dur - 14, SEG.CONGELADO.dur], [-80, 2000], clamp);
 
   // Pregunta superior
-  const entradaPregunta = spring({frame: frame - 2, fps, config: {damping: 16}});
+  const entradaPregunta = 1; // visible desde el fotograma 0: es la miniatura en el feed
   const destelloRojo = frame >= FRENO_FIN && frame < FRENO_FIN + 12 && Math.floor(frame / 3) % 2 === 0;
 
   return (
@@ -100,12 +100,15 @@ export const Gancho: React.FC = () => {
         <Sequence from={SEG.D.desde} durationInFrames={SEG.D.dur}>
           <Clip archivo="D.mp4" />
         </Sequence>
-        <Sequence from={SEG.E.desde} durationInFrames={Math.min(SEG.E.dur, SEG.CONGELADO.desde - SEG.E.desde)}>
+        <Sequence from={SEG.E.desde} durationInFrames={SEG.E.dur}>
           <Clip archivo="E.mp4" />
         </Sequence>
+        <Sequence from={SEG.F.desde} durationInFrames={SEG.CONGELADO.desde - SEG.F.desde}>
+          <Clip archivo="F.mp4" />
+        </Sequence>
         <Sequence from={SEG.CONGELADO.desde} durationInFrames={SEG.CONGELADO.dur}>
-          <Freeze frame={Math.max(0, SEG.CONGELADO.desde - SEG.E.desde - 1)}>
-            <Clip archivo="E.mp4" />
+          <Freeze frame={Math.max(0, SEG.CONGELADO.desde - SEG.F.desde - 1)}>
+            <Clip archivo="F.mp4" />
           </Freeze>
         </Sequence>
       </AbsoluteFill>
@@ -133,20 +136,27 @@ export const Gancho: React.FC = () => {
         <FlujoChevrones desde={[1000, 1760]} hasta={[120, 1060]} avance={avance} color={colorEstado} n={6} />
       )}
 
-      {frame >= SEG.D.desde && frame < SEG.CONGELADO.desde && (
+      {frame >= SEG.D.desde && frame < SEG.F.desde && (
         <Reticula
           centro={seguirPunto(frame, OBJETIVO_D)}
           radio={230}
           color={C.rojo}
           inicio={SEG.D.desde + 4}
-          fin={SEG.CONGELADO.desde - 2}
+          fin={SEG.F.desde - 2}
           etiqueta="Sube a pie"
           ladoEtiqueta="izq"
         />
       )}
 
       {/* estado de la escalera */}
-      {!enCongelado && (
+      {frame >= SEG.F.desde && !enCongelado && (
+        <div style={{position: 'absolute', left: 60, top: 1240}}>
+          <Pastilla color={C.blanco} tam={30}>
+            Donald Trump
+          </Pastilla>
+        </div>
+      )}
+      {frame < SEG.F.desde && (
         <div style={{position: 'absolute', left: 60, top: 1240, opacity: interpolate(frame, [6, 14], [0, 1], clamp)}}>
           <Pastilla color={colorEstado} punto tam={32}>
             {textoEstado}

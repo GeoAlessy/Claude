@@ -138,3 +138,15 @@ cola = np.convolve(seco, ir)[: len(t)]
 transicion = seco + 0.18 * cola / (np.max(np.abs(cola)) or 1)
 transicion *= env(len(t), 0.01, 0.3)
 guardar('transicion.wav', transicion, pico=0.7)
+
+# Riser: tensión que sube ~1 s y corta en seco (antes de "¿SABOTAJE?" y del clic)
+t = t_(1.1)
+f_r = np.linspace(200, 1400, len(t)) ** 1.0
+riser = 0.5 * np.sin(2 * np.pi * np.cumsum(f_r) / SR) * np.linspace(0, 1, len(t)) ** 2.2
+esp = np.fft.rfft(rng.normal(0, 1, len(t)))
+fr_ = np.fft.rfftfreq(len(t), 1 / SR)
+esp[(fr_ < 1500) | (fr_ > 9000)] = 0
+ruido = np.fft.irfft(esp, len(t))
+riser += 0.35 * ruido / (np.max(np.abs(ruido)) or 1) * np.linspace(0, 1, len(t)) ** 3
+riser[-int(0.02 * SR):] *= np.linspace(1, 0, int(0.02 * SR))
+guardar('riser.wav', riser, pico=0.6)

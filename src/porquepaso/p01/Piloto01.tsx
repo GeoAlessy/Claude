@@ -11,6 +11,7 @@ import {
   FIN_CARD,
   FPS,
   H,
+  FIN,
   INICIO,
   INI_HOLO,
   LLEGA_MOTOR,
@@ -32,10 +33,12 @@ const VOZ: [string, number, boolean][] = VOZ_ORDEN.map((id) => [id, INICIO[id], 
 
 // Efectos: [archivo, fotograma, volumen]
 const SFX: [string, number, number][] = [
+  ['riser', SEG.CONGELADO.desde - 33, 0.35],
   ['impacto', SEG.CONGELADO.desde, 0.9],
   ['escaneo', INI_HOLO - 14, 0.6],
   ['transicion', INI_HOLO + H.PEINE, 0.22],
   ['transicion', INI_HOLO + H.CLIC, 0.22],
+  ['riser', INI_HOLO + SENAL - 33, 0.3],
   ['clic', INI_HOLO + SENAL, 1],
   ['senal', INI_HOLO + SENAL + 2, 0.45],
   ['motor_apagado', INI_HOLO + LLEGA_MOTOR - 4, 0.7],
@@ -141,6 +144,42 @@ const Cierre: React.FC = () => {
   );
 };
 
+// ---------- Música que se hace a un lado cuando habla la voz (ducking) ----------
+function volumenMusica(f: number) {
+  let distancia = Infinity;
+  for (const id of VOZ_ORDEN) {
+    const ini = INICIO[id] - 3;
+    const fin = FIN[id] + 3;
+    distancia = Math.min(distancia, f < ini ? ini - f : f > fin ? f - fin : 0);
+  }
+  const base = 0.07 + 0.11 * Math.min(1, distancia / 8); // 0.07 con voz, 0.18 en pausas
+  const extremos = interpolate(f, [0, 10, DURACION_P01 - 20, DURACION_P01], [0, 1, 1, 0], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
+  return base * extremos;
+}
+
+// ---------- Firma fija del canal (reconocimiento en el feed) ----------
+const FirmaCanal: React.FC = () => (
+  <div
+    style={{
+      position: 'absolute',
+      top: 164,
+      right: 62,
+      fontFamily: "'JetBrains Mono', monospace",
+      fontWeight: 700,
+      fontSize: 26,
+      letterSpacing: 2,
+      color: C.cian,
+      padding: '6px 14px',
+      border: `2px solid ${C.cian}`,
+      borderRadius: 10,
+      background: 'rgba(4,10,18,0.55)',
+      boxShadow: `0 0 18px ${C.cian}55`,
+    }}
+  >
+    ¿POR QUÉ PASÓ?
+  </div>
+);
+
 export const Piloto01: React.FC = () => {
   return (
     <AbsoluteFill style={{background: '#000'}}>
@@ -154,9 +193,10 @@ export const Piloto01: React.FC = () => {
         <Cierre />
       </Sequence>
       <Subtitulos />
+      <FirmaCanal />
 
       {/* Audio */}
-      <Audio src={staticFile('porquepaso/sfx/fondo_investigacion.wav')} volume={(f) => interpolate(f, [0, 10, DURACION_P01 - 20, DURACION_P01], [0, 0.16, 0.16, 0], {extrapolateRight: 'clamp'})} />
+      <Audio src={staticFile('porquepaso/sfx/fondo_investigacion.wav')} volume={volumenMusica} />
       {VOZ.map(([nombre, desde]) => (
         <Sequence key={nombre} from={desde}>
           <Audio src={staticFile(`porquepaso/p01/voz/${nombre}.mp3`)} volume={1} />

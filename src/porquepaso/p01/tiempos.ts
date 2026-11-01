@@ -59,10 +59,13 @@ export const SEG = {
   C: {desde: 81, dur: 42}, // plano desde arriba
   D: {desde: 123, dur: 66}, // Trump sube a pie
   E: {desde: 189, dur: 54}, // sigue subiendo (extensión)
+  F: {desde: 0, dur: 48}, // corte a la cara de Trump en "Trump dijo…"
   CONGELADO: {desde: 0, dur: 0},
 };
-// Se congela justo cuando se dice "sabotaje" (o al acabarse el clip)
-SEG.CONGELADO.desde = Math.min(SEG.E.desde + SEG.E.dur, marca('03_sabotaje', 'sabotaje'));
+// En "Trump dijo que fue sabotaje" se corta a su cara y se congela justo en "sabotaje"
+SEG.F.desde = marca('03_sabotaje', 'trump') - 3;
+SEG.E.dur = Math.min(SEG.E.dur, SEG.F.desde - SEG.E.desde);
+SEG.CONGELADO.desde = Math.min(SEG.F.desde + SEG.F.dur, marca('03_sabotaje', 'sabotaje'));
 // El holograma empieza a construirse en "Pero la verdadera razón…"
 export const INI_HOLO = INICIO['04_pieza'] + 10;
 SEG.CONGELADO.dur = INI_HOLO - SEG.CONGELADO.desde;
