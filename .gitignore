@@ -4,3 +4,6 @@ out/*.mp4
 !out/EP01_ya_voy.mp4
 out/qa/
 out/qa_*.png
+
+# Clips de terceros (copyright): no se suben al repo
+clips/
