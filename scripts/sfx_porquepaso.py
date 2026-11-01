@@ -118,3 +118,23 @@ musica = (0.5 * base + 0.6 * latido + arpegio) * env(len(t), 1.5, 2.5)
 izq = musica + 0.02 * lp(rng.normal(0, 1, len(t)), 50)
 der = np.roll(musica, int(0.012 * SR)) + 0.02 * lp(rng.normal(0, 1, len(t)), 50)
 guardar('fondo_investigacion.wav', np.stack([izq, der], 1), pico=0.7)
+
+# Transición suave y limpia (reemplaza al whoosh): barrido tonal + aire filtrado + cola corta
+t = t_(0.9)
+dur_n = int(0.5 * SR)
+tt = t[:dur_n]
+forma = np.sin(np.pi * tt / tt[-1]) ** 2
+tono = np.sin(2 * np.pi * np.cumsum(np.linspace(380, 760, dur_n)) / SR) * forma
+tono += 0.3 * np.sin(2 * np.pi * np.cumsum(np.linspace(760, 1520, dur_n)) / SR) * forma
+espectro = np.fft.rfft(rng.normal(0, 1, dur_n))
+frecs = np.fft.rfftfreq(dur_n, 1 / SR)
+espectro[(frecs < 2500) | (frecs > 7000)] = 0
+aire = np.fft.irfft(espectro, dur_n) * forma
+aire = aire / (np.max(np.abs(aire)) or 1) * 0.18
+seco = np.zeros(len(t))
+seco[:dur_n] = 0.6 * tono / np.max(np.abs(tono)) + aire
+ir = rng.normal(0, 1, int(0.35 * SR)) * np.exp(-np.linspace(0, 8, int(0.35 * SR)))
+cola = np.convolve(seco, ir)[: len(t)]
+transicion = seco + 0.18 * cola / (np.max(np.abs(cola)) or 1)
+transicion *= env(len(t), 0.01, 0.3)
+guardar('transicion.wav', transicion, pico=0.7)
