@@ -20,7 +20,7 @@ export const SEG = {
   A: {desde: 0, dur: 81}, // se acercan y se suben (escalera en movimiento)
   C: {desde: 81, dur: 42}, // plano desde arriba: la escalera se detiene
   D: {desde: 123, dur: 66}, // Trump sube a pie la escalera detenida
-  CONGELADO: {desde: 189, dur: 51},
+  CONGELADO: {desde: 189, dur: 100},
 };
 export const DURACION_GANCHO = SEG.CONGELADO.desde + SEG.CONGELADO.dur;
 
@@ -167,7 +167,7 @@ export const Gancho: React.FC = () => {
               textAlign: 'center',
               fontFamily: TITULAR,
               fontWeight: 900,
-              fontSize: 132,
+              fontSize: 116,
               color: C.rojo,
               textShadow: `0 0 40px ${C.rojo}88, 0 6px 0 rgba(0,0,0,0.6)`,
               transform: `scale(${spring({frame: tc - 3, fps, config: {damping: 12, stiffness: 180}})})`,
