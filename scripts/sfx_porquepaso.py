@@ -150,3 +150,85 @@ ruido = np.fft.irfft(esp, len(t))
 riser += 0.35 * ruido / (np.max(np.abs(ruido)) or 1) * np.linspace(0, 1, len(t)) ** 3
 riser[-int(0.02 * SR):] *= np.linspace(1, 0, int(0.02 * SR))
 guardar('riser.wav', riser, pico=0.6)
+
+# ---------------------------------------------------------------------
+# Música v2 "curiosidad": La menor, Am–F–C–G a 100 bpm, piano eléctrico (FM)
+# + arpegio con eco + bajo suave + pulso ligero. Pensada para ir muy baja bajo la voz.
+# ---------------------------------------------------------------------
+def nota(n):  # número MIDI → Hz
+    return 440 * 2 ** ((n - 69) / 12)
+
+
+def epiano(fr, d, vel=1.0):
+    t = t_(d)
+    mod = 1.8 * np.exp(-t * 6) * np.sin(2 * np.pi * fr * 1.0 * t)
+    x = np.sin(2 * np.pi * fr * t + mod) * np.exp(-t * 1.6) + 0.25 * np.sin(2 * np.pi * fr * 2 * t) * np.exp(-t * 4)
+    return vel * x * env(len(t), 0.004, min(0.3, d * 0.4))
+
+
+def pulsar(fr, d):
+    t = t_(d)
+    x = np.sin(2 * np.pi * fr * t) * np.exp(-t * 9) + 0.3 * np.sin(2 * np.pi * fr * 3 * t) * np.exp(-t * 16)
+    return x * env(len(t), 0.002, 0.05)
+
+
+def poner(pista, x, seg, ganancia=1.0):
+    i = int(seg * SR)
+    if i >= len(pista):
+        return
+    n = min(len(x), len(pista) - i)
+    pista[i : i + n] += ganancia * x[:n]
+
+
+DUR_M = 46
+BPM = 100
+TIEMPO = 60 / BPM
+COMPAS = 4 * TIEMPO
+N = int(DUR_M * SR)
+L = np.zeros(N)
+R = np.zeros(N)
+acordes = [[57, 60, 64], [53, 57, 60], [48, 52, 55], [55, 59, 62]]  # Am F C G
+bajos = [45, 41, 48, 43]
+arpe_pat = [0, 1, 2, 1, 2, 0, 1, 2]
+k = 0
+c = 0
+while c * COMPAS < DUR_M:
+    ac = acordes[c % 4]
+    base = c * COMPAS
+    # Piano eléctrico: acorde en el 1 y empuje suave en el "y" del 3
+    for i, n in enumerate(ac):
+        s = epiano(nota(n), COMPAS * 0.95, 0.35)
+        poner(L, s, base + 0.006 * i, 1.0 - 0.15 * i)
+        poner(R, s, base + 0.006 * i, 0.7 + 0.15 * i)
+        poner(L, epiano(nota(n), TIEMPO * 1.4, 0.15), base + 2.5 * TIEMPO)
+        poner(R, epiano(nota(n), TIEMPO * 1.4, 0.15), base + 2.5 * TIEMPO)
+    # Bajo redondo
+    tb = t_(COMPAS)
+    bajo = np.sin(2 * np.pi * nota(bajos[c % 4] - 12) * tb) * env(len(tb), 0.02, 0.3) * 0.5
+    poner(L, bajo, base)
+    poner(R, bajo, base)
+    # Arpegio en corcheas (desde el compás 2) con eco estéreo
+    if c >= 1:
+        for j in range(8):
+            fr = nota(ac[arpe_pat[j]] + 12)
+            p = pulsar(fr, TIEMPO * 0.9) * 0.12
+            seg = base + j * TIEMPO / 2
+            poner(L, p, seg)
+            poner(R, p, seg, 0.6)
+            poner(R, p, seg + TIEMPO * 0.75, 0.35)
+            poner(L, p, seg + TIEMPO * 1.5, 0.18)
+    # Pulso: bombo suave en 1 y 3, hat ligero en contratiempos (desde el compás 2)
+    if c >= 1:
+        for b in (0, 2):
+            tk = t_(0.35)
+            bombo = np.sin(2 * np.pi * np.cumsum(np.linspace(110, 45, len(tk))) / SR) * np.exp(-tk * 12) * 0.5
+            poner(L, bombo, base + b * TIEMPO)
+            poner(R, bombo, base + b * TIEMPO)
+        for b in range(4):
+            th = t_(0.06)
+            hat = np.diff(rng.normal(0, 1, len(th) + 1)) * np.exp(-th * 70) * 0.05
+            poner(L, hat, base + (b + 0.5) * TIEMPO, 0.7)
+            poner(R, hat, base + (b + 0.5) * TIEMPO)
+    c += 1
+mus = np.stack([L, R], 1) * env(N, 0.8, 2.0)[:, None]
+guardar('fondo_curiosidad.wav', mus, pico=0.8)

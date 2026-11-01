@@ -151,7 +151,7 @@ function volumenMusica(f: number) {
     const fin = FIN[id] + 3;
     distancia = Math.min(distancia, f < ini ? ini - f : f > fin ? f - fin : 0);
   }
-  const base = 0.07 + 0.11 * Math.min(1, distancia / 8); // 0.07 con voz, 0.18 en pausas
+  const base = 0.09 + 0.07 * Math.min(1, distancia / 8); // 0.09 con voz, 0.16 en pausas (leve)
   const extremos = interpolate(f, [0, 10, DURACION_P01 - 20, DURACION_P01], [0, 1, 1, 0], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
   return base * extremos;
 }
@@ -195,7 +195,7 @@ export const Piloto01: React.FC = () => {
       <FirmaCanal />
 
       {/* Audio */}
-      <Audio src={staticFile('porquepaso/sfx/fondo_investigacion.wav')} volume={volumenMusica} />
+      <Audio src={staticFile('porquepaso/sfx/fondo_curiosidad.wav')} volume={volumenMusica} />
       {VOZ.map(([nombre, desde]) => (
         <Sequence key={nombre} from={desde}>
           <Audio src={staticFile(`porquepaso/p01/voz/${nombre}.mp3`)} volume={1} />
