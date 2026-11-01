@@ -188,9 +188,11 @@ const G = {
   brazo: new THREE.CapsuleGeometry(0.05, 0.24, 3, 8),
   antebrazo: new THREE.CapsuleGeometry(0.045, 0.22, 3, 8),
 };
-const Parte: React.FC<{g: THREE.BufferGeometry; color: string; fuerte?: boolean} & React.JSX.IntrinsicElements['group']> = ({g, color, fuerte = false, ...p}) => (
-  <Holo geom={g} color={color} relleno={fuerte ? 0.16 : 0.12} linea={0.75} angulo={28} {...p} />
-);
+const OpPersona = React.createContext(1);
+const Parte: React.FC<{g: THREE.BufferGeometry; color: string; fuerte?: boolean} & React.JSX.IntrinsicElements['group']> = ({g, color, fuerte = false, ...p}) => {
+  const o = React.useContext(OpPersona);
+  return <Holo geom={g} color={color} relleno={(fuerte ? 0.16 : 0.12) * o} linea={0.75 * o} angulo={28} {...p} />;
+};
 const Pierna: React.FC<{color: string; z: number; giro: number}> = ({color, z, giro}) => (
   <group position={[0, 0.92, z]} rotation={[0, 0, giro]}>
     <Parte g={G.muslo} color={color} position={[0, -0.22, 0]} />
@@ -208,15 +210,17 @@ const Brazo: React.FC<{color: string; z: number; giro: number; adelante?: boolea
     </group>
   </group>
 );
-const Persona: React.FC<{color: string; paso: number; escala?: number; camara?: boolean} & React.JSX.IntrinsicElements['group']> = ({
+const Persona: React.FC<{color: string; paso: number; escala?: number; camara?: boolean; opac?: number} & React.JSX.IntrinsicElements['group']> = ({
   color,
   paso,
   escala = 1,
   camara = false,
+  opac = 1,
   ...props
 }) => {
   const a = Math.sin(paso) * 0.4;
   return (
+    <OpPersona.Provider value={opac}>
     <group {...props} scale={escala}>
       <Parte g={G.cadera} color={color} position={[0, 0.98, 0]} rotation={[Math.PI / 2, 0, 0]} scale={[1, 1.2, 1]} />
       <Parte g={G.torso} color={color} fuerte position={[0, 1.27, 0]} scale={[0.85, 1, 1.35]} />
@@ -228,11 +232,12 @@ const Persona: React.FC<{color: string; paso: number; escala?: number; camara?: 
       <Brazo color={color} z={0.24} giro={a * 0.8} adelante={camara} />
       {camara && (
         <group position={[0.42, 1.35, 0]}>
-          <Holo geom={caja(0.26, 0.18, 0.16)} color={color} relleno={0.3} linea={1} />
-          <Holo geom={useMemo(() => new THREE.CylinderGeometry(0.06, 0.07, 0.14, 12), [])} color={color} relleno={0.3} linea={1} angulo={30} position={[0.19, 0, 0]} rotation={[0, 0, Math.PI / 2]} />
+          <Holo geom={caja(0.26, 0.18, 0.16)} color={color} relleno={0.3 * opac} linea={opac} />
+          <Holo geom={useMemo(() => new THREE.CylinderGeometry(0.06, 0.07, 0.14, 12), [])} color={color} relleno={0.3 * opac} linea={opac} angulo={30} position={[0.19, 0, 0]} rotation={[0, 0, Math.PI / 2]} />
         </group>
       )}
     </group>
+    </OpPersona.Provider>
   );
 };
 
@@ -279,9 +284,13 @@ const Escena: React.FC<{f: number}> = ({f}) => {
   const pinza = interpolate(f, [LLEGA_MOTOR, LLEGA_MOTOR + 6], [0.06, 0.012], clamp) * (f < H.CIERRE ? 1 : 1);
 
   // Camarógrafo: sube de espaldas hacia el peine
-  const xCam = interpolate(f, [H.CAMARA, H.CAMARA + 110], [X1 - 1.1, X1 + 0.15], {...clamp, easing: Easing.out(Easing.quad)});
-  const camVisible = f < H.PEINE + 12;
-  const opCam = interpolate(f, [H.PEINE - 6, H.PEINE + 10], [1, 0.001], clamp);
+  // Sube de espaldas, cruza el peine y sigue caminando por el piso de arriba (sale de cuadro caminando, no desaparece)
+  const xCam =
+    f < H.PEINE
+      ? interpolate(f, [H.CAMARA, H.CAMARA + 110], [X1 - 1.1, X1 + 0.15], {...clamp, easing: Easing.out(Easing.quad)})
+      : interpolate(f, [H.PEINE, H.PEINE + 70], [X1 + 0.15, XC + 2.6], {...clamp, easing: Easing.inOut(Easing.quad)});
+  // Las personas no desaparecen: se vuelven tenues mientras la cámara mira el peine de cerca
+  const opPersonas = interpolate(f, [H.PEINE - 6, H.PEINE + 10, H.CIERRE + 20, H.CIERRE + 40], [1, 0.3, 0.3, 0.55], clamp) * Math.max(0.4, exterior);
 
   // Talón (demo del clic) y zapato (demo de atrapamiento)
   const xTalon = interpolate(f, [H.CLIC, EMPUJE], [XC - 0.55, XC - 0.07], {...clamp, easing: Easing.in(Easing.quad)});
@@ -356,22 +365,18 @@ const Escena: React.FC<{f: number}> = ({f}) => {
         </group>
 
         {/* Personas */}
-        {f < H.PEINE && (
-          <>
-            <Persona color={C.cian} paso={0} position={[P.pareja.x, 0, -0.2]} rotation={[0, 0, 0]} />
-            <Persona color={C.cian} paso={0} escala={0.95} position={[P.pareja.x + 0.55, yDe(P.pareja.x + 0.55), 0.22]} />
-          </>
-        )}
-        {camVisible && (
+        <Persona color={C.cian} paso={0} opac={opPersonas} position={[P.pareja.x, 0, -0.2]} rotation={[0, 0, 0]} />
+        <Persona color={C.cian} paso={0} opac={opPersonas} escala={0.95} position={[P.pareja.x + 0.55, yDe(P.pareja.x + 0.55), 0.22]} />
+        {(
           <group>
             {/* mira hacia abajo de la escalera (−x) y camina hacia atrás (+x) */}
             <Persona
               color={C.rojo}
-              paso={f / 4}
+              paso={f < H.CAMARA + 110 || (f >= H.PEINE && f < H.PEINE + 70) ? f / 4 : 0}
               camara
               position={[xCam, yDe(xCam + 0.2), 0]}
               rotation={[0, Math.PI, 0]}
-              scale={opCam}
+              opac={opPersonas}
             />
           </group>
         )}
@@ -449,14 +454,14 @@ export const Holograma: React.FC = () => {
       </ThreeCanvas>
 
       {/* Etiquetas */}
-      <Etiqueta3D f={f} punto={P.camarografo.clone().add(new THREE.Vector3(0.3, 1.9, 0))} desde={H.CAMARA + 20} hasta={H.PEINE + 20} color={C.rojo} texto="Camarógrafo" dx={-60} dy={-150} />
-      <Etiqueta3D f={f} punto={P.pareja.clone().add(new THREE.Vector3(0.3, 1.9, 0))} desde={H.CAMARA + 10} hasta={H.PEINE - 10} texto="Trump y Melania" dx={40} dy={-130} />
-      <Etiqueta3D f={f} punto={P.peine} desde={H.PEINE + 45} hasta={H.RAYOSX + 10} texto="Peine" dx={-80} dy={-200} />
-      <Etiqueta3D f={f} punto={P.sensor} desde={H.RAYOSX + 25} hasta={H.CLIC + 15} color={C.rojo} texto="Sensor de impacto" dx={-120} dy={180} />
-      <Etiqueta3D f={f} punto={P.sensor} desde={SENAL} hasta={SENAL + 40} color={C.rojo} texto="¡Clic!" dx={-80} dy={-160} />
+      <Etiqueta3D f={f} punto={P.camarografo.clone().add(new THREE.Vector3(0.3, 1.9, 0))} desde={H.CAMARA + 20} hasta={H.PEINE + 25} color={C.rojo} texto="Camarógrafo" dx={-60} dy={-150} />
+      <Etiqueta3D f={f} punto={P.pareja.clone().add(new THREE.Vector3(0.3, 1.9, 0))} desde={H.CAMARA + 10} hasta={H.PEINE + 25} texto="Trump y Melania" dx={40} dy={-130} />
+      <Etiqueta3D f={f} punto={P.peine} desde={H.PEINE + 45} hasta={H.CLIC} texto="Peine" dx={-80} dy={-200} />
+      <Etiqueta3D f={f} punto={P.sensor} desde={H.RAYOSX + 25} hasta={H.PARA_QUE} color={C.rojo} texto="Sensor de impacto" dx={-120} dy={180} />
+      <Etiqueta3D f={f} punto={P.sensor} desde={SENAL} hasta={H.PARA_QUE} color={C.rojo} texto="¡Clic!" dx={-80} dy={-160} />
       <Etiqueta3D f={f} punto={P.motor} desde={LLEGA_MOTOR - 5} hasta={H.PARA_QUE - 5} color={C.rojo} texto="Motor: apagado" dx={-60} dy={-300} />
       <Etiqueta3D f={f} punto={P.freno} desde={LLEGA_MOTOR + 8} hasta={H.PARA_QUE - 5} color={C.rojo} texto="Freno: activado" dx={80} dy={-170} />
-      <Etiqueta3D f={f} punto={P.peine.clone().add(new THREE.Vector3(-0.15, 0.05, -0.3))} desde={ATASCO + 6} hasta={H.ONU - 5} color={C.verde} texto="Se detiene a tiempo ✓" dx={-40} dy={200} />
+      <Etiqueta3D f={f} punto={P.peine.clone().add(new THREE.Vector3(-0.15, 0.05, -0.3))} desde={ATASCO + 6} hasta={H.ONU} color={C.verde} texto="Se detiene a tiempo ✓" dx={-40} dy={200} />
       <Etiqueta3D f={f} punto={P.sensor} desde={H.CIERRE + 45} hasta={H.FIN} color={C.verde} texto="Te está protegiendo" dx={-100} dy={-240} />
 
       <Etiqueta3D f={f} punto={P.peine} desde={H.PIEZA} hasta={H.CAMARA + 8} color={C.ambar} texto="Esta pieza" dx={-60} dy={-180} />

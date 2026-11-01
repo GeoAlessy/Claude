@@ -15,7 +15,10 @@ El Piloto 01 ya está aprobado (`src/porquepaso/p01/`). Úsalo como plantilla de
 4. **Cierre circular:** la última frase completa la primera, por ejemplo "…Y ahora ya sabes por qué" + "se detuvo la escalera de Trump…".
    - La tarjeta final pasa los segundos reales que van justo antes del gancho, de modo que el último cuadro sea igual al cuadro 0.
    - **Nunca imagen estática:** siempre hay algo moviéndose (la cámara orbita, pulsos, video real).
-5. **Ritmo:** 40–50 s, cero silencios (pausas de 3–8 cuadros) y subtítulos palabra por palabra.
+5. **Nada desaparece de golpe:** personas, objetos y etiquetas del holograma se quedan hasta el cambio de toma. Si estorban, se vuelven tenues o salen caminando de cuadro; nunca se borran.
+6. **Efectos tipo "fiu" (transiciones, risers, escaneos) MUY bajos** (~0.05–0.14). El usuario los quiere casi imperceptibles: no deben distraer del video.
+7. **Música de fondo** leve (`fondo_curiosidad.wav`), unos 20 dB bajo la voz.
+8. **Ritmo:** 40–50 s, cero silencios (pausas de 3–8 cuadros) y subtítulos palabra por palabra.
 
 ## 2. Elegir el tema (REGLAS DEL USUARIO)
 - **Actual:** pasó **este mes** (máximo unas 4–6 semanas). Lo del año pasado ya no impacta.
