@@ -33,9 +33,9 @@ const VOZ: [string, number, boolean][] = VOZ_ORDEN.map((id) => [id, INICIO[id], 
 
 // Efectos: [archivo, fotograma, volumen]
 const SFX: [string, number, number][] = [
-  ['riser', SEG.CONGELADO.desde - 33, 0.35],
-  ['impacto', SEG.CONGELADO.desde, 0.9],
-  ['escaneo', INI_HOLO - 14, 0.6],
+  ['riser', SEG.CONGELADO.desde - 33, 0.14],
+  ['impacto', SEG.CONGELADO.desde, 0.36],
+  ['escaneo', INI_HOLO - 14, 0.24],
   ['transicion', INI_HOLO + H.PEINE, 0.22],
   ['transicion', INI_HOLO + H.CLIC, 0.22],
   ['riser', INI_HOLO + SENAL - 33, 0.3],
