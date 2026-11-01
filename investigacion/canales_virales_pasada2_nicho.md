@@ -1,0 +1,42 @@
+# Canales virales con ≤ 15 videos y ≥ 500.000 vistas
+
+*Generado el 2026-11-01 · Shorts de los últimos 90 días · 35 canales*
+
+| # | Canal | País | Creado | Videos | Vistas | Suscriptores | Video top | Duración |
+|---|---|---|---|---|---|---|---|---|
+| 1 | [3DPulse](https://youtube.com/channel/UCxoyOVG8Cvd34ZNRlbFJ0IQ) | US | 2026-08-27 | 9 | 48.876.843 | 15.400 | [Face Ball Falling😱#roblox #3danimation  #shorts](https://youtube.com/shorts/C55JJ3tlTrE) | 16 s |
+| 2 | [Oddlyness](https://youtube.com/channel/UC9cZqb4iiHgtDdyYgjzZuPQ) | US | 2026-09-12 | 9 | 37.862.588 | 12.200 | [Satisfying Mesmerizing Reverse Beads - Ultimate ASMR Visual Loop ✨](https://youtube.com/shorts/p5fu3FoJVQQ) | 12 s |
+| 3 | [SOFTFX](https://youtube.com/channel/UCZ41zrEpny_0VSzR9fd7JtA) | ? | 2026-09-28 | 15 | 28.653.040 | 5370 | [Unreal soft test 0-100%](https://youtube.com/shorts/UCTrMI88nAY) | 13 s |
+| 4 | [Glamrev](https://youtube.com/channel/UCNUX1P4Q7YE8ivhi1wyajxg) | ? | 2026-10-23 | 3 | 25.882.064 | 14.600 | [He Trusted Physics... and Jumped From a SpeedingTruck](https://youtube.com/shorts/93aLxbcWUy8) | 20 s |
+| 5 | [𝐏𝐀𝐑𝐈𝐁𝐇𝐑𝐀𝐌𝐀𝐍
+](https://youtube.com/channel/UC3FBVOptsNFzWvGQUJPiFGQ) | ? | 2026-09-28 | 6 | 15.538.511 | 22.600 | [The Untold Side of Rajasthan 🌾😍#villagelife #agriculture #culture #facts #trading #food #rajasthan](https://youtube.com/shorts/4-9n55CJVoo) | 69 s |
+| 6 | [cu3tom +](https://youtube.com/channel/UCUqf_56Ef4jNL0Rq2pqzOMA) | ? | 2020-04-30 | 12 | 14.170.170 | 47.600 | [TADC Silly Billy 3D Animation @Cu3tom #theamazingdigitalcircus #fnf #sillybilly](https://youtube.com/shorts/DdVtyWoQo1k) | 40 s |
+| 7 | [Lost Arts](https://youtube.com/channel/UCnxhZTz-J9KJB84vMRKqTdw) | US | 2025-08-16 | 8 | 12.661.568 | 30.900 | [Ranking skateboard moment #shorts](https://youtube.com/shorts/FvWSu0PHgAU) | 55 s |
+| 8 | [The Universe Disagrees](https://youtube.com/channel/UCITrr8LlQyk-laF82MpNfMg) | ? | 2026-09-26 | 9 | 9.812.330 | 8480 | [Why Do Phantom Traffic Jams Happen?](https://youtube.com/shorts/jBTahEPAr-I) | 61 s |
+| 9 | [Built From Scraps](https://youtube.com/channel/UCXmVq3tkffR7hGoShbHbJag) | US | 2024-06-25 | 15 | 8.891.145 | 8130 | [How Basketball Was Made From a Peach Basket #Engineering #Science #Basketball #HowItWorks #LearnOnYT](https://youtube.com/shorts/D97h45jA2y8) | 61 s |
+| 10 | [Nexo Espacial](https://youtube.com/channel/UCTsof4G9xORcuEyi78qmYaw) | US | 2024-01-06 | 14 | 8.594.770 | 17.400 | [El secreto de la gravedad en una Tierra plana #fisica #espacio #datoscuriosos](https://youtube.com/shorts/3Vytq0FZC7I) | 84 s |
+| 11 | [Doodles Fact](https://youtube.com/channel/UCMtaW-zKVdo0p6n6HDXyQrA) | ? | 2026-10-24 | 9 | 5.710.526 | 11.800 | [How A Hole in your yard can become a nuclear bunker #engineering #nuclearbunker #howitworks #Science](https://youtube.com/shorts/TLF9znXtSFc) | 99 s |
+| 12 | [Zach and Jill](https://youtube.com/channel/UClWs9M-GNvqW9McgVDxuszQ) | ? | 2022-12-05 | 11 | 5.579.488 | 4030 | [I secretly trained for months to surprise my husband… how did I pull this off??](https://youtube.com/shorts/iUiHCHfr_J4) | 64 s |
+| 13 | [Velique](https://youtube.com/channel/UCg5hjnPjIkv8g57fRk7nVvA) | ? | 2024-01-05 | 9 | 5.099.116 | 7830 | [Sigma Ball vs Verity #satisfying #physics #simulation #ball](https://youtube.com/shorts/nZPtSGMxGsA) | 69 s |
+| 14 | [Prospectus Lab](https://youtube.com/channel/UClsODaGKnNc3eflEnFvjakw) | US | 2026-06-06 | 10 | 5.094.682 | 4080 | [Why Do Military Helicopters Have Knives on Their Nose?](https://youtube.com/shorts/wHhGT2g1-iI) | 88 s |
+| 15 | [Badream](https://youtube.com/channel/UCheP9dlTQQV664Q96u_m_hg) | ? | 2024-12-24 | 3 | 5.014.893 | 14.000 | [How You Accidentally Invented the Mechanical Typewriter⌨️#engineer #engine #3danimation #blender](https://youtube.com/shorts/ZDhDxu5eNig) | 146 s |
+| 16 | [WorldMesh 3D](https://youtube.com/channel/UCOCcHseCrUrbDlCSvvwKA7A) | ? | 2006-05-01 | 7 | 3.797.817 | 1890 | [How did Dinosaurs protect their eggs?](https://youtube.com/shorts/VerzmWtP7q0) | 51 s |
+| 17 | [Boom Confirmed](https://youtube.com/channel/UChqB5NBTW8-FkOC7VeDfVww) | ? | 2026-09-25 | 4 | 3.788.124 | 2220 | [USA DASHCAM #dashcam #car #usa #shorts](https://youtube.com/shorts/UDAklfoPlnc) | 63 s |
+| 18 | [Rich Nelson's Workshop](https://youtube.com/channel/UC5zFxhd_lhOKtx2Ivv3lp9Q) | UG | 2014-02-10 | 15 | 3.783.993 | 5520 | [How I Keep 6 Toolheads Perfectly Aligned](https://youtube.com/shorts/bl1l2uvDKWc) | 22 s |
+| 19 | [Bedtime Physics](https://youtube.com/channel/UCU6nHYP9SDVcIp_0-wDzeAg) | ? | 2013-11-03 | 11 | 3.503.909 | 1450 | [How Many Times Will They Collide? #physics #satisfying #science](https://youtube.com/shorts/z-7G0_kBHJc) | 25 s |
+| 20 | [dafaq](https://youtube.com/channel/UCooeHzIYUtWgMvwcwm0VNHw) | GB | 2022-11-14 | 4 | 3.387.995 | 3920 | [How Did Audi Terrorise Europe?](https://youtube.com/shorts/znCeF0V_EUI) | 64 s |
+| 21 | [3D Simplified](https://youtube.com/channel/UCHddSsPd-w8icbR-lOn6NQA) | HR | 2026-04-19 | 9 | 3.146.231 | 1040 | [Why Does a Diesel Stop at 4,500 RPM?](https://youtube.com/shorts/Jut5IHeXJcc) | 32 s |
+| 22 | [Global Secrets](https://youtube.com/channel/UCfXGwgiYQk7t129WMMOAxEA) | ? | 2025-12-11 | 10 | 3.018.072 | 19.100 | [How did they survive running out of fuel in the middle of the Atlantic Ocean?](https://youtube.com/shorts/y7U4mQsqfN8) | 158 s |
+| 23 | [Davidayo AI](https://youtube.com/channel/UCvjva-pvh5cWCs_dyy_WYag) | US | 2009-01-26 | 9 | 2.955.387 | 1750 | [Astra - Recreating Craig Federighi as a 3D Character in Blender! #shorts #blender #apple](https://youtube.com/shorts/DRkoNLDzLhc) | 20 s |
+| 24 | [Pawland](https://youtube.com/channel/UC3l8TJvIFxIRF39hvydSnbQ) | MX | 2026-09-23 | 6 | 2.634.197 | 12.000 | [Barbero descubre triste historia del perrito #dog #shorts #learn](https://youtube.com/shorts/qgJdqR2SBns) | 136 s |
+| 25 | [Wondora](https://youtube.com/channel/UCLrfgaJE38blXy4Nb8Lo6bg) | IN | 2026-08-28 | 12 | 2.320.081 | 1270 | [How Humans Invented the Perfect Bridge! 🌉🤯 #architecture #engineering #shorts](https://youtube.com/shorts/l9xt8GiofZY) | 70 s |
+| 26 | [Punidams](https://youtube.com/channel/UCZ-ufakrbTD_9S_7wtw008A) | ? | 2025-08-23 | 11 | 1.763.885 | 15.800 | [Can a Pur03 Write a symphony / Punidams #animation #blender](https://youtube.com/shorts/9EJnZcCUeF8) | 23 s |
+| 27 | [Cofftea](https://youtube.com/channel/UCK1t3As-dS5s1Cavs1eEFIw) | US | 2026-06-02 | 2 | 1.654.399 | 6200 | [Yoo what was that 👀  #roblox #blender #robloxanimation](https://youtube.com/shorts/fUOBPi4Q6E0) | 14 s |
+| 28 | [willdo](https://youtube.com/channel/UC-pKR0u5VvrFgFcIoIz3jgw) | NZ | 2026-10-02 | 4 | 1.556.518 | 147 | [willdo agentic workflows - How willdo works?](https://youtube.com/shorts/pTIGlhrEtog) | 135 s |
+| 29 | [Engenho da Casa](https://youtube.com/channel/UC2rFg10rjFF1pqQPesRRC_g) | ? | 2023-07-31 | 12 | 1.414.545 | 6790 | [Não alague o banheiro para tomar banho. #engenharia #ciencia #banheiro](https://youtube.com/shorts/nEzv7qPYHd0) | 78 s |
+| 30 | [Krail Animation](https://youtube.com/channel/UCw40Kjgnjtr1FDGfoOZfeLQ) | ? | 2026-08-18 | 8 | 1.134.183 | 7750 | [Да, это жёсткий ритм 😤 #blender #character #animation](https://youtube.com/shorts/xSi8c4Ktv7Y) | 69 s |
+| 31 | [Desmonta Mundo](https://youtube.com/channel/UCUwEf2r30_VFnhXeun_K67g) | BR | 2026-10-09 | 11 | 980.782 | 2940 | [É assim que protege o galinheiro contra raposas. #ciencia #engenharia #raposa #desmontamundo](https://youtube.com/shorts/5w7-K9V5QYI) | 66 s |
+| 32 | [Sabías que… ya](https://youtube.com/channel/UC8UUD8yJ5Iihtgcn7tfubFA) | ? | 2026-10-27 | 9 | 913.885 | 2290 | [¿Sabías que la madera es más rara que un diamante? 🌳💎 #shorts](https://youtube.com/shorts/Ec0hdb-z--4) | 51 s |
+| 33 | [Cómo funcionan las motos](https://youtube.com/channel/UCK419Oo32ZsY1rMtjDsMkqQ) | ? | 2026-10-25 | 6 | 853.177 | 734 | [¿Sabías que al girar haces un contramanillar inconscientemente?](https://youtube.com/shorts/IR8HpJFVvmY) | 48 s |
+| 34 | [Aggregatus](https://youtube.com/channel/UCcc3GVL2y-2XdqM5wMgxvjg) | UA | 2025-03-08 | 5 | 776.876 | 4610 | [TANK WITH FULLY MODULAR ARMOR  #3d  #engineer  #3danimation  #blender  #machine #tank #concept](https://youtube.com/shorts/S97CwrYCeZE) | 98 s |
+| 35 | [Raw to Ready](https://youtube.com/channel/UCJGalE4EKY9hRVcEevtrwNg) | CA | 2025-08-30 | 15 | 566.717 | 1520 | [Old Phones Into GOLD 🪙 How E-Waste Becomes a Gold Bar  #viralshorts  #HowItsMade #FactoryASMR](https://youtube.com/shorts/FS0tYO13QYA) | 130 s |
