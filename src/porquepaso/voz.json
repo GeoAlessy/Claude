@@ -6,6 +6,7 @@
   "stability": 0.35,
   "similarity_boost": 0.8,
   "style": 0.4,
-  "use_speaker_boost": true
+  "use_speaker_boost": true,
+  "speed": 1.08
  }
 }

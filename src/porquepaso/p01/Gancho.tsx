@@ -16,13 +16,9 @@ import {FlujoChevrones, Pastilla, Reticula} from '../hud';
 
 // Gancho del piloto 01: "¿Por qué se detuvo la escalera de Trump?"
 // Clip: r/LiveNews_24H (recortado a 9:16 y escalado con Real-ESRGAN).
-export const SEG = {
-  A: {desde: 0, dur: 81}, // se acercan y se suben (escalera en movimiento)
-  C: {desde: 81, dur: 42}, // plano desde arriba: la escalera se detiene
-  D: {desde: 123, dur: 66}, // Trump sube a pie la escalera detenida
-  CONGELADO: {desde: 189, dur: 100},
-};
-export const DURACION_GANCHO = SEG.CONGELADO.desde + SEG.CONGELADO.dur;
+// Los tiempos salen de la narración (tiempos.ts)
+import {SEG, DURACION_GANCHO} from './tiempos';
+export {SEG, DURACION_GANCHO};
 
 const clamp = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
 
@@ -50,6 +46,7 @@ const ESCALERA_A_HASTA: Clave<Punto>[] = [
 const OBJETIVO_D: Clave<Punto>[] = [
   [123, [620, 1150]],
   [189, [700, 1100]],
+  [243, [640, 1050]],
 ];
 
 // Velocidad de la escalera: 1 = en movimiento, 0 = detenida.
@@ -103,9 +100,12 @@ export const Gancho: React.FC = () => {
         <Sequence from={SEG.D.desde} durationInFrames={SEG.D.dur}>
           <Clip archivo="D.mp4" />
         </Sequence>
+        <Sequence from={SEG.E.desde} durationInFrames={Math.min(SEG.E.dur, SEG.CONGELADO.desde - SEG.E.desde)}>
+          <Clip archivo="E.mp4" />
+        </Sequence>
         <Sequence from={SEG.CONGELADO.desde} durationInFrames={SEG.CONGELADO.dur}>
-          <Freeze frame={SEG.D.dur - 1}>
-            <Clip archivo="D.mp4" />
+          <Freeze frame={Math.max(0, SEG.CONGELADO.desde - SEG.E.desde - 1)}>
+            <Clip archivo="E.mp4" />
           </Freeze>
         </Sequence>
       </AbsoluteFill>
@@ -147,7 +147,7 @@ export const Gancho: React.FC = () => {
 
       {/* estado de la escalera */}
       {!enCongelado && (
-        <div style={{position: 'absolute', left: 60, top: 1380, opacity: interpolate(frame, [6, 14], [0, 1], clamp)}}>
+        <div style={{position: 'absolute', left: 60, top: 1240, opacity: interpolate(frame, [6, 14], [0, 1], clamp)}}>
           <Pastilla color={colorEstado} punto tam={32}>
             {textoEstado}
           </Pastilla>
@@ -175,22 +175,7 @@ export const Gancho: React.FC = () => {
           >
             ¿SABOTAJE?
           </div>
-          <div
-            style={{
-              position: 'absolute',
-              top: 1030,
-              width: '100%',
-              textAlign: 'center',
-              fontFamily: TEXTO,
-              fontWeight: 700,
-              fontSize: 54,
-              color: C.blanco,
-              opacity: interpolate(tc, [14, 22], [0, 1], clamp),
-              textShadow: '0 4px 16px rgba(0,0,0,0.8)',
-            }}
-          >
-            …o algo que casi nadie conoce
-          </div>
+
           {/* barrido de escaneo: anticipa la transición al holograma 3D */}
           <div
             style={{

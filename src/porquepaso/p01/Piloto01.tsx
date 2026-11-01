@@ -1,30 +1,34 @@
 import React from 'react';
 import {AbsoluteFill, Audio, Freeze, OffthreadVideo, Sequence, interpolate, staticFile, useCurrentFrame, Easing} from 'remotion';
-import {Gancho, DURACION_GANCHO, SEG} from './Gancho';
-import {Holograma, H, SENAL, LLEGA_MOTOR, ATASCO} from './Holograma';
+import {Gancho} from './Gancho';
+import {Holograma} from './Holograma';
 import {PALABRAS} from './subtitulos';
 import {C, TITULAR} from '../estilo';
+import {
+  ATASCO,
+  DURACION_GANCHO,
+  DURACION_P01 as DUR_TOTAL,
+  FIN_CARD,
+  FPS,
+  H,
+  INICIO,
+  INI_HOLO,
+  LLEGA_MOTOR,
+  SEG,
+  SENAL,
+  VOZ_ORDEN,
+} from './tiempos';
 
 // =====================================================================
 // Piloto 01 completo: gancho real → holograma 3D → vuelta al inicio (bucle)
+// Bucle: "…Y ahora ya sabes por qué" + "se detuvo la escalera de Trump…"
 // =====================================================================
-const FPS = 30;
-const INI_HOLO = DURACION_GANCHO; // 289
-const FIN_CARD = INI_HOLO + H.FIN + 26; // aparece el primer fotograma real
-export const DURACION_P01 = INI_HOLO + H.DUR + 16;
+export const DURACION_P01 = DUR_TOTAL;
 
-// Narración: [archivo, fotograma de inicio, ¿subtítulos?]
-const VOZ: [string, number, boolean][] = [
-  ['01_pregunta', 8, false],
-  ['02_sabotaje', SEG.CONGELADO.desde + 4, false],
-  ['03_camarografo', INI_HOLO + H.CAMARA + 12, true],
-  ['04_peine', INI_HOLO + H.PEINE + 8, true],
-  ['05_clic', INI_HOLO + H.CLIC + 5, true],
-  ['06_para_que', INI_HOLO + H.PARA_QUE + 5, true],
-  ['07_onu', INI_HOLO + H.ONU + 8, true],
-  ['08_cierre', INI_HOLO + H.CIERRE + 8, true],
-  ['09_ya_sabes', INI_HOLO + H.FIN + 8, false],
-];
+// Frases sin subtítulo: la 1 ya está en pantalla como titular, la 3 como "¿SABOTAJE?",
+// y la última aparece en la tarjeta final.
+const SIN_SUBTITULO = new Set(['01_se_detuvo', '03_sabotaje', '11_ya_sabes']);
+const VOZ: [string, number, boolean][] = VOZ_ORDEN.map((id) => [id, INICIO[id], !SIN_SUBTITULO.has(id)]);
 
 // Efectos: [archivo, fotograma, volumen]
 const SFX: [string, number, number][] = [
@@ -129,9 +133,9 @@ const Cierre: React.FC = () => {
           textShadow: `0 0 40px ${C.cian}66, 0 6px 0 rgba(0,0,0,0.7)`,
         }}
       >
-        Ahora ya sabes
+        Y ahora ya sabes
         <br />
-        <span style={{color: C.cian}}>por qué.</span>
+        <span style={{color: C.cian}}>por qué…</span>
       </div>
     </AbsoluteFill>
   );

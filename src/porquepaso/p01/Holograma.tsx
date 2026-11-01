@@ -7,27 +7,9 @@ import {Holo, Linea, caja, proyectar} from '../three/holo';
 import {C, MONO, TITULAR} from '../estilo';
 import {Pastilla} from '../hud';
 
-// =====================================================================
-// Línea de tiempo del holograma (fotogramas relativos al inicio, 30 fps)
-// Cada toma arranca un poco antes que su frase de narración.
-// =====================================================================
-export const H = {
-  CAMARA: 0, // L3 "Mira arriba: un camarógrafo…"
-  PEINE: 125, // L4 "Al final de cada escalera hay un peine…"
-  RAYOSX: 125 + 75, // "…Y debajo esconde un secreto"
-  CLIC: 290, // L5 "Si algo empuja ese peine…"
-  PARA_QUE: 480, // L6 "Existe para que un zapato…"
-  ONU: 615, // L7
-  CIERRE: 750, // L8
-  FIN: 890, // L9 → vuelve al video real
-  DUR: 945,
-};
-// Momentos clave dentro de la toma CLIC
-export const EMPUJE = H.CLIC + 40; // el talón toca el peine
-export const SENAL = EMPUJE + 12; // el sensor hace clic
-export const LLEGA_MOTOR = SENAL + 45; // la señal llega al motor
-// Toma PARA_QUE: el zapato llega al peine
-export const ATASCO = H.PARA_QUE + 62;
+// Línea de tiempo: sale de la narración (ver tiempos.ts)
+import {H, EMPUJE, SENAL, LLEGA_MOTOR, ATASCO} from './tiempos';
+export {H, EMPUJE, SENAL, LLEGA_MOTOR, ATASCO};
 
 const clamp = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
 const suave = Easing.inOut(Easing.cubic);
@@ -66,6 +48,7 @@ export const P = {
 type ClaveCam = [number, [number, number, number], [number, number, number]];
 const V = (x: number, y: number, z: number): [number, number, number] => [x, y, z];
 const CAM: ClaveCam[] = [
+  [H.PREVIA, V(XC + 7.5, ALTO + 7.0, 3.5), V(3, 0.8, 0)],
   [H.CAMARA, V(XC + 5.5, ALTO + 5.0, 0.4), V(2, 0.6, 0)],
   [H.CAMARA + 115, V(XC + 4, ALTO + 3.5, 1.2), V(2.4, 1.0, 0)],
   [H.PEINE + 50, V(XC + 1.6, ALTO + 1.3, 2.2), V(XC, ALTO, 0)],
@@ -257,7 +240,7 @@ const Escena: React.FC<{f: number}> = ({f}) => {
   const pinza = interpolate(f, [LLEGA_MOTOR, LLEGA_MOTOR + 6], [0.06, 0.012], clamp) * (f < H.CIERRE ? 1 : 1);
 
   // Camarógrafo: sube de espaldas hacia el peine
-  const xCam = interpolate(f, [0, 110], [X1 - 1.1, X1 + 0.15], {...clamp, easing: Easing.out(Easing.quad)});
+  const xCam = interpolate(f, [H.CAMARA, H.CAMARA + 110], [X1 - 1.1, X1 + 0.15], {...clamp, easing: Easing.out(Easing.quad)});
   const camVisible = f < H.PEINE + 12;
   const opCam = interpolate(f, [H.PEINE - 6, H.PEINE + 10], [1, 0.001], clamp);
 
@@ -275,7 +258,7 @@ const Escena: React.FC<{f: number}> = ({f}) => {
       <group scale={[1, aparicion, 1]}>
         <Estructura color={C.cian} opac={exterior} />
         <Escalones d={d} color={C.cian} opac={exterior} />
-        <Peine x={XC} color={f >= EMPUJE && f < H.PARA_QUE ? C.rojo : C.cian} opac={1} empuje={empuje} />
+        <Peine x={XC} color={f >= EMPUJE && f < H.PARA_QUE ? C.rojo : f >= H.PIEZA && f < H.CAMARA + 10 ? C.ambar : C.cian} opac={1} empuje={empuje} />
         <Peine x={XC_INF} y={0} espejo color={C.cian} opac={exterior * 0.8} empuje={0} />
         {/* piso superior */}
         <Holo geom={caja(1.4, 0.02, ANCHO)} color={C.cian} relleno={0.04 * exterior} linea={0.5 * exterior} position={[XC + 0.35 + 0.7, ALTO + 0.03, 0]} />
@@ -411,8 +394,8 @@ export const Holograma: React.FC = () => {
       </ThreeCanvas>
 
       {/* Etiquetas */}
-      <Etiqueta3D f={f} punto={P.camarografo.clone().add(new THREE.Vector3(0.3, 1.9, 0))} desde={30} hasta={H.PEINE + 20} color={C.rojo} texto="Camarógrafo" dx={-60} dy={-150} />
-      <Etiqueta3D f={f} punto={P.pareja.clone().add(new THREE.Vector3(0.3, 1.9, 0))} desde={20} hasta={H.PEINE - 10} texto="Trump y Melania" dx={40} dy={-130} />
+      <Etiqueta3D f={f} punto={P.camarografo.clone().add(new THREE.Vector3(0.3, 1.9, 0))} desde={H.CAMARA + 20} hasta={H.PEINE + 20} color={C.rojo} texto="Camarógrafo" dx={-60} dy={-150} />
+      <Etiqueta3D f={f} punto={P.pareja.clone().add(new THREE.Vector3(0.3, 1.9, 0))} desde={H.CAMARA + 10} hasta={H.PEINE - 10} texto="Trump y Melania" dx={40} dy={-130} />
       <Etiqueta3D f={f} punto={P.peine} desde={H.PEINE + 45} hasta={H.RAYOSX + 10} texto="Peine" dx={-80} dy={-200} />
       <Etiqueta3D f={f} punto={P.sensor} desde={H.RAYOSX + 25} hasta={H.CLIC + 15} color={C.rojo} texto="Sensor de impacto" dx={-120} dy={180} />
       <Etiqueta3D f={f} punto={P.sensor} desde={SENAL} hasta={SENAL + 40} color={C.rojo} texto="¡Clic!" dx={-80} dy={-160} />
@@ -420,6 +403,8 @@ export const Holograma: React.FC = () => {
       <Etiqueta3D f={f} punto={P.freno} desde={LLEGA_MOTOR + 8} hasta={H.PARA_QUE - 5} color={C.rojo} texto="Freno: activado" dx={80} dy={-170} />
       <Etiqueta3D f={f} punto={P.peine.clone().add(new THREE.Vector3(-0.15, 0.05, -0.3))} desde={ATASCO + 6} hasta={H.ONU - 5} color={C.verde} texto="Se detiene a tiempo ✓" dx={-40} dy={200} />
       <Etiqueta3D f={f} punto={P.sensor} desde={H.CIERRE + 45} hasta={H.FIN} color={C.verde} texto="Te está protegiendo" dx={-100} dy={-240} />
+
+      <Etiqueta3D f={f} punto={P.peine} desde={H.PIEZA} hasta={H.CAMARA + 8} color={C.ambar} texto="Esta pieza" dx={-60} dy={-180} />
 
       {/* Cita de la ONU */}
       {f >= H.ONU + 20 && f < H.CIERRE && (
