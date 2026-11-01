@@ -73,6 +73,7 @@ El Piloto 01 ya está aprobado (`src/porquepaso/p01/`). Úsalo como plantilla de
 npx remotion render PXX clips/pXX/PXX_raw.mp4 --gl=swangle --crf=16 --concurrency=2 --log=error
 ffmpeg -i clips/pXX/PXX_raw.mp4 -filter_complex "[0:v]format=gbrp,split[a][b];[b]gblur=sigma=7[g];[a][g]blend=all_mode=screen:all_opacity=0.5:enable='between(t,INICIO_HOLO_s,FIN_HOLO_s)',format=yuv420p[v]" -map "[v]" -map 0:a -c:v libx264 -crf 17 -preset slow -af "loudnorm=I=-14:TP=-1.5:LRA=11" -c:a aac -b:a 192k -ar 48000 clips/pXX/PXX_final.mp4
 ```
+- **Entrega final en 1440×2560 (2K)**: renderiza con `--scale=1.3333333 --crf=14`, y en ffmpeg agrega `scale=1440:2560:flags=lanczos,` antes de `format=gbrp`, sigma 9, `-crf 15 -profile:v high -movflags +faststart` y audio a 256k. Subir en 2K hace que YouTube use un códec mejor y se ve más nítido que un 1080 (el usuario lo pidió).
 - El brillo **solo en el tramo del holograma**, y siempre con `format=gbrp` antes del blend (en YUV el video sale morado).
 - El render tarda unos 10 min: córrelo en segundo plano.
 - **Antes de entregar:** saca fotogramas de control (sobre todo inicio, cambios y final) y míralos. Revisa también que no haya imágenes quietas y que los colores estén bien.
