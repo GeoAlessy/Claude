@@ -117,9 +117,8 @@ const Cierre: React.FC = () => {
   const texto = interpolate(f, [4, 12, dur - 10, dur - 2], [0, 1, 1, 0], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
   return (
     <AbsoluteFill style={{opacity: op}}>
-      <Freeze frame={0}>
-        <OffthreadVideo src={staticFile('porquepaso/p01/A.mp4')} muted style={{width: 1080, height: 1920}} />
-      </Freeze>
+      {/* Los 2 s reales que van justo antes del gancho: termina en el mismo cuadro con el que empieza el video */}
+      <OffthreadVideo src={staticFile('porquepaso/p01/Z.mp4')} muted trimBefore={Math.max(0, 60 - dur)} style={{width: 1080, height: 1920}} />
       <AbsoluteFill style={{background: `rgba(0,0,0,${0.45 * texto})`}} />
       <div
         style={{

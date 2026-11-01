@@ -62,7 +62,8 @@ const CAM: ClaveCam[] = [
   [H.ONU + 40, V(1.8, 6.5, 11.5), V(5.6, 2.4, 0)],
   [H.CIERRE - 5, V(3.5, 7.0, 10.5), V(5.8, 2.6, 0)],
   [H.CIERRE + 45, V(XC + 0.9, ALTO + 0.65, 1.4), V(XC, ALTO - 0.05, 0.15)],
-  [H.FIN - 5, V(XC + 0.6, ALTO + 0.5, 1.15), V(XC, ALTO - 0.05, 0.15)],
+  [Math.round((H.CIERRE + 45 + H.FIN - 5) / 2), V(XC + 0.1, ALTO + 0.85, 1.65), V(XC, ALTO - 0.05, 0.15)],
+  [H.FIN - 5, V(XC - 0.75, ALTO + 0.6, 1.2), V(XC, ALTO - 0.05, 0.15)],
   [H.DUR, V(-3, 5, 13), V(4.8, 2, 0)],
 ];
 export const FOV = 40;
@@ -95,7 +96,8 @@ function velocidadEscalera(f: number) {
   if (f < H.PARA_QUE) return interpolate(f, [SENAL, SENAL + 6], [1, 0], clamp);
   if (f < ATASCO) return 1;
   if (f < H.CIERRE) return interpolate(f, [ATASCO, ATASCO + 6], [1, 0], clamp);
-  return 0;
+  // Cierre: la escalera vuelve a funcionar (protegida)
+  return interpolate(f, [H.CIERRE + 40, H.CIERRE + 65], [0, 0.8], clamp);
 }
 function desplazamiento(f: number) {
   let d = 0;
@@ -237,6 +239,8 @@ const Persona: React.FC<{color: string; paso: number; escala?: number; camara?: 
 // =====================================================================
 // Escena
 // =====================================================================
+const ondaGeom = new THREE.SphereGeometry(1, 16, 10);
+
 const Escena: React.FC<{f: number}> = ({f}) => {
   const d = desplazamiento(f);
   // Modo rayos X: las piezas exteriores se vuelven casi invisibles
@@ -310,6 +314,22 @@ const Escena: React.FC<{f: number}> = ({f}) => {
             rotation={[0, 0, sensorActivo ? -0.5 : 0]}
           />
         </group>
+        {f >= H.CIERRE + 45 &&
+          [0, 1, 2].map((k) => {
+            const fase = (((f - H.CIERRE - 45) / 28 + k / 3) % 1 + 1) % 1;
+            return (
+              <Holo
+                key={k}
+                geom={ondaGeom}
+                color={C.verde}
+                relleno={0.04 * (1 - fase)}
+                linea={0.8 * (1 - fase)}
+                angulo={30}
+                position={P.sensor}
+                scale={0.08 + fase * 0.55}
+              />
+            );
+          })}
         <Linea puntos={puntosCable} color={sensorActivo ? C.rojo : C.cian} opacidad={0.25 + 0.6 * rayosX} />
         {senalVisible && (
           <mesh position={posSenal}>
