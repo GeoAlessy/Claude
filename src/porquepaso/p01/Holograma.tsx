@@ -403,7 +403,7 @@ export const Holograma: React.FC = () => {
       <ThreeCanvas
         width={1080}
         height={1920}
-        style={{filter: 'drop-shadow(0 0 3px rgba(150,240,255,0.55)) drop-shadow(0 0 10px rgba(34,211,238,0.35))'}}
+
         camera={{fov: FOV, near: 0.05, far: 200, position: [0, 3, 10]}}
       >
         <Camara f={f} />
