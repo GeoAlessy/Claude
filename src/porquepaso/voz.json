@@ -1,5 +1,11 @@
 {
  "voice_id": "RwEOTVVnDyiW7bPrjXQ8",
  "nombre": "PorQuePaso - Narrador oficial",
- "modelo": "eleven_multilingual_v2"
+ "modelo": "eleven_v3",
+ "ajustes": {
+  "stability": 0.35,
+  "similarity_boost": 0.8,
+  "style": 0.4,
+  "use_speaker_boost": true
+ }
 }
