@@ -18,6 +18,7 @@ import {Video04, DURACION_P04} from './porquepaso/p04/Video04';
 import {Banner, Logo, MarcaAgua} from './porquepaso/canal/Marca';
 import {MiniA, MiniB, MiniC, MiniH} from './porquepaso/canal/Miniaturas02';
 import * as M01 from './porquepaso/canal/Miniaturas01';
+import * as M34 from './porquepaso/canal/Miniaturas34';
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -29,6 +30,14 @@ export const RemotionRoot: React.FC = () => {
       <Composition id="P01Gancho" component={Gancho} durationInFrames={DURACION_GANCHO} fps={30} width={1080} height={1920} />
       <Still id="CanalLogo" component={Logo} width={800} height={800} />
       <Still id="CanalBanner" component={Banner} width={2560} height={1440} />
+      <Still id="P03MiniA" component={M34.M3A} width={1080} height={1920} />
+      <Still id="P03MiniB" component={M34.M3B} width={1080} height={1920} />
+      <Still id="P03MiniC" component={M34.M3C} width={1080} height={1920} />
+      <Still id="P03MiniH" component={M34.M3H} width={1280} height={720} />
+      <Still id="P04MiniA" component={M34.M4A} width={1080} height={1920} />
+      <Still id="P04MiniB" component={M34.M4B} width={1080} height={1920} />
+      <Still id="P04MiniC" component={M34.M4C} width={1080} height={1920} />
+      <Still id="P04MiniH" component={M34.M4H} width={1280} height={720} />
       <Still id="P01MiniA" component={M01.MiniA} width={1080} height={1920} />
       <Still id="P01MiniB" component={M01.MiniB} width={1080} height={1920} />
       <Still id="P01MiniC" component={M01.MiniC} width={1080} height={1920} />
