@@ -47,6 +47,11 @@ El Piloto 01 ya está aprobado (`src/porquepaso/p01/`, versión final **v8 2K**)
 - Remate emocional y útil para el espectador ("¡Te está protegiendo!") + "Y ahora ya sabes por qué".
 - Datos neutrales, sin opinión política. Guarda el guion en `guiones/pXX_<tema>.md` y el kit de publicación en `guiones/pXX_publicacion.md` (copia la estructura de `piloto01_publicacion.md`).
 
+### Casos sin causa oficial todavía (p. ej. accidentes recientes)
+- **Nunca** decir "hipótesis", "teoría" ni "creemos". El usuario lo quiere "romántico": contado como una historia que se revela, atribuida a expertos y en condicional suave ("para los expertos, ahí empezó todo", "pudo").
+- El cierre deja abierto que pronto se sabrá ("Y muy pronto sabremos por qué"), lo que permite una parte 2 cuando salga el informe oficial.
+- Si hay víctimas: mencionarlas una vez, con respeto, sin efectos de golpe ni palabras sensacionalistas.
+
 ## 4. Voz (ElevenLabs, aprobada)
 - Configuración en `src/porquepaso/voz.json`: voz "PorQuePaso – Narrador oficial v2 (cálido)", latino cálido, `eleven_v3`, stability 0.35, similarity 0.8, style 0.4, speed 1.08. **No cambiarla** sin que el usuario lo pida.
 - Las líneas van en `guiones/pXX_lineas.json` como `[["01_...", "texto"], ...]`.
