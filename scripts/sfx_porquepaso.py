@@ -232,3 +232,35 @@ while c * COMPAS < DUR_M:
     c += 1
 mus = np.stack([L, R], 1) * env(N, 0.8, 2.0)[:, None]
 guardar('fondo_curiosidad.wav', mus, pico=0.8)
+
+# ---------------------------------------------------------------------
+# Video 02 (jet): estática de radio suave y "clacker" de sobrevelocidad
+# ---------------------------------------------------------------------
+# Radio: ráfaga corta de estática filtrada (banda de voz) con clic de PTT
+t = t_(0.5)
+esp = np.fft.rfft(rng.normal(0, 1, len(t)))
+fr_ = np.fft.rfftfreq(len(t), 1 / SR)
+esp[(fr_ < 600) | (fr_ > 3500)] = 0
+radio = np.fft.irfft(esp, len(t))
+radio = radio / np.max(np.abs(radio)) * 0.5 * env(len(t), 0.01, 0.25)
+radio[: int(0.01 * SR)] += np.sin(2 * np.pi * 1800 * t[: int(0.01 * SR)]) * 0.6
+guardar('radio.wav', radio, pico=0.6)
+
+# Clacker de sobrevelocidad (alarma de cabina): golpecitos rápidos ~9 por segundo
+t = t_(2.4)
+clack = np.zeros(len(t))
+for k in np.arange(0, 2.4, 1 / 9):
+    i = int(k * SR)
+    n = min(int(0.03 * SR), len(t) - i)
+    clack[i : i + n] += rng.normal(0, 1, n) * np.exp(-t[:n] * 300) + 0.5 * np.sin(2 * np.pi * 2400 * t[:n]) * np.exp(-t[:n] * 200)
+clack *= env(len(t), 0.05, 0.4)
+guardar('clacker.wav', clack, pico=0.5)
+
+# Viento / caída: ruido grave que crece
+t = t_(3.5)
+esp = np.fft.rfft(rng.normal(0, 1, len(t)))
+fr_ = np.fft.rfftfreq(len(t), 1 / SR)
+esp[(fr_ < 80) | (fr_ > 900)] = 0
+viento = np.fft.irfft(esp, len(t))
+viento = viento / np.max(np.abs(viento)) * np.linspace(0.1, 1, len(t)) ** 1.5 * env(len(t), 0.2, 0.6)
+guardar('viento.wav', viento, pico=0.6)

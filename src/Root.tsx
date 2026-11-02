@@ -6,6 +6,9 @@ import {DURACION, FPS} from './episodes/ep01/tiempos';
 import {Gancho, DURACION_GANCHO} from './porquepaso/p01/Gancho';
 import {Holograma, H as H_HOLO} from './porquepaso/p01/Holograma';
 import {Piloto01, DURACION_P01} from './porquepaso/p01/Piloto01';
+import {Gancho as Gancho02, DURACION_GANCHO as DURACION_GANCHO_02} from './porquepaso/p02/Gancho';
+import {Holograma as Holograma02, H as H02} from './porquepaso/p02/Holograma';
+import {Video02, DURACION_P02} from './porquepaso/p02/Video02';
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -15,6 +18,9 @@ export const RemotionRoot: React.FC = () => {
       <Composition id="P01" component={Piloto01} durationInFrames={DURACION_P01} fps={30} width={1080} height={1920} />
       <Composition id="P01Holograma" component={Holograma} durationInFrames={H_HOLO.DUR} fps={30} width={1080} height={1920} />
       <Composition id="P01Gancho" component={Gancho} durationInFrames={DURACION_GANCHO} fps={30} width={1080} height={1920} />
+      <Composition id="P02" component={Video02} durationInFrames={DURACION_P02} fps={30} width={1080} height={1920} />
+      <Composition id="P02Holograma" component={Holograma02} durationInFrames={H02.DUR} fps={30} width={1080} height={1920} />
+      <Composition id="P02Gancho" component={Gancho02} durationInFrames={DURACION_GANCHO_02} fps={30} width={1080} height={1920} />
     </>
   );
 };
