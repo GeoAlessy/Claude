@@ -4,7 +4,10 @@ import {Gancho, Dash} from './Gancho';
 import {Holograma} from './Holograma';
 import {PALABRAS} from './subtitulos';
 import {C, TITULAR} from '../estilo';
-import {DASH_INI, DURACION_GANCHO, DURACION_P02 as DUR_TOTAL, FIN_CARD, FPS, H, FIN, HIELO_DICHO, INICIO, INI_HOLO, SEG, VOZ_ORDEN} from './tiempos';
+import {DASH_INI, DURACION_GANCHO, DURACION_P02 as DUR_TOTAL, FIN_CARD, FPS, H, FIN, HIELO_DICHO, INICIO, INI_HOLO, SEG, VOZ_ORDEN, marca} from './tiempos';
+
+// La cita grande aparece en el centro: el subtítulo de abajo se apaga desde "Tenemos"
+const TENEMOS = marca('03_radio', 'tenemos') - 6;
 
 // =====================================================================
 // Video 02 completo: gancho real → holograma 3D → vuelta al inicio (bucle)
@@ -52,7 +55,7 @@ const Subtitulos: React.FC = () => {
   for (const [nombre, desde, mostrar] of VOZ) {
     if (!mostrar) continue;
     // En el tramo de radio, la cita "¡Tenemos HIELO!" ya está grande en pantalla
-    if (nombre === '03_radio' && f >= HIELO_DICHO - 8) continue;
+    if (nombre === '03_radio' && f >= TENEMOS) continue;
     const t = (f - desde) / FPS;
     const pals = PALABRAS[nombre];
     if (!pals || t < 0 || t > pals[pals.length - 1][2] + 0.25) continue;
@@ -138,9 +141,13 @@ function volumenMusica(f: number) {
   return base * respeto * extremos;
 }
 
-const FirmaCanal: React.FC = () => (
+const FirmaCanal: React.FC = () => {
+  const f = useCurrentFrame();
+  const op = interpolate(f, [INI_HOLO + 30, INI_HOLO + 40, FIN_CARD - 5, FIN_CARD + 5], [1, 0, 0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
+  return (
   <div
     style={{
+      opacity: op,
       position: 'absolute',
       top: 164,
       right: 62,
@@ -158,7 +165,8 @@ const FirmaCanal: React.FC = () => (
   >
     ¿POR QUÉ PASÓ?
   </div>
-);
+  );
+};
 
 export const Video02: React.FC = () => {
   return (

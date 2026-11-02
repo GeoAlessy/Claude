@@ -394,7 +394,7 @@ const Instrumentos: React.FC<{f: number}> = ({f}) => {
     <div
       style={{
         flex: 1,
-        padding: '18px 20px',
+        padding: '14px 20px',
         background: 'rgba(4,14,24,0.72)',
         border: `2px solid ${color}`,
         borderRadius: 20,
@@ -402,7 +402,7 @@ const Instrumentos: React.FC<{f: number}> = ({f}) => {
       }}
     >
       <div style={{fontFamily: MONO, fontWeight: 700, fontSize: 22, letterSpacing: 2, color}}>{titulo}</div>
-      <div style={{fontFamily: MONO, fontWeight: 700, fontSize: 46, color: C.blanco, marginTop: 4, whiteSpace: 'nowrap'}}>{valor}</div>
+      <div style={{fontFamily: MONO, fontWeight: 700, fontSize: 42, color: C.blanco, marginTop: 2, whiteSpace: 'nowrap'}}>{valor}</div>
       {extra}
     </div>
   );
@@ -413,12 +413,12 @@ const Instrumentos: React.FC<{f: number}> = ({f}) => {
     </div>
   );
   return (
-    <div style={{position: 'absolute', top: 250, left: 50, right: 50, opacity: op}}>
+    <div style={{position: 'absolute', top: 140, left: 50, right: 50, opacity: op}}>
       <div style={{display: 'flex', gap: 16}}>
         {caja('ALTITUD', `${fmt(alt)} m`, cayendo ? C.rojo : C.cian)}
         {caja('VELOCIDAD', `${fmt(vel)} km/h`, enRojo ? C.rojo : C.cian, barra)}
       </div>
-      <div style={{display: 'flex', gap: 16, marginTop: 16, alignItems: 'center'}}>
+      <div style={{display: 'flex', gap: 16, marginTop: 12, alignItems: 'center'}}>
         {f < H.CAE + 10 ? (
           <Pastilla color={f >= H.FRIO ? C.cian : 'rgba(125,211,252,0.6)'} tam={28}>
             Afuera: −47 °C
