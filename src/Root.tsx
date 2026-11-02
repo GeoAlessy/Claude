@@ -11,6 +11,7 @@ import {Holograma as Holograma02, H as H02} from './porquepaso/p02/Holograma';
 import {Video02, DURACION_P02} from './porquepaso/p02/Video02';
 import {Banner, Logo, MarcaAgua} from './porquepaso/canal/Marca';
 import {MiniA, MiniB, MiniC, MiniH} from './porquepaso/canal/Miniaturas02';
+import * as M01 from './porquepaso/canal/Miniaturas01';
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -22,6 +23,10 @@ export const RemotionRoot: React.FC = () => {
       <Composition id="P01Gancho" component={Gancho} durationInFrames={DURACION_GANCHO} fps={30} width={1080} height={1920} />
       <Still id="CanalLogo" component={Logo} width={800} height={800} />
       <Still id="CanalBanner" component={Banner} width={2560} height={1440} />
+      <Still id="P01MiniA" component={M01.MiniA} width={1080} height={1920} />
+      <Still id="P01MiniB" component={M01.MiniB} width={1080} height={1920} />
+      <Still id="P01MiniC" component={M01.MiniC} width={1080} height={1920} />
+      <Still id="P01MiniH" component={M01.MiniH} width={1280} height={720} />
       <Still id="P02MiniA" component={MiniA} width={1080} height={1920} />
       <Still id="P02MiniB" component={MiniB} width={1080} height={1920} />
       <Still id="P02MiniC" component={MiniC} width={1080} height={1920} />

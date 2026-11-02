@@ -1,45 +1,52 @@
-# Piloto 01 · Paquete de publicación
+# Video 01 · SEO y publicación ("¿Por qué se detuvo la escalera de Trump?")
 
-## Título (máx. ~60 caracteres; lo importante al inicio)
-**¿Por qué se detuvo la escalera de Trump? 🤔**
+## Título (elige uno; el 1 es el recomendado)
+1. **¿Por qué se detuvo la escalera de Trump en la ONU? 🤔** ← recomendado: tiene las búsquedas "escalera Trump" y "ONU".
+2. No fue sabotaje: la pieza que detuvo la escalera de Trump 👀
+3. Trump dijo "sabotaje"… pero fue esta pieza 🤔
 
-Alternativas para probar en próximos videos del mismo estilo:
-- No fue sabotaje: la escalera de Trump hizo esto 👀
-- La pieza que detuvo la escalera de Trump
-
-## Descripción
+## Descripción (copiar y pegar)
 ```
-La escalera de la ONU se detuvo justo cuando Donald y Melania Trump se subieron. Trump dijo que fue sabotaje… pero la verdadera razón está en una pieza que pisas todos los días: el peine de la escalera y su sensor de impacto.
+¿Por qué se detuvo la escalera de Trump en la ONU? En septiembre de 2025, la escalera mecánica de la sede de Naciones Unidas en Nueva York se frenó justo cuando Donald y Melania Trump se subieron. Trump habló de "sabotaje"… pero la investigación de la ONU encontró otra cosa: una pieza que pisas todos los días, el peine de la escalera, y el sensor de seguridad que esconde debajo. Te lo mostramos en 3D.
 
 🔎 Fuentes:
-• Comunicado de la ONU sobre la revisión técnica (sep. 2025)
-• NPR: cómo funcionan los mecanismos de seguridad de las escaleras mecánicas
+• Comunicado de la ONU sobre la revisión técnica de la escalera (sep. 2025)
+• NPR: cómo funcionan los dispositivos de seguridad de las escaleras mecánicas
 • CBS News: la versión de la Casa Blanca y la de la ONU
 
-🎥 Clip original: [CRÉDITO PENDIENTE — autor/medio original]. Usado con fines educativos y de comentario.
+🎥 Video: Reddit (r/LiveNews_24H) [CRÉDITO PENDIENTE: autor original]. Usado con fines informativos y educativos.
 🧊 Animación 3D: ¿Por qué pasó?
 
-#escaleramecánica #ingeniería #porquépasó #trump #ciencia
+#trump #escaleramecanica #onu #porquepaso #ingenieria
+```
+- **Hashtags que se ven sobre el título:** #trump #escaleramecanica #onu.
+
+## Etiquetas (YouTube Studio → Mostrar más → Etiquetas)
+```
+escalera de trump, trump escalera onu, escalera mecanica trump, trump sabotaje escalera, melania trump escalera, onu escalera se detuvo, por que se detuvo la escalera, sensor de escalera mecanica, peine escalera mecanica, como funciona una escalera mecanica, seguridad escaleras mecanicas, trump onu 2025, por que paso
 ```
 
-## Hashtags (2–3 en el título o descripción)
-`#ingeniería` `#porquépasó` `#escaleramecánica`
+## Miniatura (carpeta canal/miniaturas)
+| Archivo | Cuándo usarla |
+|---|---|
+| `p01_miniatura_A.jpg` (vertical) | **Recomendada.** Trump, "¿SABOTAJE?" en rojo y "La respuesta: 1 pieza". Cara conocida + misterio. |
+| `p01_miniatura_B.jpg` (vertical) | Mitad escalera real y mitad holograma con "No fue sabotaje". |
+| `p01_miniatura_C.jpg` (vertical) | Holograma con "1 CLIC detuvo a Trump". |
+| `p01_miniatura_H.jpg` (1280×720) | Para búsquedas y la página principal. |
 
-## Comentario fijado (abre debate sin pedir likes)
+Si no puedes subir imagen, elige el cuadro del congelado con "¿SABOTAJE?" (segundo 8).
+
+## Comentario fijado
 > ¿Tú también pensabas que fue sabotaje? 👇
 
-Respuestas preparadas para comentarios frecuentes:
-- "Fue a propósito" → *"La ONU revisó el registro de la escalera: se activó el sensor de seguridad del peine. Si alguien lo empuja, se detiene sola."*
-- "Eso no existe" → *"Se llama 'comb impact device' (dispositivo de impacto del peine). Lo exigen las normas de seguridad de escaleras mecánicas."*
+Respuestas preparadas:
+- "Fue a propósito" → *"La ONU revisó el registro de la escalera: se activó el sensor de seguridad del peine. Si algo lo empuja, se detiene sola."*
+- "Eso no existe" → *"Se llama 'comb impact device' (dispositivo de impacto del peine). Lo exigen las normas de seguridad de las escaleras mecánicas."*
 
-## Configuración al subir
-- Formato: Short (vertical 1080×1920, 45 s)
-- Contenido alterado o sintético: **No** (la animación es claramente un gráfico; el clip real no fue alterado)
-- Audiencia: no es para niños
-- Idioma del audio: español (Latinoamérica)
-- Ubicación del video: dejar vacío
-- Publicar: entre 18:00 y 21:00 hora de tu público (probar y comparar)
-
-## Antes de publicar (pendiente)
-- [ ] Identificar al autor original del clip (el video de Reddit trae la marca de una app de reposteo, no la del autor).
-- [ ] Reemplazar [CRÉDITO PENDIENTE] en la descripción y en pantalla.
+## Al subir
+- Audiencia: no es para niños.
+- Contenido alterado o sintético: **No**.
+- Categoría: **Ciencia y tecnología**.
+- Idioma: Español (Latinoamérica).
+- Horario: si va el mismo día que el del jet, súbelo a las **12:00–13:00**. Si va otro día, a las 19:00–20:00.
+- **Neutral:** en comentarios no se opina de política, solo se explica el mecanismo.
