@@ -12,7 +12,15 @@ for f in sorted(os.listdir(carpeta)):
         continue
     a = json.load(open(os.path.join(carpeta, f)))
     palabras, actual, ini = [], '', None
+    en_etiqueta = False  # las etiquetas de eleven_v3 ([pause], [urgent]…) no van en subtítulos
     for ch, s, e in zip(a['characters'], a['character_start_times_seconds'], a['character_end_times_seconds']):
+        if ch == '[':
+            en_etiqueta = True
+            continue
+        if en_etiqueta:
+            if ch == ']':
+                en_etiqueta = False
+            continue
         if ch.isspace():
             if actual:
                 palabras.append([actual, round(ini, 3), round(fin, 3)])

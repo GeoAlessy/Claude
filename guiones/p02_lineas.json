@@ -1,14 +1,50 @@
 [
- ["01_cayo", "Este jet cayó del cielo en Florida… más de ocho kilómetros en apenas un minuto."],
- ["02_nueve", "Iban nueve personas a bordo. Ninguna sobrevivió."],
- ["03_radio", "Pero minutos antes, el piloto dejó una pista por radio: \"Tenemos hielo\"."],
- ["04_expertos", "Y para los expertos, ahí empezó todo."],
- ["05_altura", "Volaban a once kilómetros de altura, justo encima de una tormenta. Afuera: cuarenta y siete grados bajo cero."],
- ["06_hielo", "La tormenta empuja humedad hacia arriba… y el hielo empieza a pegarse en el avión."],
- ["07_cola", "Primero en las partes más delgadas. Como la cola."],
- ["08_nariz", "Y la cola es la que mantiene la nariz arriba. Con hielo, pierde fuerza… y la nariz empieza a caer."],
- ["09_velocidad", "El avión se acelera. Rompe su velocidad límite. Y el piloto lo dice: \"Estamos en sobrevelocidad\"."],
- ["10_caida", "Seis mil metros por minuto. A esa velocidad, recuperarlo es casi imposible."],
- ["11_cierre", "Los investigadores ya tienen las piezas en sus manos…"],
- ["12_pronto", "Y muy pronto sabremos por qué"]
+ [
+  "01_cayo",
+  "Este jet cayó del cielo en Florida… más de ocho kilómetros en apenas un minuto."
+ ],
+ [
+  "02_nueve",
+  "Iban nueve personas a bordo. Ninguna sobrevivió."
+ ],
+ [
+  "03_radio",
+  "Pero minutos antes, el piloto dejó una pista por radio… [dramatic pause] [urgent] \"¡Tenemos HIELO!\""
+ ],
+ [
+  "04_expertos",
+  "Y para los expertos, ahí empezó todo."
+ ],
+ [
+  "05_altura",
+  "Volaban a once kilómetros de altura, justo encima de una tormenta. Afuera: cuarenta y siete grados bajo cero."
+ ],
+ [
+  "06_hielo",
+  "La tormenta empuja humedad hacia arriba… y el hielo empieza a pegarse en el avión."
+ ],
+ [
+  "07_cola",
+  "Primero en las partes más delgadas. Como la cola."
+ ],
+ [
+  "08_nariz",
+  "Y la cola es la que mantiene la nariz arriba. Con hielo, pierde fuerza… y la nariz empieza a caer."
+ ],
+ [
+  "09_velocidad",
+  "El avión se acelera. Rompe su velocidad límite. Y el piloto lo dice: \"Estamos en sobrevelocidad\"."
+ ],
+ [
+  "10_caida",
+  "Seis mil metros por minuto. A esa velocidad, recuperarlo es casi imposible."
+ ],
+ [
+  "11_cierre",
+  "Los investigadores ya tienen las piezas en sus manos…"
+ ],
+ [
+  "12_pronto",
+  "Y muy pronto sabremos por qué"
+ ]
 ]

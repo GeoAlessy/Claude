@@ -25,7 +25,7 @@
 |---|---|
 | 01_cayo | Este jet cayó del cielo en Florida… más de ocho kilómetros en apenas un minuto. |
 | 02_nueve | Iban nueve personas a bordo. Ninguna sobrevivió. |
-| 03_radio | Pero minutos antes, el piloto dejó una pista por radio: "Tenemos hielo". |
+| 03_radio | Pero minutos antes, el piloto dejó una pista por radio… (pausa) "¡Tenemos HIELO!" (urgente, de corrido, golpe en "hielo") |
 | 04_expertos | Y para los expertos, ahí empezó todo. |
 | 05_altura | Volaban a once kilómetros de altura, justo encima de una tormenta. Afuera: cuarenta y siete grados bajo cero. |
 | 06_hielo | La tormenta empuja humedad hacia arriba… y el hielo empieza a pegarse en el avión. |
