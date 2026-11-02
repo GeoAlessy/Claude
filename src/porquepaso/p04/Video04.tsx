@@ -4,7 +4,7 @@ import {Gancho, Monitor} from './Gancho';
 import {Holograma} from './Holograma';
 import {PALABRAS} from './subtitulos';
 import {C, TITULAR} from '../estilo';
-import {CAM_INI, DURACION_GANCHO, DURACION_P04 as DUR_TOTAL, FIN_CARD, FPS, H, FIN, INICIO, INI_HOLO, SEG, VOZ_ORDEN} from './tiempos';
+import {CAM_INI, DISTRAIDO, DURACION_GANCHO, DURACION_P04 as DUR_TOTAL, FIN_CARD, FPS, H, FIN, INICIO, INI_HOLO, SEG, VOZ_ORDEN} from './tiempos';
 
 
 // =====================================================================
@@ -53,6 +53,8 @@ const Subtitulos: React.FC = () => {
   const f = useCurrentFrame();
   for (const [nombre, desde, mostrar] of VOZ) {
     if (!mostrar) continue;
+    // "¿DISTRAÍDO?" ya está grande en el centro: el subtítulo de abajo se apaga
+    if (nombre === '02_distraido' && f >= DISTRAIDO - 22) continue;
     const t = (f - desde) / FPS;
     const pals = PALABRAS[nombre];
     if (!pals || t < 0 || t > pals[pals.length - 1][2] + 0.25) continue;
