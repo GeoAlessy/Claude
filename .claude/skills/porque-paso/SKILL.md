@@ -6,7 +6,7 @@ description: Produce un nuevo Short del canal "¿Por qué pasó?" (clip viral re
 # Canal "¿Por qué pasó?": cómo hacer el siguiente video
 
 **El usuario habla español: responde SIEMPRE en español, claro y sin jerga técnica.**
-El Piloto 01 ya está aprobado (`src/porquepaso/p01/`). Úsalo como plantilla de código, estilo y ritmo.
+El Piloto 01 ya está aprobado (`src/porquepaso/p01/`, versión final **v8 2K**). Úsalo como plantilla de código, estilo y ritmo.
 
 ## 1. Fórmula del formato (no cambiar)
 1. **Gancho real (0–8 s):** un clip de Reddit en el momento más fuerte. El título-pregunta aparece desde el cuadro 0 y el crédito va arriba.
@@ -60,8 +60,8 @@ El Piloto 01 ya está aprobado (`src/porquepaso/p01/`). Úsalo como plantilla de
 - `Holograma.tsx`: escena con `@remotion/three`, material holográfico (`../three/holo.tsx`: relleno aditivo + `EdgesGeometry`), etiquetas proyectadas 3D→2D con `proyectar()`, keyframes de cámara `CAM` y maniquíes de cápsulas.
   - **No uses `filter: drop-shadow` en el canvas** (el render pasa de minutos a horas). El brillo se pone después con ffmpeg.
 - `Piloto01.tsx`: arma gancho, holograma, cierre, subtítulos (Inter Display Black 74 px, top 1440, 3 palabras, palabra activa en cian), firma del canal y audio.
-  - SFX: `riser`, `impacto`, `escaneo`, `transicion` (0.22, suave; el usuario odió el whoosh fuerte), `clic`, `senal`, `motor_apagado`, `freno`, `confirmacion`.
-  - Música `fondo_investigacion` con ducking: 0.07 con voz y 0.18 en pausas.
+  - SFX (volúmenes aprobados en v8): `riser` 0.14 / 0.075, `impacto` 0.36, `escaneo` 0.24 / 0.125, `transicion` 0.055 (nunca el whoosh: el usuario lo odió). Los sonidos que cuentan la historia (`clic` 1, `senal` 0.45, `motor_apagado` 0.7, `freno` 0.8, `confirmacion` 0.5–0.6) quedan normales.
+  - Música `fondo_curiosidad.wav` (piano eléctrico Am–F–C–G a 100 bpm, arpegio con eco, pulso suave, sintetizada sin licencias) con ducking: 0.09 con voz y 0.16 en pausas (unos 20 dB bajo la voz).
 - Estilo en `../estilo.ts`: cian #22D3EE, rojo #FF3B47, verde #34D399, ámbar #FBBF24 y las fuentes de `public/fonts/porquepaso/`.
 - Registra las composiciones en `src/Root.tsx` (`PXX`, `PXXGancho`, `PXXHolograma`).
 - Si hacen falta sonidos nuevos, agrégalos en `scripts/sfx_porquepaso.py`. Se sintetizan con numpy, sin licencias.
@@ -78,7 +78,7 @@ ffmpeg -i clips/pXX/PXX_raw.mp4 -filter_complex "[0:v]format=gbrp,split[a][b];[b
 ```
 - **Entrega final en 1440×2560 (2K)**: renderiza con `--scale=1.5 --crf=14` (1620×2880; 1.333 falla porque no da un tamaño entero), y en ffmpeg agrega `scale=1440:2560:flags=lanczos,` antes de `format=gbrp`, sigma 9, `-crf 15 -profile:v high -movflags +faststart` y audio a 256k. Subir en 2K hace que YouTube use un códec mejor y se ve más nítido que un 1080 (el usuario lo pidió).
 - El brillo **solo en el tramo del holograma**, y siempre con `format=gbrp` antes del blend (en YUV el video sale morado).
-- El render tarda unos 10 min: córrelo en segundo plano.
+- El render en 2K tarda unos 25 min: córrelo en segundo plano. **Si solo cambia el audio**, no renderices el video otra vez: renderiza solo el audio (`--codec=wav` con un config sin `setCrf`/`setCodec`, porque si no falla) y remezcla con `-c:v copy` sobre el último video 2K.
 - **Antes de entregar:** saca fotogramas de control (sobre todo inicio, cambios y final) y míralos. Revisa también que no haya imágenes quietas y que los colores estén bien.
 - Entrega con SendUserFile y explica en español qué cambió.
 
@@ -88,3 +88,18 @@ ffmpeg -i clips/pXX/PXX_raw.mp4 -filter_complex "[0:v]format=gbrp,split[a][b];[b
 
 ## 9. Investigación previa del canal
 En `investigacion/` están los estudios de canales virales con pocos videos, los disparadores de viralidad, las analogías de formato y el estudio de Shorts. Consúltalos para el título, la miniatura y el comentario fijado.
+
+## 10. Preferencias y aprendizajes del usuario (Piloto 01, en orden)
+- **Voz:** probó varias y eligió la **latina cálida** (`C_latino_calido_v1`, hoy en `voz.json`). Quiere voz natural, eufórica pero bonita, sin sonar pregrabada.
+- **Gancho:** prefiere el video vertical a pantalla completa. El título va desde el cuadro 0, con un corte a la cara del protagonista en el momento clave y el congelado con la palabra roja.
+- **Indicadores:** profesionales (retículas, pastillas de estado, chevrones), nunca flechas ni círculos feos.
+- **Bucle:** empieza con "se detuvo la escalera de Trump…" y termina con "Y ahora ya sabes por qué"; el final se conecta con el inicio sin corte.
+- **Ritmo:** sin silencios, rápido, cada palabra optimizada.
+- **Sonido:**
+  - Los "fiu" o whoosh fuertes lo molestan: bajó primero los de 7–9 s un 60% y luego todos los demás un 75%.
+  - Quiere música de fondo leve pero presente.
+- **Holograma:** nada se queda quieto (al final la cámara orbita, salen ondas verdes y la escalera vuelve a andar), y nada desaparece de la nada.
+- **Calidad:** entregar siempre en 2K, nunca en 720. Explícale que el límite del clip real es la grabación original.
+- **Descargar:** en la app, tocar la tarjeta del archivo → compartir/descargar → "Guardar video". Al subir a YouTube, usar el archivo tal cual, sin pasarlo por WhatsApp ni CapCut.
+- **Flujo de trabajo:** el usuario sigue en el mismo chat. Cuando pide algo, hazlo directo, renderiza, revisa fotogramas y entrega el archivo con una explicación corta de qué cambió.
+- **Pendiente del Piloto 01:** el crédito del autor original. Pista: en el video aparece un micrófono rosa "BURO". Falta reemplazar "r/LiveNews_24H" en pantalla y [CRÉDITO PENDIENTE] en `guiones/piloto01_publicacion.md`.
