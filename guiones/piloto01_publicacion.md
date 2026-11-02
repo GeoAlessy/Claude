@@ -21,9 +21,9 @@
 ```
 - **Hashtags que se ven sobre el título:** #trump #escaleramecanica #onu.
 
-## Etiquetas (YouTube Studio → Mostrar más → Etiquetas)
+## Etiquetas (YouTube Studio → Mostrar más → Etiquetas) · casi al límite de 500 caracteres
 ```
-escalera de trump, trump escalera onu, escalera mecanica trump, trump sabotaje escalera, melania trump escalera, onu escalera se detuvo, por que se detuvo la escalera, sensor de escalera mecanica, peine escalera mecanica, como funciona una escalera mecanica, seguridad escaleras mecanicas, trump onu 2025, por que paso
+escalera de trump, trump escalera onu, escalera mecanica trump, trump sabotaje, melania trump, trump onu, escalera onu, por que se detuvo la escalera, escalera mecanica, como funciona una escalera mecanica, sensor escalera mecanica, peine escalera mecanica, seguridad escaleras mecanicas, trump 2025, donald trump, trump escalator, trump escalator un, un escalator, escalator sabotage, noticias trump, ingenieria, curiosidades, por que paso, porquepaso, explicado en 3d
 ```
 
 ## Miniatura (carpeta canal/miniaturas)

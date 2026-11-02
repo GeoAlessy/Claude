@@ -28,9 +28,9 @@ La NTSB sigue investigando. Cuando publique su informe, lo explicamos aquí.
 - Las primeras dos líneas son las que ve la gente y las que más pesan en las búsquedas. Por eso empiezan con "¿Por qué cayó el avión de Florida?", "Learjet 60", "Greenacres" y "West Palm Beach".
 - **Hashtags:** 3 a 5, al final. YouTube muestra los 3 primeros sobre el título: #avion #florida #accidenteaereo.
 
-## Etiquetas (YouTube Studio → Mostrar más → Etiquetas)
+## Etiquetas (YouTube Studio → Mostrar más → Etiquetas) · casi al límite de 500 caracteres
 ```
-avion cae en florida, accidente aereo florida, learjet 60, greenacres florida, west palm beach avion, avion florida noviembre 2026, tenemos hielo piloto, hielo en aviones, por que cayo el avion, ntsb, accidente de avion, jet privado florida, sobrevelocidad avion, por que paso
+avion cae en florida, accidente aereo florida, learjet 60, greenacres florida, west palm beach, avion florida 2026, tenemos hielo, hielo en aviones, por que cayo el avion, ntsb, accidente de avion, jet privado, sobrevelocidad, avion se estrella, caida de avion, accidente aereo hoy, avion cayo, aviacion, piloto, tormenta avion, hielo en las alas, learjet crash, florida plane crash, plane crash, jet crash, accidente aereo explicado, por que paso, porquepaso
 ```
 
 ## Miniatura (carpeta canal/miniaturas)
