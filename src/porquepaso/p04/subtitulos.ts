@@ -122,33 +122,33 @@ export const PALABRAS: Record<string, [string, number, number][]> = {
    0.16
   ],
   [
-   "el",
+   "la",
    0.187,
    0.24
   ],
   [
-   "video",
-   0.293,
-   0.56
+   "investigación",
+   0.28,
+   0.8
   ],
   [
-   "completo",
-   0.622,
-   1.12
+   "completa",
+   0.862,
+   1.36
   ],
   [
    "cuenta",
-   1.177,
-   1.52
+   1.406,
+   1.68
   ],
   [
    "otra",
-   1.584,
-   1.84
+   1.728,
+   1.92
   ],
   [
    "historia.",
-   1.884,
+   1.973,
    2.56
   ]
  ],

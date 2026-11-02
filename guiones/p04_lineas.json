@@ -1,13 +1,46 @@
 [
- ["01_parado", "Este auto se quedó parado en las vías… justo cuando venía el tren."],
- ["02_distraido", "Y casi todos pensaron lo mismo: un conductor distraído."],
- ["03_historia", "Pero el video completo cuenta otra historia."],
- ["04_detenido", "El auto estaba detenido antes del cruce. Esperando, como debía."],
- ["05_empujo", "Pero la camioneta de atrás no frenó a tiempo… y lo empujó hacia las vías."],
- ["06_barrera", "Intentó retroceder… pero la barrera ya había bajado detrás de él."],
- ["07_frenar", "Y un tren no frena como un auto: puede necesitar más de un kilómetro para detenerse."],
- ["08_correr", "Al conductor solo le quedaba una opción: salir… y correr."],
- ["09_logro", "Lo logró. Segundos antes del impacto."],
- ["10_consejo", "Y si algún día te pasa, los expertos lo dicen claro: sal y corre en diagonal, hacia donde viene el tren. Así los pedazos no te caen encima."],
- ["11_ya_sabes", "Y ahora ya sabes por qué"]
+ [
+  "01_parado",
+  "Este auto se quedó parado en las vías… justo cuando venía el tren."
+ ],
+ [
+  "02_distraido",
+  "Y casi todos pensaron lo mismo: un conductor distraído."
+ ],
+ [
+  "03_historia",
+  "Pero la investigación completa cuenta otra historia."
+ ],
+ [
+  "04_detenido",
+  "El auto estaba detenido antes del cruce. Esperando, como debía."
+ ],
+ [
+  "05_empujo",
+  "Pero la camioneta de atrás no frenó a tiempo… y lo empujó hacia las vías."
+ ],
+ [
+  "06_barrera",
+  "Intentó retroceder… pero la barrera ya había bajado detrás de él."
+ ],
+ [
+  "07_frenar",
+  "Y un tren no frena como un auto: puede necesitar más de un kilómetro para detenerse."
+ ],
+ [
+  "08_correr",
+  "Al conductor solo le quedaba una opción: salir… y correr."
+ ],
+ [
+  "09_logro",
+  "Lo logró. Segundos antes del impacto."
+ ],
+ [
+  "10_consejo",
+  "Y si algún día te pasa, los expertos lo dicen claro: sal y corre en diagonal, hacia donde viene el tren. Así los pedazos no te caen encima."
+ ],
+ [
+  "11_ya_sabes",
+  "Y ahora ya sabes por qué"
+ ]
 ]
