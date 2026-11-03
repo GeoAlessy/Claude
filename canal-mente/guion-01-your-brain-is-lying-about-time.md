@@ -1,8 +1,8 @@
 # Vídeo 01 — Your Brain Is Lying To You About Time
 
 **Canal nuevo:** la ciencia inquietante de tu propia mente (inglés, sin rostro)
-**Duración estimada:** ≈ 17 min (≈ 2.240 palabras de narración ≈ 15,5 min a ~145 palabras/min + ~1,5 min de pausas y pruebas interactivas). Los tiempos de cada bloque son orientativos: se ajustan tras grabar la voz.
-**Estructura:** gancho + 6 capítulos + cierre. Cada capítulo = mini-vídeo (gancho → prueba/ejemplo → ciencia → revelación → puente).
+**Duración estimada:** ≈ 23 min (≈ 3.000 palabras de narración ≈ 20,5 min a ~145 palabras/min + ~2–2,5 min de pausas y pruebas interactivas). Con una voz más lenta puede llegar a 24–25 min. Los tiempos de cada bloque son orientativos: se ajustan tras grabar la voz.
+**Estructura:** gancho + 8 capítulos + cierre. Cada capítulo = mini-vídeo (gancho → prueba/ejemplo → ciencia → revelación → puente).
 
 > Cómo leer este guion:
 > - **NARRACIÓN** = lo que dice la voz (en inglés, listo para ElevenLabs).
@@ -35,7 +35,7 @@ You've probably told yourself it's just "getting older." It isn't. Your brain is
 
 `[VISUAL: la línea de vida se comprime de golpe, como un acordeón. Sonido grave.]`
 
-Today, we're going to catch your brain in the act. Six times. You'll see it slow time down when you're in danger, invent time in your dreams, and even show you a world that's already in the past.
+Today, we're going to catch your brain in the act — again and again. You'll see it slow time down when you're in danger, make the best nights of your life disappear, lose a month in a cave, invent time in your dreams, and even show you a world that's already in the past.
 
 And by the end of this video, you'll know the one thing scientists say can actually make your life *feel* longer. 🔓 *(bucle principal)*
 
@@ -123,7 +123,7 @@ In the next experiment, scientists tested that by dropping people from a tower. 
 
 ---
 
-## 7:30 – 10:30 · CAPÍTULO 3 — The slow-motion illusion
+## 7:30 – 11:30 · CAPÍTULO 3 — The slow-motion illusion
 
 `[VISUAL: "03 · THE FALL"]`
 
@@ -160,13 +160,89 @@ And you don't need to fall from a tower to feel a smaller version of this. In la
 
 Surprise stretches time. Familiarity shrinks it. It's the same rule, over and over: the more your brain has to process, the more time it believes has passed.
 
-And that brings us to the place where your brain invents time completely from nothing: your dreams. 🔓
+So fear stretches time. But what about joy? Why does the best night of your life seem to vanish in what feels like twenty minutes? 🔓
 
 ---
 
-## 10:30 – 13:00 · CAPÍTULO 4 — Time inside your dreams
+## 11:30 – 14:30 · CAPÍTULO 4 — Why time flies when you're having fun
 
-`[VISUAL: "04 · THE DREAM CLOCK"]`
+`[VISUAL: "04 · THE VANISHING NIGHT"]`
+
+**NARRACIÓN:**
+You know this one from experience. A great conversation, a concert, a long night with friends — and suddenly it's 3 a.m. and you have no idea where the hours went.
+
+Then compare it to waiting for a delayed flight. Or sitting in a doctor's waiting room. Ten minutes can feel like an hour.
+
+`[VISUAL: pantalla dividida en IA: a la izquierda, una noche de concierto con luces que pasan rápido; a la derecha, una sala de espera fría donde el reloj apenas se mueve.]`
+
+The clock is the same in both rooms. So what changes?
+
+Psychologists have a model for this called the attentional gate. Imagine that somewhere in your brain there's a pulse — tick, tick, tick — and a little gate that lets those ticks be counted. The more attention you pay to time itself, the wider the gate opens, and the more ticks get counted. More ticks means more time.
+
+`[VISUAL: animación por código: un flujo de pulsos de luz que pasa por una "compuerta". Cuando la compuerta se abre (atención al tiempo), entran muchos pulsos y un contador sube rápido. Cuando se cierra (atención absorbida), casi no entran.]`
+
+When you're bored, you check the time constantly. *Is it over yet? How much longer?* The gate is wide open. Every second gets counted — so time drags.
+
+When you're absorbed in something you love, your attention is completely on the experience. The gate almost closes. Very few ticks get through. And when you finally look up, your brain has barely counted anything — so the hours seem to have disappeared.
+
+That's why the old saying is true: a watched pot never boils. Watching the time literally makes it longer.
+
+But here's the twist that brings us back to memory. 🔓
+
+That boring hour in the waiting room — the one that felt endless? In a week, you won't remember it at all. And that amazing night that flew by? You'll remember it for years, and in memory it will feel *long*, packed with moments.
+
+`[VISUAL: dos líneas de tiempo: "Living it" (sala de espera: larga · concierto: corta) y "Remembering it" (sala de espera: casi invisible · concierto: enorme).]`
+
+So there are actually two clocks running in your head. One measures time while you're living it. The other measures it afterwards, from memory. And they almost always disagree. ✅
+
+Which raises a strange question: if the clock in your head can be sped up or slowed down by attention… can it be changed by your body? 🔓
+
+---
+
+## 14:30 – 17:30 · CAPÍTULO 5 — The clock in your body
+
+`[VISUAL: "05 · THE BODY CLOCK"]`
+
+**NARRACIÓN:**
+In the 1930s, an American physiologist named Hudson Hoagland was looking after his wife, who was sick with a high fever. He went out to the pharmacy for a few minutes. When he came back, she insisted he'd been gone far longer than he had.
+
+Hoagland was a scientist, so instead of arguing, he ran an experiment. He asked her to count to sixty at what she felt was one count per second — and he timed her. Then he repeated it as her temperature changed.
+
+`[VISUAL: recreación IA de un dormitorio de los años 30; un termómetro de mercurio sube; junto a él, un cronómetro y una mano que cuenta.]`
+
+According to his own account, the hotter her fever, the faster she counted. Her "minute" was shorter than a real minute. Her internal clock had sped up with her body temperature — so the real world seemed slow by comparison, and his short trip felt long.
+
+Hoagland and others went on to study this more carefully, and the idea held up: the speed of your internal sense of time is linked to the chemistry and temperature of your body.
+
+`[VISUAL: gráfica animada: temperatura corporal en un eje, "cuentas por minuto" en el otro, con una línea que sube.]`
+
+Now, an even more dramatic experiment.
+
+In 1962, a young French cave explorer named Michel Siffre went deep underground into a glacier cave in the Alps — and stayed there, alone, with no clock, no watch and no daylight, for about two months.
+
+`[VISUAL: escena IA: una cueva helada iluminada solo por una lámpara; un hombre solo en una tienda de campaña; un teléfono con cable que lo conecta con la superficie.]`
+
+Every time he woke up, ate or went to sleep, he called his team on the surface. They never told him the time. When they finally came to bring him out, Siffre believed it was mid-August.
+
+It was mid-September.
+
+`[VISUAL: dos calendarios lado a lado: "What Siffre believed: AUGUST 20" · "Reality: SEPTEMBER 14". Las casillas de diferencia se tiñen de rojo.]`
+
+Without sunlight to reset it, his sense of time had drifted so far that close to a month of his life had simply… gone missing from his count. Yet his body kept running on its own rough daily rhythm the whole time — a biological clock deep in the brain that tries to keep a roughly 24-hour cycle, even in total darkness.
+
+And scientists have found even smaller clocks. In 2011, researchers discovered that certain neurons in the hippocampus — a key memory region — fire in sequence across a span of time, like the ticks of a stopwatch. They called them "time cells." Your brain doesn't just store *what* happened. It stamps *when*.
+
+`[VISUAL: neuronas que se encienden una tras otra en fila, como un cronómetro de luz dentro del cerebro.]`
+
+So you have clocks for the day, clocks for seconds, and clocks that tag your memories — and every one of them can be pushed, stretched or broken.
+
+Except at night. Because when you fall asleep, your brain stops measuring time — and starts inventing it. 🔓
+
+---
+
+## 17:30 – 20:00 · CAPÍTULO 6 — Time inside your dreams
+
+`[VISUAL: "06 · THE DREAM CLOCK"]`
 
 **NARRACIÓN:**
 You've probably heard this one: a dream that feels like it lasted hours actually takes only a few seconds. It's one of the most repeated "facts" about sleep.
@@ -199,9 +275,9 @@ But the strangest lie of all is happening right now, while you're watching this.
 
 ---
 
-## 13:00 – 15:30 · CAPÍTULO 5 — You live in the past
+## 20:00 – 22:30 · CAPÍTULO 7 — You live in the past
 
-`[VISUAL: "05 · THE DELAY"]`
+`[VISUAL: "07 · THE DELAY"]`
 
 **NARRACIÓN:**
 Here's another test. If there's a clock with a second hand near you — or one on your phone — glance at it quickly.
@@ -236,9 +312,9 @@ So if your brain controls time this completely… can you take control back? �
 
 ---
 
-## 15:30 – 18:30 · CAPÍTULO 6 — How to make your life feel longer
+## 22:30 – 25:00 · CAPÍTULO 8 — How to make your life feel longer
 
-`[VISUAL: "06 · TAKING TIME BACK"]`
+`[VISUAL: "08 · TAKING TIME BACK"]`
 
 **NARRACIÓN:**
 Let's go back to where we started. Remember: your brain measures your life by the memories it keeps — not by the clock.
@@ -269,7 +345,7 @@ You can't stop time. But you can stop your brain from deleting it.
 
 ---
 
-## 18:30 – 19:30 · CIERRE
+## 25:00 – 26:00 · CIERRE
 
 `[VISUAL: vuelve la línea de vida del gancho. Esta vez, los años de la parte adulta se ensanchan y se iluminan de nuevo.]`
 
@@ -287,7 +363,7 @@ That's the next video. 🔓 *(bucle hacia el siguiente vídeo)*
 ## Notas de producción
 
 - **Ritmo visual:** un cambio de plano cada 4–7 segundos. Nunca más de ~10 s con la misma imagen fija.
-- **Pruebas interactivas:** 2 (contar 30 s en el cap. 1 · reloj con segundero en el cap. 5). Son los picos de retención y comentarios: deja el texto en pantalla y una pausa de silencio real.
+- **Pruebas interactivas:** 4 (contar 30 s en el cap. 1 · imagen "oddball" en el cap. 3 · reloj con segundero y *flash-lag* en el cap. 7). Son los picos de retención y comentarios: deja el texto en pantalla y una pausa de silencio real.
 - **Piezas reutilizables para la biblioteca del canal:** cerebro-galaxia de recuerdos, línea de vida, rótulos de capítulo, ficha de estudio, gráfica de señales.
 - **Voz:** grave, calmada, cercana. Pausas de 1 s antes de cada revelación.
 - **Música:** ambiente oscuro suave; se corta a silencio en cada 🔓 importante.
@@ -306,3 +382,7 @@ That's the next video. 🔓 *(bucle hacia el siguiente vídeo)*
 9. **Rubin, D. C. & Schulkind, M. D. (1997)** y literatura posterior sobre el *reminiscence bump*.
 10. **Tse, P. U., Intriligator, J., Rivest, J., & Cavanagh, P. (2004).** *Attention and the subjective expansion of time.* Perception & Psychophysics, 66(7), 1171–1189 (efecto "oddball").
 11. **Nijhawan, R. (1994).** *Motion extrapolation in catching.* Nature, 370, 256–257 (efecto *flash-lag*), y Eagleman & Sejnowski (2000) para la interpretación de *postdicción*.
+12. **Hoagland, H. (1933).** *The physiological control of judgments of duration: evidence for a chemical clock.* Journal of General Psychology, 9, 267–287.
+13. **Siffre, M.** — experimento en la cueva de Scarasson (1962); relató su experiencia en *Beyond Time* (1964).
+14. **Zakay, D. & Block, R. A. (1997).** *Temporal cognition.* Current Directions in Psychological Science, 6(1), 12–16 (modelo de la compuerta atencional).
+15. **MacDonald, C. J., Lepage, K. Q., Eden, U. T., & Eichenbaum, H. (2011).** *Hippocampal "time cells" bridge the gap in memory for discontiguous events.* Neuron, 71(4), 737–749.
