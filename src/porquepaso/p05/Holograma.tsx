@@ -23,11 +23,11 @@ const RADIO_ROTOR = 5.35; // AS350: rotor de 10.7 m de diámetro
 
 // ---------- Trayectorias ----------
 const progreso = (f: number) =>
-  interpolate(f, [H.TORRE, H.DOS, H.MISMO, H.ASPAS, H.TOCAN], [0, 0.15, 0.55, 0.86, 1], clamp);
+  interpolate(f, [H.TORRE, H.DOS, H.MISMO, H.ASPAS, H.TOCAN], [0, 0.15, 0.6, 0.93, 1], clamp);
 type Estado = {pos: THREE.Vector3; yaw: number; pitch: number; roll: number; rotor: number; palas: number};
-const A_INI = new THREE.Vector3(-170, 32, 22);
+const A_INI = new THREE.Vector3(-130, 30, 18);
 const A_FIN = new THREE.Vector3(-5.2, 3.2, 2.6);
-const R_INI = new THREE.Vector3(150, 58, -26);
+const R_INI = new THREE.Vector3(105, 50, -20);
 const R_FIN = new THREE.Vector3(2.2, 3.6, -3.2);
 function enRuta(ini: THREE.Vector3, fin: THREE.Vector3, p: number) {
   const v = ini.clone().lerp(fin, p);
@@ -91,20 +91,22 @@ function lanzadera(f: number) {
 // ---------- Cámara ----------
 type ClaveCam = [number, [number, number, number], [number, number, number]];
 const V = (x: number, y: number, z: number): [number, number, number] => [x, y, z];
+// En vertical caben mejor las distancias a lo largo de la pantalla: para la torre, las rutas
+// y el roce, la cámara mira el valle "de punta" (desde +x), así el eje x queda de arriba abajo.
 const CAM: ClaveCam[] = [
   [0, V(60, 70, 140), V(0, 5, 0)],
   [H.PHERICHE + 30, V(40, 40, 90), V(0, 3, 0)],
   [H.ALTURA + 20, V(30, 24, 60), V(4, 2, 4)],
   [H.NIEVE + 25, V(34, 16, 46), V(9, 2, 7)],
-  [H.IBAN + 30, V(22, 24, 62), V(-22, 9, 0)],
-  [H.TORRE + 25, V(-10, 150, 240), V(-80, 0, 0)],
-  [H.RADIO + 10, V(-5, 115, 185), V(-45, 12, 0)],
-  [H.DOS + 25, V(10, 95, 170), V(-10, 18, -5)],
-  [H.BASE + 15, V(15, 75, 140), V(0, 14, 0)],
-  [H.MISMO + 25, V(-8, 32, 58), V(-1, 5, 0)],
-  [H.ASPAS + 10, V(-4, 24, 36), V(-1.5, 4, 0)],
-  [H.TOCAN - 4, V(-2, 21, 27), V(-1.5, 4.5, -0.3)],
-  [H.TOCAN + 16, V(-7, 15, 31), V(0, 2, 0)],
+  [H.IBAN + 30, V(26, 30, 60), V(-25, 10, 0)],
+  [H.TORRE + 25, V(50, 110, 8), V(-62, 0, 6)],
+  [H.RADIO + 5, V(65, 112, 10), V(-45, 5, 2)],
+  [H.DOS + 30, V(150, 150, 40), V(-15, 10, 0)],
+  [H.BASE + 20, V(135, 135, 35), V(-10, 8, 0)],
+  [H.MISMO + 25, V(70, 80, 12), V(-8, 4, 0)],
+  [H.ASPAS + 15, V(42, 58, 8), V(-2, 3, 0)],
+  [H.TOCAN - 4, V(27, 40, 6), V(-1.5, 3.5, 0)],
+  [H.TOCAN + 16, V(22, 20, 22), V(-1, 1.5, 0)],
   [H.AIRE + 22, V(10, 11, 34), V(0, 2.5, 0)],
   [H.VICTIMA + 5, V(16, 16, 40), V(0, 1.5, 0)],
   [H.CIERRE, V(24, 28, 56), V(0, 2, 0)],
@@ -193,7 +195,7 @@ for (let i = 0; i < 9; i++) {
 const Montes: React.FC = () => (
   <group>
     {MONTES.map(([x, z, r, h], i) => (
-      <Holo key={i} geom={CONO} color={BLANCO} relleno={0.025} linea={0.3} angulo={10} position={[x, h / 2, z]} scale={[r, h, r]} />
+      <Holo key={i} geom={CONO} color={BLANCO} relleno={0.015} linea={0.16} angulo={10} position={[x, h / 2, z]} scale={[r, h, r]} />
     ))}
   </group>
 );
@@ -256,16 +258,16 @@ const Nieve: React.FC<{f: number}> = ({f}) => {
 
 // Torre de Lukla: cúpula de alcance que se queda corta antes de llegar a Pheriche
 const CUPULA = new THREE.SphereGeometry(1, 28, 10, 0, Math.PI * 2, 0, Math.PI / 2);
-const TORRE_X = -175;
-const ALCANCE = 120;
+const TORRE_X = -150;
+const ALCANCE = 100;
 const Torre: React.FC<{f: number}> = ({f}) => {
   const op = interpolate(f, [H.TORRE, H.TORRE + 20], [0, 1], clamp) * interpolate(f, [H.MISMO, H.MISMO + 20], [1, 0.25], clamp);
   const r = ALCANCE * interpolate(f, [H.TORRE, H.TORRE_NO + 10], [0.2, 1], {...clamp, easing: Easing.out(Easing.cubic)});
   if (op <= 0) return null;
   return (
     <group position={[TORRE_X, 0, 10]}>
-      <Holo geom={caja(3, 16, 3)} color={C.ambar} relleno={0.15 * op} linea={0.9 * op} position={[0, 8, 0]} />
-      <Holo geom={caja(6, 3, 6)} color={C.ambar} relleno={0.15 * op} linea={0.9 * op} position={[0, 17, 0]} />
+      <Holo geom={caja(5, 30, 5)} color={C.ambar} relleno={0.15 * op} linea={0.9 * op} position={[0, 15, 0]} />
+      <Holo geom={caja(10, 5, 10)} color={C.ambar} relleno={0.15 * op} linea={0.9 * op} position={[0, 32, 0]} />
       <Holo geom={CUPULA} color={C.ambar} relleno={0.03 * op} linea={0.28 * op} angulo={1} scale={[r, r * 0.55, r]} />
     </group>
   );
@@ -282,7 +284,7 @@ const Radio: React.FC<{f: number; centro: THREE.Vector3; color: string; desde: n
     // cuando la comunicación "falla", las ondas parpadean y se cortan
     const corte = falla ? (Math.floor(f / 5) % 3 === 0 ? 0.15 : 1) : 1;
     out.push(
-      <mesh key={k} geometry={ONDA} position={[centro.x, centro.y + 2, centro.z]} rotation={[-Math.PI / 2, 0, 0]} scale={[2 + t * 22, 2 + t * 22, 1]}>
+      <mesh key={k} geometry={ONDA} position={[centro.x, centro.y + 2, centro.z]} rotation={[-Math.PI / 2, 0, 0]} scale={[2 + t * 11, 2 + t * 11, 1]}>
         <meshBasicMaterial color={color} transparent opacity={(1 - t) * 0.7 * fin * corte} depthWrite={false} blending={THREE.AdditiveBlending} side={THREE.DoubleSide} />
       </mesh>
     );
@@ -468,7 +470,7 @@ export const Holograma: React.FC = () => {
       <Etiqueta3D f={f} punto={new THREE.Vector3(0, 0.2, 0)} desde={H.PHERICHE + 25} hasta={H.NIEVE + 10} texto="Helipuerto" dx={-60} dy={170} />
       <Etiqueta3D f={f} punto={new THREE.Vector3(15, 1.8, 10)} desde={H.GENTE - 5} hasta={H.IBAN + 10} color={C.verde} texto="Excursionistas atrapados" dx={-40} dy={-230} />
       <Etiqueta3D f={f} punto={lanzadera(f).pos.clone().add(new THREE.Vector3(0, 3, 0))} desde={H.IBAN} hasta={H.TORRE - 5} texto="Ida y vuelta" dx={60} dy={-160} />
-      <Etiqueta3D f={f} punto={new THREE.Vector3(TORRE_X, 20, 10)} desde={H.TORRE + 15} hasta={H.DOS + 15} color={C.ambar} texto="Torre de Lukla" dx={40} dy={-180} />
+      <Etiqueta3D f={f} punto={new THREE.Vector3(TORRE_X, 34, 10)} desde={H.TORRE + 15} hasta={H.DOS + 15} color={C.ambar} texto="Torre de Lukla" dx={40} dy={-180} />
       <Etiqueta3D f={f} punto={new THREE.Vector3(0, 0.2, 0)} desde={H.TORRE_NO} hasta={H.DOS + 15} color={C.rojo} texto="Aquí no llega" dx={-40} dy={200} />
       <Etiqueta3D f={f} punto={a.pos.clone().add(new THREE.Vector3(0, 3, 0))} desde={H.LUKLA - 5} hasta={H.MISMO + 15} color={AZUL} texto="Desde Lukla" dx={40} dy={180} />
       <Etiqueta3D f={f} punto={r.pos.clone().add(new THREE.Vector3(0, 3, 0))} desde={H.BASE - 5} hasta={H.MISMO + 15} color={NARANJA} texto="Desde el campamento base" dx={-40} dy={-200} />
