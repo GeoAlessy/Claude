@@ -119,3 +119,19 @@ Solo si no aparece nada real:
 - El experimento de la torre de caída (SCAD) si no hay stock de una atracción parecida.
 
 En ese caso, imágenes **fijas** con movimiento lento de cámara hecho por código, pasadas por el filtro de película para que no se note "IA cinematográfica".
+
+## Candidatos HD encontrados (Prelinger, masters 2K–5K)
+
+Se leen por HTTP solo los segundos necesarios (ver `scripts/mente_clips_v01.sh`, función `cortar_hd`).
+
+| Para | Ítem de archive.org | Resolución |
+|---|---|---|
+| Memoria (¡título perfecto!) | `202096_The_Memory_Chain` | 2048×1536 |
+| Oficinas, rascacielos | `200718_Rockefeller_Center` (1945) | 4096×3072 |
+| Calles de Nueva York | `IA35000011001_201710` (Manhattan, 1945) | 2048×1536 |
+| Multitudes, feria | `200732_New_York_Worlds_Fair_6` | 2048×1536 |
+| Miedo (cap. 3) | `202891_Overcoming_Fear` (1950) | 2048×1536 |
+| Accidentes (cap. 3) | `200503_The_Human_Factor_In_Driving` | 2048×1536 |
+| Cuerpo, salud (cap. 5) | `201668_Television_Commercials_The_Body` | 2048×1536 |
+| Infancia, familia a color | `201047_Home_Movie_003791`, `HomeMoviePA097836`, `HMFamilyHolidayand97317` (1950) | 1440–2048 |
+| Relojes, oficios | `masterhandscomplete4kh264` (*Master Hands*, 1936) | 4096×3072 |

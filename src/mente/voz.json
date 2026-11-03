@@ -1,0 +1,12 @@
+{
+ "voice_id": "DVgWWuLBFB5ZdlZXagwO",
+ "nombre": "Romero – Warm, Grounded Storyteller | Reflective (biblioteca compartida de ElevenLabs)",
+ "modelo": "eleven_v4",
+ "ajustes": {
+  "stability": 0.5,
+  "similarity_boost": 0.8,
+  "style": 0.3,
+  "use_speaker_boost": true,
+  "speed": 0.95
+ }
+}
