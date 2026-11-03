@@ -6,12 +6,12 @@
 
 | Material | % del vídeo | Notas |
 |---|---|---|
-| Película antigua de dominio público | ~35 % | Nostalgia, infancia, memoria. Pasa por el filtro `PeliculaAntigua` (intensidad 0,7–0,9). |
-| Stock gratis de internet | ~25 % | Vida cotidiana actual. Filtro suave (intensidad 0,2–0,35) para que no parezca genérico. |
-| Motion graphics por código | ~30 % | Explicar la ciencia: cerebro-galaxia, línea de vida, fichas, pruebas interactivas. |
-| Tarjetas de testimonio | ~5 % | Posts públicos **parafraseados**, sin usuario, sin logos ni capturas. |
-| Tu móvil (planos sin cara) | ~3–5 % | Relojes, pasillos, ventanas. Lo más auténtico. |
-| Imágenes IA | ≤ 2 % | Solo si no existe material real (p. ej. la cueva de Siffre). |
+| Película antigua de dominio público | ~28 % | Nostalgia, infancia, memoria. Pasa por el filtro `PeliculaAntigua` (intensidad 0,7–0,9). |
+| Stock gratis de internet | ~30 % | Vida cotidiana actual. Filtro suave (intensidad 0,2–0,35) para que no parezca genérico. |
+| Motion graphics por código | ~33 % | Explicar la ciencia: cerebro-galaxia, línea de vida, fichas, pruebas interactivas. |
+| Tarjetas de testimonio | ~5,5 % | Posts públicos **parafraseados**, sin usuario, sin logos ni capturas. |
+| Tu móvil (planos sin cara) | ~3 % (dentro del stock) | Relojes, pasillos, ventanas. Lo más auténtico. |
+| Imágenes IA | ~1 % | Solo si no existe material real (p. ej. la cueva de Siffre). |
 
 **Ritmo:** ningún plano de más de 4–6 s; nunca dos planos seguidos del mismo tipo.
 
@@ -19,13 +19,13 @@
 
 | Tramo | Película antigua | Stock | Gráficos | Otros |
 |---|---|---|---|---|
-| Gancho (0:00–0:50) | 60 % | — | 40 % | — |
-| Cap. 1 · Los años se aceleran | 40 % (películas caseras de infancia) | — | 45 % | 15 % testimonios |
-| Cap. 2 · El cerebro deja de grabar | 40 % (rutina, oficinas) | 30 % (trayecto diario) | 30 % | — |
+| Gancho (0:00–0:50) | 40 % | 20 % | 40 % | — |
+| Cap. 1 · Los años se aceleran | 30 % (películas caseras de infancia) | 25 % | 30 % | 15 % testimonios |
+| Cap. 2 · El cerebro deja de grabar | 30 % (rutina, oficinas) | 40 % (trayecto diario) | 30 % | — |
 | Cap. 3 · Cámara lenta | 25 % (crash tests) | 35 % (caída libre, montaña rusa) | 30 % | 10 % testimonios |
 | Cap. 4 · El tiempo vuela | 15 % | 40 % (concierto, sala de espera) | 35 % | 10 % testimonios |
 | Cap. 5 · El reloj del cuerpo | 30 % (fiebre, años 60) | 25 % (cueva) | 35 % | 10 % imagen IA si no hay foto de Siffre |
-| Cap. 6 · Sueños | 45 % (Méliès, laboratorio del sueño) | 10 % | 35 % | 10 % testimonios |
+| Cap. 6 · Sueños | 35 % (Méliès, laboratorio del sueño) | 20 % | 35 % | 10 % testimonios |
 | Cap. 7 · Vives en el pasado | 15 % | 35 % (ojo macro, reloj) | 50 % (pruebas visuales) | — |
 | Cap. 8 + cierre | 40 % (familias, películas caseras) | 40 % (viaje, atardecer) | 20 % | — |
 
