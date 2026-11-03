@@ -1,16 +1,22 @@
 import React from 'react';
 import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
 import {C, MONO, SANS, SERIF, rango} from '../estilo';
+import {Escribe, Teclea, tecla} from './TextoAnimado';
 
 // Piezas de motion graphics del vídeo 01 (todas abstractas: nunca dibujan personas).
 // Cada pieza dura lo que diga su <Sequence>; aquí solo se anima con el fotograma local.
 
 const Etiqueta: React.FC<{texto: string; f: number}> = ({texto, f}) => (
-  <div style={{position: 'absolute', top: 90, width: '100%', textAlign: 'center', fontFamily: MONO, fontSize: 24, letterSpacing: 8, color: C.oro, opacity: rango(f, 0, 15)}}>{texto}</div>
+  <div style={{position: 'absolute', top: 90, width: '100%', textAlign: 'center', fontFamily: MONO, fontSize: 24, letterSpacing: 8, color: C.oro}}>
+    <Teclea texto={texto} desde={4} />
+  </div>
 );
 
-const Frase: React.FC<{texto: React.ReactNode; f: number; desde: number; abajo?: number}> = ({texto, f, desde, abajo = 150}) => (
-  <div style={{position: 'absolute', bottom: abajo, width: '100%', textAlign: 'center', fontFamily: SERIF, fontStyle: 'italic', fontSize: 52, color: C.luz, opacity: rango(f, desde, desde + 20)}}>{texto}</div>
+// `texto` admite marcado: *acento dorado*, !acento rojo!
+const Frase: React.FC<{texto: string; f: number; desde: number; abajo?: number}> = ({texto, desde, abajo = 150}) => (
+  <div style={{position: 'absolute', bottom: abajo, width: '100%', textAlign: 'center', fontFamily: SERIF, fontStyle: 'italic', fontSize: 52, color: C.luz}}>
+    <Escribe texto={texto} desde={desde} ritmo={5} />
+  </div>
 );
 
 // Cap. 1 · Teoría proporcional (Janet, 1877): un año es una porción cada vez más pequeña de tu vida.
@@ -39,16 +45,18 @@ export const ProporcionVida: React.FC = () => {
               })}
               <path d={`M${cx} ${cy} L${cx} ${cy - r} A${r} ${r} 0 ${grande} 1 ${x2} ${y2} Z`} fill={k === 0 ? C.oro : C.rojo} opacity={0.85} />
               <text x={cx} y={cy + r + 70} textAnchor="middle" fill={C.luz} fontFamily={SERIF} fontSize={46}>
-                Age {edad}
+                {tecla(`Age ${edad}`, f, 30 + k * 40, 24)}
               </text>
               <text x={cx} y={cy + r + 115} textAnchor="middle" fill={C.niebla} fontFamily={MONO} fontSize={24}>
-                1 year = 1/{edad} of your life
+                {tecla(`1 year = 1/${edad} of your life`, f, 50 + k * 40)}
               </text>
             </g>
           );
         })}
       </svg>
-      <div style={{position: 'absolute', bottom: 40, width: '100%', textAlign: 'center', fontFamily: SANS, fontSize: 18, color: C.gris}}>Proportional theory · Paul Janet, 1877</div>
+      <div style={{position: 'absolute', bottom: 40, width: '100%', textAlign: 'center', fontFamily: SANS, fontSize: 18, color: C.gris}}>
+        <Teclea texto="Proportional theory · Paul Janet, 1877" desde={24} cps={70} cursor="transparent" />
+      </div>
     </AbsoluteFill>
   );
 };
@@ -70,12 +78,14 @@ export const CurvaDecada: React.FC = () => {
       <svg width={1920} height={1080}>
         <line x1={x0} y1={y0} x2={x1} y2={y0} stroke={C.nieblaSuave} strokeWidth={2} />
         <line x1={x0} y1={y0} x2={x0} y2={y1 - 40} stroke={C.nieblaSuave} strokeWidth={2} />
-        <text x={x0} y={y0 + 50} fill={C.niebla} fontFamily={MONO} fontSize={22}>YOUNGER</text>
-        <text x={x1} y={y0 + 50} textAnchor="end" fill={C.niebla} fontFamily={MONO} fontSize={22}>OLDER</text>
-        <text x={x0 - 20} y={y1 - 50} fill={C.niebla} fontFamily={MONO} fontSize={22}>FASTER ↑</text>
+        <text x={x0} y={y0 + 50} fill={C.niebla} fontFamily={MONO} fontSize={22}>{tecla('YOUNGER', f, 12)}</text>
+        <text x={x1} y={y0 + 50} textAnchor="end" fill={C.niebla} fontFamily={MONO} fontSize={22}>{tecla('OLDER', f, 100)}</text>
+        <text x={x0 - 20} y={y1 - 50} fill={C.niebla} fontFamily={MONO} fontSize={22}>{tecla('FASTER ↑', f, 20)}</text>
         <polyline points={visibles.map((p) => p.join(',')).join(' ')} fill="none" stroke={C.oro} strokeWidth={5} strokeLinecap="round" />
       </svg>
-      <div style={{position: 'absolute', bottom: 40, width: '100%', textAlign: 'center', fontFamily: SANS, fontSize: 18, color: C.gris}}>Shape based on Wittmann &amp; Lehnhoff (2005) · illustrative</div>
+      <div style={{position: 'absolute', bottom: 40, width: '100%', textAlign: 'center', fontFamily: SANS, fontSize: 18, color: C.gris}}>
+        <Teclea texto="Shape based on Wittmann & Lehnhoff (2005) · illustrative" desde={24} cps={70} cursor="transparent" />
+      </div>
     </AbsoluteFill>
   );
 };
@@ -108,8 +118,10 @@ export const ExperimentoCaida: React.FC = () => {
         <div style={{fontFamily: MONO, fontSize: 110, color: C.rojo, textAlign: 'center', filter: 'blur(1.2px)'}}>{parpadeo}</div>
         <div style={{fontFamily: SANS, fontSize: 20, color: C.niebla, textAlign: 'center'}}>too fast to read</div>
       </div>
-      <Frase f={f} desde={200} texto={<>Not one of them could read it.</>} />
-      <div style={{position: 'absolute', bottom: 40, width: '100%', textAlign: 'center', fontFamily: SANS, fontSize: 18, color: C.gris}}>Stetson, Fiesta &amp; Eagleman · PLoS ONE, 2007</div>
+      <Frase f={f} desde={200} texto="Not one of them could *read* it." />
+      <div style={{position: 'absolute', bottom: 40, width: '100%', textAlign: 'center', fontFamily: SANS, fontSize: 18, color: C.gris}}>
+        <Teclea texto="Stetson, Fiesta & Eagleman · PLoS ONE, 2007" desde={24} cps={70} cursor="transparent" />
+      </div>
     </AbsoluteFill>
   );
 };
@@ -138,8 +150,10 @@ export const CompuertaAtencion: React.FC = () => {
         <div style={{fontFamily: MONO, fontSize: 20, letterSpacing: 4, color: C.niebla}}>TICKS COUNTED</div>
         <div style={{fontFamily: MONO, fontSize: 90, color: abierta ? C.rojo : C.oro}}>{contados}</div>
       </div>
-      <Frase f={f} desde={190} texto="Watching time makes it longer." />
-      <div style={{position: 'absolute', bottom: 40, width: '100%', textAlign: 'center', fontFamily: SANS, fontSize: 18, color: C.gris}}>Attentional-gate model · Zakay &amp; Block (1997)</div>
+      <Frase f={f} desde={190} texto="Watching time makes it *longer.*" />
+      <div style={{position: 'absolute', bottom: 40, width: '100%', textAlign: 'center', fontFamily: SANS, fontSize: 18, color: C.gris}}>
+        <Teclea texto="Attentional-gate model · Zakay & Block (1997)" desde={24} cps={70} cursor="transparent" />
+      </div>
     </AbsoluteFill>
   );
 };
@@ -149,7 +163,9 @@ export const CalendariosSiffre: React.FC = () => {
   const f = useCurrentFrame();
   const Mes: React.FC<{titulo: string; dia: number; diasMes: number; rojo: boolean; x: number; aparece: number}> = ({titulo, dia, diasMes, rojo, x, aparece}) => (
     <div style={{position: 'absolute', left: x, top: 230, width: 560, opacity: aparece}}>
-      <div style={{fontFamily: MONO, fontSize: 22, letterSpacing: 6, color: rojo ? C.rojo : C.oro, marginBottom: 18}}>{titulo}</div>
+      <div style={{fontFamily: MONO, fontSize: 22, letterSpacing: 6, color: rojo ? C.rojo : C.oro, marginBottom: 18}}>
+        <Teclea texto={titulo} desde={rojo ? 72 : 17} cursor={rojo ? C.rojo : C.oro} />
+      </div>
       <div style={{display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 8}}>
         {Array.from({length: diasMes}, (_, i) => (
           <div
@@ -177,8 +193,10 @@ export const CalendariosSiffre: React.FC = () => {
       <Etiqueta texto="58 DAYS UNDERGROUND · NO CLOCKS · 1962" f={f} />
       <Mes titulo="WHAT HE BELIEVED · AUGUST" dia={20} diasMes={31} rojo={false} x={330} aparece={rango(f, 15, 35)} />
       <Mes titulo="REALITY · SEPTEMBER" dia={14} diasMes={30} rojo x={1030} aparece={rango(f, 70, 90)} />
-      <Frase f={f} desde={130} texto={<>Almost a month of his life, <span style={{color: C.rojo}}>gone</span>.</>} />
-      <div style={{position: 'absolute', bottom: 40, width: '100%', textAlign: 'center', fontFamily: SANS, fontSize: 18, color: C.gris}}>Michel Siffre · Scarasson cave, 1962</div>
+      <Frase f={f} desde={130} texto="Almost a month of his life, !gone.!" />
+      <div style={{position: 'absolute', bottom: 40, width: '100%', textAlign: 'center', fontFamily: SANS, fontSize: 18, color: C.gris}}>
+        <Teclea texto="Michel Siffre · Scarasson cave, 1962" desde={24} cps={70} cursor="transparent" />
+      </div>
     </AbsoluteFill>
   );
 };
@@ -222,7 +240,7 @@ export const PruebaFlashLag: React.FC = () => {
         {(destello || congela) && <rect x={(congela ? xc : x) - 14} y={420} width={28} height={60} fill={C.oro} />}
         {congela && <line x1={xc} x2={xc} y1={380} y2={600} stroke={C.rojo} strokeWidth={2} strokeDasharray="6 6" opacity={rango(f, ciclo * 2, ciclo * 2 + 15)} />}
       </svg>
-      {congela && <Frase f={f} desde={ciclo * 2 + 10} texto="They were perfectly lined up." />}
+      {congela && <Frase f={f} desde={ciclo * 2 + 10} texto="They were *perfectly* lined up." />}
     </AbsoluteFill>
   );
 };
@@ -232,13 +250,17 @@ export const DosRelojes: React.FC = () => {
   const f = useCurrentFrame();
   const fila = (y: number, titulo: string, vivir: number, recordar: number, color: string, k: number) => (
     <div style={{position: 'absolute', left: 260, top: y, width: 1400, opacity: rango(f, 10 + k * 30, 30 + k * 30)}}>
-      <div style={{fontFamily: SERIF, fontSize: 46, color: C.luz, marginBottom: 18}}>{titulo}</div>
+      <div style={{fontFamily: SERIF, fontSize: 46, color: C.luz, marginBottom: 18}}>
+        <Escribe texto={titulo} desde={12 + k * 30} ritmo={4} />
+      </div>
       {[
         ['LIVING IT', vivir],
         ['REMEMBERING IT', recordar],
       ].map(([etq, v], i) => (
         <div key={i} style={{display: 'flex', alignItems: 'center', marginBottom: 14}}>
-          <div style={{width: 260, fontFamily: MONO, fontSize: 20, letterSpacing: 3, color: C.niebla}}>{etq as string}</div>
+          <div style={{width: 260, fontFamily: MONO, fontSize: 20, letterSpacing: 3, color: C.niebla}}>
+            <Teclea texto={etq as string} desde={30 + k * 30 + i * 15} cursor={C.niebla} />
+          </div>
           <div style={{height: 26, borderRadius: 6, background: color, width: `${(v as number) * 100 * rango(f, 40 + k * 30 + i * 15, 90 + k * 30 + i * 15)}%`, maxWidth: 1100}} />
         </div>
       ))}
@@ -249,7 +271,9 @@ export const DosRelojes: React.FC = () => {
       <Etiqueta texto="THE TWO CLOCKS IN YOUR HEAD" f={f} />
       {fila(250, 'A night you loved', 0.15, 0.85, C.oro, 0)}
       {fila(560, 'An hour in a waiting room', 0.85, 0.06, C.rojo, 1)}
-      <div style={{position: 'absolute', bottom: 40, width: '100%', textAlign: 'center', fontFamily: SANS, fontSize: 18, color: C.gris}}>The holiday paradox · Claudia Hammond (2012) · illustrative</div>
+      <div style={{position: 'absolute', bottom: 40, width: '100%', textAlign: 'center', fontFamily: SANS, fontSize: 18, color: C.gris}}>
+        <Teclea texto="The holiday paradox · Claudia Hammond (2012) · illustrative" desde={24} cps={70} cursor="transparent" />
+      </div>
     </AbsoluteFill>
   );
 };

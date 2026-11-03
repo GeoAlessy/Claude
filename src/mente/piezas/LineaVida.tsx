@@ -1,6 +1,7 @@
 import React from 'react';
 import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
 import {C, MONO, SERIF, rango, suave} from '../estilo';
+import {Escribe, tecla} from './TextoAnimado';
 
 // La línea de vida: cada década tiene el ancho de cómo se SIENTE, no de cuánto dura.
 // La infancia ocupa mucho y brilla; a partir de los 20, los años se encogen y se apagan.
@@ -55,17 +56,17 @@ export const LineaVida: React.FC<{dur: number; compresion: number}> = ({dur, com
               {i < 2 && <rect x={xi + 3} y={y - 22} width={Math.max(2, w - 6)} height={44} rx={6} fill={C.oro} opacity={0.35 * aparece} filter="url(#halo)" />}
               {/* al comprimirse, solo quedan 0, 10 y 20; el resto se apaga para no amontonarse */}
               <text x={xi + 6} y={y + 72} fill={C.niebla} fontFamily={MONO} fontSize={24} opacity={i <= 2 ? 1 : 1 - comp}>
-                {d.etq}
+                {tecla(d.etq, f, 10 + 110 * (i / DECADAS.length), 30)}
               </text>
             </g>
           );
         })}
         <text x={x0} y={y - 70} fill={C.niebla} fontFamily={MONO} fontSize={22} letterSpacing={4} opacity={dibujo}>
-          YOUR LIFE · AS IT FEELS
+          {tecla('YOUR LIFE · AS IT FEELS', f, 6)}
         </text>
         {/* tras la compresión: toda la vida adulta cabe en un trocito */}
         <text x={x + 14} y={y + 9} fill={C.rojo} fontFamily={MONO} fontSize={24} opacity={comp}>
-          ← 20 to 80
+          {tecla('← 20 to 80', f, compresion + 10, 26)}
         </text>
       </svg>
       <div
@@ -78,10 +79,10 @@ export const LineaVida: React.FC<{dur: number; compresion: number}> = ({dur, com
           fontStyle: 'italic',
           fontSize: 54,
           color: C.luz,
-          opacity: rango(f, compresion + 30, compresion + 55) * (1 - rango(f, dur - 15, dur)),
+          opacity: 1 - rango(f, dur - 15, dur),
         }}
       >
-        Your brain is quietly <span style={{color: C.rojo}}>editing</span> your life.
+        <Escribe texto="Your brain is quietly !editing! your life." desde={compresion + 30} ritmo={5} />
       </div>
     </AbsoluteFill>
   );

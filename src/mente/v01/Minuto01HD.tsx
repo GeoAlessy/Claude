@@ -15,21 +15,8 @@ import {NARRACION} from './narracion';
 // Material: masters HD de Prelinger (dominio público), Safety Last! 1080p (dominio público, sin su música),
 // stock 1080p de Mixkit (licencia gratuita) y gráficos propios. Registro en canal-mente/fuentes-material-v01.md.
 
-const linea = (id: string) => {
-  const l = NARRACION.find((x) => x.id === id);
-  if (!l) throw new Error(`Falta la línea ${id}`);
-  return l;
-};
-const limpia = (w: string) => w.toLowerCase().replace(/[^a-z0-9']/g, '');
-/** Fotograma (global) en que empieza la palabra `w` (n-ésima aparición) de la línea `id`. */
-const P = (id: string, w: string, n = 0) => {
-  const l = linea(id);
-  const hits = l.palabras.filter(([p]) => limpia(p) === limpia(w));
-  if (!hits[n]) throw new Error(`No encuentro "${w}" en ${id}`);
-  return l.desde + Math.round(hits[n][1] * 30);
-};
-const inicio = (id: string) => linea(id).desde;
-const fin = (id: string) => linea(id).desde + linea(id).dur;
+import {A, P, fin, inicio, tiemposFrase, volMusica, volSfx} from './montaje';
+import {FraseClave} from '../piezas/TextoAnimado';
 
 type Plano = {desde: number; hasta: number; nodo: React.ReactNode};
 const arch = (src: string, rotulo?: string, intensidad = 0.4) => (
@@ -42,8 +29,6 @@ const graf = (n: React.ReactNode) => (
     {n}
   </>
 );
-
-const A = (n: number) => n - 4; // corte un pelín antes de la palabra, como en edición profesional
 
 const T_TITULO = A(P('gancho_05', 'scientists'));
 const T_ROTULO = inicio('cap01_01') + 10;
@@ -106,22 +91,18 @@ const SFX: [string, number, number, number?][] = [
   ['tick_dato', P('cap01_02', 'most') + 16, 0.45],
   ['tick_dato', P('cap01_02', 'drop'), 0.5],
   // proyector suave bajo los planos de archivo
-  ...ARCHIVO_PLANOS.map((i) => ['proyector', PLANOS[i].desde, 0.12, PLANOS[i].hasta - PLANOS[i].desde] as [string, number, number, number]),
+  ...ARCHIVO_PLANOS.map((i) => ['proyector', PLANOS[i].desde, 0.5, PLANOS[i].hasta - PLANOS[i].desde] as [string, number, number, number]),
 ];
 
-// Música de fondo con "ducking": baja cuando habla el narrador y sube en las pausas (rampas de ~0,4 s).
+// Frases clave del narrador escritas en pantalla, al ritmo exacto de su voz (sobre la imagen, con velo oscuro).
+type Frase = {id: string; texto: string; hasta: number};
+const FRASES: Frase[] = [
+  {id: 'gancho_02', texto: 'That summer felt *endless.*', hasta: A(P('gancho_02', 'last'))},
+  {id: 'gancho_02', texto: 'Last year… !barely! happened.', hasta: A(P('gancho_03', "you've"))},
+];
+
+// Música de fondo con "ducking": baja cuando habla el narrador y sube en las pausas.
 const MUSICA = {src: 'mente/musica/p1_cz_is_that_you.mp3', inicio: 0, alta: 0.42, baja: 0.13};
-const HABLA = NARRACION.map((l) => [l.desde, l.desde + l.dur] as const);
-const volumenMusica = (f: number) => {
-  let d = Infinity; // distancia en fotogramas al tramo de voz más cercano (0 si está hablando)
-  for (const [a, b] of HABLA) {
-    if (f >= a && f <= b) return MUSICA.baja;
-    d = Math.min(d, Math.abs(f - a), Math.abs(f - b));
-  }
-  const t = Math.min(1, d / 12);
-  const entrada = Math.min(1, f / 45);
-  return (MUSICA.baja + (MUSICA.alta - MUSICA.baja) * t) * entrada;
-};
 
 const Transicion: React.FC<{dur: number; children: React.ReactNode}> = ({dur, children}) => {
   const f = useCurrentFrame();
@@ -140,10 +121,19 @@ export const Minuto01HD: React.FC = () => (
         <Audio src={staticFile(l.audio)} />
       </Sequence>
     ))}
-    <Audio src={staticFile(MUSICA.src)} startFrom={MUSICA.inicio} volume={volumenMusica} />
+    {FRASES.map((fr, i) => {
+      const t = tiemposFrase(fr.id, fr.texto);
+      const desde = t[0] - 8;
+      return (
+        <Sequence key={`f${i}`} from={desde} durationInFrames={fr.hasta - desde}>
+          <FraseClave texto={fr.texto} tiempos={t.map((x) => x - desde)} dur={fr.hasta - desde} sobreImagen />
+        </Sequence>
+      );
+    })}
+    <Audio src={staticFile(MUSICA.src)} startFrom={MUSICA.inicio} volume={volMusica(MUSICA.alta, MUSICA.baja)} />
     {SFX.map(([s, desde, vol, dur], i) => (
       <Sequence key={`s${i}`} from={Math.max(0, desde)} durationInFrames={dur ?? 150}>
-        <Audio src={staticFile(`mente/sfx/${s}.mp3`)} volume={vol} loop={dur !== undefined} />
+        <Audio src={staticFile(`mente/sfx/${s}.mp3`)} volume={volSfx(s, vol, Math.max(0, desde))} loop={dur !== undefined} />
       </Sequence>
     ))}
   </AbsoluteFill>

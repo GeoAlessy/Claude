@@ -1,6 +1,7 @@
 import React from 'react';
 import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
 import {C, FPS, MONO, SANS, SERIF, rango, suave} from '../estilo';
+import {Escribe, Teclea} from './TextoAnimado';
 
 // Prueba 01 del capítulo 1: "cierra los ojos y cuenta hasta 30".
 // La voz guía toda la prueba (nunca hay silencio): este gráfico solo acompaña cada fase.
@@ -49,7 +50,9 @@ export const PruebaContar: React.FC<Props> = ({cerrar, crono, fallos, comentar})
 
   return (
     <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center', opacity: entrada}}>
-      <div style={{position: 'absolute', top: 120, fontFamily: MONO, fontSize: 22, letterSpacing: 8, color: C.oro}}>TEST 01 · YOUR INTERNAL CLOCK</div>
+      <div style={{position: 'absolute', top: 120, fontFamily: MONO, fontSize: 22, letterSpacing: 8, color: C.oro}}>
+        <Teclea texto="TEST 01 · YOUR INTERNAL CLOCK" desde={4} />
+      </div>
 
       <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', transform: `translateY(${subir}px)`}}>
         {/* anillo del cronómetro con el pulso */}
@@ -73,8 +76,8 @@ export const PruebaContar: React.FC<Props> = ({cerrar, crono, fallos, comentar})
           <div style={{fontFamily: MONO, fontSize: 92, color: C.luz}}>{crono_txt}</div>
         </div>
 
-        <div style={{fontFamily: SERIF, fontSize: 64, color: C.luz, marginTop: 40, opacity: tConsigna, textAlign: 'center'}}>
-          Close your eyes. <span style={{color: C.oro, fontStyle: 'italic'}}>Count to 30.</span>
+        <div style={{fontFamily: SERIF, fontSize: 64, color: C.luz, marginTop: 40, textAlign: 'center'}}>
+          {f >= cerrar - 2 && <Escribe texto="Close your eyes. *Count to 30.*" desde={cerrar} ritmo={5} />}
         </div>
         <div style={{fontFamily: SANS, fontSize: 26, color: C.niebla, marginTop: 14, opacity: tConsigna * (1 - tFallos)}}>
           {latidos > 0 ? `one second per beat · ${latidos}` : ''}
@@ -86,8 +89,8 @@ export const PruebaContar: React.FC<Props> = ({cerrar, crono, fallos, comentar})
         <Chip texto="30.0 s" color={C.oro} t={rango(f, fallos + 8, fallos + 23, 0, 1, suave)} />
         <Chip texto="35.1 s" color={C.rojo} t={rango(f, fallos + 16, fallos + 31, 0, 1, suave)} />
       </div>
-      <div style={{position: 'absolute', bottom: 205, fontFamily: SANS, fontSize: 20, color: C.gris, opacity: tFallos}}>
-        illustrative results · most people miss by several seconds
+      <div style={{position: 'absolute', bottom: 205, fontFamily: SANS, fontSize: 20, color: C.gris}}>
+        {f >= fallos && <Teclea texto="illustrative results · most people miss by several seconds" desde={fallos + 20} cps={60} cursor="transparent" />}
       </div>
 
       <div
@@ -105,7 +108,7 @@ export const PruebaContar: React.FC<Props> = ({cerrar, crono, fallos, comentar})
           transform: `scale(${0.9 + 0.1 * tComentar})`,
         }}
       >
-        Comment your result ↓
+        {f >= comentar && <Escribe texto="Comment your result ↓" desde={comentar + 4} ritmo={4} colorBase={C.noche} />}
       </div>
     </AbsoluteFill>
   );

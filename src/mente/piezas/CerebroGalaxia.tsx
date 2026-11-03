@@ -1,6 +1,7 @@
 import React, {useMemo} from 'react';
 import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
 import {C, MONO, SERIF, rango, semilla} from '../estilo';
+import {Escribe, Teclea} from './TextoAnimado';
 
 // El cerebro como una galaxia: cada punto es un recuerdo. Los recuerdos nuevos se encienden en oro.
 // Fase 1 (infancia): casi todo se enciende. Fase 2 (rutina adulta): las luces se apagan y casi nada nuevo se graba.
@@ -67,12 +68,14 @@ export const CerebroGalaxia: React.FC<{dur: number; cambio: number}> = ({dur, ca
         </g>
       </svg>
       {/* etiqueta de fase */}
-      <div style={{position: 'absolute', top: 70, left: 120, fontFamily: MONO, fontSize: 24, letterSpacing: 6, color: C.oro, opacity: rango(f, 10, 30)}}>
-        {etiqueta}
+      <div style={{position: 'absolute', top: 70, left: 120, fontFamily: MONO, fontSize: 24, letterSpacing: 6, color: C.oro}}>
+        <Teclea key={etiqueta} texto={etiqueta} desde={tAdulto < 0.5 ? 10 : cambio + 8} />
       </div>
       {/* medidor de recuerdos nuevos */}
       <div style={{position: 'absolute', top: 120, left: 120, width: 360}}>
-        <div style={{fontFamily: MONO, fontSize: 18, letterSpacing: 4, color: C.niebla, marginBottom: 10}}>NEW MEMORIES RECORDED</div>
+        <div style={{fontFamily: MONO, fontSize: 18, letterSpacing: 4, color: C.niebla, marginBottom: 10}}>
+          <Teclea texto="NEW MEMORIES RECORDED" desde={24} cursor={C.niebla} />
+        </div>
         <div style={{height: 6, background: C.nieblaSuave, borderRadius: 3}}>
           <div style={{width: `${medidor * 100}%`, height: 6, background: tAdulto > 0.5 ? C.rojo : C.oro, borderRadius: 3}} />
         </div>
@@ -87,10 +90,9 @@ export const CerebroGalaxia: React.FC<{dur: number; cambio: number}> = ({dur, ca
           fontStyle: 'italic',
           fontSize: 50,
           color: C.luz,
-          opacity: rango(f, cambio + 50, cambio + 75),
         }}
       >
-        Weeks collapse into a single blur.
+        <Escribe texto="Weeks collapse into a single !blur.!" desde={cambio + 50} ritmo={5} />
       </div>
     </AbsoluteFill>
   );

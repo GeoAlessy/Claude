@@ -6,6 +6,8 @@ import {Easing, interpolate, staticFile} from 'remotion';
 // un único acento rojo para lo inquietante. Fuentes OFL guardadas en public/mente/fonts.
 loadFont({family: 'Cormorant Garamond', url: staticFile('mente/fonts/CormorantGaramond-500.woff2'), weight: '500'});
 loadFont({family: 'Cormorant Garamond', url: staticFile('mente/fonts/CormorantGaramond-500i.woff2'), weight: '500', style: 'italic'});
+loadFont({family: 'Cormorant Garamond', url: staticFile('mente/fonts/CormorantGaramond-700.woff2'), weight: '700'});
+loadFont({family: 'Cormorant Garamond', url: staticFile('mente/fonts/CormorantGaramond-700i.woff2'), weight: '700', style: 'italic'});
 loadFont({family: 'Inter', url: staticFile('mente/fonts/Inter-400.woff2'), weight: '400'});
 loadFont({family: 'Inter', url: staticFile('mente/fonts/Inter-600.woff2'), weight: '600'});
 loadFont({family: 'JetBrains Mono', url: staticFile('mente/fonts/JetBrainsMono-500.woff2'), weight: '500'});
@@ -24,6 +26,7 @@ export const C = {
   oro: '#E9C27B',
   oroSuave: 'rgba(233, 194, 123, 0.35)',
   rojo: '#E5484D',
+  luna: '#A9C4FF', // segundo acento del texto: luz de luna (lo inquietante), en vez del rojo
   gris: '#6B7280',
 };
 

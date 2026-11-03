@@ -1,6 +1,7 @@
 import React from 'react';
 import {AbsoluteFill, useCurrentFrame} from 'remotion';
 import {C, MONO, SANS, SERIF, rango} from '../estilo';
+import {Escribe, Teclea} from './TextoAnimado';
 
 // Ficha de estudio: cita la fuente en pantalla y anima los datos.
 // Datos aproximados del estudio de Mangan (1996): tres grupos de edad cuentan "3 minutos".
@@ -26,9 +27,15 @@ export const FichaEstudio: React.FC<{dur: number}> = ({dur}) => {
           transform: `translateY(${(1 - entrada) * 30}px)`,
         }}
       >
-        <div style={{fontFamily: MONO, fontSize: 20, letterSpacing: 6, color: C.oro}}>THE STUDY</div>
-        <div style={{fontFamily: SERIF, fontSize: 56, color: C.luz, margin: '10px 0 6px'}}>"Count three minutes in your head."</div>
-        <div style={{fontFamily: SANS, fontSize: 22, color: C.niebla, marginBottom: 46}}>What each age group actually counted, on average</div>
+        <div style={{fontFamily: MONO, fontSize: 20, letterSpacing: 6, color: C.oro}}>
+          <Teclea texto="THE STUDY" desde={8} />
+        </div>
+        <div style={{fontFamily: SERIF, fontSize: 56, color: C.luz, margin: '10px 0 6px'}}>
+          <Escribe texto={'"Count *three minutes* in your head."'} desde={14} ritmo={4} />
+        </div>
+        <div style={{fontFamily: SANS, fontSize: 22, color: C.niebla, marginBottom: 46}}>
+          <Teclea texto="What each age group actually counted, on average" desde={30} cps={60} cursor="transparent" />
+        </div>
         {BARRAS.map((b, i) => {
           const t = rango(f, 30 + i * 22, 75 + i * 22);
           const pasado = b.seg > 180;
@@ -53,7 +60,7 @@ export const FichaEstudio: React.FC<{dur: number}> = ({dur}) => {
           );
         })}
         <div style={{display: 'flex', justifyContent: 'space-between', marginTop: 30, fontFamily: SANS, fontSize: 18, color: C.gris}}>
-          <span>Source: Mangan, P. (1996) · small study, approximate values</span>
+          <Teclea texto="Source: Mangan, P. (1996) · small study, approximate values" desde={90} cps={70} cursor="transparent" />
           <span style={{color: C.niebla}}>│ real 3:00</span>
         </div>
       </div>
