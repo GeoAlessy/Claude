@@ -11,6 +11,7 @@ Salida: <id>.mp3 + <id>.json (alignment) por línea. Luego:
   python3 scripts/subtitulos_voz.py public/porquepaso/pXX/voz src/porquepaso/pXX/subtitulos.ts
 """
 import base64
+import subprocess
 import json
 import os
 import sys
@@ -44,6 +45,12 @@ for nombre, texto in lineas:
             time.sleep(2 ** intento)
     else:
         sys.exit(f'{nombre}: sin respuesta')
-    open(os.path.join(salida, f'{nombre}.mp3'), 'wb').write(base64.b64decode(d['audio_base64']))
+    mp3 = os.path.join(salida, f'{nombre}.mp3')
+    open(mp3, 'wb').write(base64.b64decode(d['audio_base64']))
+    if cfg.get('ganancia'):  # subir volumen (p. ej. 1.2 = +20 %) con limitador para no saturar
+        tmp = mp3 + '.tmp.mp3'
+        subprocess.run(['ffmpeg', '-loglevel', 'error', '-y', '-i', mp3, '-af', f"volume={cfg['ganancia']},alimiter=limit=0.89:level=false",
+                        '-ar', '44100', '-ac', '1', '-c:a', 'libmp3lame', '-b:a', '192k', tmp], check=True)
+        os.replace(tmp, mp3)
     json.dump(d.get('alignment'), open(os.path.join(salida, f'{nombre}.json'), 'w'))
     print('ok', nombre)

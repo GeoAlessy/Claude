@@ -8,5 +8,6 @@
   "style": 0.3,
   "use_speaker_boost": true,
   "speed": 0.95
- }
+ },
+ "ganancia": 1.2
 }

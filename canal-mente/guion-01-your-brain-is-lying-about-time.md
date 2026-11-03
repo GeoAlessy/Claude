@@ -1,8 +1,8 @@
 # Vídeo 01 — Your Brain Is Lying To You About Time
 
 **Canal nuevo:** la ciencia inquietante de tu propia mente (inglés, sin rostro)
-**Duración estimada:** ≈ 22 min (≈ 3.100 palabras de narración ≈ 21,3 min a ~145 palabras/min + ~45 s de pausas cortas: rótulos de capítulo y pausas dramáticas, nunca más de 3 s seguidos). Con una voz más lenta puede llegar a 23–24 min. Los tiempos de cada bloque son orientativos: se ajustan tras grabar la voz.
-**Estructura:** gancho + 8 capítulos + cierre. Cada capítulo = mini-vídeo (gancho → prueba/ejemplo → ciencia → revelación → puente).
+**Duración real con la voz (Romero, Eleven v4):** 23:07 · 113 frases · 3.601 palabras. Nunca más de 2 s sin voz (pausa de 1,8 s entre capítulos, 0,45 s entre párrafos). Los tiempos de cada bloque son los reales de la narración grabada.
+**Estructura:** gancho + 9 capítulos + cierre. Cada capítulo = mini-vídeo (gancho → prueba/ejemplo → ciencia → revelación → puente).
 
 > Cómo leer este guion:
 > - **NARRACIÓN** = lo que dice la voz (en inglés, listo para ElevenLabs).
@@ -22,7 +22,7 @@
 
 ---
 
-## 0:00 – 0:50 · GANCHO
+## 0:00 – 0:57 · GANCHO
 
 `[VISUAL: negro total. Se oye un tic-tac lento. Aparece una línea de vida horizontal con años 0 → 80. Los primeros años son anchos y brillantes; a partir de los 20, los años se encogen y se apagan.]`
 
@@ -35,7 +35,7 @@ You've probably told yourself it's just "getting older." It isn't. Your brain is
 
 `[VISUAL: la línea de vida se comprime de golpe, como un acordeón. Sonido grave.]`
 
-Today, we're going to catch your brain in the act — again and again. You'll see it slow time down when you're in danger, make the best nights of your life disappear, lose a month in a cave, invent time in your dreams, and even show you a world that's already in the past.
+Today, we're going to catch your brain in the act — again and again. You'll see it slow time down when you're in danger, make the best nights of your life disappear, lose a month in a cave, erase an entire year from billions of people at once, invent time in your dreams, and even show you a world that's already in the past.
 
 And by the end of this video, you'll know the one thing scientists say can actually make your life *feel* longer. 🔓 *(bucle principal)*
 
@@ -43,7 +43,7 @@ And by the end of this video, you'll know the one thing scientists say can actua
 
 ---
 
-## 0:50 – 4:00 · CAPÍTULO 1 — Why the years speed up
+## 0:58 – 3:08 · CAPÍTULO 1 — Why the years speed up
 
 `[VISUAL: rótulo de capítulo minimalista: "01 · THE SHRINKING YEAR"]`
 
@@ -82,7 +82,7 @@ But the second explanation is the one that should worry you. 🔓 *"…the one t
 
 ---
 
-## 4:00 – 7:30 · CAPÍTULO 2 — Your brain stops recording
+## 3:09 – 5:25 · CAPÍTULO 2 — Your brain stops recording
 
 `[VISUAL: "02 · THE BLANK PAGES"]`
 
@@ -121,7 +121,7 @@ In the next experiment, scientists tested that by dropping people from a tower. 
 
 ---
 
-## 7:30 – 11:30 · CAPÍTULO 3 — The slow-motion illusion
+## 5:27 – 8:10 · CAPÍTULO 3 — The slow-motion illusion
 
 `[VISUAL: "03 · THE FALL"]`
 
@@ -132,7 +132,11 @@ So is your brain actually speeding up in an emergency, like a high-speed camera?
 
 `[VISUAL: escena IA en cámara lenta: el interior de un coche, cristales suspendidos en el aire.]`
 
-In 2007, neuroscientist David Eagleman and his team decided to find out. They took volunteers to an amusement park ride called SCAD — a tower where you're dropped backwards, in free fall, for about thirty meters into a net.
+Neuroscientist David Eagleman had a personal reason to ask. When he was eight years old, he fell from the roof of an unfinished house — and he has said the fall seemed to last far longer than it possibly could have. Years later, he decided to test it.
+
+`[VISUAL: película casera antigua de un tejado en construcción / niños jugando; filtro de recuerdo.]`
+
+In 2007, Eagleman and his team found a way. They took volunteers to an amusement park ride called SCAD — a tower where you're dropped backwards, in free fall, for about thirty meters into a net.
 
 `[VISUAL: animación por código del experimento: torre, caída libre de ~3 segundos, red. Contador de altura bajando.]`
 
@@ -164,7 +168,7 @@ So fear stretches time. But what about joy? Why does the best night of your life
 
 ---
 
-## 11:30 – 14:30 · CAPÍTULO 4 — Why time flies when you're having fun
+## 8:12 – 10:15 · CAPÍTULO 4 — Why time flies when you're having fun
 
 `[VISUAL: "04 · THE VANISHING NIGHT"]`
 
@@ -199,7 +203,7 @@ Which raises a strange question: if the clock in your head can be sped up or slo
 
 ---
 
-## 14:30 – 17:30 · CAPÍTULO 5 — The clock in your body
+## 10:17 – 13:28 · CAPÍTULO 5 — The clock in your body
 
 `[VISUAL: "05 · THE BODY CLOCK"]`
 
@@ -230,6 +234,12 @@ It was mid-September.
 
 Without sunlight to reset it, his sense of time had drifted so far that close to a month of his life had simply… gone missing from his count. Yet his body kept running on its own rough daily rhythm the whole time — a biological clock deep in the brain that tries to keep a roughly 24-hour cycle, even in total darkness.
 
+Ten years later, Siffre went back underground — this time for much longer. In 1972, in an experiment backed by NASA and the French government, who wanted to know how astronauts would sleep on long missions, he spent two hundred and five days alone in Midnight Cave, in Texas.
+
+And something even stranger happened. A few times, his body slipped into a completely different rhythm — a forty-eight-hour day: a huge stretch awake, followed by a very long sleep. And from the inside, he couldn't tell those days apart from normal ones. Two days of his life, lived as one.
+
+`[VISUAL: un calendario donde dos casillas se funden en una sola; contador "DAY 1 … DAY 205".]`
+
 And scientists have found even smaller clocks. In 2011, researchers discovered that certain neurons in the hippocampus — a key memory region — fire in sequence across a span of time, like the ticks of a stopwatch. They called them "time cells." Your brain doesn't just store *what* happened. It stamps *when*.
 
 `[VISUAL: neuronas que se encienden una tras otra en fila, como un cronómetro de luz dentro del cerebro.]`
@@ -240,7 +250,7 @@ Except at night. Because when you fall asleep, your brain stops measuring time �
 
 ---
 
-## 17:30 – 20:00 · CAPÍTULO 6 — Time inside your dreams
+## 13:30 – 15:40 · CAPÍTULO 6 — Time inside your dreams
 
 `[VISUAL: "06 · THE DREAM CLOCK"]`
 
@@ -275,7 +285,7 @@ But the strangest lie of all is happening right now, while you're watching this.
 
 ---
 
-## 20:00 – 22:30 · CAPÍTULO 7 — You live in the past
+## 15:41 – 18:27 · CAPÍTULO 7 — You live in the past
 
 `[VISUAL: "07 · THE DELAY"]`
 
@@ -300,6 +310,10 @@ And there's more. Signals from your eyes, ears and skin don't reach your brain a
 
 Which means the "present" you experience is a reconstruction of something that already happened, assembled a fraction of a second too late. You have never, not once, seen the present moment.
 
+And it isn't only your brain. Light itself takes time to reach you. The sunlight on your skin right now left the Sun about eight minutes ago. Some of the stars you see at night are showing you light that left them thousands of years ago. Everywhere you look, you are looking into the past.
+
+`[VISUAL: material de la NASA: el Sol en ultravioleta; contador "8 min 20 s"; cielo estrellado.]`
+
 You can catch this delay with an illusion called the flash-lag effect. When a dot moves smoothly across a screen and a light flashes right next to it, people consistently see the moving dot *ahead* of the flash — even when they were perfectly lined up.
 
 Let's try it. Watch the dot moving across your screen, and keep your eyes on it. A light is going to flash right beside it… there. Once more… there.
@@ -310,13 +324,46 @@ Did you see it? The dot looked like it was already past the flash. Researchers l
 
 So your brain isn't a live broadcast. It's a recorded show, edited slightly after the fact — and presented to you as if it were happening live.
 
+And a few years ago, billions of people saw every one of these tricks happen at the same time. 🔓
+
+---
+
+## 18:29 – 20:35 · CAPÍTULO 8 — The year that disappeared
+
+`[VISUAL: "08 · THE LOST YEAR"]`
+
+**NARRACIÓN:**
+Think back to 2020. For most people, that year feels strange in memory. It seemed to drag on forever while you were living it… and yet, looking back, it's almost a blur. Whole months seem to be missing.
+
+You weren't imagining it. It was one of the largest accidental experiments on time ever run — on billions of people at once.
+
+`[VISUAL: stock de calles vacías, ventanas, una persona mirando por la ventana (sin cara); filtro suave.]`
+
+In April 2020, psychologist Ruth Ogden, at Liverpool John Moores University, surveyed more than six hundred people during the UK lockdown. More than eighty percent said time felt distorted compared to normal life. For some, the days were racing. For others, they were crawling.
+
+`[VISUAL: ficha del estudio (Ogden, 2020, PLoS ONE) + medidor "80%+ felt time was distorted".]`
+
+And who felt the days crawling? People who were more stressed. People who had less to do. People who were less satisfied with their social contact. And older people.
+
+Now put that next to everything you've learned so far. Every day looked the same. Same room. Same screen. Same walls. Almost no firsts. No trips, no crowds, no surprises.
+
+While you were living it, with nothing to absorb your attention, the gate stayed wide open — and every hour felt long. But your memory had nothing new to keep. So when you look back, the pages are blank.
+
+`[VISUAL: las dos líneas de tiempo del cap. 4: "living it" (larguísima) vs "remembering it" (casi vacía), con "2020" encima.]`
+
+Both clocks were wrong at the same time — in opposite directions.
+
+Researchers around the world noticed it too. An international project called Blursday gathered time-perception data from thousands of people in several countries during the lockdowns. Even its name comes from a word people invented back then — Blursday: a day of the week you can't tell apart from any other.
+
+That's the warning hidden in 2020. You don't need a pandemic for this to happen. A life with no new chapters does exactly the same thing — just more slowly, and more quietly.
+
 So if your brain controls time this completely… can you take control back? 🔓 *(conecta con el bucle principal)*
 
 ---
 
-## 22:30 – 25:00 · CAPÍTULO 8 — How to make your life feel longer
+## 20:37 – 22:44 · CAPÍTULO 9 — How to make your life feel longer
 
-`[VISUAL: "08 · TAKING TIME BACK"]`
+`[VISUAL: "09 · TAKING TIME BACK"]`
 
 **NARRACIÓN:**
 Let's go back to where we started. Remember: your brain measures your life by the memories it keeps — not by the clock.
@@ -341,13 +388,15 @@ Some people go further and keep a tiny daily record — a single sentence, or on
 
 And pay attention. Your brain records what you notice. Ten seconds of really looking at a sunset, the face of someone you love, the street you walk every day — that's a memory with an anchor. And anchors are what make a year feel full instead of empty.
 
+So here's a challenge for this week. Do one thing you've never done before — however small — and tell me in the comments what it was. A year from now, I promise you, that week will still be there.
+
 ✅ *(cierra el bucle principal del minuto 0)*
 
 You can't stop time. But you can stop your brain from deleting it.
 
 ---
 
-## 25:00 – 26:00 · CIERRE
+## 22:46 – 23:07 · CIERRE
 
 `[VISUAL: vuelve la línea de vida del gancho. Esta vez, los años de la parte adulta se ensanchan y se iluminan de nuevo.]`
 
@@ -388,4 +437,8 @@ That's the next video. 🔓 *(bucle hacia el siguiente vídeo)*
 12. **Hoagland, H. (1933).** *The physiological control of judgments of duration: evidence for a chemical clock.* Journal of General Psychology, 9, 267–287.
 13. **Siffre, M.** — experimento en la cueva de Scarasson (1962); relató su experiencia en *Beyond Time* (1964).
 14. **Zakay, D. & Block, R. A. (1997).** *Temporal cognition.* Current Directions in Psychological Science, 6(1), 12–16 (modelo de la compuerta atencional).
+16. **Ogden, R. S. (2020).** *The passage of time during the UK Covid-19 lockdown.* PLoS ONE, 15(7), e0235871.
+17. **Chaumon, M. et al. (2022).** *The Blursday database as a resource to study subjective temporalities during COVID-19.* Nature Human Behaviour, 6, 1587–1599.
+18. **Siffre, M.** — experimento en Midnight Cave, Texas (feb.–sept. 1972, 205 días), con apoyo de la NASA; ciclos ocasionales de 48 horas.
+19. **Eagleman, D.** — caída del tejado a los 8 años como origen de su interés por el tiempo (entrevistas; *The New Yorker*, 2011, "The Possibilian").
 15. **MacDonald, C. J., Lepage, K. Q., Eden, U. T., & Eichenbaum, H. (2011).** *Hippocampal "time cells" bridge the gap in memory for discontiguous events.* Neuron, 71(4), 737–749.
