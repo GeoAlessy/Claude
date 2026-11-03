@@ -16,3 +16,6 @@ public/porquepaso/canal/p03_real.png
 public/porquepaso/canal/p03_real2.png
 public/porquepaso/canal/p04_real.png
 public/porquepaso/canal/p04_real_antes.png
+
+# Canal mente: renders y fotogramas de prueba (se regeneran con Remotion)
+out/mente/
