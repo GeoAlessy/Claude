@@ -49,7 +49,7 @@ for nombre, texto in lineas:
     open(mp3, 'wb').write(base64.b64decode(d['audio_base64']))
     if cfg.get('ganancia'):  # subir volumen (p. ej. 1.2 = +20 %) con limitador para no saturar
         tmp = mp3 + '.tmp.mp3'
-        subprocess.run(['ffmpeg', '-loglevel', 'error', '-y', '-i', mp3, '-af', f"volume={cfg['ganancia']},alimiter=limit=0.89:level=false",
+        subprocess.run(['ffmpeg', '-loglevel', 'error', '-y', '-i', mp3, '-af', f"volume={cfg['ganancia']},alimiter=limit=0.89:attack=5:release=50:level=false",
                         '-ar', '44100', '-ac', '1', '-c:a', 'libmp3lame', '-b:a', '192k', tmp], check=True)
         os.replace(tmp, mp3)
     json.dump(d.get('alignment'), open(os.path.join(salida, f'{nombre}.json'), 'w'))
