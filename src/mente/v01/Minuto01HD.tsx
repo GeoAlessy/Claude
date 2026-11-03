@@ -10,7 +10,7 @@ import {CerebroGalaxia} from '../piezas/CerebroGalaxia';
 import {PruebaContar} from '../piezas/PruebaContar';
 import {NARRACION} from './narracion';
 
-// Vídeo 01 · primer minuto (gancho + inicio del cap. 1) en HD, con voz (Fish Audio v3), música y efectos.
+// Vídeo 01 · primer minuto (gancho + inicio del cap. 1) en HD, con voz (Fish Audio "Psychological"), música y efectos.
 // Cada corte está anclado a una palabra de la narración: si se regraba la voz, el montaje se reajusta solo.
 // Material: masters HD de Prelinger (dominio público), Safety Last! 1080p (dominio público, sin su música),
 // stock 1080p de Mixkit (licencia gratuita) y gráficos propios. Registro en canal-mente/fuentes-material-v01.md.
