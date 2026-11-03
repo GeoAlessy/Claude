@@ -19,3 +19,7 @@ public/porquepaso/canal/p04_real_antes.png
 
 # Canal mente: renders y fotogramas de prueba (se regeneran con Remotion)
 out/mente/
+
+# Clips descargados (stock/archivo): pesan mucho; se guardan fuera del repo
+public/mente/clips/*.mp4
+public/mente/clips/*.mov
