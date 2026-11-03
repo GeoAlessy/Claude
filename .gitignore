@@ -27,3 +27,4 @@ clips_fuente/
 # Canal mente: música y efectos de Mixkit (se descargan con scripts/mente_audio_gratis.sh)
 public/mente/musica/
 public/mente/sfx/*.mp3
+__pycache__/
