@@ -7,8 +7,8 @@ export {SEG, DURACION_GANCHO};
 
 // Gancho del video 06: el camión con nitrato de amonio arde y explota (videos de testigos).
 const clamp = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
-export const TOP = 420; // el monitor 1080×1449 (3:4) ocupa desde aquí
-const ALTO = 1449;
+export const TOP = 420; // el monitor 1080×1448 (3:4) ocupa desde aquí
+const ALTO = 1448;
 
 // Video del testigo dentro de un "monitor", con el mismo video desenfocado de fondo
 export const Monitor: React.FC<{clip: 'A' | 'B' | 'C'; desde: number; velocidad?: number; oscuro?: number; zoom?: number}> = ({clip, desde, velocidad = 1, oscuro = 0, zoom = 1}) => {
@@ -20,7 +20,7 @@ export const Monitor: React.FC<{clip: 'A' | 'B' | 'C'; desde: number; velocidad?
     <AbsoluteFill>
       <div style={{position: 'absolute', inset: -80, filter: 'blur(40px) brightness(0.45)'}}>{v({width: '100%', height: '100%', objectFit: 'cover'})}</div>
       <div style={{position: 'absolute', left: 0, top: TOP, width: 1080, height: ALTO, overflow: 'hidden', boxShadow: `0 0 0 3px ${C.cian}88, 0 0 60px ${C.cian}33`}}>
-        <div style={{width: '100%', height: '100%', transform: `scale(${zoom})`, transformOrigin: '55% 35%'}}>{v({width: 1080, height: ALTO})}</div>
+        <div style={{width: '100%', height: '100%', transform: `scale(${zoom})`, transformOrigin: '70% 62%'}}>{v({width: 1080, height: ALTO})}</div>
         <AbsoluteFill style={{background: `rgba(0,0,0,${oscuro})`}} />
         <div style={{position: 'absolute', left: 24, top: 20, display: 'flex', alignItems: 'center', gap: 12, fontFamily: MONO, fontWeight: 700, fontSize: 26, color: C.blanco, textShadow: '0 2px 6px #000'}}>
           <span style={{width: 18, height: 18, borderRadius: 9, background: C.rojo, opacity: Math.floor(f / 15) % 2 ? 0.3 : 1}} />
@@ -63,7 +63,7 @@ export const Gancho: React.FC = () => {
         <div
           style={{
             position: 'absolute',
-            top: 1180,
+            top: 830,
             width: '100%',
             textAlign: 'center',
             fontFamily: TITULAR,
