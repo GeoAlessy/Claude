@@ -6,7 +6,7 @@ Genera, por línea: id, archivo, fotograma de inicio, duración y palabras con t
 import json, os, sys
 
 FPS = 30
-HUECO, HUECO_CAP, INICIO = 0.45, 1.8, 0.6
+HUECO, HUECO_CAP, INICIO = 0.6, 2.0, 0.6
 lineas = json.load(open(sys.argv[1]))
 carpeta, salida = sys.argv[2], sys.argv[3]
 t, tramo_prev, items = INICIO, None, []
