@@ -120,6 +120,16 @@ Solo si no aparece nada real:
 
 En ese caso, imágenes **fijas** con movimiento lento de cámara hecho por código, pasadas por el filtro de película para que no se note "IA cinematográfica".
 
+## Plataformas de stock que funcionan desde el entorno
+
+| Plataforma | Calidad | Cómo | Licencia |
+|---|---|---|---|
+| Coverr (coverr.co) | 1080p / original 4K | enlaces `cdn.coverr.co/videos/…/1080p.mp4` en la página de búsqueda | Coverr License (uso comercial). **Descartar los clips generados con IA** (`ai-generation`, `temp-…`). |
+| Pixabay | 1080p / 4K | `scripts/mente_pixabay.sh` (clave en archivo privado, fuera del repo) | Pixabay Content License (uso comercial). El script descarta los vídeos con etiqueta *ai generated*. |
+| Mixkit | 1080p (vídeos antiguos) | `assets.mixkit.co/videos/<id>/<id>-1080.mp4` | Mixkit Stock Video Free License |
+| NASA | HD / 4K | `images-api.nasa.gov` | Dominio público (sin usar logos como respaldo) |
+| Pexels | 4K | solo con enlaces de descarga que pase el usuario (`videos.pexels.com`) | Licencia Pexels |
+
 ## Candidatos HD encontrados (Prelinger, masters 2K–5K)
 
 Se leen por HTTP solo los segundos necesarios (ver `scripts/mente_clips_v01.sh`, función `cortar_hd`).
