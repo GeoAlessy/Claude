@@ -6,7 +6,7 @@
 
 | Material | % del vídeo | Notas |
 |---|---|---|
-| Película antigua de dominio público | ~28 % | Nostalgia, infancia, memoria. Pasa por el filtro `PeliculaAntigua` (intensidad 0,7–0,9). |
+| Película antigua de dominio público | ~28 % | Nostalgia, infancia, memoria. Solo escaneos HD; filtro `PeliculaAntigua` suave (intensidad 0,3–0,5). |
 | Stock gratis de internet | ~30 % | Vida cotidiana actual. Filtro suave (intensidad 0,2–0,35) para que no parezca genérico. |
 | Motion graphics por código | ~33 % | Explicar la ciencia: cerebro-galaxia, línea de vida, fichas, pruebas interactivas. |
 | Tarjetas de testimonio | ~5,5 % | Posts públicos **parafraseados**, sin usuario, sin logos ni capturas. |
