@@ -15,6 +15,27 @@
 
 **Ritmo:** ningún plano de más de 4–6 s; nunca dos planos seguidos del mismo tipo.
 
+## Regla visual
+
+**El código nunca dibuja personas.** El código hace lo abstracto (cerebro, datos, tiempo, ilusiones). Las personas salen siempre de material real.
+
+## Películas clásicas de dominio público (el impacto de "película de verdad", sin riesgo)
+
+En EE. UU. las películas estrenadas antes de 1930 son de dominio público, y algunas posteriores también (por no renovar el registro). Usar copias **sin la música añadida en restauraciones modernas** y guardar el enlace de origen.
+
+| Película | Escena útil | Para |
+|---|---|---|
+| *Safety Last!* (1923) | Harold Lloyd colgado de las manecillas de un reloj gigante | Gancho / cap. 1 (el tiempo) |
+| *Metropolis* (1927) | Obreros moviendo el reloj-máquina; ciudad futurista | Cap. 2 (rutina) |
+| *Le Voyage dans la Lune* (1902) | Imágenes oníricas imposibles | Cap. 6 (sueños) |
+| *Nosferatu* (1922) | Sombras en la escalera | Cap. 6 / futuros vídeos de miedos |
+| *Carnival of Souls* (1962) | Atmósfera liminal, inquietante | Futuros vídeos de miedos |
+| *Charade* (1963), *His Girl Friday* (1940) | Escenas humanas de cine clásico | Planos de personas |
+
+**No usar:** películas o series con copyright, ni siquiera 3–5 segundos sin sonido. Content ID reconoce la imagen y un solo reclamo puede llevarse los ingresos de todo el vídeo.
+
+**YouTube con licencia Creative Commons:** solo de autores originales verificados (universidades, NASA, creadores de stock), citando al autor en la descripción.
+
 ## Dónde buscar (todo gratis y con licencia para monetizar)
 
 | Fuente | Qué tiene | Licencia |
