@@ -1,7 +1,7 @@
 # Vídeo 01 — Your Brain Is Lying To You About Time
 
 **Canal nuevo:** la ciencia inquietante de tu propia mente (inglés, sin rostro)
-**Duración estimada:** ≈ 23 min (≈ 3.000 palabras de narración ≈ 20,5 min a ~145 palabras/min + ~2–2,5 min de pausas y pruebas interactivas). Con una voz más lenta puede llegar a 24–25 min. Los tiempos de cada bloque son orientativos: se ajustan tras grabar la voz.
+**Duración estimada:** ≈ 22 min (≈ 3.100 palabras de narración ≈ 21,3 min a ~145 palabras/min + ~45 s de pausas cortas: rótulos de capítulo y pausas dramáticas, nunca más de 3 s seguidos). Con una voz más lenta puede llegar a 23–24 min. Los tiempos de cada bloque son orientativos: se ajustan tras grabar la voz.
 **Estructura:** gancho + 8 capítulos + cierre. Cada capítulo = mini-vídeo (gancho → prueba/ejemplo → ciencia → revelación → puente).
 
 > Cómo leer este guion:
@@ -48,15 +48,13 @@ And by the end of this video, you'll know the one thing scientists say can actua
 `[VISUAL: rótulo de capítulo minimalista: "01 · THE SHRINKING YEAR"]`
 
 **NARRACIÓN:**
-Let's start with a simple test. Pause the video if you need to — but I want you to try this.
+Let's start with a simple test — one you can do right after this video, or pause and try right now.
 
-Close your eyes. Count to thirty in your head, at what feels like one second per beat. Then open them.
+Close your eyes and count to thirty in your head, at what feels like one second per beat. Then check a stopwatch and see how far off you were. Most people miss by several seconds — and the direction you miss tells you something about how your internal clock is running. Try it, and drop your result in the comments. I'm curious how far off you'll be.
 
-`[VISUAL: un cronómetro gigante aparece en pantalla y corre 30 segundos reales mientras suena una pulsación suave. Texto: "Close your eyes. Count to 30."]`
+`[VISUAL: (la voz NO se detiene) un cronómetro gigante aparece unos 5 s con el texto "Close your eyes. Count to 30." y una pulsación suave de fondo; luego el texto cambia a "Comment your result" y el cronómetro se desvanece.]`
 
-`[VISUAL: el cronómetro se detiene en 0:30. Texto: "Where were you?"]`
-
-Were you early? Late? Keep that in mind, because in the 1990s a researcher named James Mangan ran a version of this test with three groups: people in their early twenties, middle-aged adults, and people in their sixties. He asked them to count off three minutes.
+Keep that in mind, because in the 1990s a researcher named James Mangan ran a version of this test with three groups: people in their early twenties, middle-aged adults, and people in their sixties. He asked them to count off three minutes.
 
 The young group was remarkably accurate. The middle-aged group ran over. And the oldest group — on average — said "three minutes" when more than three and a half minutes had actually passed.
 
@@ -156,7 +154,9 @@ The slow motion isn't happening during the moment. It's created afterwards — i
 
 And you don't need to fall from a tower to feel a smaller version of this. In lab experiments, when people watch a series of identical images and suddenly one different image appears — an "oddball" — they judge that unexpected image as lasting longer than the others, even when it was on screen for exactly the same time.
 
-`[VISUAL: secuencia de círculos grises idénticos; de pronto aparece uno rojo. Texto: "Which one lasted longer?" Todos duraron lo mismo.]`
+Watch the circles on your screen. Gray… gray… gray… red. Gray. Which one felt longer? The red one, right? They all lasted exactly the same.
+
+`[VISUAL: (la voz narra encima, sin pausas) secuencia rápida de círculos grises idénticos; aparece uno rojo; texto final "Which one lasted longer?" y debajo "They were all the same length."]`
 
 Surprise stretches time. Familiarity shrinks it. It's the same rule, over and over: the more your brain has to process, the more time it believes has passed.
 
@@ -284,7 +284,7 @@ Here's another test. If there's a clock with a second hand near you — or one o
 
 Did the first second seem to last a little longer than the next ones? As if the clock froze for a moment?
 
-`[VISUAL: un reloj analógico generado por código ocupa la pantalla; la primera "salta" del segundero se percibe más larga. Texto: "Look at the second hand."]`
+`[VISUAL: (la voz sigue hablando encima) un reloj analógico generado por código ocupa la pantalla; la primera "salta" del segundero se percibe más larga. Texto: "Look at the second hand."]`
 
 That's a real, measured illusion called chronostasis — the "stopped clock" illusion. When your eyes jump to something new, there's a split second where you're essentially blind during the movement. Your brain doesn't show you that gap. Instead, it fills it in with the image of whatever your eyes landed on — and backdates it.
 
@@ -302,7 +302,9 @@ Which means the "present" you experience is a reconstruction of something that a
 
 You can catch this delay with an illusion called the flash-lag effect. When a dot moves smoothly across a screen and a light flashes right next to it, people consistently see the moving dot *ahead* of the flash — even when they were perfectly lined up.
 
-`[VISUAL: prueba en pantalla generada por código: un punto se mueve en línea recta y un destello aparece alineado con él; el espectador lo verá "por detrás". Se repite dos veces y luego se congela para mostrar que estaban alineados.]`
+Let's try it. Watch the dot moving across your screen, and keep your eyes on it. A light is going to flash right beside it… there. Once more… there.
+
+`[VISUAL: (la voz guía la prueba en tiempo real, sin silencios) un punto se mueve en línea recta y un destello aparece alineado con él dos veces, sincronizado con cada "there"; después la imagen se congela y una línea vertical muestra que estaban perfectamente alineados.]`
 
 Did you see it? The dot looked like it was already past the flash. Researchers like David Eagleman have argued that this happens because your brain doesn't decide what happened at a moment until it has gathered what comes just *after* it. Your perception of "now" is written with a little information from the future.
 
@@ -363,10 +365,11 @@ That's the next video. 🔓 *(bucle hacia el siguiente vídeo)*
 ## Notas de producción
 
 - **Ritmo visual:** un cambio de plano cada 4–7 segundos. Nunca más de ~10 s con la misma imagen fija.
-- **Pruebas interactivas:** 4 (contar 30 s en el cap. 1 · imagen "oddball" en el cap. 3 · reloj con segundero y *flash-lag* en el cap. 7). Son los picos de retención y comentarios: deja el texto en pantalla y una pausa de silencio real.
+- **Pruebas interactivas:** 4 (contar 30 s en el cap. 1 · imagen "oddball" en el cap. 3 · reloj con segundero y *flash-lag* en el cap. 7). Son los picos de retención y comentarios. **La voz narra encima de todas ellas**: nunca se detiene para esperar al espectador.
 - **Piezas reutilizables para la biblioteca del canal:** cerebro-galaxia de recuerdos, línea de vida, rótulos de capítulo, ficha de estudio, gráfica de señales.
-- **Voz:** grave, calmada, cercana. Pausas de 1 s antes de cada revelación.
-- **Música:** ambiente oscuro suave; se corta a silencio en cada 🔓 importante.
+- **Regla de silencios:** la voz nunca calla más de **3 segundos** seguidos. Las pausas dramáticas antes de una revelación son de 1–2 s, y los rótulos de capítulo, de 2–3 s con sonido.
+- **Voz:** grave, calmada, cercana.
+- **Música:** ambiente oscuro suave; en cada 🔓 importante baja casi a silencio durante 1–2 s y vuelve.
 - **Capítulos de YouTube:** usar los tiempos de arriba como marcadores en la descripción.
 
 ## Fuentes (verificar enlaces antes de publicar la descripción)
