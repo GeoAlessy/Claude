@@ -15,6 +15,29 @@
 
 **Ritmo:** ningún plano de más de 4–6 s; nunca dos planos seguidos del mismo tipo.
 
+## Reparto por capítulo (vídeo de ~26 min)
+
+| Tramo | Película antigua | Stock | Gráficos | Otros |
+|---|---|---|---|---|
+| Gancho (0:00–0:50) | 60 % | — | 40 % | — |
+| Cap. 1 · Los años se aceleran | 40 % (películas caseras de infancia) | — | 45 % | 15 % testimonios |
+| Cap. 2 · El cerebro deja de grabar | 40 % (rutina, oficinas) | 30 % (trayecto diario) | 30 % | — |
+| Cap. 3 · Cámara lenta | 25 % (crash tests) | 35 % (caída libre, montaña rusa) | 30 % | 10 % testimonios |
+| Cap. 4 · El tiempo vuela | 15 % | 40 % (concierto, sala de espera) | 35 % | 10 % testimonios |
+| Cap. 5 · El reloj del cuerpo | 30 % (fiebre, años 60) | 25 % (cueva) | 35 % | 10 % imagen IA si no hay foto de Siffre |
+| Cap. 6 · Sueños | 45 % (Méliès, laboratorio del sueño) | 10 % | 35 % | 10 % testimonios |
+| Cap. 7 · Vives en el pasado | 15 % | 35 % (ojo macro, reloj) | 50 % (pruebas visuales) | — |
+| Cap. 8 + cierre | 40 % (familias, películas caseras) | 40 % (viaje, atardecer) | 20 % | — |
+
+## Regla de calidad (obligatoria)
+
+- **Nada por debajo de 1080 líneas de resolución.** Prohibido usar las copias de 320×240 o 640×480 de archive.org estiradas.
+- **Prelinger:** usar solo los ítems con *master* escaneado (`*_master.intros.mov` o `.mp4` de 2K, 4K o 5K). Pesan decenas de GB, pero ffmpeg lee por HTTP solo los segundos necesarios (`-ss` antes de `-i`).
+- **Clásicos:** buscar copias 1080p (p. ej. *Safety Last!* en `safety-last-1923`). Usar solo la imagen: la banda sonora de las restauraciones modernas tiene derechos.
+- **Stock:** descargar siempre la versión 1080p o 4K (Mixkit la ofrece gratis). Pexels también tiene 4K, pero necesita permitir `pexels.com` y `videos.pexels.com` en la red del entorno.
+- **Filtro suave en material HD:** sin sepia fuerte ni rayas falsas; solo grano ligero y el color del canal. El escaneo real ya tiene textura de película.
+- *The City* (1939), *Sleep for Health* (1950) y *American Look* (1958) solo existen a 640×480 → se sustituyen por planos equivalentes de masters HD.
+
 ## Regla visual
 
 **El código nunca dibuja personas.** El código hace lo abstracto (cerebro, datos, tiempo, ilusiones). Las personas salen siempre de material real.

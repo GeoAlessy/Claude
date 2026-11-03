@@ -15,8 +15,12 @@ cortar the_city_1939 13:03 3 c02_maquina_escribir
 cortar_ancho american_look_1958 1:54 4 c03_ninos_juguetes
 cortar_ancho american_look_1958 2:03 4 c04_nino_dibujando
 cortar the_city_1939 12:53 3 c06_multitud
-cortar safety_last 2:14 6 c07_reloj
-cortar safety_last 3:00 4 c08_colgado
+# Safety Last! en escaneo 1080p (archive.org/details/safety-last-1923): se lee por HTTP solo el tramo necesario
+SL=$(curl -sS -o /dev/null -w '%{redirect_url}' "https://archive.org/download/safety-last-1923/safety%20last%201923.mp4")
+PX=(); [ -n "${HTTPS_PROXY:-}" ] && PX=(-http_proxy "$HTTPS_PROXY" -ca_file /root/.ccr/ca-bundle.crt)
+cortar_hd(){ ffmpeg -loglevel error -y "${PX[@]}" -ss "$2" -i "$1" -t "$3" -an -vf "crop=1440:1080:240:0,setsar=1,fps=30" -c:v libx264 -crf 14 -preset slow -pix_fmt yuv420p "$D/$4.mp4"; }
+cortar_hd "$SL" 3972 5 c07_reloj
+cortar_hd "$SL" 3893 4 c08_colgado
 cortar sleep_for_health_1950 4:08 4 c09_dormir
 cortar the_city_1939 12:19 4 c10_rascacielos
 cortar sleep_for_health_1950 0:45 4 c11_ojos_cerrados

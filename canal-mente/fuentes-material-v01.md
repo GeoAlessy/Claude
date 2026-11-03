@@ -12,3 +12,11 @@ Todo el material de película viene de **archive.org** y está marcado como **do
 Notas:
 - Se usan **sin audio** (la banda sonora va aparte).
 - Para regenerar los clips: `bash scripts/mente_clips_v01.sh`.
+
+## Actualización de calidad (HD)
+
+| Clip | Fuente HD | Segundo | Licencia / nota |
+|---|---|---|---|
+| c07_reloj | archive.org/details/safety-last-1923 (1920×1080) | 3972 s, 5 s | Película de 1923, dominio público en EE. UU. Restauración moderna: se usa **solo la imagen**, nunca la música de Carl Davis (1989). |
+| c08_colgado | archive.org/details/safety-last-1923 (1920×1080) | 3893 s, 4 s | Ídem. |
+| (prueba) | archive.org/details/201047_Home_Movie_003791 (master 2048×1536) | 60 s | Prelinger Archives, película casera. |
