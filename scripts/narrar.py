@@ -1,7 +1,9 @@
 """Genera la narración con ElevenLabs (voz oficial del canal) + tiempos por carácter.
 
 Uso:
-  export ELEVENLABS_API_KEY=...        # nunca en el código ni en el chat
+  La clave va como "secreto de red" del entorno (cabecera xi-api-key para api.elevenlabs.io):
+  el proxy la añade sola y nunca aparece en el código ni en el chat. Si existe la variable
+  ELEVENLABS_API_KEY también sirve. Para otra voz/canal: VOZ_CFG=src/mente/voz.json
   python3 scripts/narrar.py guiones/pXX_lineas.json public/porquepaso/pXX/voz [solo_id ...]
 
 El JSON de líneas es una lista de pares: [["01_gancho", "texto…"], ["02_…", "…"], …]
@@ -17,11 +19,9 @@ import urllib.error
 import urllib.request
 
 RAIZ = os.path.join(os.path.dirname(__file__), '..')
-KEY = os.environ.get('ELEVENLABS_API_KEY')
-if not KEY:
-    sys.exit('Falta la variable de entorno ELEVENLABS_API_KEY')
+KEY = os.environ.get('ELEVENLABS_API_KEY')  # opcional: si no está, la añade el proxy del entorno
 
-cfg = json.load(open(os.path.join(RAIZ, 'src', 'porquepaso', 'voz.json')))
+cfg = json.load(open(os.environ.get('VOZ_CFG') or os.path.join(RAIZ, 'src', 'porquepaso', 'voz.json')))
 lineas = json.load(open(sys.argv[1]))
 salida = sys.argv[2]
 solo = set(sys.argv[3:])
@@ -34,7 +34,7 @@ for nombre, texto in lineas:
     cuerpo = json.dumps({'text': texto, 'model_id': cfg['modelo'], 'voice_settings': cfg['ajustes']}).encode()
     for intento in range(5):
         try:
-            req = urllib.request.Request(url, data=cuerpo, headers={'xi-api-key': KEY, 'Content-Type': 'application/json'})
+            req = urllib.request.Request(url, data=cuerpo, headers={**({'xi-api-key': KEY} if KEY else {}), 'Content-Type': 'application/json'})
             d = json.load(urllib.request.urlopen(req, timeout=240))
             break
         except urllib.error.HTTPError as e:
