@@ -10,7 +10,7 @@ import {CerebroGalaxia} from '../piezas/CerebroGalaxia';
 import {PruebaContar} from '../piezas/PruebaContar';
 import {NARRACION} from './narracion';
 
-// Vídeo 01 · primer minuto (gancho + inicio del cap. 1) en HD, con la voz de Romero y efectos.
+// Vídeo 01 · primer minuto (gancho + inicio del cap. 1) en HD, con voz (Fish Audio v3), música y efectos.
 // Cada corte está anclado a una palabra de la narración: si se regraba la voz, el montaje se reajusta solo.
 // Material: masters HD de Prelinger (dominio público), Safety Last! 1080p (dominio público, sin su música),
 // stock 1080p de Mixkit (licencia gratuita) y gráficos propios. Registro en canal-mente/fuentes-material-v01.md.
@@ -109,6 +109,20 @@ const SFX: [string, number, number, number?][] = [
   ...ARCHIVO_PLANOS.map((i) => ['proyector', PLANOS[i].desde, 0.12, PLANOS[i].hasta - PLANOS[i].desde] as [string, number, number, number]),
 ];
 
+// Música de fondo con "ducking": baja cuando habla el narrador y sube en las pausas (rampas de ~0,4 s).
+const MUSICA = {src: 'mente/musica/p1_cz_is_that_you.mp3', inicio: 0, alta: 0.42, baja: 0.13};
+const HABLA = NARRACION.map((l) => [l.desde, l.desde + l.dur] as const);
+const volumenMusica = (f: number) => {
+  let d = Infinity; // distancia en fotogramas al tramo de voz más cercano (0 si está hablando)
+  for (const [a, b] of HABLA) {
+    if (f >= a && f <= b) return MUSICA.baja;
+    d = Math.min(d, Math.abs(f - a), Math.abs(f - b));
+  }
+  const t = Math.min(1, d / 12);
+  const entrada = Math.min(1, f / 45);
+  return (MUSICA.baja + (MUSICA.alta - MUSICA.baja) * t) * entrada;
+};
+
 const Transicion: React.FC<{dur: number; children: React.ReactNode}> = ({dur, children}) => {
   const f = useCurrentFrame();
   return <AbsoluteFill style={{opacity: fundido(f, dur, 4, 4)}}>{children}</AbsoluteFill>;
@@ -123,9 +137,10 @@ export const Minuto01HD: React.FC = () => (
     ))}
     {NARRACION.filter((l) => l.desde < DURACION_MINUTO01HD).map((l) => (
       <Sequence key={l.id} from={l.desde} durationInFrames={l.dur + 10}>
-        <Audio src={staticFile(`mente/v01/voz/${l.id}.mp3`)} />
+        <Audio src={staticFile(l.audio)} />
       </Sequence>
     ))}
+    <Audio src={staticFile(MUSICA.src)} startFrom={MUSICA.inicio} volume={volumenMusica} />
     {SFX.map(([s, desde, vol, dur], i) => (
       <Sequence key={`s${i}`} from={Math.max(0, desde)} durationInFrames={dur ?? 150}>
         <Audio src={staticFile(`mente/sfx/${s}.mp3`)} volume={vol} loop={dur !== undefined} />
