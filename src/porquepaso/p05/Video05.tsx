@@ -21,11 +21,11 @@ const VOZ: [string, number, boolean][] = VOZ_ORDEN.map((id) => [id, INICIO[id], 
 // Hubo una víctima: nada de golpes fuertes (regla del canal). Los "fiu" van muy bajos.
 const SFX: [string, number, number][] = [
   ['impacto', SUERTE - 2, 0.16],
-  ['escaneo', INI_HOLO - 14, 0.14],
+  ['escaneo', INI_HOLO - 14, 0.042], // bajado 70 % (pedido del usuario)
   ['transicion', INI_HOLO + H.PHERICHE, 0.05],
   ['viento', INI_HOLO + H.NIEVE, 0.12],
   ['transicion', INI_HOLO + H.TORRE, 0.05],
-  ['radio', INI_HOLO + H.RADIO - 6, 0.25],
+  ['radio', INI_HOLO + H.RADIO - 6, 0.075], // bajado 70 % (pedido del usuario)
   ['senal', INI_HOLO + H.LUKLA, 0.1],
   ['radio', INI_HOLO + H.COMUNICACION - 4, 0.2],
   ['riser', INI_HOLO + H.TOCAN - 33, 0.1],
