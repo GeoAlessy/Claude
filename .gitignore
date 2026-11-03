@@ -23,3 +23,4 @@ out/mente/
 # Clips descargados (stock/archivo): pesan mucho; se guardan fuera del repo
 public/mente/clips/*.mp4
 public/mente/clips/*.mov
+clips_fuente/

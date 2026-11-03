@@ -21,10 +21,12 @@ import * as M01 from './porquepaso/canal/Miniaturas01';
 import * as M34 from './porquepaso/canal/Miniaturas34';
 import {PrototipoEstilo, DURACION_PROTO} from './mente/PrototipoEstilo';
 import {DemoMaterial, DURACION_DEMO_MATERIAL} from './mente/DemoMaterial';
+import {GaleriaPiezas, DURACION_GALERIA} from './mente/GaleriaPiezas';
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      <Composition id="MenteGaleria" component={GaleriaPiezas} durationInFrames={DURACION_GALERIA} fps={30} width={1920} height={1080} />
       <Composition id="MenteDemoMaterial" component={DemoMaterial} durationInFrames={DURACION_DEMO_MATERIAL} fps={30} width={1920} height={1080} />
       <Composition id="MenteProtoEstilo" component={PrototipoEstilo} durationInFrames={DURACION_PROTO} fps={30} width={1920} height={1080} />
       <Composition id="Ep01" component={Ep01} durationInFrames={DURACION} fps={FPS} width={1080} height={1920} defaultProps={{conAudio: true}} />
