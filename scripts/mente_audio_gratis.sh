@@ -25,4 +25,14 @@ P
 mus(){ curl -sS -o "$M/$2.mp3" "https://assets.mixkit.co/music/$1/$1.mp3"; sleep 1.5; }
 mus 184 m1_vastness; mus 614 m2_silent_descent; mus 188 m3_echoes; mus 588 m4_feedback_dreams; mus 587 m5_discover; mus 839 m6_tears_of_joy
 curl -sSL -o "$M/m7_chopin_nocturno_op55.mp3" "https://archive.org/download/parso-2baabd827af86a852bb54f058dbceba9edc4ec00/000_Nocturne_Op_55_no_1_in_F_minor.mp3"
+# Música psicológica (CC BY: hay que citar al autor en la descripción del vídeo)
+q(){ python3 -c "import urllib.parse,sys;print(urllib.parse.quote(sys.argv[1]))" "$1"; }
+dl(){ curl -sSL -o "$M/$1.mp3" "$2"; sleep 1; }
+dl p1_cz_is_that_you "https://archive.org/download/ChrisZabriskieReappear/$(q 'Chris Zabriskie - Reappear - 04 Is That You or Are You You-.mp3')"
+dl p2_cz_readers "https://archive.org/download/ChrisZabriskieReappear/$(q 'Chris Zabriskie - Reappear - 02 Readers! Do You Read-.mp3')"
+dl p3_cz_just_here "https://archive.org/download/cz-blackhole/$(q '04 - It Seems Like I Was Just Here.mp3')"
+dl p4_cz_out_of_the_skies "https://archive.org/download/ChrisZabriskieReappear/$(q 'Chris Zabriskie - Reappear - 03 Out of the Skies, Under the Earth.mp3')"
+dl p5_km_long_note_four "https://incompetech.com/music/royalty-free/mp3-royaltyfree/$(q 'Long Note Four').mp3"
+dl p6_km_lightless_dawn "https://incompetech.com/music/royalty-free/mp3-royaltyfree/$(q 'Lightless Dawn').mp3"
+dl p7_km_dreamer "https://incompetech.com/music/royalty-free/mp3-royaltyfree/$(q 'Dreamer').mp3"
 echo "Audio gratis listo en $F y $M"

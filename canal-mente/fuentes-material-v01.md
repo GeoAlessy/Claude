@@ -38,3 +38,19 @@ Notas:
 | s07_pantalla_gafas | mixkit.co … reflection-of-a-screen-in-glasses-221 (1080p) | 2 s · 3,5 s | ídem |
 
 Nota: en Mixkit, los vídeos recientes solo ofrecen 720p de descarga directa; se eligieron los que tienen 1080p.
+
+## Música (gratis)
+
+| Archivo | Obra | Licencia | Crédito obligatorio en la descripción |
+|---|---|---|---|
+| p1_cz_is_that_you | Chris Zabriskie — *Is That You or Are You You?* (álbum *Reappear*, archive.org/details/ChrisZabriskieReappear) | CC BY 3.0 | "Is That You or Are You You?" by Chris Zabriskie — CC BY 3.0 |
+| p2_cz_readers | Chris Zabriskie — *Readers! Do You Read?* (*Reappear*) | CC BY 3.0 | ídem con el título |
+| p3_cz_just_here | Chris Zabriskie — *It Seems Like I Was Just Here* (archive.org/details/cz-blackhole) | CC BY 4.0 | ídem |
+| p4_cz_out_of_the_skies | Chris Zabriskie — *Out of the Skies, Under the Earth* (*Reappear*) | CC BY 3.0 | ídem |
+| p5_km_long_note_four | Kevin MacLeod — *Long Note Four* (incompetech.com) | CC BY 4.0 | "Long Note Four" Kevin MacLeod (incompetech.com), CC BY 4.0 |
+| p6_km_lightless_dawn | Kevin MacLeod — *Lightless Dawn* | CC BY 4.0 | ídem |
+| p7_km_dreamer | Kevin MacLeod — *Dreamer* | CC BY 4.0 | ídem |
+| m1–m6 | Mixkit Stock Music (Vastness, Silent Descent, Echoes, Feedback Dreams, Discover, Tears of Joy) | Mixkit License | no |
+| m7 | Chopin — Nocturno op. 55 n.º 1 (archive.org, parso-2baabd…) | CC0 | no |
+
+Ojo: las pistas CC BY y NC se mezclan en archive.org. Solo usar ítems **CC BY** (nunca BY-NC en un canal monetizado).
