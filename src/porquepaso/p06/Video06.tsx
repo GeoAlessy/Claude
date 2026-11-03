@@ -4,7 +4,7 @@ import {Gancho, Monitor} from './Gancho';
 import {Holograma} from './Holograma';
 import {PALABRAS} from './subtitulos';
 import {C, TITULAR} from '../estilo';
-import {A_INI, BOMBA, DURACION_GANCHO, DURACION_P06 as DUR_TOTAL, FIN_CARD, FPS, H, FIN, INICIO, INI_HOLO, VOZ_ORDEN} from './tiempos';
+import {A_INI, BOMBA, SEG, DURACION_GANCHO, DURACION_P06 as DUR_TOTAL, FIN_CARD, FPS, H, FIN, INICIO, INI_HOLO, VOZ_ORDEN} from './tiempos';
 
 
 // =====================================================================
@@ -185,6 +185,14 @@ export const Video06: React.FC = () => {
 
       {/* Audio */}
       <Audio src={staticFile('porquepaso/sfx/fondo_curiosidad.wav')} volume={volumenMusica} />
+      {/* Sonido real del clip durante la primera toma: el estallido se escucha de verdad */}
+      <Sequence from={0} durationInFrames={SEG.A.dur + 10}>
+        <Audio
+          src={staticFile('porquepaso/p06/original.mp4')}
+          trimBefore={A_INI}
+          volume={(f) => interpolate(f, [0, 6, SEG.A.dur - 2, SEG.A.dur + 10], [0, 0.55, 0.55, 0], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'})}
+        />
+      </Sequence>
       {VOZ.map(([nombre, desde]) => (
         <Sequence key={nombre} from={desde}>
           <Audio src={staticFile(`porquepaso/p06/voz/${nombre}.mp3`)} volume={1} />
