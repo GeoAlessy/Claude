@@ -1,4 +1,4 @@
-"""Narración del canal mente con Fish Audio (modelo gratuito s2.1-pro-free) — estilo "v3: emociones dirigidas".
+"""Narración del canal mente con Fish Audio (modelo gratuito s2.1-pro-free) — voz oficial "Psychological", estilo "v3: emociones dirigidas".
 
 Uso:
   FISH_KEY_FILE=/ruta/privada/.fish_key python3 scripts/mente_fish_narrar.py \
@@ -6,8 +6,8 @@ Uso:
 
 Por cada línea:
   1. añade indicaciones de emoción entre corchetes, frase a frase (la voz no las lee: comprobado por transcripción);
-  2. genera el audio con la voz "Calm storyteller male" de Fish Audio;
-  3. baja la velocidad un 8 % sin cambiar el tono (atempo) y normaliza el volumen a -16 LUFS (pico -1,5 dB);
+  2. genera el audio con la voz "Psychological" de Fish Audio (FISH_VOZ para otra);
+  3. ajusta la velocidad (FISH_TEMPO, por defecto 0,97) sin cambiar el tono (atempo) y normaliza el volumen a -16 LUFS (pico -1,5 dB);
   4. saca el tiempo de cada palabra con faster-whisper en local (gratis) → <id>.json {"palabras": [[w, ini, fin]], "dur": s}.
 La clave NUNCA va en el repositorio: se lee de un archivo privado.
 """
@@ -20,9 +20,9 @@ import time
 import urllib.error
 import urllib.request
 
-VOZ = 'e686ae649ee44f219a108aacba206c1a'  # "calm storyteller male" (voz genérica, no imita a nadie real)
+VOZ = os.environ.get('FISH_VOZ', 'c8c398f58ea74012969c3d9e51dd086c')  # "Psychological" (genérica, poco usada: ~29 mil usos)
 MODELO = 's2.1-pro-free'
-TEMPO = 0.92
+TEMPO = float(os.environ.get('FISH_TEMPO', '0.97'))
 LUFS = -16
 
 INQUIETANTE = re.compile(r"\b(unsettling|quietly|barely|worry|strange|stranger|strangest|missing|gone|deleting|delet|never|lie|lying|blank|vanish|disappear|erase|terror|dark|alone|broken)\w*", re.I)
@@ -109,7 +109,7 @@ def main():
         os.remove(crudo)
         pcm = subprocess.run(['ffmpeg', '-loglevel', 'error', '-i', mp3, '-f', 's16le', '-ac', '1', '-ar', '16000', '-'], capture_output=True).stdout
         audio = np.frombuffer(pcm, np.int16).astype(np.float32) / 32768
-        segs, _ = asr.transcribe(audio, word_timestamps=True, initial_prompt=texto[:200])
+        segs, _ = asr.transcribe(audio, word_timestamps=True, condition_on_previous_text=False, beam_size=5)
         palabras = [[w.word.strip(), round(float(w.start), 3), round(float(w.end), 3)] for s in segs for w in s.words]
         dur = float(subprocess.run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', mp3], capture_output=True, text=True).stdout)
         json.dump({'palabras': palabras, 'dur': round(dur, 3)}, open(os.path.join(salida, f'{lid}.json'), 'w'))
