@@ -18,8 +18,7 @@ import urllib.request
 
 RAIZ = os.path.join(os.path.dirname(__file__), '..')
 KEY = os.environ.get('ELEVENLABS_API_KEY')
-if not KEY:
-    sys.exit('Falta la variable de entorno ELEVENLABS_API_KEY')
+# Sin variable: la clave puede llegar como secreto de red del entorno (el proxy la agrega).
 
 cfg = json.load(open(os.path.join(RAIZ, 'src', 'porquepaso', 'voz.json')))
 lineas = json.load(open(sys.argv[1]))
@@ -34,7 +33,7 @@ for nombre, texto in lineas:
     cuerpo = json.dumps({'text': texto, 'model_id': cfg['modelo'], 'voice_settings': cfg['ajustes']}).encode()
     for intento in range(5):
         try:
-            req = urllib.request.Request(url, data=cuerpo, headers={'xi-api-key': KEY, 'Content-Type': 'application/json'})
+            req = urllib.request.Request(url, data=cuerpo, headers={**({'xi-api-key': KEY} if KEY else {}), 'Content-Type': 'application/json'})
             d = json.load(urllib.request.urlopen(req, timeout=240))
             break
         except urllib.error.HTTPError as e:
