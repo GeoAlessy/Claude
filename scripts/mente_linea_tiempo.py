@@ -14,7 +14,7 @@ for lid, texto in lineas:
     dur = a['character_end_times_seconds'][-1]
     tramo = lid.split('_')[0]
     if tramo_prev is not None:
-        t += HUECO_CAP if tramo != tramo_prev else HUECO
+        t += (2.6 if tramo_prev == 'gancho' else HUECO_CAP) if tramo != tramo_prev else HUECO  # tras el gancho: título + rótulo
     palabras, actual, ini, fin = [], '', None, 0
     for ch, s, e in zip(a['characters'], a['character_start_times_seconds'], a['character_end_times_seconds']):
         if ch.isspace():

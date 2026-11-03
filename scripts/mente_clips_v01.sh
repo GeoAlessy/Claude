@@ -25,3 +25,17 @@ cortar sleep_for_health_1950 4:08 4 c09_dormir
 cortar the_city_1939 12:19 4 c10_rascacielos
 cortar sleep_for_health_1950 0:45 4 c11_ojos_cerrados
 echo "Clips listos en $D"
+
+# ---- Minuto 1 en HD: masters de Prelinger (por HTTP, solo el tramo) + stock 1080p de Mixkit ----
+url(){ curl -sS -o /dev/null -w '%{redirect_url}' "https://archive.org/download/$1/$2"; }
+hd169(){ ffmpeg -loglevel error -y "${PX[@]}" -ss "$2" -i "$1" -t "$3" -an -vf "crop=iw-${6:-0}*2:(iw-${6:-0}*2)*9/16:${6:-0}:(ih-(iw-${6:-0}*2)*9/16)*${5:-0.5},scale=1920:1080:flags=lanczos${7:+,$7},setsar=1,fps=30" -c:v libx264 -crf 16 -preset slow -pix_fmt yuv420p "$D/$4.mp4"; }
+U1=$(url HMFamilyHolidayand97317 97317.mov); U2=$(url HomeMoviePA097836 HomeMovie_PA097836.mov); U3=$(url IA35000011001_201710 IA_35000011_001.mov)
+hd169 "$U1" 30 3.8 h01_columpio 0.35 0 "eq=gamma=1.45:brightness=0.03:saturation=1.1"
+hd169 "$U1" 214 3 h02_nina_corriendo 0.5
+hd169 "$U2" 461 3.2 h03_tarta_cumple 0.5 240
+hd169 "$U3" 17 4 h04_manhattan_cruce 0.55
+hd169 "$U3" 238.5 4 h05_manhattan_multitud 0.55
+mk(){ curl -sS -o "$S/mk_$1.mp4" "https://assets.mixkit.co/videos/$1/$1-1080.mp4"; ffmpeg -loglevel error -y -ss "$3" -i "$S/mk_$1.mp4" -t "$4" -an -vf "scale=1920:1080:flags=lanczos,setsar=1,fps=30" -c:v libx264 -crf 16 -preset slow -pix_fmt yuv420p "$D/$2.mp4"; sleep 2; }
+mk 918 s01_oficina 2 4; mk 31414 s02_inquieto_cama 0 3; mk 4185 s04_festival 0 4
+mk 1105 s05_cueva 5 3.5; mk 42981 s06_dormir_noche 1 3; mk 221 s07_pantalla_gafas 2 3.5
+echo "Clips HD listos en $D"

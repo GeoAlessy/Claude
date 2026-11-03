@@ -54,7 +54,7 @@ Close your eyes and count to thirty in your head, at what feels like one second 
 
 `[VISUAL: (la voz NO se detiene) un cronómetro gigante aparece unos 5 s con el texto "Close your eyes. Count to 30." y una pulsación suave de fondo; luego el texto cambia a "Comment your result" y el cronómetro se desvanece.]`
 
-Keep that in mind, because in the 1990s a researcher named James Mangan ran a version of this test with three groups: people in their early twenties, middle-aged adults, and people in their sixties. He asked them to count off three minutes.
+Keep that in mind, because in the 1990s a researcher named Peter Mangan ran a version of this test with three groups: people in their early twenties, middle-aged adults, and people in their sixties. He asked them to count off three minutes.
 
 The young group was remarkably accurate. The middle-aged group ran over. And the oldest group — on average — said "three minutes" when more than three and a half minutes had actually passed.
 

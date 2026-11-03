@@ -13,9 +13,13 @@ type Props = {
   intensidad?: number; // 0 = limpio · 1 = recuerdo muy gastado
   rotulo?: string; // texto pequeño tipo archivo: "HOME MOVIE · 1962"
   children?: React.ReactNode; // alternativa: una escena dibujada por código
+  modo?: 'archivo' | 'stock'; // stock = vídeo moderno HD: sin sepia, rayas ni temblor; solo el color del canal
 };
 
-export const PeliculaAntigua: React.FC<Props> = ({src, descripcion, inicio = 0, intensidad = 0.8, rotulo, children}) => {
+export const PeliculaAntigua: React.FC<Props> = (props) =>
+  props.modo === 'stock' && props.src ? <Stock src={props.src} inicio={props.inicio ?? 0} /> : <Archivo {...props} />;
+
+const Archivo: React.FC<Props> = ({src, descripcion, inicio = 0, intensidad = 0.8, rotulo, children}) => {
   const f = useCurrentFrame();
   const azar = useMemo(() => semilla(99), []);
   const rayas = useMemo(() => Array.from({length: 40}, () => ({x: azar() * 1920, vida: 2 + Math.floor(azar() * 5), cuando: Math.floor(azar() * 400)})), [azar]);
@@ -32,7 +36,7 @@ export const PeliculaAntigua: React.FC<Props> = ({src, descripcion, inicio = 0, 
 
   return (
     <AbsoluteFill style={{background: '#000', overflow: 'hidden'}}>
-      <AbsoluteFill style={{transform: `translate(${tx}px, ${ty}px) scale(1.03)`, filter: filtroColor}}>
+      <AbsoluteFill style={{transform: `translate(${tx}px, ${ty}px) scale(${1.03 + f * 0.00025})`, filter: filtroColor}}>
         {src ? (
           esVideo ? (
             <OffthreadVideo src={staticFile(src)} startFrom={Math.round(inicio * 30)} muted style={{width: '100%', height: '100%', objectFit: 'cover'}} />
@@ -78,6 +82,27 @@ export const PeliculaAntigua: React.FC<Props> = ({src, descripcion, inicio = 0, 
       {rotulo && (
         <div style={{position: 'absolute', left: 80, top: 60, fontFamily: MONO, fontSize: 20, letterSpacing: 6, color: 'rgba(244,239,230,0.7)'}}>{rotulo}</div>
       )}
+    </AbsoluteFill>
+  );
+};
+
+// Stock moderno en HD: gradación suave del canal (frío, contraste ligero), grano fino y viñeta.
+const Stock: React.FC<{src: string; inicio: number}> = ({src, inicio}) => {
+  const f = useCurrentFrame();
+  return (
+    <AbsoluteFill style={{background: '#000', overflow: 'hidden'}}>
+      <AbsoluteFill style={{transform: `scale(${1.02 + f * 0.0002})`, filter: 'contrast(1.06) saturate(0.82) brightness(0.96)'}}>
+        <OffthreadVideo src={staticFile(src)} startFrom={Math.round(inicio * 30)} muted style={{width: '100%', height: '100%', objectFit: 'cover'}} />
+      </AbsoluteFill>
+      <AbsoluteFill style={{background: 'rgba(11,16,36,0.18)', mixBlendMode: 'multiply'}} />
+      <svg width={1920} height={1080} style={{position: 'absolute', opacity: 0.07, mixBlendMode: 'overlay'}}>
+        <filter id="granoStock">
+          <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves={2} seed={f % 24} />
+          <feColorMatrix type="saturate" values="0" />
+        </filter>
+        <rect width={1920} height={1080} filter="url(#granoStock)" />
+      </svg>
+      <AbsoluteFill style={{background: 'radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.55) 100%)'}} />
     </AbsoluteFill>
   );
 };

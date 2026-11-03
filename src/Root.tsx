@@ -22,11 +22,13 @@ import * as M34 from './porquepaso/canal/Miniaturas34';
 import {PrototipoEstilo, DURACION_PROTO} from './mente/PrototipoEstilo';
 import {DemoMaterial, DURACION_DEMO_MATERIAL} from './mente/DemoMaterial';
 import {GaleriaPiezas, DURACION_GALERIA} from './mente/GaleriaPiezas';
+import {Minuto01HD, DURACION_MINUTO01HD} from './mente/v01/Minuto01HD';
 import {Minuto01, DURACION_MINUTO01} from './mente/v01/Minuto01';
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      <Composition id="MenteV01Minuto1HD" component={Minuto01HD} durationInFrames={DURACION_MINUTO01HD} fps={30} width={1920} height={1080} />
       <Composition id="MenteV01Minuto1" component={Minuto01} durationInFrames={DURACION_MINUTO01} fps={30} width={1920} height={1080} />
       <Composition id="MenteGaleria" component={GaleriaPiezas} durationInFrames={DURACION_GALERIA} fps={30} width={1920} height={1080} />
       <Composition id="MenteDemoMaterial" component={DemoMaterial} durationInFrames={DURACION_DEMO_MATERIAL} fps={30} width={1920} height={1080} />
