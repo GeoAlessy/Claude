@@ -18,6 +18,9 @@ import {Video04, DURACION_P04} from './porquepaso/p04/Video04';
 import {Gancho as Gancho05, DURACION_GANCHO as DURACION_GANCHO_05} from './porquepaso/p05/Gancho';
 import {Holograma as Holograma05, H as H05} from './porquepaso/p05/Holograma';
 import {Video05, DURACION_P05} from './porquepaso/p05/Video05';
+import {Gancho as Gancho06, DURACION_GANCHO as DURACION_GANCHO_06} from './porquepaso/p06/Gancho';
+import {Holograma as Holograma06, H as H06} from './porquepaso/p06/Holograma';
+import {Video06, DURACION_P06} from './porquepaso/p06/Video06';
 import {Banner, Logo, MarcaAgua} from './porquepaso/canal/Marca';
 import {MiniA, MiniB, MiniC, MiniH} from './porquepaso/canal/Miniaturas02';
 import * as M01 from './porquepaso/canal/Miniaturas01';
@@ -56,6 +59,9 @@ export const RemotionRoot: React.FC = () => {
       <Composition id="P05" component={Video05} durationInFrames={DURACION_P05} fps={30} width={1080} height={1920} />
       <Composition id="P05Holograma" component={Holograma05} durationInFrames={H05.DUR} fps={30} width={1080} height={1920} />
       <Composition id="P05Gancho" component={Gancho05} durationInFrames={DURACION_GANCHO_05} fps={30} width={1080} height={1920} />
+      <Composition id="P06" component={Video06} durationInFrames={DURACION_P06} fps={30} width={1080} height={1920} />
+      <Composition id="P06Holograma" component={Holograma06} durationInFrames={H06.DUR} fps={30} width={1080} height={1920} />
+      <Composition id="P06Gancho" component={Gancho06} durationInFrames={DURACION_GANCHO_06} fps={30} width={1080} height={1920} />
       <Composition id="P03" component={Video03} durationInFrames={DURACION_P03} fps={30} width={1080} height={1920} />
       <Composition id="P03Holograma" component={Holograma03} durationInFrames={H03.DUR} fps={30} width={1080} height={1920} />
       <Composition id="P03Gancho" component={Gancho03} durationInFrames={DURACION_GANCHO_03} fps={30} width={1080} height={1920} />
