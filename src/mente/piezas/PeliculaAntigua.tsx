@@ -76,7 +76,7 @@ export const PeliculaAntigua: React.FC<Props> = ({src, descripcion, inicio = 0, 
       <AbsoluteFill style={{background: 'radial-gradient(ellipse at center, transparent 45%, rgba(0,0,0,0.85) 100%)', opacity: 0.6 + 0.4 * intensidad}} />
 
       {rotulo && (
-        <div style={{position: 'absolute', left: 80, bottom: 70, fontFamily: MONO, fontSize: 20, letterSpacing: 6, color: 'rgba(244,239,230,0.7)'}}>{rotulo}</div>
+        <div style={{position: 'absolute', left: 80, top: 60, fontFamily: MONO, fontSize: 20, letterSpacing: 6, color: 'rgba(244,239,230,0.7)'}}>{rotulo}</div>
       )}
     </AbsoluteFill>
   );
