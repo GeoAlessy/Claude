@@ -39,3 +39,12 @@ mk(){ curl -sS -o "$S/mk_$1.mp4" "https://assets.mixkit.co/videos/$1/$1-1080.mp4
 mk 918 s01_oficina 2 4; mk 31414 s02_inquieto_cama 0 3; mk 4185 s04_festival 0 4
 mk 1105 s05_cueva 5 3.5; mk 42981 s06_dormir_noche 1 3; mk 221 s07_pantalla_gafas 2 3.5
 echo "Clips HD listos en $D"
+
+# --- añadidos: rótulo de capítulo (relojes 4K, Pixabay) y ventana de la prueba (Mixkit) ---
+[ -f "$S/px_68062.mp4" ] || curl -sS -o "$S/px_68062.mp4" "https://cdn.pixabay.com/video/2021/03/15/68062-524689341_large.mp4"
+ffmpeg -loglevel error -y -i "$S/px_68062.mp4" -an -vf "scale=1920:1080:flags=lanczos,fps=30" -c:v libx264 -crf 16 -preset slow -pix_fmt yuv420p "$D/s08_relojes_antiguos.mp4"
+curl -sS -o "$S/mk_32635.mp4" "https://assets.mixkit.co/videos/32635/32635-1080.mp4"   # vertical 1080×1920: recorte 16:9 de la cara
+ffmpeg -loglevel error -y -i "$S/mk_32635.mp4" -an -vf "crop=1080:608:0:110,scale=760:428:flags=lanczos,fps=30" -c:v libx264 -crf 15 -pix_fmt yuv420p "$D/s09_ojos_mano_pecho_v.mp4"
+curl -sS -o "$S/mk_42904.mp4" "https://assets.mixkit.co/videos/42904/42904-1080.mp4"
+ffmpeg -loglevel error -y -ss 4.5 -i "$S/mk_42904.mp4" -an -vf "scale=760:428:flags=lanczos,fps=30" -c:v libx264 -crf 15 -pix_fmt yuv420p "$D/s10_ojos_respira_v.mp4"
+echo "Clips listos en $D"

@@ -1,7 +1,7 @@
 # Vídeo 01 — Your Brain Is Lying To You About Time
 
 **Canal nuevo:** la ciencia inquietante de tu propia mente (inglés, sin rostro)
-**Duración real con la voz (Romero, Eleven v4):** 23:07 · 113 frases · 3.601 palabras. Nunca más de 2 s sin voz (pausa de 1,8 s entre capítulos, 0,45 s entre párrafos). Los tiempos de cada bloque son los reales de la narración grabada.
+**Duración real con la voz (Fish Audio "Psychological"):** 24:45 · 113 frases · 3.601 palabras. Nunca más de 3 s sin voz (0,6 s entre párrafos, 2,0 s entre capítulos, 2,8 s tras el gancho para título + logo). Los tiempos de cada bloque son los reales de la narración grabada.
 **Estructura:** gancho + 9 capítulos + cierre. Cada capítulo = mini-vídeo (gancho → prueba/ejemplo → ciencia → revelación → puente).
 
 > Cómo leer este guion:
