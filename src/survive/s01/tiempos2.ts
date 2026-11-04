@@ -9,13 +9,12 @@ export const FPS = 30;
 // Audio original del episodio
 // Bucle: el video termina con Bart ("But, Dad, you'll never make it.") y empieza con la respuesta de Homero.
 export const ORIG_H = {archivo: 'orig_H_know.wav', dur: 39, src: 1189.58}; // Homero: "Don't you think I know that?" (1,30 s)
-export const ORIG_A = {archivo: 'orig_A_make_it.wav', dur: 22, ini: 39}; // Homero: "I'm gonna make it!" (0,74 s)
 export const ORIG_C = {archivo: 'orig_C_bones.wav', dur: 66, src: 984.62}; // Lance Murdock: "Bones heal, chicks dig scars" (2,2 s)
 export const ORIG_B = {archivo: 'orig_B_bart.wav', dur: 64, src: 1187.45}; // Bart: "But, Dad, you'll never make it." (2,13 s)
 
 // [id, pausa antes]: la pausa tras los golpes deja ver la repetición en cámara lenta
 const ORDEN: [string, number][] = [
-  ['01_spoiler', ORIG_A.ini + ORIG_A.dur + 1],
+  ['01_spoiler', ORIG_H.dur + 1],
   ['02_deep', 2],
   ['03_clean', 2],
   ['04_hits', 2],
@@ -106,14 +105,12 @@ const plano = (p: Plano) => P.push(p);
 
 // H · Homero responde a Bart (cierra el bucle): "Don't you think I know that?"
 plano({desde: 0, src: ORIG_H.src, vel: 1.0, cx: 0.5, zoom: [1.05, 1.2], archivo: 'dialogo'});
-// A · "I'm gonna make it!": Homero sube en el aire
-plano({desde: ORIG_A.ini, src: 1221.45, vel: 1.0, cx: 0.48, zoom: [1.0, 1.15]});
 // 01 · "Spoiler: he didn't." Homero en el aire, se congela con brillo en "didn't"
 plano({desde: INICIO['01_spoiler'] - 1, src: 1224.6, vel: 1.0, cx: 0.5, zoom: [1.55, 1.75], congela: 12, encaja: true}); // cuadro 12 = segundo 1225,0 (el del recorte)
 // 01 · "But could a real human survive this fall?" cae
 plano({desde: M.BUT - 1, src: 1226.5, vel: 1.05, cx: 0.5, zoom: [1.05, 1.3], pan: [0, -30]});
 // 02 · el acantilado con la cinta métrica 3D
-plano({desde: INICIO['02_deep'] - 2, src: 1218.0, vel: 0.9, cx: 0.52, zoom: [1.0, 1.1], pan: [20, -20]});
+plano({desde: INICIO['02_deep'] - 2, src: 1218.0, vel: 0.9, cx: 0.52, zoom: [1.0, 1.04]}); // casi quieto: la cinta va pegada al sendero
 // 02 · "so you'd hit the bottom at a hundred miles an hour"
 plano({desde: M.SO - 1, src: 1227.3, vel: 1.15, cx: 0.5, zoom: [1.0, 1.2]});
 // 03 · los niños se asoman al borde

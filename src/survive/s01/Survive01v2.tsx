@@ -2,7 +2,7 @@ import React from 'react';
 import {AbsoluteFill, Audio, Easing, Freeze, Img, OffthreadVideo, Sequence, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
 import {loadFont} from '@remotion/fonts';
 import {PALABRAS} from './subtitulos2';
-import {BRILLOS, CLIPS, DURACION_S01V2, EVENTOS, FIN, FPS, INICIO, INI_B, INI_C, M, MEDIDOR_DESDE, ORIG_A, ORIG_B, ORIG_C, ORIG_H, PLANOS, REPLAY, VOZ_ORDEN} from './tiempos2';
+import {BRILLOS, CLIPS, DURACION_S01V2, EVENTOS, FIN, FPS, INICIO, INI_B, INI_C, M, MEDIDOR_DESDE, ORIG_B, ORIG_C, ORIG_H, PLANOS, REPLAY, VOZ_ORDEN} from './tiempos2';
 import {SonidoEventos, VidasEventos} from '../rosquillas';
 import {DMedabot} from '../opciones2';
 
@@ -13,6 +13,9 @@ import {DMedabot} from '../opciones2';
 // =====================================================================
 loadFont({family: 'LuckiestGuy', url: staticFile('fonts/LuckiestGuy-latin.woff2'), weight: '400'});
 loadFont({family: 'Bangers', url: staticFile('fonts/Bangers-latin.woff2'), weight: '400'});
+loadFont({family: 'Chewy', url: staticFile('fonts/Chewy-latin.woff2'), weight: '400'});
+// Las mediciones (velocidad, metros) tienen su propia letra y color para reconocerlas de un vistazo
+const MEDIDA = '#36D6FF';
 
 export {DURACION_S01V2};
 const AM = '#FFD90F';
@@ -126,28 +129,41 @@ const Replay: React.FC = () => {
   );
 };
 
-// ---------- Cinta métrica 3D pegada al acantilado ----------
+// ---------- Cinta métrica 3D pegada al sendero del acantilado ----------
+const LARGO = 1220; // largo total de la cinta (antes de la perspectiva): el final queda dentro de la pantalla
 const Cinta: React.FC = () => {
   const f = useCurrentFrame();
-  const largo = interpolate(f, [0, 16], [0, 1250], {...clamp, easing: Easing.out(Easing.cubic)});
+  const largo = interpolate(f, [0, 16], [0, LARGO], {...clamp, easing: Easing.out(Easing.cubic)});
   const salida = interpolate(f, [M.SO - INICIO['02_deep'] - 5, M.SO - INICIO['02_deep']], [1, 0], clamp);
+  const etiqueta = f - (M.THIRTY - INICIO['02_deep'] + 2);
+  const paso = LARGO / 100; // 1 m
   return (
-    <AbsoluteFill style={{perspective: 1100, opacity: salida}}>
-      <div style={{position: 'absolute', left: 470, top: 150, transformOrigin: 'top center', transform: 'rotateX(28deg) rotateZ(-14deg)', transformStyle: 'preserve-3d'}}>
-        {/* carrete */}
-        <div style={{position: 'absolute', left: -46, top: -70, width: 150, height: 110, borderRadius: 26, background: 'linear-gradient(160deg,#FDE047,#CA8A04)', border: `6px solid ${NEG}`, boxShadow: '0 10px 0 rgba(0,0,0,0.3)'}}>
-          <div style={{position: 'absolute', left: 44, top: 24, width: 50, height: 50, borderRadius: 25, background: '#3F3F46', border: `5px solid ${NEG}`}} />
+    <AbsoluteFill style={{perspective: 1300, opacity: salida}}>
+      <div style={{position: 'absolute', left: 560, top: 100, transformOrigin: 'top center', transform: 'rotateX(32deg) rotateZ(-4deg)', transformStyle: 'preserve-3d'}}>
+        {/* carcasa de la cinta */}
+        <div style={{position: 'absolute', left: -52, top: -78, width: 178, height: 118, borderRadius: 28, background: 'linear-gradient(160deg,#FDE047,#CA8A04)', border: `6px solid ${NEG}`, boxShadow: '0 10px 0 rgba(0,0,0,0.3)'}}>
+          <div style={{position: 'absolute', left: 58, top: 26, width: 52, height: 52, borderRadius: 26, background: '#3F3F46', border: `5px solid ${NEG}`}} />
         </div>
-        <div style={{width: 64, height: largo, overflow: 'hidden', background: 'linear-gradient(90deg,#FACC15,#FDE68A 50%,#EAB308)', border: `4px solid ${NEG}`, borderTop: 'none', boxShadow: '8px 0 14px rgba(0,0,0,0.35)'}}>
-          {Array.from({length: 51}).map((_, i) => (
-            <div key={i} style={{position: 'absolute', top: i * 24, left: 0, width: i % 5 === 0 ? 30 : 16, height: 4, background: NEG}} />
+        <div style={{position: 'relative', width: 76, height: largo, overflow: 'hidden', background: 'linear-gradient(90deg,#EAB308,#FDE68A 45%,#FACC15 70%,#CA8A04)', borderLeft: `4px solid ${NEG}`, borderRight: `4px solid ${NEG}`, boxShadow: '10px 0 16px rgba(0,0,0,0.35)'}}>
+          {Array.from({length: 101}).map((_, m) => (
+            <div key={m} style={{position: 'absolute', top: m * paso, left: 0, width: m % 10 === 0 ? 40 : m % 5 === 0 ? 26 : 14, height: m % 10 === 0 ? 5 : 3, background: NEG}} />
           ))}
-          {Array.from({length: 11}).map((_, i) => (
-            <div key={i} style={{position: 'absolute', top: i * 120 - 14, left: 30, fontFamily: 'Bangers', fontSize: 26, color: NEG}}>
-              {i * 10}
+          {Array.from({length: 10}).map((_, i) => (
+            <div key={i} style={{position: 'absolute', top: (i + 1) * 10 * paso - 30, left: 20, fontFamily: 'Bangers', fontSize: 30, letterSpacing: 1, color: NEG, transform: 'rotate(-90deg)', transformOrigin: 'left top', whiteSpace: 'nowrap'}}>
+              {(i + 1) * 10} M
             </div>
           ))}
         </div>
+        {/* etiqueta al costado del final, con el mismo diseño de la cinta */}
+        {etiqueta >= 0 && (
+          <div style={{position: 'absolute', right: 84, top: LARGO - 420, transform: `scale(${interpolate(etiqueta, [0, 4, 7], [0.4, 1.08, 1], clamp)})`, transformOrigin: 'right center', display: 'flex', alignItems: 'center', whiteSpace: 'nowrap'}}>
+            <div style={{background: 'linear-gradient(180deg,#FDE68A,#FACC15)', border: `5px solid ${NEG}`, borderRadius: 10, padding: '6px 18px', fontFamily: 'Bangers', color: NEG, lineHeight: 0.95, textAlign: 'center', boxShadow: '0 8px 0 rgba(0,0,0,0.3)'}}>
+              <div style={{fontSize: 62, letterSpacing: 2}}>100 M</div>
+              <div style={{fontSize: 32, letterSpacing: 2}}>≈ 30 FLOORS</div>
+            </div>
+            <div style={{width: 30, height: 6, background: NEG}} />
+          </div>
+        )}
       </div>
     </AbsoluteFill>
   );
@@ -165,27 +181,32 @@ const Dato: React.FC<{children: React.ReactNode; x: number; y: number; k: number
   );
 };
 
+/** Medición (velocidad): letra Chewy en celeste, como un cartel pintado de la serie. */
+const Medida: React.FC<{valor: number; unidad: string; k: number; hasta: number; x?: number; y?: number}> = ({valor, unidad, k, hasta, x = 770, y = 1030}) => {
+  if (k < 0 || hasta <= 0) return null;
+  const s = interpolate(k, [0, 4, 7], [0.5, 1.12, 1], clamp);
+  const o = interpolate(hasta, [0, 4], [0, 1], clamp);
+  return (
+    <div style={{position: 'absolute', left: x, top: y, transform: `translate(-50%,-50%) scale(${s}) rotate(-4deg)`, opacity: o, fontFamily: 'Chewy', color: MEDIDA, whiteSpace: 'nowrap', lineHeight: 0.9, ...trazo(11), filter: SOMBRA}}>
+      <span style={{fontSize: 120}}>{Math.round(valor)}</span>
+      <span style={{fontSize: 58, color: '#fff'}}> MPH</span>
+    </div>
+  );
+};
+
 const Velocidad: React.FC = () => {
   const f = useCurrentFrame();
   const k = f - M.SO;
   if (k < 0 || f > FIN['02_deep'] + 3) return null;
   const v = interpolate(f, [M.SO, M.HUNDRED + 5], [0, 100], {...clamp, easing: Easing.out(Easing.cubic)});
-  return (
-    <Dato x={760} y={1040} k={k} hasta={FIN['02_deep'] + 3 - f} tam={78}>
-      {Math.round(v)} <span style={{fontSize: 44, color: ROSA}}>MPH</span>
-    </Dato>
-  );
+  return <Medida valor={v} unidad="MPH" k={k} hasta={FIN['02_deep'] + 3 - f} />;
 };
 
 const Velocidad2: React.FC = () => {
   const f = useCurrentFrame();
   if (f < M.EVERY || f > FIN['05_twist'] + 2) return null;
   const v = interpolate(f, [M.EVERY + 6, M.BRAKES + 4], [100, 45], {...clamp, easing: Easing.inOut(Easing.cubic)});
-  return (
-    <Dato x={760} y={1040} k={f - M.EVERY} hasta={FIN['05_twist'] + 2 - f} tam={78}>
-      {Math.round(v)} <span style={{fontSize: 44, color: '#7CFF4F'}}>MPH</span>
-    </Dato>
-  );
+  return <Medida valor={v} unidad="MPH" k={f - M.EVERY} hasta={FIN['05_twist'] + 2 - f} />;
 };
 
 // ---------- Latido que avanza (sigue vivo) ----------
@@ -307,11 +328,10 @@ const SIN_SUB_DESDE: Record<string, number> = {'01_spoiler': M.BUT}; // ahí ent
 // Frases originales: [desde (fotograma), segundo del episodio en que empieza el audio, palabras, color]
 const ORIGINALES: [number, number, [string, number][], string][] = [
   [0, ORIG_H.src, [["DON'T", 1189.65], ['YOU', 1189.85], ['THINK', 1189.95], ['I', 1190.21], ['KNOW', 1190.33], ['THAT?', 1190.57]], AM],
-  [ORIG_A.ini, 1220.48, [["I'M", 1220.59], ['GONNA', 1220.67], ['MAKE', 1220.81], ['IT!', 1220.99]], AM],
   [INI_C, ORIG_C.src, [['BONES', 984.75], ['HEAL,', 985.09], ['CHICKS', 985.73], ['DIG', 986.03], ['SCARS!', 986.27]], '#7CFF4F'],
   [INI_B, ORIG_B.src, [['BUT,', 1187.57], ['DAD,', 1188.03], ["YOU'LL", 1188.57], ['NEVER', 1188.75], ['MAKE', 1189.05], ['IT.', 1189.33]], '#fff'],
 ];
-const DUR_ORIG = [ORIG_H.dur, ORIG_A.dur, ORIG_C.dur, ORIG_B.dur];
+const DUR_ORIG = [ORIG_H.dur, ORIG_C.dur, ORIG_B.dur];
 const Palabra: React.FC<{w: string; k: number; color: string}> = ({w, k, color}) => {
   const pop = interpolate(k, [0, 2, 4], [0.7, 1.12, 1], clamp);
   return (
@@ -345,14 +365,42 @@ const Subtitulos: React.FC = () => {
   return null;
 };
 
-// ---------- Nombre del canal: solo un momento al inicio ----------
-const Canal: React.FC = () => {
+// ---------- Gancho del cuadro 0 (2 s): "HOMER vs. PHYSICS", letras saltonas estilo caricatura ----------
+const LETRAS: [string, string, number][] = [
+  ...('HOMER'.split('').map((c) => [c, AM, 150] as [string, string, number])),
+  [' ', AM, 60],
+  ['V', '#fff', 92],
+  ['S', '#fff', 92],
+  ['.', '#fff', 92],
+  [' ', AM, 60],
+  ...('PHYSICS'.split('').map((c) => [c, MEDIDA, 150] as [string, string, number])),
+];
+const Gancho: React.FC = () => {
   const f = useCurrentFrame();
-  if (f > 30) return null;
-  const o = interpolate(f, [0, 3, 24, 30], [0, 1, 1, 0], clamp);
+  if (f > 62) return null;
+  const sale = interpolate(f, [54, 62], [1, 0], clamp);
+  const fila1 = LETRAS.slice(0, 9);
+  const fila2 = LETRAS.slice(10);
+  const Fila: React.FC<{ls: [string, string, number][]; base: number}> = ({ls, base}) => (
+    <div style={{display: 'flex', justifyContent: 'center', alignItems: 'flex-end'}}>
+      {ls.map(([c, col, t], i) => {
+        const k = f - (base + i) * 1.2;
+        const y = interpolate(k, [0, 4, 7], [-90, 12, 0], clamp);
+        const o = interpolate(k, [0, 2], [0, 1], clamp);
+        const giro = [-7, 5, -4, 6, -5, 4, -6, 5, -3][(base + i) % 9];
+        const respira = Math.sin((f + i * 4) / 6) * 4;
+        return (
+          <span key={i} style={{display: 'inline-block', fontFamily: 'LuckiestGuy', fontSize: t, color: col, transform: `translateY(${y + respira}px) rotate(${giro}deg)`, opacity: o, margin: '0 1px', ...trazo(t > 100 ? 20 : 15)}}>
+            {c === ' ' ? '\u00A0' : c}
+          </span>
+        );
+      })}
+    </div>
+  );
   return (
-    <div style={{position: 'absolute', top: 150, width: '100%', textAlign: 'center', opacity: o}}>
-      <span style={{fontFamily: 'LuckiestGuy', fontSize: 58, color: AM, background: 'rgba(14,14,18,0.6)', padding: '10px 30px', borderRadius: 30, ...trazo(6)}}>COULD YOU SURVIVE IT?</span>
+    <div style={{position: 'absolute', top: 170, width: '100%', opacity: sale, filter: SOMBRA, lineHeight: 0.95}}>
+      <Fila ls={fila1} base={0} />
+      <Fila ls={fila2} base={9} />
     </div>
   );
 };
@@ -403,7 +451,7 @@ SFX.push(
 
 function volMusica(f: number) {
   const base = 0.1;
-  const bajo = f < ORIG_A.ini + ORIG_A.dur + 2 || f >= INI_B - 2 || (f >= INI_C - 2 && f < INI_C + ORIG_C.dur + 2);
+  const bajo = f < ORIG_H.dur + 2 || f >= INI_B - 2 || (f >= INI_C - 2 && f < INI_C + ORIG_C.dur + 2);
   const orig = bajo ? 0.25 : 1; // baja mucho bajo el audio original
   const ext = interpolate(f, [0, 3, DURACION_S01V2 - 8, DURACION_S01V2], [0.6, 1, 1, 0], clamp);
   return base * orig * ext;
@@ -422,9 +470,6 @@ export const Survive01v2: React.FC = () => {
       <Sequence from={INICIO['02_deep'] - 2} durationInFrames={M.SO - INICIO['02_deep'] + 2}>
         <Cinta />
       </Sequence>
-      <Dato x={640} y={760} k={f - M.THIRTY} hasta={M.SO - f} tam={60}>
-        ≈100 M <span style={{color: ROSA}}>· 30 FLOORS</span>
-      </Dato>
       <Velocidad />
       <Velocidad2 />
       <Latido />
@@ -434,14 +479,11 @@ export const Survive01v2: React.FC = () => {
       {visibleMedidor > 0 && <VidasEventos eventos={EVENTOS} visible={visibleMedidor} left={40} top={100} escala={0.6} />}
       <Titulo />
       <Subtitulos />
-      <Canal />
+      <Gancho />
 
       {/* audio */}
       <Audio src={staticFile('survive/sfx/musica.wav')} volume={volMusica} />
       <Audio src={staticFile(`survive/s01/clips/${ORIG_H.archivo}`)} volume={1} />
-      <Sequence from={ORIG_A.ini}>
-        <Audio src={staticFile(`survive/s01/clips/${ORIG_A.archivo}`)} volume={1} />
-      </Sequence>
       <Sequence from={INI_C}>
         <Audio src={staticFile(`survive/s01/clips/${ORIG_C.archivo}`)} volume={1} />
       </Sequence>
