@@ -25,3 +25,6 @@ public/survive/*/clips_previa/
 # Muestras de opciones (llevan cuadros de la serie) y caché de Python
 out/opciones/
 __pycache__/
+public/porquepaso/canal/p05_real.png
+public/porquepaso/canal/p06_real.png
+public/porquepaso/canal/p06_lejos.png

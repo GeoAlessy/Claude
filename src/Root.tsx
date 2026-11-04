@@ -34,6 +34,7 @@ import {DemoBarras3, DUR_BARRAS3} from './survive/opciones3';
 import {DemoBarras4, DUR_BARRAS4} from './survive/opciones4';
 import * as OP5 from './survive/opciones5';
 import {DemoRosquillas, DUR_DEMO_ROSQ} from './survive/rosquillas';
+import * as M56 from './porquepaso/canal/Miniaturas56';
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -70,6 +71,14 @@ export const RemotionRoot: React.FC = () => {
       <Still id="P04MiniB" component={M34.M4B} width={1080} height={1920} />
       <Still id="P04MiniC" component={M34.M4C} width={1080} height={1920} />
       <Still id="P04MiniH" component={M34.M4H} width={1280} height={720} />
+      <Still id="P05MiniA" component={M56.M5A} width={1080} height={1920} />
+      <Still id="P05MiniB" component={M56.M5B} width={1080} height={1920} />
+      <Still id="P05MiniC" component={M56.M5C} width={1080} height={1920} />
+      <Still id="P05MiniH" component={M56.M5H} width={1280} height={720} />
+      <Still id="P06MiniA" component={M56.M6A} width={1080} height={1920} />
+      <Still id="P06MiniB" component={M56.M6B} width={1080} height={1920} />
+      <Still id="P06MiniC" component={M56.M6C} width={1080} height={1920} />
+      <Still id="P06MiniH" component={M56.M6H} width={1280} height={720} />
       <Still id="P01MiniA" component={M01.MiniA} width={1080} height={1920} />
       <Still id="P01MiniB" component={M01.MiniB} width={1080} height={1920} />
       <Still id="P01MiniC" component={M01.MiniC} width={1080} height={1920} />
