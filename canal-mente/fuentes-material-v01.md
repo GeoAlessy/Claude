@@ -36,6 +36,9 @@ Notas:
 | s05_cueva | mixkit.co … woman-walks-into-cave-on-the-beach-1105 (1080p) | 5 s · 3,5 s | ídem |
 | s06_dormir_noche | mixkit.co … loving-couple-sleeping-together-at-night-42981 (1080p) | 1 s · 3 s | ídem |
 | s07_pantalla_gafas | mixkit.co … reflection-of-a-screen-in-glasses-221 (1080p) | 2 s · 3,5 s | ídem |
+| s08_relojes_antiguos | pixabay.com/videos/id-68062 (4K → 1080p) | 0 s · 19,6 s | Licencia de contenido de Pixabay (uso comercial, sin atribución) |
+| s09_ojos_mano_pecho | mixkit.co … young-woman-meditating-on-the-floor-with-hand-on-chest-32635 (1080p) | 0 s · 7,6 s | Licencia gratuita de Mixkit |
+| s10_ojos_respira | mixkit.co … woman-meditating-and-breathing-deeply-42904 (1080p) | 4,5 s · 7,5 s | Licencia gratuita de Mixkit |
 
 Nota: en Mixkit, los vídeos recientes solo ofrecen 720p de descarga directa; se eligieron los que tienen 1080p.
 

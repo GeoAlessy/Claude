@@ -5,7 +5,7 @@ import {Fondo} from '../piezas/Fondo';
 import {PeliculaAntigua} from '../piezas/PeliculaAntigua';
 import {LineaVida} from '../piezas/LineaVida';
 import {Titulo} from '../piezas/Titulo';
-import {RotuloCapitulo} from '../piezas/RotuloCapitulo';
+import {RotuloCapituloCine, golpeRotulo} from '../piezas/RotuloCapituloCine';
 import {CerebroGalaxia} from '../piezas/CerebroGalaxia';
 import {PruebaContar} from '../piezas/PruebaContar';
 import {LogoCanal} from '../piezas/LogoCanal';
@@ -18,6 +18,14 @@ import {NARRACION} from './narracion';
 
 import {A, P, fin, inicio, tiemposFrase, volMusica, volSfx} from './montaje';
 import {FraseClave} from '../piezas/TextoAnimado';
+
+const ROTULO_01 = {
+  numero: '01',
+  nombre: 'The Shrinking Year',
+  flashes: [{src: 'h01_columpio', inicio: 1}, {src: 'h03_tarta_cumple'}, {src: 'c07_reloj', inicio: 1}, {src: 'h02_nina_corriendo'}],
+  dentro: {src: 's08_relojes_antiguos', inicio: 2},
+  tono: 'rapido' as const,
+};
 
 type Plano = {desde: number; hasta: number; nodo: React.ReactNode};
 const arch = (src: string, rotulo?: string, intensidad = 0.4) => (
@@ -59,7 +67,7 @@ const PLANOS: Plano[] = [
   {desde: A(P('gancho_05', 'and')), hasta: T_TITULO, nodo: arch('h03_tarta_cumple', 'HOME MOVIE · 1950s')},
   {desde: T_TITULO, hasta: T_LOGO, nodo: graf(<Titulo lineas={['YOUR BRAIN IS LYING', 'TO YOU ABOUT TIME']} acento="TIME" />)},
   {desde: T_LOGO, hasta: T_ROTULO, nodo: graf(<LogoCanal dur={T_ROTULO - T_LOGO} />)},
-  {desde: T_ROTULO, hasta: T_PRUEBA, nodo: graf(<RotuloCapitulo numero="01" nombre="The Shrinking Year" />)},
+  {desde: T_ROTULO, hasta: T_PRUEBA, nodo: <RotuloCapituloCine {...ROTULO_01} dur={T_PRUEBA - T_ROTULO} />},
   {
     desde: T_PRUEBA,
     hasta: DURACION_MINUTO01HD,
@@ -87,7 +95,8 @@ const SFX: [string, number, number, number?][] = [
   ['riser_tension', P('gancho_05', 'and') - 10, 0.4],
   ['golpe_grave', T_TITULO, 0.75],
   ['campana_sueno', T_LOGO + 6, 0.5],
-  ['whoosh_suave', T_ROTULO - 6, 0.45],
+  ...ROTULO_01.flashes.map((_, k) => ['tick_dato', T_ROTULO + k * 5, 0.8] as [string, number, number]),
+  ['golpe_grave', T_ROTULO + golpeRotulo(ROTULO_01.flashes.length), 0.85],
   ['tick_dato', P('cap01_02', 'close'), 0.5],
   ['latido', P('cap01_02', 'close') + 10, 0.35, P('cap01_02', 'most') - P('cap01_02', 'close')],
   ['tick_dato', P('cap01_02', 'most') + 0, 0.45],
