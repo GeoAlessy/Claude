@@ -131,7 +131,7 @@ plano({desde: M.ROCKS - 2, src: 1238.3, vel: 1.0, cx: 0.55, zoom: [1.0, 1.15], p
 // 06 · llega al fondo: se congela con brillo en "alive"
 plano({desde: INICIO['06a_alive'] - 2, src: 1239.55, vel: 1.0, cx: 0.5, zoom: [1.12, 1.25], congela: 10, encaja: true}); // cuadro 10 = segundo 1239,9 (el del recorte)
 // C · Lance Murdock en el hospital: "Bones heal, chicks dig scars"
-plano({desde: INI_C - 1, src: ORIG_C.src - 0.1, vel: 1.0, cx: 0.5, zoom: [1.05, 1.2], pan: [20, -20], archivo: 'lance'});
+plano({desde: INI_C - 1, src: ORIG_C.src - 0.1, vel: 1.0, cx: 0.76, zoom: [1.1, 1.3], archivo: 'lance'}); // Lance está a la derecha del cuadro
 // 06b · caso real: de vuelta a Homero en el fondo (quieto) bajo la tarjeta
 plano({desde: INICIO['06b_real'] - 2, src: 1239.9, vel: 1.0, cx: 0.5, zoom: [1.15, 1.3], congela: 0, encaja: true});
 // 07 · la ambulancia choca y vuelve a caer
