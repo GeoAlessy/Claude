@@ -21,3 +21,7 @@ fuentes_video/
 # Survive: clips de la serie (copyright) y modelos
 public/survive/*/clips/
 public/survive/*/clips_previa/
+
+# Muestras de opciones (llevan cuadros de la serie) y caché de Python
+out/opciones/
+__pycache__/
