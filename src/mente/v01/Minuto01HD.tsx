@@ -8,6 +8,7 @@ import {Titulo} from '../piezas/Titulo';
 import {RotuloCapitulo} from '../piezas/RotuloCapitulo';
 import {CerebroGalaxia} from '../piezas/CerebroGalaxia';
 import {PruebaContar} from '../piezas/PruebaContar';
+import {LogoCanal} from '../piezas/LogoCanal';
 import {NARRACION} from './narracion';
 
 // Vídeo 01 · primer minuto (gancho + inicio del cap. 1) en HD, con voz (Fish Audio "Psychological"), música y efectos.
@@ -31,7 +32,8 @@ const graf = (n: React.ReactNode) => (
 );
 
 const T_TITULO = A(P('gancho_05', 'scientists'));
-const T_ROTULO = inicio('cap01_01') + 10;
+const T_LOGO = fin('gancho_05') + 24; // el título se queda solo 0,8 s tras la voz
+const T_ROTULO = inicio('cap01_01');
 const T_PRUEBA = A(P('cap01_01', 'pause'));
 export const DURACION_MINUTO01HD = fin('cap01_02') + 45;
 
@@ -55,7 +57,8 @@ const PLANOS: Plano[] = [
   {desde: A(P('gancho_04', 'invent')), hasta: A(P('gancho_04', 'and', 1)), nodo: stock('s06_dormir_noche')},
   {desde: A(P('gancho_04', 'and', 1)), hasta: A(P('gancho_05', 'and')), nodo: arch('c08_colgado', undefined, 0.35)},
   {desde: A(P('gancho_05', 'and')), hasta: T_TITULO, nodo: arch('h03_tarta_cumple', 'HOME MOVIE · 1950s')},
-  {desde: T_TITULO, hasta: T_ROTULO, nodo: graf(<Titulo lineas={['YOUR BRAIN IS LYING', 'TO YOU ABOUT TIME']} acento="TIME" />)},
+  {desde: T_TITULO, hasta: T_LOGO, nodo: graf(<Titulo lineas={['YOUR BRAIN IS LYING', 'TO YOU ABOUT TIME']} acento="TIME" />)},
+  {desde: T_LOGO, hasta: T_ROTULO, nodo: graf(<LogoCanal dur={T_ROTULO - T_LOGO} />)},
   {desde: T_ROTULO, hasta: T_PRUEBA, nodo: graf(<RotuloCapitulo numero="01" nombre="The Shrinking Year" />)},
   {
     desde: T_PRUEBA,
@@ -72,7 +75,7 @@ const PLANOS: Plano[] = [
 ];
 
 // Efectos de sonido: [archivo, fotograma, volumen, duración opcional en fotogramas]
-const ARCHIVO_PLANOS = [2, 3, 5, 8, 11, 13, 14];
+const ARCHIVO_PLANOS = [2, 3, 5, 8, 11, 13, 14]; // índices en PLANOS
 const SFX: [string, number, number, number?][] = [
   ['tictac_reloj', 0, 0.28, P('gancho_02', 'that')],
   ['golpe_grave', P('gancho_03', "isn't"), 0.7],
@@ -83,6 +86,7 @@ const SFX: [string, number, number, number?][] = [
   ['cueva_goteo', A(P('gancho_04', 'lose')), 0.5, A(P('gancho_04', 'erase')) - A(P('gancho_04', 'lose')) + 20],
   ['riser_tension', P('gancho_05', 'and') - 10, 0.4],
   ['golpe_grave', T_TITULO, 0.75],
+  ['campana_sueno', T_LOGO + 6, 0.5],
   ['whoosh_suave', T_ROTULO - 6, 0.45],
   ['tick_dato', P('cap01_02', 'close'), 0.5],
   ['latido', P('cap01_02', 'close') + 10, 0.35, P('cap01_02', 'most') - P('cap01_02', 'close')],
@@ -91,7 +95,7 @@ const SFX: [string, number, number, number?][] = [
   ['tick_dato', P('cap01_02', 'most') + 16, 0.45],
   ['tick_dato', P('cap01_02', 'drop'), 0.5],
   // proyector suave bajo los planos de archivo
-  ...ARCHIVO_PLANOS.map((i) => ['proyector', PLANOS[i].desde, 0.5, PLANOS[i].hasta - PLANOS[i].desde] as [string, number, number, number]),
+  ...ARCHIVO_PLANOS.map((i) => ['proyector', PLANOS[i].desde, 0.22, PLANOS[i].hasta - PLANOS[i].desde] as [string, number, number, number]),
 ];
 
 // Frases clave del narrador escritas en pantalla, al ritmo exacto de su voz (sobre la imagen, con velo oscuro).

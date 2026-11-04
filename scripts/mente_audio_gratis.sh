@@ -35,4 +35,6 @@ dl p4_cz_out_of_the_skies "https://archive.org/download/ChrisZabriskieReappear/$
 dl p5_km_long_note_four "https://incompetech.com/music/royalty-free/mp3-royaltyfree/$(q 'Long Note Four').mp3"
 dl p6_km_lightless_dawn "https://incompetech.com/music/royalty-free/mp3-royaltyfree/$(q 'Lightless Dawn').mp3"
 dl p7_km_dreamer "https://incompetech.com/music/royalty-free/mp3-royaltyfree/$(q 'Dreamer').mp3"
+# todos los efectos al mismo nivel (-18 LUFS): el montaje los baja 6 dB cuando habla el narrador
+for f in "$F"/*.mp3; do ffmpeg -loglevel error -y -i "$f" -af loudnorm=I=-18:TP=-1.5:LRA=11 -ar 44100 -b:a 192k "$f.tmp.mp3" && mv "$f.tmp.mp3" "$f"; done
 echo "Audio gratis listo en $F y $M"

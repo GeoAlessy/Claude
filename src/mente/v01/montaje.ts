@@ -64,24 +64,9 @@ export const tiemposFrase = (id: string, frase: string): number[] => {
 
 // ---------------- Audio ----------------
 // Regla del canal: los efectos NUNCA suenan más fuerte que la voz (voz a -16 LUFS).
-// Cada efecto se normaliza a -24 LUFS y, mientras habla el narrador, baja otros 10 dB.
-
-const LUFS_SFX: Record<string, number> = {
-  campana_sueno: -22.5,
-  cueva_goteo: -29.6,
-  golpe_grave: -14.2,
-  latido: -16.4,
-  pagina_papel: -29.4,
-  proyector: -34.8,
-  rebobinar: -13.7,
-  riser_tension: -22.5,
-  tick_dato: -33.1,
-  tictac_reloj: -35.5,
-  viento_caida: -16.5,
-  whoosh_suave: -18.3,
-};
-const REF_SFX = -24;
-const BAJO_VOZ = 0.32; // ≈ -10 dB
+// Los archivos de efectos ya vienen normalizados a -18 LUFS (scripts/mente_audio_gratis.sh);
+// mientras habla el narrador bajan 6 dB más, y en las pausas suenan a su nivel.
+const BAJO_VOZ = 0.5; // ≈ -6 dB
 
 export const HABLA = NARRACION.map((l) => [l.desde, l.desde + l.dur] as const);
 /** Distancia en fotogramas al tramo de voz más cercano (0 si está hablando). */
@@ -96,10 +81,7 @@ export const distanciaVoz = (f: number) => {
 const factorVoz = (fGlobal: number) => BAJO_VOZ + (1 - BAJO_VOZ) * Math.min(1, distanciaVoz(fGlobal) / 10);
 
 /** Volumen de un efecto (callback de Remotion): `nivel` 0–1 relativo, `desde` = fotograma global del Sequence. */
-export const volSfx = (s: string, nivel: number, desde: number) => {
-  const norm = Math.min(1, Math.pow(10, (REF_SFX - (LUFS_SFX[s] ?? REF_SFX)) / 20));
-  return (f: number) => norm * nivel * factorVoz(desde + f);
-};
+export const volSfx = (_s: string, nivel: number, desde: number) => (f: number) => Math.min(1, nivel) * factorVoz(desde + f);
 
 /** Música con "ducking": baja cuando habla el narrador y sube en las pausas. */
 export const volMusica = (alta: number, baja: number, desdeGlobal = 0, entrada = 45) => (f: number) => {
