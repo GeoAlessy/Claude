@@ -24,12 +24,15 @@ import {DemoMaterial, DURACION_DEMO_MATERIAL} from './mente/DemoMaterial';
 import {GaleriaPiezas, DURACION_GALERIA} from './mente/GaleriaPiezas';
 import {Minuto01HD, DURACION_MINUTO01HD} from './mente/v01/Minuto01HD';
 import {HojaLogos, LaminaLogo} from './mente/marca/Logos';
-import {AvatarLuna, LaminaLuna} from './mente/marca/LogoLuna';
+import {AvatarLuna, BannerLuna, DURACION_LOGO_ENTRADA, LaminaLuna, LogoEntrada, PantallaLogo} from './mente/marca/LogoLuna';
 import {Minuto01, DURACION_MINUTO01} from './mente/v01/Minuto01';
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      <Still id="MenteBannerLuna" component={BannerLuna} width={2560} height={1440} defaultProps={{guias: false}} />
+      <Still id="MentePantallaLogo" component={PantallaLogo} width={1920} height={1080} />
+      <Composition id="MenteLogoEntrada" component={LogoEntrada} durationInFrames={DURACION_LOGO_ENTRADA} fps={30} width={1920} height={1080} defaultProps={{dur: DURACION_LOGO_ENTRADA}} />
       <Still id="MenteAvatarLuna" component={AvatarLuna} width={800} height={800} />
       <Still id="MenteLaminaLuna" component={LaminaLuna} width={2400} height={1350} />
       <Still id="MenteHojaLogos" component={HojaLogos} width={1920} height={1080} />

@@ -16,7 +16,7 @@ for lid, texto in lineas:
     dur = a['dur'] if fish else a['character_end_times_seconds'][-1]
     tramo = lid.split('_')[0]
     if tramo_prev is not None:
-        t += (2.2 if tramo_prev == 'gancho' else HUECO_CAP) if tramo != tramo_prev else HUECO  # tras el gancho: cola del título (0,8 s) + logo del canal
+        t += (2.8 if tramo_prev == 'gancho' else HUECO_CAP) if tramo != tramo_prev else HUECO  # tras el gancho: cola del título (0,4 s) + entrada del logo (2,4 s)
     palabras, actual, ini, fin = (a['palabras'] if fish else []), '', None, 0
     for ch, s, e in ([] if fish else zip(a['characters'], a['character_start_times_seconds'], a['character_end_times_seconds'])):
         if ch.isspace():

@@ -1,18 +1,29 @@
 import React from 'react';
-import {AbsoluteFill, Img, staticFile} from 'remotion';
-import {C, MONO, SANS, SERIF, semilla} from '../estilo';
+import {AbsoluteFill, Img, staticFile, useCurrentFrame} from 'remotion';
+import {C, MONO, SANS, SERIF, rango, semilla, suave} from '../estilo';
+import {Escribe, Teclea} from '../piezas/TextoAnimado';
 
 // Logo del canal: QUIET CORTEX.
 // Símbolo: una Luna real (foto de la NASA, dominio público) en cuarto creciente, con terminador suave,
 // luz cenicienta en la parte oscura y una sola estrella dorada: la mente en la sombra.
 
-const LUNA = 'mente/marca/luna_nasa.jpg';
+const LUNA = 'mente/marca/luna_nasa.png'; // fondo transparente (recortada de la foto de la NASA)
 
 /** La luna creciente fotográfica. `s` = diámetro en px. */
-export const LunaReal: React.FC<{s: number; estrella?: boolean; halo?: boolean}> = ({s, estrella = true, halo = true}) => (
+/** `revela` (0–1) anima la fase: 0 = luna en sombra total, 1 = cuarto creciente final. `brilloEstrella` 0–1. */
+export const LunaReal: React.FC<{s: number; estrella?: boolean; halo?: boolean; revela?: number; brilloEstrella?: number}> = ({
+  s,
+  estrella = true,
+  halo = true,
+  revela = 1,
+  brilloEstrella = 1,
+}) => {
+  const t = 45 + (1 - revela) * 62; // borde del terminador
+  const mascara = `radial-gradient(circle at 70% 33%, transparent 0%, transparent ${t}%, rgba(0,0,0,0.55) ${t + 5.5}%, #000 ${t + 12}%)`;
+  return (
   <div style={{position: 'relative', width: s, height: s}}>
     {/* halo de luz alrededor de la parte iluminada */}
-    {halo && (
+    {halo && revela > 0 && (
       <div
         style={{
           position: 'absolute',
@@ -20,11 +31,12 @@ export const LunaReal: React.FC<{s: number; estrella?: boolean; halo?: boolean}>
           borderRadius: '50%',
           background: `radial-gradient(circle at 34% 60%, rgba(225, 228, 240, 0.16) 0%, rgba(225, 228, 240, 0.05) 38%, transparent 62%)`,
           filter: `blur(${s * 0.04}px)`,
+          opacity: revela,
         }}
       />
     )}
     {/* luz cenicienta: la parte oscura apenas se intuye */}
-    <Img src={staticFile(LUNA)} style={{position: 'absolute', inset: 0, width: s, height: s, mixBlendMode: 'screen', opacity: 0.05, filter: 'grayscale(1) brightness(0.9)'}} />
+    <Img src={staticFile(LUNA)} style={{position: 'absolute', inset: 0, width: s, height: s, opacity: 0.05 * revela, filter: 'grayscale(1) brightness(0.9)'}} />
     {/* parte iluminada: la sombra de la fase es una máscara con terminador suave */}
     <Img
       src={staticFile(LUNA)}
@@ -33,15 +45,19 @@ export const LunaReal: React.FC<{s: number; estrella?: boolean; halo?: boolean}>
         inset: 0,
         width: s,
         height: s,
-        mixBlendMode: 'screen',
         filter: 'grayscale(0.5) sepia(0.12) contrast(1.15) brightness(1.06)',
-        WebkitMaskImage: 'radial-gradient(circle at 70% 33%, transparent 0%, transparent 45%, rgba(0,0,0,0.55) 50.5%, #000 57%)',
-        maskImage: 'radial-gradient(circle at 70% 33%, transparent 0%, transparent 45%, rgba(0,0,0,0.55) 50.5%, #000 57%)',
+        WebkitMaskImage: mascara,
+        maskImage: mascara,
       }}
     />
-    {estrella && <Estrella x={s * 0.73} y={s * 0.36} s={s * 0.2} />}
+    {estrella && brilloEstrella > 0 && (
+      <div style={{opacity: brilloEstrella}}>
+        <Estrella x={s * 0.73} y={s * 0.36} s={s * 0.2 * (0.6 + 0.4 * brilloEstrella)} />
+      </div>
+    )}
   </div>
-);
+  );
+};
 
 /** Estrella dorada con destellos de difracción (cuatro puntas finas). */
 export const Estrella: React.FC<{x: number; y: number; s: number}> = ({x, y, s}) => (
@@ -121,5 +137,81 @@ export const LaminaLuna: React.FC = () => (
       ))}
     </div>
     <div style={{position: 'absolute', left: 70, bottom: 66, fontFamily: MONO, fontSize: 20, letterSpacing: 6, color: C.gris}}>Moon image: NASA / GSFC (public domain)</div>
+  </AbsoluteFill>
+);
+
+// ---------------------------------------------------------------------------
+// Entrada del logo en los vídeos (1920×1080): la luna sale de la sombra, la estrella destella,
+// el nombre se escribe y el lema se teclea. Solo tres elementos: luna, nombre y lema.
+export const LogoEntrada: React.FC<{dur: number}> = ({dur}) => {
+  const f = useCurrentFrame();
+  const entrada = rango(f, 0, 8);
+  const salida = 1 - rango(f, dur - 10, dur);
+  const revela = rango(f, 3, 34, 0, 1, suave);
+  const est = rango(f, 24, 32) * (1 + 0.6 * (1 - rango(f, 32, 46)));
+  const lema = rango(f, 30, 44);
+  return (
+    <AbsoluteFill style={{opacity: entrada * salida}}>
+      <Cielo w={1920} h={1080} n={260} />
+      <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', flexDirection: 'column', transform: `scale(${1 + 0.035 * rango(f, 0, dur, 0, 1, (x) => x)})`}}>
+        <LunaReal s={400} revela={revela} brilloEstrella={Math.min(1.6, est)} />
+        <div style={{fontFamily: SERIF, fontWeight: 500, fontSize: 112, letterSpacing: 24, marginRight: -24, color: C.luz, lineHeight: 1, marginTop: 70}}>
+          <Escribe texto="QUIET CORTEX" desde={14} ritmo={7} />
+        </div>
+        <div style={{display: 'flex', alignItems: 'center', gap: 18, marginTop: 26, opacity: lema}}>
+          <div style={{width: 56 * lema, height: 1.5, background: C.oro, opacity: 0.8}} />
+          <div style={{fontFamily: SANS, fontWeight: 400, fontSize: 20, letterSpacing: 8, color: C.oro}}>
+            <Teclea texto="THE UNSETTLING SCIENCE OF YOUR MIND" desde={30} cps={80} cursor="transparent" />
+          </div>
+          <div style={{width: 56 * lema, height: 1.5, background: C.oro, opacity: 0.8}} />
+        </div>
+      </AbsoluteFill>
+    </AbsoluteFill>
+  );
+};
+export const DURACION_LOGO_ENTRADA = 75;
+
+/** Fotograma final de la entrada (para exportarlo como imagen en 4K). */
+export const PantallaLogo: React.FC = () => (
+  <AbsoluteFill>
+    <Cielo w={1920} h={1080} n={260} />
+    <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}}>
+      <LunaReal s={400} />
+      <div style={{fontFamily: SERIF, fontWeight: 500, fontSize: 112, letterSpacing: 24, marginRight: -24, color: C.luz, lineHeight: 1, marginTop: 70}}>QUIET CORTEX</div>
+      <div style={{display: 'flex', alignItems: 'center', gap: 18, marginTop: 26}}>
+        <div style={{width: 56, height: 1.5, background: C.oro, opacity: 0.8}} />
+        <div style={{fontFamily: SANS, fontWeight: 400, fontSize: 20, letterSpacing: 8, color: C.oro}}>THE UNSETTLING SCIENCE OF YOUR MIND</div>
+        <div style={{width: 56, height: 1.5, background: C.oro, opacity: 0.8}} />
+      </div>
+    </AbsoluteFill>
+  </AbsoluteFill>
+);
+
+// ---------------------------------------------------------------------------
+// Banner de YouTube (2560×1440). Zona segura en todos los dispositivos: 1546×423 en el centro.
+export const BannerLuna: React.FC<{guias?: boolean}> = ({guias}) => (
+  <AbsoluteFill>
+    <Cielo w={2560} h={1440} n={520} />
+    {/* bruma de luz lunar muy suave que cruza el banner */}
+    <AbsoluteFill style={{background: 'radial-gradient(ellipse 60% 22% at 50% 50%, rgba(150,170,230,0.10) 0%, transparent 70%)'}} />
+    <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center'}}>
+      <div style={{display: 'flex', alignItems: 'center', gap: 56}}>
+        <LunaReal s={290} />
+        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start'}}>
+          <div style={{fontFamily: SERIF, fontWeight: 500, fontSize: 110, letterSpacing: 18, color: C.luz, lineHeight: 1}}>QUIET CORTEX</div>
+          <div style={{display: 'flex', alignItems: 'center', gap: 18, marginTop: 28}}>
+            <div style={{width: 60, height: 1.5, background: C.oro, opacity: 0.8}} />
+            <div style={{fontFamily: SANS, fontWeight: 400, fontSize: 21, letterSpacing: 7.4, color: C.oro}}>THE UNSETTLING SCIENCE OF YOUR MIND</div>
+          </div>
+          <div style={{fontFamily: SANS, fontWeight: 400, fontSize: 19, letterSpacing: 5, color: C.niebla, marginTop: 18}}>NEW VIDEOS EVERY WEEK</div>
+        </div>
+      </div>
+    </AbsoluteFill>
+    {guias && (
+      <>
+        <div style={{position: 'absolute', left: (2560 - 1546) / 2, top: (1440 - 423) / 2, width: 1546, height: 423, border: '2px dashed rgba(255,80,80,0.8)'}} />
+        <div style={{position: 'absolute', left: 0, top: (1440 - 423) / 2, width: 2560, height: 423, border: '2px dashed rgba(80,200,255,0.6)'}} />
+      </>
+    )}
   </AbsoluteFill>
 );

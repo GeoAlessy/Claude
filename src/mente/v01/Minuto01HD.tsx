@@ -8,7 +8,7 @@ import {Titulo} from '../piezas/Titulo';
 import {RotuloCapituloCine, golpeRotulo} from '../piezas/RotuloCapituloCine';
 import {CerebroGalaxia} from '../piezas/CerebroGalaxia';
 import {PruebaContar} from '../piezas/PruebaContar';
-import {LogoCanal} from '../piezas/LogoCanal';
+import {LogoEntrada} from '../marca/LogoLuna';
 import {NARRACION} from './narracion';
 
 // Vídeo 01 · primer minuto (gancho + inicio del cap. 1) en HD, con voz (Fish Audio "Psychological"), música y efectos.
@@ -40,7 +40,7 @@ const graf = (n: React.ReactNode) => (
 );
 
 const T_TITULO = A(P('gancho_05', 'scientists'));
-const T_LOGO = fin('gancho_05') + 24; // el título se queda solo 0,8 s tras la voz
+const T_LOGO = fin('gancho_05') + 12; // el título se queda solo 0,4 s tras la voz
 const T_ROTULO = inicio('cap01_01');
 const T_PRUEBA = A(P('cap01_01', 'pause'));
 export const DURACION_MINUTO01HD = fin('cap01_02') + 45;
@@ -66,7 +66,7 @@ const PLANOS: Plano[] = [
   {desde: A(P('gancho_04', 'and', 1)), hasta: A(P('gancho_05', 'and')), nodo: arch('c08_colgado', undefined, 0.35)},
   {desde: A(P('gancho_05', 'and')), hasta: T_TITULO, nodo: arch('h03_tarta_cumple', 'HOME MOVIE · 1950s')},
   {desde: T_TITULO, hasta: T_LOGO, nodo: graf(<Titulo lineas={['YOUR BRAIN IS LYING', 'TO YOU ABOUT TIME']} acento="TIME" />)},
-  {desde: T_LOGO, hasta: T_ROTULO, nodo: graf(<LogoCanal dur={T_ROTULO - T_LOGO} />)},
+  {desde: T_LOGO, hasta: T_ROTULO, nodo: <LogoEntrada dur={T_ROTULO - T_LOGO} />},
   {desde: T_ROTULO, hasta: T_PRUEBA, nodo: <RotuloCapituloCine {...ROTULO_01} dur={T_PRUEBA - T_ROTULO} />},
   {
     desde: T_PRUEBA,
