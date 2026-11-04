@@ -19,6 +19,7 @@ ap = argparse.ArgumentParser()
 ap.add_argument('carpeta')
 ap.add_argument('--deja', type=float, default=0.14)
 ap.add_argument('--umbral', type=float, default=0.22)
+ap.add_argument('--tempo', type=float, default=1.0, help='acelera sin cambiar el tono (atempo)')
 args = ap.parse_args()
 
 
@@ -56,6 +57,8 @@ for f in sorted(os.listdir(args.carpeta)):
     tramos.append((t, None))
     partes = ''.join(f"[0:a]atrim=start={a}{'' if b is None else f':end={b}'},asetpts=PTS-STARTPTS[p{i}];" for i, (a, b) in enumerate(tramos))
     filtro = partes + ''.join(f'[p{i}]' for i in range(len(tramos))) + f'concat=n={len(tramos)}:v=0:a=1[o]'
+    if args.tempo != 1.0:
+        filtro = filtro.replace('[o]', '[c]') + f';[c]atempo={args.tempo}[o]'
     subprocess.run(['ffmpeg', '-loglevel', 'error', '-y', '-i', orig, '-filter_complex', filtro, '-map', '[o]',
                     '-c:a', 'libmp3lame', '-b:a', '192k', mp3], check=True)
 
@@ -66,7 +69,7 @@ for f in sorted(os.listdir(args.carpeta)):
                 quitado += b - a
             elif x > a:
                 quitado += x - a
-        return x - quitado
+        return (x - quitado) / args.tempo
 
     jr = os.path.join(args.carpeta, nombre + '.json')
     jo = os.path.join(dir_orig, nombre + '.json')
