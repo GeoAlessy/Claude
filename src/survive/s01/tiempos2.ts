@@ -96,6 +96,7 @@ export type Plano = {
   cy?: number;
   zoom: [number, number];
   pan?: [number, number]; // desplazamiento horizontal (px) de inicio a fin
+  fy?: number; // foco vertical: punto del cuadro (0 arriba, 1 abajo) que queda en el centro de la pantalla
   congela?: number; // fotograma (relativo) desde el que se queda quieto
   golpe?: 'rojo' | 'replay';
   archivo?: string;
@@ -119,11 +120,19 @@ plano({desde: M.SO - 1, src: 1227.3, vel: 1.15, cx: 0.5, zoom: [1.0, 1.2]});
 // 03 · los niños se asoman al borde
 plano({desde: INICIO['03_clean'] - 2, src: 1230.0, vel: 1.15, cx: 0.5, zoom: [1.0, 1.15], pan: [30, -30]});
 // 04 · los cuatro golpes: entra 6 fotogramas antes de "Hit", golpea en la palabra
+// El cuadro congelado es el del contacto; el centro de la pantalla cae en la parte golpeada (medido cuadro a cuadro).
+const FOCO_GOLPE: {ajuste: number; x: number; y: number; zoom: number}[] = [
+  {ajuste: 0, x: 0.45, y: 0.58, zoom: 1.12}, // costillas: el torso entra en el arbusto
+  {ajuste: 0.1, x: 0.45, y: 0.45, zoom: 1.12}, // bazo: la cadera choca contra la roca
+  {ajuste: 0.1, x: 0.2, y: 0.75, zoom: 1.25}, // pulmones: el pecho contra la cornisa
+  {ajuste: 0.1, x: 0.27, y: 0.76, zoom: 1.25}, // cráneo: la cabeza contra las piedras
+];
 IMPACTO.forEach((imp, i) => {
-  plano({desde: M.HIT[i] - 6, src: imp - 6 / FPS, vel: 1.0, cx: [0.4, 0.42, 0.36, 0.38][i], zoom: [1.05, 1.22], congela: 7, golpe: 'rojo'});
+  const g = FOCO_GOLPE[i];
+  plano({desde: M.HIT[i] - 6, src: imp + g.ajuste - 6 / FPS, vel: 1.0, cx: g.x, fy: g.y, zoom: [g.zoom, g.zoom * 1.1], congela: 7, golpe: 'rojo'});
 });
 // 04 · repetición del golpe 4 en cámara lenta
-plano({desde: REPLAY.desde, src: IMPACTO[3] - 0.25, vel: 0.3, cx: 0.38, zoom: [1.3, 1.5], golpe: 'replay'});
+plano({desde: REPLAY.desde, src: IMPACTO[3] - 0.15, vel: 0.3, cx: 0.27, fy: 0.76, zoom: [1.35, 1.55], golpe: 'replay'});
 // 05 · el giro
 plano({desde: INICIO['05_twist'] - 2, src: 1235.4, vel: 1.4, cx: 0.5, zoom: [1.0, 1.12], pan: [-30, 30]});
 plano({desde: M.EVERY - 2, src: 1237.15, vel: 0.8, cx: 0.4, zoom: [1.1, 1.3]});

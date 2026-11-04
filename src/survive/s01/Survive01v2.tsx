@@ -68,8 +68,17 @@ const Plano: React.FC<{p: (typeof PLANOS)[number]}> = ({p}) => {
     const H = 1920 * zoom;
     const W = H * RATIO;
     const left = Math.min(0, Math.max(1080 - W, 540 - p.cx * W + pan)) + dx;
-    const top = (1920 - H) * (p.cy ?? 0.5) + dy;
-    caja = {position: 'absolute', left, top, width: W, height: H};
+    if (p.fy !== undefined) {
+      // foco: la parte golpeada queda en el centro; si el cuadro no alcanza, el borde se funde con un fondo desenfocado
+      const top = 960 - p.fy * H + dy;
+      const borde = 'linear-gradient(to bottom, transparent 0, #000 90px, #000 calc(100% - 90px), transparent 100%)';
+      caja = {position: 'absolute', left, top, width: W, height: H, WebkitMaskImage: borde, maskImage: borde};
+      const Hf = 1920 * 1.15;
+      fondo = <OffthreadVideo src={fuente} muted trimBefore={trim} playbackRate={p.vel} style={{position: 'absolute', height: Hf, width: Hf * RATIO, left: 540 - p.cx * Hf * RATIO, top: -144, filter: 'blur(30px) brightness(0.6)'}} />;
+    } else {
+      const top = (1920 - H) * (p.cy ?? 0.5) + dy;
+      caja = {position: 'absolute', left, top, width: W, height: H};
+    }
   }
   const video = (
     <>
@@ -365,6 +374,37 @@ const Subtitulos: React.FC = () => {
   return null;
 };
 
+// ---------- Nombre del capítulo arriba (hasta que entran las rosquillas) ----------
+// Letras amarillas con contorno grueso y sombra dura, cada una a su altura y con su giro, como el logo de la serie.
+const EPISODIO = 'BART THE DAREDEVIL';
+const TituloEpisodio: React.FC = () => {
+  const f = useCurrentFrame();
+  const fin = MEDIDOR_DESDE;
+  if (f > fin) return null;
+  const sale = interpolate(f, [fin - 6, fin], [1, 0], clamp);
+  const giros = [-6, 4, -3, 7, -5, 3, -7, 5, -2, 6, -4, 3, -6, 4, -3, 5, -5, 2];
+  const alturas = [0, -6, 4, -3, 6, -5, 2, -7, 5, -2, 4, -6, 3, -4, 6, -3, 5, -5];
+  return (
+    <div style={{position: 'absolute', top: 92, width: '100%', textAlign: 'center', opacity: sale}}>
+      <div style={{display: 'inline-block', fontFamily: 'LuckiestGuy', fontSize: 30, color: '#fff', background: '#D6312B', border: `5px solid ${NEG}`, borderRadius: 14, padding: '6px 18px 0', transform: 'rotate(-2deg)', boxShadow: `0 6px 0 ${NEG}`}}>
+        SEASON 2 · EPISODE 8
+      </div>
+      <div style={{marginTop: 10, display: 'flex', justifyContent: 'center', alignItems: 'center', filter: `drop-shadow(0 7px 0 ${NEG})`}}>
+        {EPISODIO.split('').map((c, i) => {
+          if (c === ' ') return <span key={i} style={{display: 'inline-block', width: 26}} />;
+          const k = f - i * 1.1;
+          const pop = interpolate(k, [0, 3, 6], [0, 1.2, 1], clamp);
+          return (
+            <span key={i} style={{display: 'inline-block', fontFamily: 'LuckiestGuy', fontSize: c === ' ' ? 40 : 86, color: AM, transform: `translateY(${alturas[i % alturas.length]}px) rotate(${giros[i % giros.length]}deg) scale(${pop})`, ...trazo(16), margin: '0 -1px'}}>
+              {c === ' ' ? '\u00A0' : c}
+            </span>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
 // ---------- Gancho del cuadro 0 (2 s): letrero de alarma "W8 4 IT" que se prende y se apaga ----------
 // W8 4 IT = "wait for it" (jerga de internet en EE. UU.): avisa que el final vale la pena.
 const ALARMA_CICLO = 14; // fotogramas por destello
@@ -485,6 +525,7 @@ export const Survive01v2: React.FC = () => {
       <PanelDano />
       {visibleMedidor > 0 && <VidasEventos eventos={EVENTOS} visible={visibleMedidor} left={40} top={100} escala={0.6} />}
       <Titulo />
+      <TituloEpisodio />
       <Subtitulos />
 
       {/* audio */}
