@@ -163,3 +163,13 @@ guardar('mordisco.wav', mordisco(3), 0.9)
 t = t_(0.18)
 glup = np.sin(2 * np.pi * (180 + 500 * (t / 0.18) ** 2) * t) * np.sin(np.pi * t / 0.18) ** 2
 guardar('glup.wav', glup, 0.6)
+
+# Bip de monitor cardíaco
+t = t_(0.12)
+guardar('bip.wav', np.sin(2 * np.pi * 1046.5 * t) * np.minimum(1, (0.12 - t) * 40) * np.minimum(1, t * 400), 0.5)
+
+# "Pop" brillante (aparece el delineado / vuelve una rosquilla)
+t = t_(0.3)
+x = np.sin(2 * np.pi * (700 + 900 * np.minimum(1, t / 0.06)) * t) * np.exp(-t * 14)
+x += 0.4 * np.sin(2 * np.pi * 2093 * t) * np.exp(-t * 10)
+guardar('brillo.wav', x, 0.55)

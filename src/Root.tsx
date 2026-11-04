@@ -26,6 +26,7 @@ import {MiniA, MiniB, MiniC, MiniH} from './porquepaso/canal/Miniaturas02';
 import * as M01 from './porquepaso/canal/Miniaturas01';
 import * as M34 from './porquepaso/canal/Miniaturas34';
 import {Survive01, DURACION_S01} from './survive/s01/Survive01';
+import {Survive01v2, DURACION_S01V2} from './survive/s01/Survive01v2';
 import * as OP from './survive/opciones';
 import {DemoGolpes, DUR_DEMO} from './survive/demoGolpes';
 import {DemoMedidores, DUR_MEDIDORES, DemoDano, DUR_DANO} from './survive/opciones2';
@@ -52,6 +53,7 @@ export const RemotionRoot: React.FC = () => {
       <Composition id="DemoMedidores" component={DemoMedidores} durationInFrames={DUR_MEDIDORES} fps={30} width={1080} height={1920} />
       <Composition id="DemoDano" component={DemoDano} durationInFrames={DUR_DANO} fps={30} width={1080} height={1920} />
       <Composition id="DemoGolpes" component={DemoGolpes} durationInFrames={DUR_DEMO} fps={30} width={1080} height={1920} />
+      <Composition id="S01v2" component={Survive01v2} durationInFrames={DURACION_S01V2} fps={30} width={1080} height={1920} />
       <Composition id="S01" component={Survive01} durationInFrames={DURACION_S01} fps={30} width={1080} height={1920} />
       <Composition id="Ep01" component={Ep01} durationInFrames={DURACION} fps={FPS} width={1080} height={1920} defaultProps={{conAudio: true}} />
       <Still id="HojaPersonajes" component={HojaPersonajes} width={3000} height={2000} />

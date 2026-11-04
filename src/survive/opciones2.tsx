@@ -335,7 +335,7 @@ const CUERPO = {
   PIERNAS: 'M62,246 h32 v88 h-32Z M106,246 h32 v88 h-32Z',
 };
 
-type Estado = {i: number; k: number};
+export type Estado = {i: number; k: number};
 const Cuerpo: React.FC<{e: Estado; base: string; borde: string; estilo?: 'solido' | 'alambre'}> = ({e, base, borde, estilo = 'solido'}) => (
   <g strokeLinejoin="round" strokeDasharray={estilo === 'alambre' ? '7 5' : undefined}>
     <path d={CUERPO.BRAZOS} fill={base} stroke={borde} strokeWidth={5} />
@@ -347,7 +347,7 @@ const Cuerpo: React.FC<{e: Estado; base: string; borde: string; estilo?: 'solido
 );
 
 // 1 · Medabot: panel oscuro con barras de vida por pieza
-const DMedabot: React.FC<{e: Estado}> = ({e}) => {
+export const DMedabot: React.FC<{e: Estado}> = ({e}) => {
   const hp = PARTES.map((_, j) => (j < e.i ? 18 : j === e.i ? interpolate(e.k, [0, 8], [100, 18], clamp) : 100));
   const alerta = e.i >= 0 && Math.floor(e.k / 5) % 2 === 0;
   return (
