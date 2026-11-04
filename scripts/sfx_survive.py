@@ -135,3 +135,31 @@ for c in range(compases):
             if m:
                 poner(marimba(m), base + k * beat / 2, 0.18)
 guardar('musica.wav', mix, 0.8)
+
+
+# ---------- Mordisco a una rosquilla: crujido + "ñam" grave + migas ----------
+def mordisco(semilla):
+    r = np.random.default_rng(semilla)
+    t = t_(0.22)
+    crujido = banda(r.standard_normal(len(t)), 1500, 9000) * np.exp(-t * 38)
+    # pequeños chasquidos dentro del crujido (migas que se quiebran)
+    for _ in range(7):
+        i = int(r.uniform(0, 0.09) * SR)
+        crujido[i:i + 120] += r.standard_normal(min(120, len(t) - i)) * 1.8
+    golpe = np.sin(2 * np.pi * (140 - 60 * t) * t) * np.exp(-t * 30)  # mandíbula que se cierra
+    return crujido * 0.9 + golpe * 0.7
+
+
+t = t_(0.45)
+partes = np.zeros(int(0.75 * SR))
+for k, ini in enumerate([0.0, 0.16, 0.32]):  # tres mordiscos rápidos
+    m = mordisco(10 + k)
+    i = int(ini * SR)
+    partes[i:i + len(m)] += m * (1 - 0.12 * k)
+guardar('mordiscos.wav', partes, 0.9)
+guardar('mordisco.wav', mordisco(3), 0.9)
+
+# Tragar: "glup" corto
+t = t_(0.18)
+glup = np.sin(2 * np.pi * (180 + 500 * (t / 0.18) ** 2) * t) * np.sin(np.pi * t / 0.18) ** 2
+guardar('glup.wav', glup, 0.6)
