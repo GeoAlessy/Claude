@@ -14,7 +14,7 @@ export const ORIG_B = {archivo: 'orig_B_bart.wav', dur: 64, src: 1187.45}; // Ba
 
 // [id, pausa antes]: la pausa tras los golpes deja ver la repetición en cámara lenta
 const ORDEN: [string, number][] = [
-  ['01_spoiler', ORIG_H.dur + 1],
+  ['01_hook', ORIG_H.dur + 1],
   ['02_deep', 2],
   ['03_clean', 2],
   ['04_hits', 2],
@@ -55,8 +55,9 @@ export const INI_B = FIN['08_verdict'] + 6;
 export const DURACION_S01V2 = INI_B + ORIG_B.dur + 2;
 
 export const M = {
-  DIDNT: marca('01_spoiler', 'didn'),
-  BUT: marca('01_spoiler', 'but'),
+  KILL: marca('01_hook', 'kill'),
+  AMB: marca('01_hook', 'ambulance'),
+  BUT: marca('01_hook', 'but'),
   THIRTY: marca('02_deep', 'thirty'),
   SO: marca('02_deep', 'so'),
   HUNDRED: marca('02_deep', 'hundred'),
@@ -104,10 +105,12 @@ const P: Plano[] = [];
 const plano = (p: Plano) => P.push(p);
 
 // H · Homero responde a Bart (cierra el bucle): "Don't you think I know that?"
-plano({desde: 0, src: ORIG_H.src, vel: 1.0, cx: 0.5, zoom: [1.05, 1.2], archivo: 'dialogo'});
-// 01 · "Spoiler: he didn't." Homero en el aire, se congela con brillo en "didn't"
-plano({desde: INICIO['01_spoiler'] - 1, src: 1224.6, vel: 1.0, cx: 0.5, zoom: [1.55, 1.75], congela: 12, encaja: true}); // cuadro 12 = segundo 1225,0 (el del recorte)
-// 01 · "But could a real human survive this fall?" cae
+plano({desde: 0, src: 1189.72, vel: 1.0, cx: 0.5, zoom: [1.25, 1.4], archivo: 'dialogo', encaja: true}); // la cámara se mueve con ellos: cuadro completo
+// 01 · "This fall probably won't kill you." Homero en el aire, se congela con brillo
+plano({desde: INICIO['01_hook'] - 1, src: 1224.6, vel: 1.0, cx: 0.5, zoom: [1.55, 1.75], congela: 12, encaja: true}); // cuadro 12 = segundo 1225,0 (el del recorte)
+// 01 · "The ambulance will." adelanto: la ambulancia que lo hace caer otra vez (se paga al final)
+plano({desde: M.AMB - 2, src: 1255.3, vel: 1.0, cx: 0.45, zoom: [1.0, 1.12], archivo: 'segunda'}); // la ambulancia contra el árbol
+// 01 · "But could a real human survive this?" cae
 plano({desde: M.BUT - 1, src: 1226.5, vel: 1.05, cx: 0.5, zoom: [1.05, 1.3], pan: [0, -30]});
 // 02 · el acantilado con la cinta métrica 3D
 plano({desde: INICIO['02_deep'] - 2, src: 1218.0, vel: 0.9, cx: 0.52, zoom: [1.0, 1.04]}); // casi quieto: la cinta va pegada al sendero
@@ -144,7 +147,7 @@ export const PLANOS = P.map((p, i) => ({...p, hasta: P[i + 1]?.desde ?? DURACION
 
 // Momentos de brillo (Homero recortado encima del cuadro congelado)
 export const BRILLOS = [
-  {recorte: 'recorte_vuelo.png', desde: INICIO['01_spoiler'] - 1 + 12, hasta: M.BUT - 1},
+  {recorte: 'recorte_vuelo.png', desde: INICIO['01_hook'] - 1 + 12, hasta: M.AMB - 2},
   {recorte: 'recorte_fondo.png', desde: INICIO['06a_alive'] - 2 + 10, hasta: INI_C - 1},
 ];
 

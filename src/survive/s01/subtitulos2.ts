@@ -1,61 +1,86 @@
 // Generado por scripts/subtitulos_voz.py — no editar a mano.
 // [palabra, inicio_s, fin_s] relativo al inicio de cada archivo de voz.
 export const PALABRAS: Record<string, [string, number, number][]> = {
- "01_spoiler": [
+ "01_hook": [
   [
-   "Spoiler:",
+   "This",
    0.0,
-   0.421
+   0.12
   ],
   [
-   "he",
-   0.492,
-   0.561
+   "fall",
+   0.168,
+   0.361
   ],
   [
-   "didn't.",
-   0.598,
-   0.922
+   "probably",
+   0.414,
+   0.842
+  ],
+  [
+   "won't",
+   0.872,
+   1.023
+  ],
+  [
+   "kill",
+   1.059,
+   1.203
+  ],
+  [
+   "you.",
+   1.248,
+   1.444
+  ],
+  [
+   "The",
+   1.519,
+   1.634
+  ],
+  [
+   "ambulance",
+   1.682,
+   2.115
+  ],
+  [
+   "will.",
+   2.164,
+   2.416
   ],
   [
    "But",
-   0.988,
-   0.991
+   2.495,
+   2.558
   ],
   [
    "could",
-   1.021,
-   1.172
+   2.579,
+   2.679
   ],
   [
    "a",
-   1.202,
-   1.232
+   2.739,
+   2.799
   ],
   [
    "real",
-   1.304,
-   1.593
+   2.835,
+   2.979
   ],
   [
    "human",
-   1.663,
-   2.014
+   3.03,
+   3.28
   ],
   [
    "survive",
-   2.089,
-   2.615
+   3.325,
+   3.641
   ],
   [
-   "this",
-   2.687,
-   2.976
-  ],
-  [
-   "fall?",
-   3.048,
-   3.457
+   "this?",
+   3.689,
+   4.122
   ]
  ],
  "02_deep": [

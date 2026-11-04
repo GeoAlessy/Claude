@@ -173,3 +173,10 @@ t = t_(0.3)
 x = np.sin(2 * np.pi * (700 + 900 * np.minimum(1, t / 0.06)) * t) * np.exp(-t * 14)
 x += 0.4 * np.sin(2 * np.pi * 2093 * t) * np.exp(-t * 10)
 guardar('brillo.wav', x, 0.55)
+
+# Alarma de caricatura: "wii-u" de dos tonos, corto (un destello del letrero)
+t = t_(0.3)
+f = np.where(t < 0.15, 988, 740)
+x = np.sign(np.sin(2 * np.pi * f * t)) * 0.35 + np.sin(2 * np.pi * f * t) * 0.65
+x *= np.minimum(1, t * 300) * np.minimum(1, (0.3 - t) * 60)
+guardar('alarma.wav', x, 0.5)

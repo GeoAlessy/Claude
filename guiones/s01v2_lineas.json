@@ -1,10 +1,34 @@
 [
- ["01_spoiler", "Spoiler: he didn't. But could a real human survive this fall?"],
- ["02_deep", "This gorge is about thirty stories deep, so you'd hit the bottom at a hundred miles an hour."],
- ["03_clean", "But Homer doesn't fall clean."],
- ["04_hits", "Hit one: ribs. Hit two: spleen. Hit three: lungs. Hit four: skull."],
- ["05_twist", "And here's the twist: every hit steals speed. The rocks are basically brakes."],
- ["06_alive", "So he lands broken, but alive. And that's real: a flight attendant once survived a six-mile fall."],
- ["07_again", "But then the ambulance crashes, and he falls again. Same rocks."],
- ["08_verdict", "The first fall? Maybe. The second one? That kills you."]
+ [
+  "01_hook",
+  "This fall probably won't kill you. The ambulance will. But could a real human survive this?"
+ ],
+ [
+  "02_deep",
+  "This gorge is about thirty stories deep, so you'd hit the bottom at a hundred miles an hour."
+ ],
+ [
+  "03_clean",
+  "But Homer doesn't fall clean."
+ ],
+ [
+  "04_hits",
+  "Hit one: ribs. Hit two: spleen. Hit three: lungs. Hit four: skull."
+ ],
+ [
+  "05_twist",
+  "And here's the twist: every hit steals speed. The rocks are basically brakes."
+ ],
+ [
+  "06_alive",
+  "So he lands broken, but alive. And that's real: a flight attendant once survived a six-mile fall."
+ ],
+ [
+  "07_again",
+  "But then the ambulance crashes, and he falls again. Same rocks."
+ ],
+ [
+  "08_verdict",
+  "The first fall? Maybe. The second one? That kills you."
+ ]
 ]

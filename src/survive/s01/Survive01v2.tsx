@@ -310,7 +310,7 @@ const Titulo: React.FC = () => {
   const f = useCurrentFrame();
   const {fps} = useVideoConfig();
   const ini = M.BUT;
-  const fin = FIN['01_spoiler'] + 4;
+  const fin = FIN['01_hook'] + 4;
   if (f < ini || f > fin) return null;
   const s = spring({frame: f - ini, fps, config: {damping: 11, stiffness: 220}});
   const o = interpolate(fin - f, [0, 4], [0, 1], clamp);
@@ -323,8 +323,8 @@ const Titulo: React.FC = () => {
 };
 
 // ---------- Subtítulos: una palabra a la vez (como el video de referencia) ----------
-const CLAVE = new Set(['spoiler', 'didnt', 'thirty', 'hundred', 'clean', 'ribs', 'spleen', 'lungs', 'skull', 'twist', 'brakes', 'alive', 'real', 'sixmile', 'again', 'same', 'maybe', 'kills', 'you']);
-const SIN_SUB_DESDE: Record<string, number> = {'01_spoiler': M.BUT}; // ahí entra el título
+const CLAVE = new Set(['kill', 'ambulance', 'thirty', 'hundred', 'clean', 'ribs', 'spleen', 'lungs', 'skull', 'twist', 'brakes', 'alive', 'real', 'sixmile', 'again', 'same', 'maybe', 'kills', 'you']);
+const SIN_SUB_DESDE: Record<string, number> = {'01_hook': M.BUT}; // ahí entra el título
 // Frases originales: [desde (fotograma), segundo del episodio en que empieza el audio, palabras, color]
 const ORIGINALES: [number, number, [string, number][], string][] = [
   [0, ORIG_H.src, [["DON'T", 1189.65], ['YOU', 1189.85], ['THINK', 1189.95], ['I', 1190.21], ['KNOW', 1190.33], ['THAT?', 1190.57]], AM],
@@ -359,48 +359,55 @@ const Subtitulos: React.FC = () => {
     let w = ps[0];
     for (const p of ps) if (t >= p[1] - 0.02) w = p;
     const limpio = w[0].toLowerCase().replace(/[^a-z0-9]/g, '');
-    const color = CLAVE.has(limpio) ? (['ribs', 'spleen', 'lungs', 'skull', 'kills', 'again', 'same'].indexOf(limpio) >= 0 ? '#FF4D4D' : ROSA) : '#fff';
+    const color = CLAVE.has(limpio) ? (['kill', 'ribs', 'spleen', 'lungs', 'skull', 'kills', 'again', 'same'].indexOf(limpio) >= 0 ? '#FF4D4D' : ROSA) : '#fff';
     return <Palabra w={w[0].toUpperCase()} k={Math.round((t - w[1]) * FPS)} color={color} />;
   }
   return null;
 };
 
-// ---------- Gancho del cuadro 0 (2 s): "HOMER vs. PHYSICS", letras saltonas estilo caricatura ----------
-const LETRAS: [string, string, number][] = [
-  ...('HOMER'.split('').map((c) => [c, AM, 150] as [string, string, number])),
-  [' ', AM, 60],
-  ['V', '#fff', 92],
-  ['S', '#fff', 92],
-  ['.', '#fff', 92],
-  [' ', AM, 60],
-  ...('PHYSICS'.split('').map((c) => [c, MEDIDA, 150] as [string, string, number])),
-];
-const Gancho: React.FC = () => {
-  const f = useCurrentFrame();
-  if (f > 62) return null;
-  const sale = interpolate(f, [54, 62], [1, 0], clamp);
-  const fila1 = LETRAS.slice(0, 9);
-  const fila2 = LETRAS.slice(10);
-  const Fila: React.FC<{ls: [string, string, number][]; base: number}> = ({ls, base}) => (
-    <div style={{display: 'flex', justifyContent: 'center', alignItems: 'flex-end'}}>
-      {ls.map(([c, col, t], i) => {
-        const k = f - (base + i) * 1.2;
-        const y = interpolate(k, [0, 4, 7], [-90, 12, 0], clamp);
-        const o = interpolate(k, [0, 2], [0, 1], clamp);
-        const giro = [-7, 5, -4, 6, -5, 4, -6, 5, -3][(base + i) % 9];
-        const respira = Math.sin((f + i * 4) / 6) * 4;
-        return (
-          <span key={i} style={{display: 'inline-block', fontFamily: 'LuckiestGuy', fontSize: t, color: col, transform: `translateY(${y + respira}px) rotate(${giro}deg)`, opacity: o, margin: '0 1px', ...trazo(t > 100 ? 20 : 15)}}>
-            {c === ' ' ? '\u00A0' : c}
-          </span>
-        );
-      })}
+// ---------- Gancho del cuadro 0 (2 s): letrero de alarma "W8 4 IT" que se prende y se apaga ----------
+// W8 4 IT = "wait for it" (jerga de internet en EE. UU.): avisa que el final vale la pena.
+const ALARMA_CICLO = 14; // fotogramas por destello
+const ALARMA_ON = 9; // fotogramas encendido dentro de cada ciclo
+const ALARMA_FIN = 60;
+export const ALARMA_DESTELLOS = [0, 1, 2, 3].map((i) => i * ALARMA_CICLO);
+const Sirena: React.FC<{on: boolean; lado: 1 | -1; f: number}> = ({on, lado, f}) => {
+  const giro = (f * 24 * lado) % 360;
+  return (
+    <div style={{position: 'relative', width: 78, height: 92}}>
+      {on && (
+        <div style={{position: 'absolute', left: -60, top: -50, width: 198, height: 198, borderRadius: '50%', background: 'radial-gradient(circle, rgba(255,60,40,0.75) 0%, rgba(255,60,40,0.25) 40%, rgba(255,60,40,0) 70%)', transform: `rotate(${giro}deg)`}} />
+      )}
+      {/* cúpula */}
+      <div style={{position: 'absolute', left: 4, top: 0, width: 70, height: 70, borderRadius: '35px 35px 8px 8px', border: `6px solid ${NEG}`,
+        background: on ? 'radial-gradient(circle at 35% 30%, #FFE3DC 0%, #FF4A2E 35%, #C4120B 100%)' : 'radial-gradient(circle at 35% 30%, #A0524A 0%, #6E1A14 45%, #3E0B08 100%)'}} />
+      {/* base */}
+      <div style={{position: 'absolute', left: 0, top: 66, width: 78, height: 22, borderRadius: 6, background: '#5B5F6B', border: `6px solid ${NEG}`}} />
     </div>
   );
+};
+const Gancho: React.FC = () => {
+  const f = useCurrentFrame();
+  const {fps} = useVideoConfig();
+  if (f > ALARMA_FIN + 6) return null;
+  const on = f < ALARMA_FIN && f % ALARMA_CICLO < ALARMA_ON;
+  const entra = spring({frame: f, fps, config: {damping: 10, stiffness: 260}});
+  const sale = interpolate(f, [ALARMA_FIN, ALARMA_FIN + 6], [1, 0], clamp);
+  const k = f % ALARMA_CICLO;
+  const latido = on ? interpolate(k, [0, 2, 5], [1.07, 1.0, 1.0], clamp) : 0.985;
+  const brillo = on ? '0 0 18px #FF3B2F, 0 0 42px rgba(255,59,47,0.8)' : 'none';
   return (
-    <div style={{position: 'absolute', top: 170, width: '100%', opacity: sale, filter: SOMBRA, lineHeight: 0.95}}>
-      <Fila ls={fila1} base={0} />
-      <Fila ls={fila2} base={9} />
+    <div style={{position: 'absolute', top: 150, width: '100%', display: 'flex', justifyContent: 'center', opacity: sale, filter: SOMBRA}}>
+      <div style={{display: 'flex', alignItems: 'center', gap: 18, transform: `rotate(-3deg) scale(${(0.8 + 0.2 * entra) * latido})`}}>
+        <Sirena on={on} lado={-1} f={f} />
+        {/* letrero con borde de franjas de peligro */}
+        <div style={{padding: 12, borderRadius: 26, border: `6px solid ${NEG}`, background: `repeating-linear-gradient(-45deg, ${AM} 0 22px, ${NEG} 22px 44px)`}}>
+          <div style={{borderRadius: 16, border: `5px solid ${NEG}`, background: on ? '#2A0B0B' : '#160707', padding: '6px 30px 0', textAlign: 'center'}}>
+            <div style={{fontFamily: 'LuckiestGuy', fontSize: 96, lineHeight: 1.05, color: on ? '#FFF1E8' : '#5A2320', textShadow: brillo, letterSpacing: 3}}>W8 4 IT</div>
+          </div>
+        </div>
+        <Sirena on={on} lado={1} f={f} />
+      </div>
     </div>
   );
 };
@@ -436,6 +443,7 @@ M.HIT.forEach((h) => {
 });
 BRILLOS.forEach((b) => SFX.push(['brillo', b.desde, 0.55]));
 BIPS.forEach((b) => SFX.push(['bip', b, 0.35]));
+ALARMA_DESTELLOS.forEach((d) => SFX.push(['alarma', d, 0.22]));
 SFX.push(
   ['ding', M.THIRTY, 0.3],
   ['ding', M.HUNDRED + 5, 0.35],
