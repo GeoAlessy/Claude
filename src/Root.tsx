@@ -29,6 +29,8 @@ import {Survive01, DURACION_S01} from './survive/s01/Survive01';
 import * as OP from './survive/opciones';
 import {DemoGolpes, DUR_DEMO} from './survive/demoGolpes';
 import {DemoMedidores, DUR_MEDIDORES, DemoDano, DUR_DANO} from './survive/opciones2';
+import {DemoBarras3, DUR_BARRAS3} from './survive/opciones3';
+import {DemoBarras4, DUR_BARRAS4} from './survive/opciones4';
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -39,6 +41,8 @@ export const RemotionRoot: React.FC = () => {
           <Still id={`OpDano${n}`} component={(OP as any)[`Dano${n}`]} width={1080} height={1920} />
         </React.Fragment>
       ))}
+      <Composition id="DemoBarras4" component={DemoBarras4} durationInFrames={DUR_BARRAS4} fps={30} width={1080} height={1920} />
+      <Composition id="DemoBarras3" component={DemoBarras3} durationInFrames={DUR_BARRAS3} fps={30} width={1080} height={1920} />
       <Composition id="DemoMedidores" component={DemoMedidores} durationInFrames={DUR_MEDIDORES} fps={30} width={1080} height={1920} />
       <Composition id="DemoDano" component={DemoDano} durationInFrames={DUR_DANO} fps={30} width={1080} height={1920} />
       <Composition id="DemoGolpes" component={DemoGolpes} durationInFrames={DUR_DEMO} fps={30} width={1080} height={1920} />
