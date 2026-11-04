@@ -152,7 +152,7 @@ def mordisco(semilla):
 
 t = t_(0.45)
 partes = np.zeros(int(0.75 * SR))
-for k, ini in enumerate([0.0, 0.16, 0.32]):  # tres mordiscos rápidos
+for k, ini in enumerate([0.0, 0.17]):  # dos mordiscos rápidos
     m = mordisco(10 + k)
     i = int(ini * SR)
     partes[i:i + len(m)] += m * (1 - 0.12 * k)

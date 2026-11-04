@@ -5,7 +5,7 @@ import {Clip} from './opciones2';
 
 // =====================================================================
 // Medidor elegido: VIDAS EN ROSQUILLAS (Luckiest Guy).
-// Cada vida perdida se come en 3 mordiscos, con migas y sonido de mordida.
+// Cada vida perdida se come en 2 mordiscos, con migas y sonido de mordida.
 // =====================================================================
 loadFont({family: 'LuckiestGuy', url: staticFile('fonts/LuckiestGuy-latin.woff2'), weight: '400'});
 
@@ -15,8 +15,8 @@ const clamp = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
 const trazo = (px: number): React.CSSProperties => ({WebkitTextStroke: `${px}px ${NEG}`, paintOrder: 'stroke fill'});
 
 /** Fotogramas desde que empieza a comerse cada mordisco. */
-export const MORDISCOS = [0, 4, 8];
-export const DUR_COMER = 12;
+export const MORDISCOS = [0, 5];
+export const DUR_COMER = 9;
 
 // Forma de un mordisco: varios círculos en arco = borde con marcas de dientes.
 function mordida(cx: number, cy: number, r: number, ang: number) {
@@ -27,8 +27,8 @@ function mordida(cx: number, cy: number, r: number, ang: number) {
   }
   return out;
 }
-// Tres mordiscos: derecha, arriba, y el último se lleva el resto
-const BOCADOS = [mordida(94, 38, 34, -0.3), mordida(44, 4, 36, -Math.PI / 2 - 0.3), mordida(30, 64, 62, Math.PI * 0.8)];
+// Dos mordiscos: el primero se lleva casi media rosquilla, el segundo el resto
+const BOCADOS = [mordida(90, 34, 44, -0.4), mordida(26, 66, 66, Math.PI * 0.8)];
 
 const Rosquilla: React.FC<{id: string; comida: number; t?: number}> = ({id, comida, t = 150}) => {
   // comida: fotogramas desde que empezó a comérsela (<0 = intacta)
