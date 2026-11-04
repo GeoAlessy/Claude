@@ -12,7 +12,7 @@ import {Contador, Letra, Mano, Sello, Tarjeta, Trazo, circuloMano, flechaMano} f
 export {DURACION_S01};
 
 // Clips escalados con Real-ESRGAN (fuentes_video/escalar_s01.sh). Para trabajar rápido: 'clips_previa'.
-export const CARPETA_CLIPS: string = 'clips_previa';
+export const CARPETA_CLIPS: string = 'clips';
 
 const clamp = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
 
