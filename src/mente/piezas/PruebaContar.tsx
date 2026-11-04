@@ -109,10 +109,10 @@ export const PruebaContar: React.FC<Props> = ({cerrar, crono, fallos, comentar})
         {f >= 8 && (
           <Sequence from={8} layout="none">
             <Sequence durationInFrames={primerVideo} layout="none">
-              <OffthreadVideo src={staticFile('mente/clips/s09_ojos_mano_pecho.mp4')} playbackRate={0.8} muted style={{position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'saturate(0.8) contrast(1.05)'}} />
+              <OffthreadVideo src={staticFile('mente/clips/s09_ojos_mano_pecho_v.mp4')} playbackRate={0.8} muted style={{position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'saturate(0.8) contrast(1.05)'}} />
             </Sequence>
             <Sequence from={primerVideo} layout="none">
-              <OffthreadVideo src={staticFile('mente/clips/s10_ojos_respira.mp4')} playbackRate={0.7} muted style={{position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'saturate(0.8) contrast(1.05)'}} />
+              <OffthreadVideo src={staticFile('mente/clips/s10_ojos_respira_v.mp4')} playbackRate={0.7} muted style={{position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'saturate(0.8) contrast(1.05)'}} />
             </Sequence>
           </Sequence>
         )}
