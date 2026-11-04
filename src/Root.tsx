@@ -28,6 +28,7 @@ import * as M34 from './porquepaso/canal/Miniaturas34';
 import {Survive01, DURACION_S01} from './survive/s01/Survive01';
 import * as OP from './survive/opciones';
 import {DemoGolpes, DUR_DEMO} from './survive/demoGolpes';
+import {DemoMedidores, DUR_MEDIDORES, DemoDano, DUR_DANO} from './survive/opciones2';
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -38,6 +39,8 @@ export const RemotionRoot: React.FC = () => {
           <Still id={`OpDano${n}`} component={(OP as any)[`Dano${n}`]} width={1080} height={1920} />
         </React.Fragment>
       ))}
+      <Composition id="DemoMedidores" component={DemoMedidores} durationInFrames={DUR_MEDIDORES} fps={30} width={1080} height={1920} />
+      <Composition id="DemoDano" component={DemoDano} durationInFrames={DUR_DANO} fps={30} width={1080} height={1920} />
       <Composition id="DemoGolpes" component={DemoGolpes} durationInFrames={DUR_DEMO} fps={30} width={1080} height={1920} />
       <Composition id="S01" component={Survive01} durationInFrames={DURACION_S01} fps={30} width={1080} height={1920} />
       <Composition id="Ep01" component={Ep01} durationInFrames={DURACION} fps={FPS} width={1080} height={1920} defaultProps={{conAudio: true}} />
