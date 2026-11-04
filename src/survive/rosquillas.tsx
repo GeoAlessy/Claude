@@ -107,7 +107,7 @@ const Rosquilla: React.FC<{id: string; comida: number; vuelve?: number; t?: numb
  * Vidas con eventos: [fotograma, -1] se come una, [fotograma, +1] vuelve una.
  * Se comen de derecha a izquierda y vuelven en el mismo orden inverso.
  */
-export const VidasEventos: React.FC<{eventos: [number, number][]; total?: number; visible?: number; left?: number; top?: number}> = ({eventos, total = 5, visible = 1, left = 46, top = 110}) => {
+export const VidasEventos: React.FC<{eventos: [number, number][]; total?: number; visible?: number; left?: number; top?: number; escala?: number}> = ({eventos, total = 5, visible = 1, left = 46, top = 110, escala = 1}) => {
   const f = useCurrentFrame();
   const comida: number[] = Array(total).fill(-1); // fotograma en que se empezó a comer (o -1)
   const vuelta: number[] = Array(total).fill(-1); // fotograma en que volvió (o -1)
@@ -133,7 +133,7 @@ export const VidasEventos: React.FC<{eventos: [number, number][]; total?: number
   const valor = Math.round(((vivas + enCurso) / total) * 100);
   const k = f - ultimoCambio;
   return (
-    <div style={{position: 'absolute', left, top, opacity: visible, filter: 'drop-shadow(0 8px 0 rgba(0,0,0,0.3)) drop-shadow(0 16px 28px rgba(0,0,0,0.35))'}}>
+    <div style={{position: 'absolute', left, top, opacity: visible, transform: `scale(${escala})`, transformOrigin: 'left top', filter: 'drop-shadow(0 8px 0 rgba(0,0,0,0.3)) drop-shadow(0 16px 28px rgba(0,0,0,0.35))'}}>
       <div style={{fontFamily: 'LuckiestGuy', fontSize: 66, color: '#fff', ...trazo(12)}}>
         SURVIVAL{' '}
         <span style={{color: valor === 0 ? '#FF3B3B' : ROSA, display: 'inline-block', transform: `scale(${k < 8 ? 1 + 0.25 * (1 - k / 8) : 1})`}}>{valor === 0 ? '☠ 0%' : `${valor}%`}</span>

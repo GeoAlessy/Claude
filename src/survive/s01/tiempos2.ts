@@ -7,17 +7,21 @@ import {PALABRAS} from './subtitulos2';
 export const FPS = 30;
 
 // Audio original del episodio
-export const ORIG_A = {archivo: 'orig_A_make_it.wav', dur: 22}; // Homero: "I'm gonna make it!" (0,74 s)
-export const ORIG_B = {archivo: 'orig_B_never.wav', dur: 103, src: 1187.45}; // Bart + Homero (3,43 s)
+// Bucle: el video termina con Bart ("But, Dad, you'll never make it.") y empieza con la respuesta de Homero.
+export const ORIG_H = {archivo: 'orig_H_know.wav', dur: 39, src: 1189.58}; // Homero: "Don't you think I know that?" (1,30 s)
+export const ORIG_A = {archivo: 'orig_A_make_it.wav', dur: 22, ini: 39}; // Homero: "I'm gonna make it!" (0,74 s)
+export const ORIG_C = {archivo: 'orig_C_bones.wav', dur: 66, src: 984.62}; // Lance Murdock: "Bones heal, chicks dig scars" (2,2 s)
+export const ORIG_B = {archivo: 'orig_B_bart.wav', dur: 64, src: 1187.45}; // Bart: "But, Dad, you'll never make it." (2,13 s)
 
 // [id, pausa antes]: la pausa tras los golpes deja ver la repetición en cámara lenta
 const ORDEN: [string, number][] = [
-  ['01_spoiler', ORIG_A.dur + 1],
+  ['01_spoiler', ORIG_A.ini + ORIG_A.dur + 1],
   ['02_deep', 2],
   ['03_clean', 2],
   ['04_hits', 2],
   ['05_twist', 26],
-  ['06_alive', 2],
+  ['06a_alive', 2],
+  ['06b_real', ORIG_C.dur + 6], // en medio: Lance Murdock, "Bones heal, chicks dig scars"
   ['07_again', 3],
   ['08_verdict', 3],
 ];
@@ -47,6 +51,7 @@ export function marca(id: string, palabra: string, n = 0): number {
   return INICIO[id] + Math.round(w[1] * FPS);
 }
 
+export const INI_C = FIN['06a_alive'] + 3;
 export const INI_B = FIN['08_verdict'] + 6;
 export const DURACION_S01V2 = INI_B + ORIG_B.dur + 2;
 
@@ -62,11 +67,11 @@ export const M = {
   EVERY: marca('05_twist', 'every'),
   ROCKS: marca('05_twist', 'the', 1),
   BRAKES: marca('05_twist', 'brakes'),
-  ALIVE: marca('06_alive', 'alive'),
-  AND: marca('06_alive', 'and'),
-  FLIGHT: marca('06_alive', 'flight'),
-  SIXMILE: marca('06_alive', 'sixmile'),
-  SURVIVED: marca('06_alive', 'survived'),
+  ALIVE: marca('06a_alive', 'alive'),
+  AND: INICIO['06b_real'],
+  FLIGHT: marca('06b_real', 'flight'),
+  SIXMILE: marca('06b_real', 'sixmile'),
+  SURVIVED: marca('06b_real', 'survived'),
   FALLS: marca('07_again', 'falls'),
   SAME: marca('07_again', 'same'),
   AND7: marca('07_again', 'and'),
@@ -79,7 +84,7 @@ export const M = {
 export const REPLAY = {desde: FIN['04_hits'] - 4, hasta: INICIO['05_twist'] + 2};
 
 // ---------- Clips (segundo del episodio en que empieza cada archivo) ----------
-export const CLIPS: Record<string, number> = {caida: 1218, camilla: 1247, segunda: 1255, hospital: 1266, dialogo: 1186.5};
+export const CLIPS: Record<string, number> = {caida: 1218, camilla: 1247, segunda: 1255, hospital: 1266, dialogo: 1186.5, lance: 984.2};
 export const IMPACTO = [1232.45, 1233.65, 1234.95, 1237.7];
 
 // ---------- Planos: la cámara nunca se queda quieta ----------
@@ -99,8 +104,10 @@ export type Plano = {
 const P: Plano[] = [];
 const plano = (p: Plano) => P.push(p);
 
+// H · Homero responde a Bart (cierra el bucle): "Don't you think I know that?"
+plano({desde: 0, src: ORIG_H.src, vel: 1.0, cx: 0.5, zoom: [1.05, 1.2], archivo: 'dialogo'});
 // A · "I'm gonna make it!": Homero sube en el aire
-plano({desde: 0, src: 1221.45, vel: 1.0, cx: 0.48, zoom: [1.0, 1.15]});
+plano({desde: ORIG_A.ini, src: 1221.45, vel: 1.0, cx: 0.48, zoom: [1.0, 1.15]});
 // 01 · "Spoiler: he didn't." Homero en el aire, se congela con brillo en "didn't"
 plano({desde: INICIO['01_spoiler'] - 1, src: 1224.6, vel: 1.0, cx: 0.5, zoom: [1.55, 1.75], congela: 12, encaja: true}); // cuadro 12 = segundo 1225,0 (el del recorte)
 // 01 · "But could a real human survive this fall?" cae
@@ -122,14 +129,18 @@ plano({desde: INICIO['05_twist'] - 2, src: 1235.4, vel: 1.4, cx: 0.5, zoom: [1.0
 plano({desde: M.EVERY - 2, src: 1237.15, vel: 0.8, cx: 0.4, zoom: [1.1, 1.3]});
 plano({desde: M.ROCKS - 2, src: 1238.3, vel: 1.0, cx: 0.55, zoom: [1.0, 1.15], pan: [0, -40]});
 // 06 · llega al fondo: se congela con brillo en "alive"
-plano({desde: INICIO['06_alive'] - 2, src: 1239.55, vel: 1.0, cx: 0.5, zoom: [1.12, 1.25], congela: 10, encaja: true}); // cuadro 10 = segundo 1239,9 (el del recorte)
+plano({desde: INICIO['06a_alive'] - 2, src: 1239.55, vel: 1.0, cx: 0.5, zoom: [1.12, 1.25], congela: 10, encaja: true}); // cuadro 10 = segundo 1239,9 (el del recorte)
+// C · Lance Murdock en el hospital: "Bones heal, chicks dig scars"
+plano({desde: INI_C - 1, src: ORIG_C.src - 0.1, vel: 1.0, cx: 0.5, zoom: [1.05, 1.2], pan: [20, -20], archivo: 'lance'});
+// 06b · caso real: de vuelta a Homero en el fondo (quieto) bajo la tarjeta
+plano({desde: INICIO['06b_real'] - 2, src: 1239.9, vel: 1.0, cx: 0.5, zoom: [1.15, 1.3], congela: 0, encaja: true});
 // 07 · la ambulancia choca y vuelve a caer
 plano({desde: INICIO['07_again'] - 3, src: 1255.1, vel: 2.0, cx: 0.5, zoom: [1.0, 1.15], archivo: 'segunda'});
 plano({desde: M.AND7 - 2, src: 1256.6, vel: 1.3, cx: 0.4, zoom: [1.05, 1.25], archivo: 'segunda'});
 plano({desde: M.SAME - 2, src: 1259.0, vel: 1.6, cx: 0.5, zoom: [1.0, 1.15], archivo: 'segunda'});
 // 08 · hospital
 plano({desde: INICIO['08_verdict'] - 3, src: 1266.6, vel: 0.7, cx: 0.5, zoom: [1.0, 1.2], archivo: 'hospital'});
-// B · Bart: "But, Dad, you'll never make it." Homero: "Don't you think I know that?"
+// B · Bart: "But, Dad, you'll never make it." (el bucle vuelve a H)
 plano({desde: INI_B, src: ORIG_B.src, vel: 1.0, cx: 0.5, zoom: [1.0, 1.1], archivo: 'dialogo'});
 
 export const PLANOS = P.map((p, i) => ({...p, hasta: P[i + 1]?.desde ?? DURACION_S01V2}));
@@ -137,7 +148,7 @@ export const PLANOS = P.map((p, i) => ({...p, hasta: P[i + 1]?.desde ?? DURACION
 // Momentos de brillo (Homero recortado encima del cuadro congelado)
 export const BRILLOS = [
   {recorte: 'recorte_vuelo.png', desde: INICIO['01_spoiler'] - 1 + 12, hasta: M.BUT - 1},
-  {recorte: 'recorte_fondo.png', desde: INICIO['06_alive'] - 2 + 10, hasta: M.AND - 1},
+  {recorte: 'recorte_fondo.png', desde: INICIO['06a_alive'] - 2 + 10, hasta: INI_C - 1},
 ];
 
 // ---------- Vidas en rosquillas: -1 se come una, +1 vuelve ----------

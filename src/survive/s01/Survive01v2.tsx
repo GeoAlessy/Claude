@@ -2,7 +2,7 @@ import React from 'react';
 import {AbsoluteFill, Audio, Easing, Freeze, Img, OffthreadVideo, Sequence, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
 import {loadFont} from '@remotion/fonts';
 import {PALABRAS} from './subtitulos2';
-import {BRILLOS, CLIPS, DURACION_S01V2, EVENTOS, FIN, FPS, INICIO, INI_B, M, MEDIDOR_DESDE, ORIG_A, ORIG_B, PLANOS, REPLAY, VOZ_ORDEN} from './tiempos2';
+import {BRILLOS, CLIPS, DURACION_S01V2, EVENTOS, FIN, FPS, INICIO, INI_B, INI_C, M, MEDIDOR_DESDE, ORIG_A, ORIG_B, ORIG_C, ORIG_H, PLANOS, REPLAY, VOZ_ORDEN} from './tiempos2';
 import {SonidoEventos, VidasEventos} from '../rosquillas';
 import {DMedabot} from '../opciones2';
 
@@ -193,7 +193,7 @@ const PERIODO = 22;
 const Latido: React.FC = () => {
   const f = useCurrentFrame();
   const ini = M.ALIVE - 4;
-  const fin = M.FLIGHT - 3;
+  const fin = INI_C - 2;
   if (f < ini || f > fin) return null;
   const k = f - ini;
   const pts: string[] = [];
@@ -212,14 +212,14 @@ const Latido: React.FC = () => {
     </svg>
   );
 };
-const BIPS = Array.from({length: 6}).map((_, i) => M.ALIVE - 4 + 6 + i * PERIODO).filter((b) => b < M.FLIGHT - 3);
+const BIPS = Array.from({length: 6}).map((_, i) => M.ALIVE - 4 + 6 + i * PERIODO).filter((b) => b < INI_C - 2);
 
 // ---------- Caso real: la azafata que sobrevivió (tarjeta rediseñada) ----------
 const CasoReal: React.FC = () => {
   const f = useCurrentFrame();
   const {fps} = useVideoConfig();
   const ini = M.FLIGHT - 4;
-  const fin = FIN['06_alive'] + 2;
+  const fin = FIN['06b_real'] + 2;
   if (f < ini || f > fin) return null;
   const k = f - ini;
   const s = spring({frame: k, fps, config: {damping: 13, stiffness: 210}});
@@ -304,10 +304,14 @@ const Titulo: React.FC = () => {
 // ---------- Subtítulos: una palabra a la vez (como el video de referencia) ----------
 const CLAVE = new Set(['spoiler', 'didnt', 'thirty', 'hundred', 'clean', 'ribs', 'spleen', 'lungs', 'skull', 'twist', 'brakes', 'alive', 'real', 'sixmile', 'again', 'same', 'maybe', 'kills', 'you']);
 const SIN_SUB_DESDE: Record<string, number> = {'01_spoiler': M.BUT}; // ahí entra el título
-const LINEAS_B: [string, number][] = [
-  ['BUT,', 1187.57], ['DAD,', 1188.03], ["YOU'LL", 1188.57], ['NEVER', 1188.75], ['MAKE', 1189.05], ['IT.', 1189.33],
-  ["DON'T", 1189.65], ['YOU', 1189.85], ['THINK', 1189.95], ['I', 1190.21], ['KNOW', 1190.33], ['THAT?', 1190.57],
+// Frases originales: [desde (fotograma), segundo del episodio en que empieza el audio, palabras, color]
+const ORIGINALES: [number, number, [string, number][], string][] = [
+  [0, ORIG_H.src, [["DON'T", 1189.65], ['YOU', 1189.85], ['THINK', 1189.95], ['I', 1190.21], ['KNOW', 1190.33], ['THAT?', 1190.57]], AM],
+  [ORIG_A.ini, 1220.48, [["I'M", 1220.59], ['GONNA', 1220.67], ['MAKE', 1220.81], ['IT!', 1220.99]], AM],
+  [INI_C, ORIG_C.src, [['BONES', 984.75], ['HEAL,', 985.09], ['CHICKS', 985.73], ['DIG', 986.03], ['SCARS!', 986.27]], '#7CFF4F'],
+  [INI_B, ORIG_B.src, [['BUT,', 1187.57], ['DAD,', 1188.03], ["YOU'LL", 1188.57], ['NEVER', 1188.75], ['MAKE', 1189.05], ['IT.', 1189.33]], '#fff'],
 ];
+const DUR_ORIG = [ORIG_H.dur, ORIG_A.dur, ORIG_C.dur, ORIG_B.dur];
 const Palabra: React.FC<{w: string; k: number; color: string}> = ({w, k, color}) => {
   const pop = interpolate(k, [0, 2, 4], [0.7, 1.12, 1], clamp);
   return (
@@ -318,13 +322,14 @@ const Palabra: React.FC<{w: string; k: number; color: string}> = ({w, k, color})
 };
 const Subtitulos: React.FC = () => {
   const f = useCurrentFrame();
-  if (f >= INI_B) {
-    const t = ORIG_B.src + (f - INI_B) / FPS;
+  for (let j = 0; j < ORIGINALES.length; j++) {
+    const [ini, src, pals, color] = ORIGINALES[j];
+    if (f < ini || f >= ini + DUR_ORIG[j]) continue;
+    const t = src + (f - ini) / FPS;
     let actual: [string, number] | undefined;
-    for (const w of LINEAS_B) if (t >= w[1] - 0.03) actual = w;
+    for (const w of pals) if (t >= w[1] - 0.03) actual = w;
     if (!actual) return null;
-    const bart = actual[1] < 1189.6;
-    return <Palabra w={actual[0]} k={Math.round((t - actual[1]) * FPS)} color={bart ? '#fff' : AM} />;
+    return <Palabra w={actual[0]} k={Math.round((t - actual[1]) * FPS)} color={color} />;
   }
   for (const id of VOZ_ORDEN) {
     const ps = PALABRAS[id];
@@ -398,7 +403,8 @@ SFX.push(
 
 function volMusica(f: number) {
   const base = 0.1;
-  const orig = f < ORIG_A.dur + 2 || f >= INI_B - 2 ? 0.25 : 1; // baja mucho bajo el audio original
+  const bajo = f < ORIG_A.ini + ORIG_A.dur + 2 || f >= INI_B - 2 || (f >= INI_C - 2 && f < INI_C + ORIG_C.dur + 2);
+  const orig = bajo ? 0.25 : 1; // baja mucho bajo el audio original
   const ext = interpolate(f, [0, 3, DURACION_S01V2 - 8, DURACION_S01V2], [0.6, 1, 1, 0], clamp);
   return base * orig * ext;
 }
@@ -425,14 +431,20 @@ export const Survive01v2: React.FC = () => {
       <CasoReal />
       <Veredicto />
       <PanelDano />
-      {visibleMedidor > 0 && <VidasEventos eventos={EVENTOS} visible={visibleMedidor} left={40} top={100} />}
+      {visibleMedidor > 0 && <VidasEventos eventos={EVENTOS} visible={visibleMedidor} left={40} top={100} escala={0.6} />}
       <Titulo />
       <Subtitulos />
       <Canal />
 
       {/* audio */}
       <Audio src={staticFile('survive/sfx/musica.wav')} volume={volMusica} />
-      <Audio src={staticFile(`survive/s01/clips/${ORIG_A.archivo}`)} volume={1} />
+      <Audio src={staticFile(`survive/s01/clips/${ORIG_H.archivo}`)} volume={1} />
+      <Sequence from={ORIG_A.ini}>
+        <Audio src={staticFile(`survive/s01/clips/${ORIG_A.archivo}`)} volume={1} />
+      </Sequence>
+      <Sequence from={INI_C}>
+        <Audio src={staticFile(`survive/s01/clips/${ORIG_C.archivo}`)} volume={1} />
+      </Sequence>
       <Sequence from={INI_B}>
         <Audio src={staticFile(`survive/s01/clips/${ORIG_B.archivo}`)} volume={1} />
       </Sequence>
