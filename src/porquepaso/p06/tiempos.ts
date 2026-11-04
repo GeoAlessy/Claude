@@ -7,7 +7,7 @@ import {PALABRAS} from './subtitulos';
 export const FPS = 30;
 
 const ORDEN: [string, number][] = [
-  ['01_exploto', 25], // la voz entra un poco después: "explotó" cae cerca de la explosión
+  ['01_exploto', 3], // la voz entra desde el inicio: así el bucle empalma con nuestra voz
   ['02_bomba', 4],
   ['03_fertilizante', 4],
   ['04_nitrato', 10],
@@ -59,6 +59,8 @@ export function marca(id: string, palabra: string): number {
 // El gancho empieza en el cuadro 30 de A: los cuadros 0–30 van en la tarjeta final (bucle).
 export const A_INI = 30; // un segundo más del camión ardiendo antes de la explosión (pedido del usuario)
 export const A_TOTAL = 120;
+// Sonido real del clip: solo desde el estallido (antes se oye a una persona hablando, y se quita).
+export const ESTALLIDO = 78; // cuadro del gancho (A_INI + 78 = segundo 3.6 del original)
 export const SEG = {
   A: {desde: 0, dur: 0}, // el camión arde y explota
   C: {desde: 0, dur: 0}, // el asfalto partido
