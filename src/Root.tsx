@@ -26,10 +26,17 @@ import {MiniA, MiniB, MiniC, MiniH} from './porquepaso/canal/Miniaturas02';
 import * as M01 from './porquepaso/canal/Miniaturas01';
 import * as M34 from './porquepaso/canal/Miniaturas34';
 import {Survive01, DURACION_S01} from './survive/s01/Survive01';
+import * as OP from './survive/opciones';
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      {[1, 2, 3, 4, 5].map((n) => (
+        <React.Fragment key={n}>
+          <Still id={`OpMedidor${n}`} component={(OP as any)[`Medidor${n}`]} width={1080} height={1920} />
+          <Still id={`OpDano${n}`} component={(OP as any)[`Dano${n}`]} width={1080} height={1920} />
+        </React.Fragment>
+      ))}
       <Composition id="S01" component={Survive01} durationInFrames={DURACION_S01} fps={30} width={1080} height={1920} />
       <Composition id="Ep01" component={Ep01} durationInFrames={DURACION} fps={FPS} width={1080} height={1920} defaultProps={{conAudio: true}} />
       <Still id="HojaPersonajes" component={HojaPersonajes} width={3000} height={2000} />
