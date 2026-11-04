@@ -33,6 +33,7 @@ import {DemoMedidores, DUR_MEDIDORES, DemoDano, DUR_DANO} from './survive/opcion
 import {DemoBarras3, DUR_BARRAS3} from './survive/opciones3';
 import {DemoBarras4, DUR_BARRAS4} from './survive/opciones4';
 import * as OP5 from './survive/opciones5';
+import * as OP6 from './survive/opciones6';
 import {DemoRosquillas, DUR_DEMO_ROSQ} from './survive/rosquillas';
 import * as M56 from './porquepaso/canal/Miniaturas56';
 
@@ -47,6 +48,13 @@ export const RemotionRoot: React.FC = () => {
       ))}
       {['BS1', 'BS2', 'BS3', 'BS4', 'BS5', 'BG1', 'BG2', 'BG3', 'BG4', 'BG5'].map((id) => (
         <Still key={id} id={`Op${id}`} component={(OP5 as any)[id]} width={1080} height={1920} />
+      ))}
+      <Still id="HojaAlarmas" component={OP6.HojaAlarmas} width={1600} height={1920} />
+      {OP6.AlarmaVista.map((C, i) => (
+        <Still key={`v${i}`} id={`OpAlarma${i + 1}`} component={C} width={1080} height={1920} />
+      ))}
+      {OP6.AlarmaAnim.map((C, i) => (
+        <Composition key={`a${i}`} id={`AnimAlarma${i + 1}`} component={C} durationInFrames={56} fps={30} width={1080} height={1920} />
       ))}
       <Composition id="DemoRosquillas" component={DemoRosquillas} durationInFrames={DUR_DEMO_ROSQ} fps={30} width={1080} height={1920} />
       <Composition id="DemoBarras4" component={DemoBarras4} durationInFrames={DUR_BARRAS4} fps={30} width={1080} height={1920} />
