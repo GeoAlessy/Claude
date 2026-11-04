@@ -140,6 +140,14 @@ export const LaminaLuna: React.FC = () => (
   </AbsoluteFill>
 );
 
+// Fondo propio del logo en los vídeos: negro puro, sin estrellas ni el azul noche del resto del vídeo,
+// para que la marca se sienta como una pieza aparte. Solo un leve resplandor neutro detrás de la luna.
+export const FondoLogo: React.FC = () => (
+  <AbsoluteFill style={{background: '#000'}}>
+    <AbsoluteFill style={{background: 'radial-gradient(ellipse 38% 42% at 50% 40%, rgba(255,255,255,0.035) 0%, transparent 70%)'}} />
+  </AbsoluteFill>
+);
+
 // ---------------------------------------------------------------------------
 // Entrada del logo en los vídeos (1920×1080): la luna sale de la sombra, la estrella destella,
 // el nombre se escribe y el lema se teclea. Solo tres elementos: luna, nombre y lema.
@@ -152,7 +160,7 @@ export const LogoEntrada: React.FC<{dur: number}> = ({dur}) => {
   const lema = rango(f, 30, 44);
   return (
     <AbsoluteFill style={{opacity: entrada * salida}}>
-      <Cielo w={1920} h={1080} n={260} />
+      <FondoLogo />
       <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', flexDirection: 'column', transform: `scale(${1 + 0.035 * rango(f, 0, dur, 0, 1, (x) => x)})`}}>
         <LunaReal s={400} revela={revela} brilloEstrella={Math.min(1.6, est)} />
         <div style={{fontFamily: SERIF, fontWeight: 500, fontSize: 112, letterSpacing: 24, marginRight: -24, color: C.luz, lineHeight: 1, marginTop: 70}}>
@@ -174,7 +182,7 @@ export const DURACION_LOGO_ENTRADA = 75;
 /** Fotograma final de la entrada (para exportarlo como imagen en 4K). */
 export const PantallaLogo: React.FC = () => (
   <AbsoluteFill>
-    <Cielo w={1920} h={1080} n={260} />
+    <FondoLogo />
     <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}}>
       <LunaReal s={400} />
       <div style={{fontFamily: SERIF, fontWeight: 500, fontSize: 112, letterSpacing: 24, marginRight: -24, color: C.luz, lineHeight: 1, marginTop: 70}}>QUIET CORTEX</div>
