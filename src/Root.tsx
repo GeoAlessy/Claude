@@ -25,10 +25,12 @@ import {Banner, Logo, MarcaAgua} from './porquepaso/canal/Marca';
 import {MiniA, MiniB, MiniC, MiniH} from './porquepaso/canal/Miniaturas02';
 import * as M01 from './porquepaso/canal/Miniaturas01';
 import * as M34 from './porquepaso/canal/Miniaturas34';
+import {Survive01, DURACION_S01} from './survive/s01/Survive01';
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      <Composition id="S01" component={Survive01} durationInFrames={DURACION_S01} fps={30} width={1080} height={1920} />
       <Composition id="Ep01" component={Ep01} durationInFrames={DURACION} fps={FPS} width={1080} height={1920} defaultProps={{conAudio: true}} />
       <Still id="HojaPersonajes" component={HojaPersonajes} width={3000} height={2000} />
       <Composition id="P01" component={Piloto01} durationInFrames={DURACION_P01} fps={30} width={1080} height={1920} />

@@ -20,7 +20,8 @@ RAIZ = os.path.join(os.path.dirname(__file__), '..')
 KEY = os.environ.get('ELEVENLABS_API_KEY')
 # Sin variable: la clave puede llegar como secreto de red del entorno (el proxy la agrega).
 
-cfg = json.load(open(os.path.join(RAIZ, 'src', 'porquepaso', 'voz.json')))
+# VOZ_CFG permite usar la voz de otro canal (por defecto, la de ¿Por qué pasó?).
+cfg = json.load(open(os.environ.get('VOZ_CFG') or os.path.join(RAIZ, 'src', 'porquepaso', 'voz.json')))
 lineas = json.load(open(sys.argv[1]))
 salida = sys.argv[2]
 solo = set(sys.argv[3:])
