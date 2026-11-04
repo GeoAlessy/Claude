@@ -12,11 +12,11 @@ import {loadFont} from '@remotion/fonts';
 const AM = '#FFD90F';
 const NEG = '#0E0E12';
 const clamp = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
-const trazo = (px: number, c = NEG): React.CSSProperties => ({WebkitTextStroke: `${px}px ${c}`, paintOrder: 'stroke fill'});
-const SOMBRA = 'drop-shadow(0 10px 0 rgba(0,0,0,0.28)) drop-shadow(0 18px 30px rgba(0,0,0,0.35))';
+export const trazo = (px: number, c = NEG): React.CSSProperties => ({WebkitTextStroke: `${px}px ${c}`, paintOrder: 'stroke fill'});
+export const SOMBRA = 'drop-shadow(0 10px 0 rgba(0,0,0,0.28)) drop-shadow(0 18px 30px rgba(0,0,0,0.35))';
 
 // ---------- Clip de fondo a pantalla completa, con cámara siempre en movimiento ----------
-const Clip: React.FC<{src: number; vel?: number; cx?: number; zoom?: [number, number]; dur: number; congela?: number; dx?: number; dy?: number}> = ({src, vel = 1, cx = 0.5, zoom = [1.05, 1.18], dur, congela, dx = 0, dy = 0}) => {
+export const Clip: React.FC<{src: number; vel?: number; cx?: number; zoom?: [number, number]; dur: number; congela?: number; dx?: number; dy?: number}> = ({src, vel = 1, cx = 0.5, zoom = [1.05, 1.18], dur, congela, dx = 0, dy = 0}) => {
   const f = useCurrentFrame();
   const z = interpolate(f, [0, dur], zoom, clamp);
   const H = 1920 * z;
@@ -34,7 +34,7 @@ const Clip: React.FC<{src: number; vel?: number; cx?: number; zoom?: [number, nu
   return congela === undefined ? v : <Freeze frame={congela} active={(fr) => fr >= congela}>{v}</Freeze>;
 };
 
-const Rotulo: React.FC<{n: number; nombre: string; fuentes: string}> = ({n, nombre, fuentes}) => (
+export const Rotulo: React.FC<{n: number; nombre: string; fuentes: string}> = ({n, nombre, fuentes}) => (
   <div style={{position: 'absolute', bottom: 70, left: 0, right: 0, display: 'flex', justifyContent: 'center'}}>
     <div style={{background: 'rgba(10,10,14,0.82)', borderRadius: 18, padding: '14px 26px', textAlign: 'center', border: '2px solid rgba(255,255,255,0.15)'}}>
       <div style={{fontFamily: 'Inter, sans-serif', fontWeight: 800, fontSize: 40, color: '#fff'}}>
