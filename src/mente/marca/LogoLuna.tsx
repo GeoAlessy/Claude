@@ -83,12 +83,20 @@ export const Nombre: React.FC<{escala?: number; alinear?: 'center' | 'left'}> = 
   </div>
 );
 
-/** Foto de perfil (800×800; YouTube la recorta en círculo). */
+/** Foto de perfil (800×800; YouTube la recorta en círculo): luna + nombre dentro de la zona circular. */
 export const AvatarLuna: React.FC = () => (
   <AbsoluteFill>
     <Cielo w={800} h={800} n={90} />
-    <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center'}}>
-      <LunaReal s={560} />
+    <AbsoluteFill style={{alignItems: 'center'}}>
+      <div style={{marginTop: 118}}>
+        <LunaReal s={370} />
+      </div>
+      <div style={{fontFamily: SERIF, fontWeight: 700, fontSize: 64, letterSpacing: 9, marginRight: -9, color: C.luz, lineHeight: 1, marginTop: 44}}>QUIET CORTEX</div>
+      <div style={{display: 'flex', alignItems: 'center', gap: 14, marginTop: 18}}>
+        <div style={{width: 46, height: 1.5, background: C.oro, opacity: 0.85}} />
+        <div style={{width: 7, height: 7, transform: 'rotate(45deg)', background: C.oro}} />
+        <div style={{width: 46, height: 1.5, background: C.oro, opacity: 0.85}} />
+      </div>
     </AbsoluteFill>
   </AbsoluteFill>
 );
