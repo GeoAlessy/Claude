@@ -443,7 +443,6 @@ M.HIT.forEach((h) => {
 });
 BRILLOS.forEach((b) => SFX.push(['brillo', b.desde, 0.55]));
 BIPS.forEach((b) => SFX.push(['bip', b, 0.35]));
-ALARMA_DESTELLOS.forEach((d) => SFX.push(['alarma', d, 0.22]));
 SFX.push(
   ['ding', M.THIRTY, 0.3],
   ['ding', M.HUNDRED + 5, 0.35],
@@ -487,7 +486,6 @@ export const Survive01v2: React.FC = () => {
       {visibleMedidor > 0 && <VidasEventos eventos={EVENTOS} visible={visibleMedidor} left={40} top={100} escala={0.6} />}
       <Titulo />
       <Subtitulos />
-      <Gancho />
 
       {/* audio */}
       <Audio src={staticFile('survive/sfx/musica.wav')} volume={volMusica} />

@@ -14,7 +14,7 @@ export const ORIG_B = {archivo: 'orig_B_bart.wav', dur: 64, src: 1187.45}; // Ba
 
 // [id, pausa antes]: la pausa tras los golpes deja ver la repetición en cámara lenta
 const ORDEN: [string, number][] = [
-  ['01_hook', ORIG_H.dur + 1],
+  ['01_hook', ORIG_H.dur + 18], // 0,6 s de aire tras la frase de Homero antes de nuestra voz
   ['02_deep', 2],
   ['03_clean', 2],
   ['04_hits', 2],
