@@ -52,7 +52,7 @@ export function marca(id: string, palabra: string, n = 0): number {
 
 export const INI_C = FIN['06a_alive'] + 3;
 export const INI_B = FIN['08_verdict'] + 6;
-export const DURACION_S01V2 = INI_B + ORIG_B.dur + 2;
+export const DURACION_S01V2 = INI_B + ORIG_B.dur + 1; // +2 dejaba 1 cuadro azul (corte del episodio) al final
 
 export const M = {
   KILL: marca('01_hook', 'kill'),
