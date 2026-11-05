@@ -68,7 +68,8 @@ const Plano: React.FC<{p: (typeof PLANOS)[number]}> = ({p}) => {
   } else {
     const H = 1920 * zoom;
     const W = H * RATIO;
-    const left = Math.min(0, Math.max(1080 - W, 540 - p.cx * W + pan)) + dx;
+    const cxv = p.sigue ? interpolate(f / Math.max(1, dur), p.sigue.map((k) => k[0]), p.sigue.map((k) => k[1]), clamp) : p.cx;
+    const left = Math.min(0, Math.max(1080 - W, 540 - cxv * W + pan)) + dx;
     if (p.fy !== undefined) {
       // foco: la parte golpeada queda en el centro; si el cuadro no alcanza, el borde se funde con un fondo desenfocado
       const top = 960 - p.fy * H + dy;
@@ -77,7 +78,8 @@ const Plano: React.FC<{p: (typeof PLANOS)[number]}> = ({p}) => {
       const Hf = 1920 * 1.15;
       fondo = <OffthreadVideo src={fuente} muted trimBefore={trim} playbackRate={p.vel} style={{position: 'absolute', height: Hf, width: Hf * RATIO, left: 540 - p.cx * Hf * RATIO, top: -144, filter: 'blur(30px) brightness(0.6)'}} />;
     } else {
-      const top = (1920 - H) * (p.cy ?? 0.5) + dy;
+      const cyv = p.cy2 !== undefined ? interpolate(f, [0, dur], [p.cy ?? 0.5, p.cy2], clamp) : (p.cy ?? 0.5);
+      const top = (1920 - H) * cyv + dy;
       caja = {position: 'absolute', left, top, width: W, height: H};
     }
   }
@@ -610,7 +612,7 @@ const SFX: [string, number, number][] = [];
 PLANOS.forEach((p, i) => {
   if (i > 0 && !p.golpe && p.desde < INI_B) SFX.push(['swish', p.desde - 2, 0.16]);
 });
-M.HIT.forEach((h) => {
+[...M.HIT, M.SAME].forEach((h) => {
   SFX.push(['bonk', h, 0.7]);
   SFX.push(['impacto', h, 0.35]);
 });
