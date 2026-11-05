@@ -244,7 +244,76 @@ const Latido: React.FC = () => {
 };
 const BIPS = Array.from({length: 6}).map((_, i) => M.ALIVE - 4 + 6 + i * PERIODO).filter((b) => b < INI_C - 2);
 
-// ---------- Caso real: la azafata que sobrevivió (tarjeta rediseñada) ----------
+// ---------- Caso real: la azafata que sobrevivió (ilustración estilo serie) ----------
+// Colores planos, contorno marrón oscuro, una sombra dura; nubes y cielo como en la serie.
+const OL = '#2B1A10';
+const CREMA = '#FFF6DF';
+
+/** DC-9 de perfil (el avión real del vuelo 367): cola en T, motores atrás, un solo ala visible bajo el fuselaje. */
+const Avion: React.FC = () => (
+  <g stroke={OL} strokeWidth={4} strokeLinejoin="round" strokeLinecap="round">
+    {/* ala (la del lado de la cámara), en flecha hacia atrás, bajo el fuselaje */}
+    <path d="M232 76 L196 78 L128 124 L150 126 Z" fill="#C9C6BE" />
+    <path d="M150 126 L128 124 L134 120 L156 121 Z" fill="#D6312B" />
+    {/* fuselaje */}
+    <path d="M24 44 L330 40 Q370 41 386 60 Q372 82 330 84 L84 84 Q50 80 24 58 Z" fill="#F7F4EC" />
+    {/* sombra dura de la panza */}
+    <path d="M84 84 L330 84 Q366 82 382 66 L60 70 Q70 78 84 84 Z" fill="#D9D4C8" stroke="none" />
+    <path d="M24 44 L330 40 Q370 41 386 60 Q372 82 330 84 L84 84 Q50 80 24 58 Z" fill="none" />
+    {/* franja de la aerolínea */}
+    <path d="M40 56 L346 52 L352 58 L46 62 Z" fill="#D6312B" stroke="none" />
+    {/* ventanillas */}
+    {Array.from({length: 15}).map((_, i) => (
+      <rect key={i} x={118 + i * 14} y={45} width={7} height={8} rx={3} fill="#3E6FA8" stroke="none" />
+    ))}
+    {/* cabina */}
+    <path d="M352 47 L372 50 L378 56 L354 55 Z" fill="#2E4A6E" strokeWidth={3} />
+    {/* puerta */}
+    <rect x={322} y={44} width={12} height={24} rx={3} fill="none" strokeWidth={3} />
+    {/* deriva (cola en T) */}
+    <path d="M30 44 L96 42 L50 -44 L18 -44 Z" fill="#D6312B" />
+    <path d="M40 22 L80 21 L72 8 L34 9 Z" fill={CREMA} stroke="none" />
+    {/* estabilizador horizontal encima de la deriva */}
+    <path d="M58 -44 L-6 -58 L-14 -52 L22 -40 Z" fill="#F7F4EC" />
+    {/* motor trasero con su pilón */}
+    <path d="M96 52 L108 40" strokeWidth={5} />
+    <rect x={64} y={18} width={86} height={28} rx={14} fill="#E8E4DA" />
+    <path d="M70 38 L144 38 Q148 40 146 44 L76 46 Q66 44 70 38 Z" fill="#C2BDB2" stroke="none" />
+    <rect x={64} y={18} width={86} height={28} rx={14} fill="none" />
+    <ellipse cx={150} cy={32} rx={6} ry={13} fill="#3A3330" />
+  </g>
+);
+
+/** Nube como las del cielo de la serie: blanca, sin contorno, sombra lila abajo. */
+const Nube: React.FC<{x: number; y: number; s: number}> = ({x, y, s}) => (
+  <g transform={`translate(${x} ${y}) scale(${s})`}>
+    <path d="M0 40 Q-4 14 26 14 Q34 -8 62 0 Q80 -16 104 2 Q134 -2 134 26 Q152 34 140 46 L4 48 Q-8 46 0 40 Z" fill="#FFFFFF" />
+    <path d="M4 48 L140 46 Q146 40 140 36 Q100 44 60 40 Q30 44 0 40 Q-2 46 4 48 Z" fill="#D7DDF2" />
+  </g>
+);
+
+/** Pino plano con contorno */
+const Pino: React.FC<{x: number; y: number; s: number}> = ({x, y, s}) => (
+  <g transform={`translate(${x} ${y}) scale(${s})`} stroke={OL} strokeWidth={4} strokeLinejoin="round">
+    <rect x={-6} y={0} width={12} height={22} fill="#7A4A2A" />
+    <path d="M0 -92 L30 -40 L18 -40 L40 0 L-40 0 L-18 -40 L-30 -40 Z" fill="#2F7D46" />
+    <path d="M0 -92 L30 -40 L18 -40 L40 0 L10 0 L0 -60 Z" fill="#225E35" stroke="none" />
+    <path d="M0 -92 L30 -40 L18 -40 L40 0 L-40 0 L-18 -40 L-30 -40 Z" fill="none" />
+    <path d="M-10 -76 L0 -92 L10 -76 Q0 -70 -10 -76 Z" fill="#FFFFFF" />
+  </g>
+);
+
+/** La azafata cayendo, figura chiquita al estilo de la serie */
+const Azafata: React.FC<{giro: number}> = ({giro}) => (
+  <g transform={`rotate(${giro})`} stroke={OL} strokeWidth={3} strokeLinejoin="round" strokeLinecap="round">
+    <path d="M-6 -2 L-20 -22 M6 -2 L20 -22" strokeWidth={6} />
+    <path d="M-5 14 L-12 30 M5 14 L12 30" strokeWidth={6} />
+    <rect x={-10} y={-6} width={20} height={24} rx={7} fill="#2F5DA8" />
+    <circle cx={0} cy={-15} r={10} fill={AM} />
+    <path d="M-10 -18 Q-8 -30 2 -27 Q12 -26 10 -16 Q4 -22 -10 -18 Z" fill="#6B3E1E" />
+  </g>
+);
+
 const CasoReal: React.FC = () => {
   const f = useCurrentFrame();
   const {fps} = useVideoConfig();
@@ -254,36 +323,68 @@ const CasoReal: React.FC = () => {
   const k = f - ini;
   const s = spring({frame: k, fps, config: {damping: 13, stiffness: 210}});
   const sale = interpolate(fin - f, [0, 5], [0, 1], clamp);
-  const caida = interpolate(k, [3, 22], [0, 1], {...clamp, easing: Easing.in(Easing.quad)});
-  const km = interpolate(f, [M.FLIGHT + 2, M.SIXMILE + 6], [0, 10], {...clamp, easing: Easing.out(Easing.quad)});
+  const caida = interpolate(f, [M.FLIGHT + 2, M.SIXMILE + 6], [0, 1], {...clamp, easing: Easing.in(Easing.quad)});
+  const km = caida * 10;
   const sello = f - (M.SIXMILE + 10);
+  // trayectoria de la caída: del avión a la nieve
+  const P0 = [236, 360];
+  const P1 = [400, 390];
+  const P2 = [520, 560];
+  const t = caida;
+  const px = (1 - t) * (1 - t) * P0[0] + 2 * (1 - t) * t * P1[0] + t * t * P2[0];
+  const py = (1 - t) * (1 - t) * P0[1] + 2 * (1 - t) * t * P1[1] + t * t * P2[1];
+  const sube = Math.sin(k / 9) * 4;
   return (
-    <div style={{position: 'absolute', left: 70, right: 70, top: 470, height: 640, transform: `translateY(${(1 - s) * 300}px) scale(${0.85 + 0.15 * s})`, opacity: Math.min(1, s * 1.4) * sale, borderRadius: 40, background: 'linear-gradient(160deg, rgba(20,24,46,0.95), rgba(8,10,22,0.95))', border: `6px solid ${NEG}`, boxShadow: '0 0 0 4px rgba(255,140,198,0.6), 0 24px 50px rgba(0,0,0,0.5)', overflow: 'hidden'}}>
-      <div style={{position: 'absolute', left: 36, top: 30, fontFamily: 'LuckiestGuy', fontSize: 40, color: NEG, background: ROSA, padding: '6px 22px', borderRadius: 30}}>REAL CASE · 1972</div>
-      {/* cielo con avión y la línea de caída */}
-      <svg width={420} height={560} viewBox="0 0 420 560" style={{position: 'absolute', left: 20, top: 90}}>
-        <g transform="translate(70,40)" fill="#E5E7EB" stroke={NEG} strokeWidth={5} strokeLinejoin="round">
-          <path d="M0,40 L200,40 Q236,40 236,56 Q236,72 200,72 L22,72 Q0,72 0,56 Z" />
-          <path d="M96,40 L136,0 L158,0 L140,40Z M96,72 L136,112 L158,112 L140,72Z M10,40 L0,8 L24,8 L42,40Z" />
-          {[40, 70, 100, 130, 160].map((x) => <circle key={x} cx={x + 20} cy={54} r={5} fill="#60A5FA" stroke="none" />)}
-        </g>
-        <path d={`M190,150 Q230,${150 + 380 * caida * 0.5} 220,${150 + 380 * caida}`} fill="none" stroke={ROSA} strokeWidth={8} strokeDasharray="4 20" strokeLinecap="round" />
-        <circle cx={220} cy={150 + 380 * caida} r={14} fill={AM} stroke={NEG} strokeWidth={5} />
-        <path d="M20,540 Q210,500 400,540" fill="none" stroke="#4ADE80" strokeWidth={10} />
-      </svg>
-      <div style={{position: 'absolute', right: 40, top: 150, textAlign: 'right'}}>
-        <div style={{fontFamily: 'LuckiestGuy', fontSize: 150, lineHeight: 0.9, color: AM, ...trazo(12)}}>
-          {km.toFixed(km < 10 ? 1 : 0)}
-          <span style={{fontSize: 70}}> KM</span>
+    <div style={{position: 'absolute', left: 64, right: 64, top: 460, height: 660, transform: `translateY(${(1 - s) * 300}px) scale(${0.85 + 0.15 * s}) rotate(-1.5deg)`, opacity: Math.min(1, s * 1.4) * sale, filter: `drop-shadow(0 14px 0 rgba(43,26,16,0.55))`}}>
+      <div style={{position: 'absolute', inset: 0, borderRadius: 36, border: `7px solid ${OL}`, overflow: 'hidden', background: '#6FB6E8'}}>
+        <svg width={952} height={660} viewBox="0 0 952 660" style={{position: 'absolute', left: -7, top: -7}}>
+          {/* cielo: franja más clara arriba, como el fondo de la serie */}
+          <rect x={0} y={0} width={952} height={660} fill="#6FB6E8" />
+          <rect x={0} y={0} width={952} height={140} fill="#7EC2EE" />
+          <Nube x={620 - k * 0.6} y={300} s={1.3} />
+          <Nube x={40 + k * 0.4} y={400} s={1.0} />
+          <Nube x={760 - k * 0.3} y={70} s={0.9} />
+          {/* línea punteada de la caída */}
+          <path d={`M${P0[0]} ${P0[1]} Q${P1[0]} ${P1[1]} ${P2[0]} ${P2[1]}`} fill="none" stroke="#FFFFFF" strokeWidth={6} strokeDasharray="2 18" strokeLinecap="round" opacity={0.9} pathLength={1} style={{strokeDashoffset: 0}} />
+          {/* montaña nevada (cayó en una ladera con nieve) */}
+          <path d="M-10 670 L-10 520 Q160 440 330 500 Q480 450 640 520 Q800 470 962 520 L962 670 Z" fill="#F4F7FB" stroke={OL} strokeWidth={6} strokeLinejoin="round" />
+          <path d="M-10 670 L-10 590 Q200 540 420 600 Q640 560 962 610 L962 670 Z" fill="#CFDDEE" />
+          <Pino x={110} y={540} s={1} />
+          <Pino x={175} y={560} s={0.8} />
+          <Pino x={760} y={548} s={1.05} />
+          <Pino x={850} y={565} s={0.85} />
+          {/* hoyo en la nieve donde aterriza */}
+          {caida >= 1 && <ellipse cx={P2[0]} cy={P2[1] + 8} rx={40} ry={12} fill="#9FB4CF" stroke={OL} strokeWidth={4} />}
+          {/* avión */}
+          <g transform={`translate(46 ${196 + sube}) rotate(-5) scale(1.32)`}>
+            <Avion />
+          </g>
+          {/* la azafata */}
+          {caida > 0 && caida < 1 && (
+            <g transform={`translate(${px} ${py})`}>
+              <Azafata giro={k * 14} />
+            </g>
+          )}
+        </svg>
+        {/* rótulo superior */}
+        <div style={{position: 'absolute', left: 30, top: 26, fontFamily: 'LuckiestGuy', fontSize: 40, color: CREMA, background: '#D6312B', border: `5px solid ${OL}`, padding: '6px 22px 0', borderRadius: 18, transform: 'rotate(-2deg)', boxShadow: `0 6px 0 ${OL}`}}>REAL CASE · 1972</div>
+        {/* contador de la caída */}
+        <div style={{position: 'absolute', right: 36, top: 120, textAlign: 'right'}}>
+          <div style={{fontFamily: 'LuckiestGuy', fontSize: 140, lineHeight: 0.9, color: AM, WebkitTextStroke: `14px ${OL}`, paintOrder: 'stroke fill', filter: `drop-shadow(0 7px 0 ${OL})`}}>
+            {km.toFixed(km < 10 ? 1 : 0)}
+            <span style={{fontSize: 66}}> KM</span>
+          </div>
+          <div style={{fontFamily: 'LuckiestGuy', fontSize: 46, color: '#fff', WebkitTextStroke: `9px ${OL}`, paintOrder: 'stroke fill', opacity: interpolate(f, [M.SIXMILE + 4, M.SIXMILE + 8], [0, 1], clamp)}}>(6 MILES) FALL</div>
         </div>
-        <div style={{fontFamily: 'LuckiestGuy', fontSize: 50, color: '#fff', opacity: interpolate(f, [M.SIXMILE + 4, M.SIXMILE + 8], [0, 1], clamp)}}>(6 MILES) FALL</div>
+        {/* sello */}
+        {sello >= 0 && (
+          <div style={{position: 'absolute', right: 40, top: 370, transform: `rotate(-8deg) scale(${interpolate(sello, [0, 4, 7], [2.4, 0.92, 1], clamp)})`, opacity: interpolate(sello, [0, 3], [0, 1], clamp), fontFamily: 'LuckiestGuy', fontSize: 84, color: '#fff', background: '#2FA84F', border: `7px solid ${OL}`, borderRadius: 22, padding: '8px 28px 0', boxShadow: `0 8px 0 ${OL}`, WebkitTextStroke: `7px ${OL}`, paintOrder: 'stroke fill'}}>
+            SURVIVED ✓
+          </div>
+        )}
+        {/* nombre */}
+        <div style={{position: 'absolute', left: 0, right: 0, bottom: 0, height: 64, background: CREMA, borderTop: `6px solid ${OL}`, fontFamily: 'LuckiestGuy', fontSize: 34, color: OL, textAlign: 'center', paddingTop: 16}}>VESNA VULOVIC · FLIGHT ATTENDANT</div>
       </div>
-      {sello >= 0 && (
-        <div style={{position: 'absolute', right: 50, top: 400, transform: `rotate(-8deg) scale(${interpolate(sello, [0, 4, 7], [2.4, 0.92, 1], clamp)})`, opacity: interpolate(sello, [0, 3], [0, 1], clamp), fontFamily: 'LuckiestGuy', fontSize: 92, color: '#4ADE80', border: '10px solid #4ADE80', borderRadius: 24, padding: '4px 30px'}}>
-          SURVIVED ✓
-        </div>
-      )}
-      <div style={{position: 'absolute', left: 40, bottom: 24, fontFamily: 'Bangers', fontSize: 34, letterSpacing: 2, color: 'rgba(255,255,255,0.6)'}}>VESNA VULOVIĆ · FLIGHT ATTENDANT</div>
     </div>
   );
 };
@@ -374,18 +475,18 @@ const Subtitulos: React.FC = () => {
   return null;
 };
 
-// ---------- Nombre del capítulo arriba (hasta que entran las rosquillas) ----------
+// ---------- Nombre del capítulo: en el hueco entre el borde de arriba y el video, hasta que entra la voz ----------
 // Letras amarillas con contorno grueso y sombra dura, cada una a su altura y con su giro, como el logo de la serie.
 const EPISODIO = 'BART THE DAREDEVIL';
 const TituloEpisodio: React.FC = () => {
   const f = useCurrentFrame();
-  const fin = MEDIDOR_DESDE;
+  const fin = INICIO['01_hook']; // hasta que entra nuestra voz
   if (f > fin) return null;
-  const sale = interpolate(f, [fin - 6, fin], [1, 0], clamp);
+  const sale = interpolate(f, [fin - 5, fin], [1, 0], clamp);
   const giros = [-6, 4, -3, 7, -5, 3, -7, 5, -2, 6, -4, 3, -6, 4, -3, 5, -5, 2];
   const alturas = [0, -6, 4, -3, 6, -5, 2, -7, 5, -2, 4, -6, 3, -4, 6, -3, 5, -5];
   return (
-    <div style={{position: 'absolute', top: 92, width: '100%', textAlign: 'center', opacity: sale}}>
+    <div style={{position: 'absolute', top: 205, width: '100%', textAlign: 'center', opacity: sale}}>
       <div style={{display: 'inline-block', fontFamily: 'LuckiestGuy', fontSize: 30, color: '#fff', background: '#D6312B', border: `5px solid ${NEG}`, borderRadius: 14, padding: '6px 18px 0', transform: 'rotate(-2deg)', boxShadow: `0 6px 0 ${NEG}`}}>
         SEASON 2 · EPISODE 8
       </div>
