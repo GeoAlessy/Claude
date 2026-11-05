@@ -13,6 +13,7 @@ import {DMedabot} from '../opciones2';
 // =====================================================================
 loadFont({family: 'LuckiestGuy', url: staticFile('fonts/LuckiestGuy-latin.woff2'), weight: '400'});
 loadFont({family: 'Bangers', url: staticFile('fonts/Bangers-latin.woff2'), weight: '400'});
+loadFont({family: 'Simpsonfont', url: staticFile('fonts/Simpsonfont-demo.otf'), weight: '400'});
 loadFont({family: 'Chewy', url: staticFile('fonts/Chewy-latin.woff2'), weight: '400'});
 // Las mediciones (velocidad, metros) tienen su propia letra y color para reconocerlas de un vistazo
 const MEDIDA = '#36D6FF';
@@ -303,14 +304,45 @@ const Pino: React.FC<{x: number; y: number; s: number}> = ({x, y, s}) => (
   </g>
 );
 
-/** La azafata cayendo, figura chiquita al estilo de la serie */
-const Azafata: React.FC<{giro: number}> = ({giro}) => (
-  <g transform={`rotate(${giro})`} stroke={OL} strokeWidth={3} strokeLinejoin="round" strokeLinecap="round">
-    <path d="M-6 -2 L-20 -22 M6 -2 L20 -22" strokeWidth={6} />
-    <path d="M-5 14 L-12 30 M5 14 L12 30" strokeWidth={6} />
-    <rect x={-10} y={-6} width={20} height={24} rx={7} fill="#2F5DA8" />
-    <circle cx={0} cy={-15} r={10} fill={AM} />
-    <path d="M-10 -18 Q-8 -30 2 -27 Q12 -26 10 -16 Q4 -22 -10 -18 Z" fill="#6B3E1E" />
+/** Homero chiquito cayendo: gordito, camisa blanca, pantalón azul, dos pelos y barba de tres días. */
+const HomeroCae: React.FC<{giro: number}> = ({giro}) => (
+  <g transform={`rotate(${giro}) scale(1.4)`} stroke={OL} strokeWidth={2.6} strokeLinejoin="round" strokeLinecap="round">
+    {/* brazos arriba */}
+    <path d="M-12 -6 Q-26 -14 -28 -30" fill="none" stroke={OL} strokeWidth={9} />
+    <path d="M-12 -6 Q-26 -14 -28 -30" fill="none" stroke={AM} strokeWidth={5} />
+    <path d="M12 -6 Q26 -14 28 -30" fill="none" stroke={OL} strokeWidth={9} />
+    <path d="M12 -6 Q26 -14 28 -30" fill="none" stroke={AM} strokeWidth={5} />
+    <circle cx={-28} cy={-32} r={4.5} fill={AM} />
+    <circle cx={28} cy={-32} r={4.5} fill={AM} />
+    {/* piernas (pantalón azul) y zapatos grises */}
+    <path d="M-14 16 L-18 34 L-6 34 L-3 18 Z" fill="#2F6FD0" />
+    <path d="M14 16 L18 34 L6 34 L3 18 Z" fill="#2F6FD0" />
+    <ellipse cx={-13} cy={37} rx={8} ry={4} fill="#5B5F6B" />
+    <ellipse cx={13} cy={37} rx={8} ry={4} fill="#5B5F6B" />
+    {/* panza: pantalón abajo, camisa blanca arriba */}
+    <ellipse cx={0} cy={12} rx={19} ry={11} fill="#2F6FD0" />
+    <path d="M-17 6 Q-20 -10 -10 -12 L10 -12 Q20 -10 17 6 Q0 12 -17 6 Z" fill="#FFFFFF" />
+    {/* mangas */}
+    <path d="M-10 -12 L-17 -7 L-13 -2 Z" fill="#FFFFFF" />
+    <path d="M10 -12 L17 -7 L13 -2 Z" fill="#FFFFFF" />
+    {/* cabeza */}
+    <path d="M-9 -12 L-9 -30 Q-9 -42 1 -42 Q11 -42 11 -30 L11 -16 Z" fill={AM} />
+    {/* barba de tres días */}
+    <path d="M-2 -22 Q-6 -10 4 -10 Q14 -10 13 -20 Q10 -23 4 -22 Z" fill="#C9A26A" />
+    <path d="M1 -14 Q5 -12 9 -15" fill="none" strokeWidth={1.8} />
+    {/* ojos */}
+    <circle cx={2} cy={-30} r={5} fill="#FFFFFF" />
+    <circle cx={10} cy={-30} r={5} fill="#FFFFFF" />
+    <circle cx={3} cy={-30} r={1.3} fill={OL} stroke="none" />
+    <circle cx={11} cy={-30} r={1.3} fill={OL} stroke="none" />
+    {/* nariz */}
+    <path d="M10 -25 Q16 -25 16 -22 Q16 -19 11 -20" fill={AM} strokeWidth={2} />
+    {/* oreja */}
+    <path d="M-8 -26 Q-12 -26 -12 -22 Q-12 -18 -8 -19" fill={AM} strokeWidth={2} />
+    {/* los dos pelos */}
+    <path d="M-4 -42 Q-2 -50 2 -42 M2 -42 Q4 -50 8 -42" fill="none" strokeWidth={1.8} />
+    {/* boca abierta del grito */}
+    <ellipse cx={6} cy={-15} rx={3} ry={2.2} fill="#7A2A1E" strokeWidth={1.5} />
   </g>
 );
 
@@ -362,7 +394,7 @@ const CasoReal: React.FC = () => {
           {/* la azafata */}
           {caida > 0 && caida < 1 && (
             <g transform={`translate(${px} ${py})`}>
-              <Azafata giro={k * 14} />
+              <HomeroCae giro={k * 14} />
             </g>
           )}
         </svg>
@@ -496,7 +528,7 @@ const TituloEpisodio: React.FC = () => {
           const k = f - i * 1.1;
           const pop = interpolate(k, [0, 3, 6], [0, 1.2, 1], clamp);
           return (
-            <span key={i} style={{display: 'inline-block', fontFamily: 'LuckiestGuy', fontSize: c === ' ' ? 40 : 86, color: AM, transform: `translateY(${alturas[i % alturas.length]}px) rotate(${giros[i % giros.length]}deg) scale(${pop})`, ...trazo(16), margin: '0 -1px'}}>
+            <span key={i} style={{display: 'inline-block', fontFamily: 'Simpsonfont', fontSize: 86, color: AM, transform: `translateY(${alturas[i % alturas.length]}px) rotate(${giros[i % giros.length]}deg) scale(${pop})`, ...trazo(16), margin: '0 -1px'}}>
               {c === ' ' ? '\u00A0' : c}
             </span>
           );
