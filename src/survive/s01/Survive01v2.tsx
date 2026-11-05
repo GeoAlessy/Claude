@@ -689,7 +689,7 @@ export const Survive01v2: React.FC = () => {
       <CasoReal />
       <Veredicto />
       <PanelDano />
-      {visibleMedidor > 0 && <VidasEventos eventos={EVENTOS} visible={visibleMedidor} left={40} top={100} escala={0.6} />}
+      {visibleMedidor > 0 && <VidasEventos eventos={EVENTOS} visible={visibleMedidor} left={40} top={100} escala={0.72} />}
       <Titulo />
       <TituloEpisodio />
       <Subtitulos />
