@@ -39,7 +39,7 @@ export const Gancho: React.FC = () => {
 
       <Reticula centro={[440, 880]} radio={105} color={C.ambar} inicio={2} fin={22} etiqueta="Refresco de 2 litros" ladoEtiqueta="der" />
       {enRepeticion && (
-        <div style={{position: 'absolute', left: 60, top: 470, opacity: interpolate(tb, [0, 8], [0, 1], clamp)}}>
+        <div style={{position: 'absolute', left: 60, top: 480, opacity: interpolate(tb, [0, 8], [0, 1], clamp)}}>
           <Pastilla color={C.ambar} punto tam={28}>
             Repetición · cámara lenta
           </Pastilla>
@@ -85,7 +85,10 @@ export const Gancho: React.FC = () => {
         el fuego?
       </div>
       <div style={{position: 'absolute', top: 170, left: 62, fontFamily: MONO, fontWeight: 700, fontSize: 24, letterSpacing: 1.5, color: 'rgba(248,250,252,0.85)', textShadow: '0 2px 8px rgba(0,0,0,0.9)'}}>
-        VIDEO · REDDIT · VALLE DE LA PASCUA, VENEZUELA
+        VIDEO · REDDIT
+      </div>
+      <div style={{position: 'absolute', top: 410, left: 62, fontFamily: MONO, fontWeight: 700, fontSize: 26, letterSpacing: 1.5, color: C.blanco, textShadow: '0 2px 8px rgba(0,0,0,0.95)'}}>
+        <span style={{color: C.rojo}}>●</span> VALLE DE LA PASCUA, VENEZUELA
       </div>
     </AbsoluteFill>
   );
