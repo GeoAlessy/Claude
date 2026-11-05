@@ -150,7 +150,7 @@ plano({desde: INICIO['07_again'] - 3, src: 1255.1, vel: 1.25, cx: 0.5, sigue: [[
 plano({desde: M.AND7 - 2, src: 1234.6, vel: 0.6, cx: 0.2, cy: 0.9, zoom: [1.2, 1.3]}); // vuelve a caer de cabeza
 plano({desde: M.SAME - 6, src: IMPACTO[3] + 0.1 - 6 / FPS, vel: 1.0, cx: 0.27, fy: 0.76, zoom: [1.25, 1.375], congela: 7, golpe: 'rojo'}); // "Same rocks": las mismas piedras, mismo golpe
 // 08 · hospital
-plano({desde: INICIO['08_verdict'] - 3, src: 1266.6, vel: 0.7, cx: 0.5, zoom: [1.0, 1.2], archivo: 'hospital'});
+plano({desde: INICIO['08_verdict'] - 3, src: 1240.9, vel: 0.55, cx: 0.3, zoom: [1.05, 1.15], congela: 70}); // Homero tirado en el fondo: la patineta le cae en la cabeza (golpe en el cuadro 60) y queda congelado
 // B · Bart: "But, Dad, you'll never make it." (el bucle vuelve a H)
 plano({desde: INI_B, src: ORIG_B.src, vel: 1.0, cx: 0.5, zoom: [1.0, 1.1], archivo: 'dialogo'});
 

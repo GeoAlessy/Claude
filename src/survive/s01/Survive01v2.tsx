@@ -143,10 +143,10 @@ const Replay: React.FC = () => {
 };
 
 // ---------- Medida AR (como la app de medir del celular) sobre el sendero del acantilado ----------
-// Empieza en los pies de Bart (arriba, en el borde) y baja por el sendero hasta los pies del niño de verde.
+// Empieza en los pies de Bart (arriba, en el borde) y baja recta, en vertical, por el medio del sendero.
 // Coordenadas en el cuadro original (0..1), así siguen a la imagen aunque la cámara haga zoom.
 const AR_INI = {u: 0.4876, v: 0.099};
-const AR_FIN = {u: 0.582, v: 0.776};
+const AR_FIN = {u: 0.4876, v: 0.776}; // recto hacia abajo desde los pies de Bart
 const AR_ZOOM: [number, number] = [1.0, 1.04];
 const AR_CX = 0.52;
 const Cinta: React.FC = () => {
@@ -640,7 +640,7 @@ const SFX: [string, number, number][] = [];
 PLANOS.forEach((p, i) => {
   if (i > 0 && !p.golpe && p.desde < INI_B) SFX.push(['swish', p.desde - 2, 0.16]);
 });
-[...M.HIT, M.SAME].forEach((h) => {
+[...M.HIT, M.SAME, INICIO['08_verdict'] - 3 + 60].forEach((h) => { // + la patineta en la cabeza
   SFX.push(['bonk', h, 0.7]);
   SFX.push(['impacto', h, 0.35]);
 });
