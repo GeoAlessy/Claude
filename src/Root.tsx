@@ -43,6 +43,7 @@ import * as OP6 from './survive/opciones6';
 import {DemoRosquillas, DUR_DEMO_ROSQ} from './survive/rosquillas';
 import * as M56 from './porquepaso/canal/Miniaturas56';
 import * as M7 from './porquepaso/canal/Miniaturas7';
+import * as M8 from './porquepaso/canal/Miniaturas8';
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -98,6 +99,10 @@ export const RemotionRoot: React.FC = () => {
       <Still id="P07MiniB" component={M7.M7B} width={1080} height={1920} />
       <Still id="P07MiniC" component={M7.M7C} width={1080} height={1920} />
       <Still id="P07MiniH" component={M7.M7H} width={1280} height={720} />
+      <Still id="P08MiniA" component={M8.M8A} width={1080} height={1920} />
+      <Still id="P08MiniB" component={M8.M8B} width={1080} height={1920} />
+      <Still id="P08MiniC" component={M8.M8C} width={1080} height={1920} />
+      <Still id="P08MiniH" component={M8.M8H} width={1280} height={720} />
       <Still id="P01MiniA" component={M01.MiniA} width={1080} height={1920} />
       <Still id="P01MiniB" component={M01.MiniB} width={1080} height={1920} />
       <Still id="P01MiniC" component={M01.MiniC} width={1080} height={1920} />
