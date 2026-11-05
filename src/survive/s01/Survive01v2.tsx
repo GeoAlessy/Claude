@@ -62,7 +62,8 @@ const Plano: React.FC<{p: (typeof PLANOS)[number]}> = ({p}) => {
     // cuadro completo a lo ancho (se ve el cuerpo entero) + el mismo cuadro desenfocado de fondo
     const W = 1080 * zoom;
     const H = W / RATIO;
-    caja = {position: 'absolute', left: 540 - W / 2 + pan + dx, top: 900 - H / 2 + dy, width: W, height: H, borderRadius: 26, boxShadow: '0 20px 60px rgba(0,0,0,0.6)'};
+    const cxe = p.sigue ? interpolate(f / Math.max(1, dur), p.sigue.map((k) => k[0]), p.sigue.map((k) => k[1]), clamp) : 0.5;
+    caja = {position: 'absolute', left: Math.min(0, Math.max(1080 - W, 540 - cxe * W)) + pan + dx, top: 900 - H / 2 + dy, width: W, height: H, borderRadius: 26, boxShadow: '0 20px 60px rgba(0,0,0,0.6)'};
     const Hf = 1920 * 1.1;
     fondo = <OffthreadVideo src={fuente} muted trimBefore={trim} playbackRate={p.vel} style={{position: 'absolute', height: Hf, width: Hf * RATIO, left: 540 - (Hf * RATIO) / 2, top: -96, filter: 'blur(28px) brightness(0.55)'}} />;
   } else {
