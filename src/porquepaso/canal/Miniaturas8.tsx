@@ -52,10 +52,10 @@ export const M8A: React.FC = () => (
 export const M8B: React.FC = () => (
   <AbsoluteFill style={{background: '#000'}}>
     <div style={{position: 'absolute', top: 0, left: 0, width: 1080, height: 960, overflow: 'hidden'}}>
-      <Img src={R8} style={{position: 'absolute', width: 1500, left: -40, top: -560}} />
+      <Img src={R8} style={{position: 'absolute', width: 1500, left: -40, top: -980}} />
     </div>
     <div style={{position: 'absolute', top: 960, left: 0, width: 1080, height: 960, overflow: 'hidden', background: '#01040a'}}>
-      <Img src={H8} style={{position: 'absolute', width: 1080, left: 0, top: -420}} />
+      <Img src={H8} style={{position: 'absolute', width: 1080, left: 0, top: -520}} />
     </div>
     <div style={{position: 'absolute', top: 0, left: 0, right: 0, height: 420, background: 'linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%)'}} />
     <Corte top={960} />
@@ -74,10 +74,10 @@ export const M8C: React.FC = () => (
   <AbsoluteFill style={{background: '#01040a'}}>
     <Img src={H8A} style={{position: 'absolute', width: 1080, height: 1920}} />
     <AbsoluteFill style={{background: 'linear-gradient(180deg, rgba(1,4,10,0.97) 0%, rgba(1,4,10,0.6) 22%, rgba(1,4,10,0) 40%, rgba(1,4,10,0) 60%, rgba(1,4,10,0.9) 100%)'}} />
-    <Grande top={150} color={C.verde} tam={100}>AMARRADA</Grande>
-    <Grande top={270} color={C.blanco} tam={70}>se queda</Grande>
-    <Grande bottom={330} color={C.rojo} tam={100}>SIN AMARRE</Grande>
-    <Grande bottom={230} color={C.blanco} tam={70}>el río se la lleva</Grande>
+    <Grande top={150} color={C.rojo} tam={100}>SIN AMARRE</Grande>
+    <Grande top={270} color={C.blanco} tam={70}>el río se la lleva</Grande>
+    <Grande bottom={330} color={C.verde} tam={100}>AMARRADA</Grande>
+    <Grande bottom={230} color={C.blanco} tam={70}>se queda</Grande>
   </AbsoluteFill>
 );
 export const M8H: React.FC = () => (
