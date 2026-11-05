@@ -142,42 +142,65 @@ const Replay: React.FC = () => {
   );
 };
 
-// ---------- Cinta métrica 3D pegada al sendero del acantilado ----------
-const LARGO = 1220; // largo total de la cinta (antes de la perspectiva): el final queda dentro de la pantalla
+// ---------- Medida AR (como la app de medir del celular) sobre el sendero del acantilado ----------
+// Empieza en los pies de Bart (arriba, en el borde) y baja por el sendero hasta los pies del niño de verde.
+// Coordenadas en el cuadro original (0..1), así siguen a la imagen aunque la cámara haga zoom.
+const AR_INI = {u: 0.4876, v: 0.099};
+const AR_FIN = {u: 0.582, v: 0.776};
+const AR_ZOOM: [number, number] = [1.0, 1.04];
+const AR_CX = 0.52;
 const Cinta: React.FC = () => {
   const f = useCurrentFrame();
-  const largo = interpolate(f, [0, 16], [0, LARGO], {...clamp, easing: Easing.out(Easing.cubic)});
-  const salida = interpolate(f, [M.SO - INICIO['02_deep'] - 5, M.SO - INICIO['02_deep']], [1, 0], clamp);
+  const dur = M.SO - INICIO['02_deep'] + 2;
+  const z = interpolate(f, [0, dur], AR_ZOOM, clamp);
+  const H = 1920 * z;
+  const W = H * RATIO;
+  const left = Math.min(0, Math.max(1080 - W, 540 - AR_CX * W));
+  const top = (1920 - H) / 2;
+  const a = {x: left + AR_INI.u * W, y: top + AR_INI.v * H};
+  const b = {x: left + AR_FIN.u * W, y: top + AR_FIN.v * H};
+  const avance = interpolate(f, [3, 20], [0, 1], {...clamp, easing: Easing.inOut(Easing.cubic)});
+  const salida = interpolate(f, [dur - 5, dur], [1, 0], clamp);
   const etiqueta = f - (M.THIRTY - INICIO['02_deep'] + 2);
-  const paso = LARGO / 100; // 1 m
+  const punta = {x: a.x + (b.x - a.x) * avance, y: a.y + (b.y - a.y) * avance};
+  const ang = (Math.atan2(b.y - a.y, b.x - a.x) * 180) / Math.PI;
+  const largo = Math.hypot(b.x - a.x, b.y - a.y);
+  const pinA = interpolate(f, [0, 4, 7], [0, 1.25, 1], clamp);
+  const pinB = interpolate(f, [19, 23, 26], [0, 1.25, 1], clamp);
+  const sombra = 'drop-shadow(0 3px 4px rgba(0,0,0,0.55))';
+  const Pin: React.FC<{p: {x: number; y: number}; s: number}> = ({p, s}) => (
+    <div style={{position: 'absolute', left: p.x - 30, top: p.y - 30, width: 60, height: 60, borderRadius: 30, background: 'rgba(255,255,255,0.3)', border: '7px solid #fff', boxSizing: 'border-box', transform: `scale(${s})`, filter: sombra}}>
+      <div style={{position: 'absolute', left: 17, top: 17, width: 12, height: 12, borderRadius: 6, background: '#fff'}} />
+    </div>
+  );
   return (
-    <AbsoluteFill style={{perspective: 1300, opacity: salida}}>
-      <div style={{position: 'absolute', left: 560, top: 100, transformOrigin: 'top center', transform: 'rotateX(32deg) rotateZ(-4deg)', transformStyle: 'preserve-3d'}}>
-        {/* carcasa de la cinta */}
-        <div style={{position: 'absolute', left: -52, top: -78, width: 178, height: 118, borderRadius: 28, background: 'linear-gradient(160deg,#FDE047,#CA8A04)', border: `6px solid ${NEG}`, boxShadow: '0 10px 0 rgba(0,0,0,0.3)'}}>
-          <div style={{position: 'absolute', left: 58, top: 26, width: 52, height: 52, borderRadius: 26, background: '#3F3F46', border: `5px solid ${NEG}`}} />
+    <AbsoluteFill style={{opacity: salida}}>
+      {/* línea punteada que avanza */}
+      <div style={{position: 'absolute', left: a.x, top: a.y - 3, width: largo * avance, height: 0, borderTop: '6px dashed #fff', transform: `rotate(${ang}deg)`, transformOrigin: '0 50%', filter: sombra}} />
+      {/* puntos cada 10 m */}
+      {Array.from({length: 9}).map((_, i) => {
+        const t = (i + 1) / 10;
+        if (t > avance) return null;
+        return <div key={i} style={{position: 'absolute', left: a.x + (b.x - a.x) * t - 9, top: a.y + (b.y - a.y) * t - 9, width: 18, height: 18, borderRadius: 9, background: '#fff', filter: sombra}} />;
+      })}
+      <Pin p={a} s={pinA} />
+      {f >= 19 && <Pin p={b} s={pinB} />}
+      {/* lectura en vivo junto a la punta mientras mide */}
+      {avance > 0 && avance < 1 && (
+        <div style={{position: 'absolute', left: punta.x + 26, top: punta.y - 26, padding: '6px 16px', borderRadius: 30, background: 'rgba(255,255,255,0.95)', fontFamily: 'Bangers', fontSize: 34, letterSpacing: 1, color: '#111', filter: sombra, whiteSpace: 'nowrap'}}>
+          {Math.round(avance * 100)} m
         </div>
-        <div style={{position: 'relative', width: 76, height: largo, overflow: 'hidden', background: 'linear-gradient(90deg,#EAB308,#FDE68A 45%,#FACC15 70%,#CA8A04)', borderLeft: `4px solid ${NEG}`, borderRight: `4px solid ${NEG}`, boxShadow: '10px 0 16px rgba(0,0,0,0.35)'}}>
-          {Array.from({length: 101}).map((_, m) => (
-            <div key={m} style={{position: 'absolute', top: m * paso, left: 0, width: m % 10 === 0 ? 40 : m % 5 === 0 ? 26 : 14, height: m % 10 === 0 ? 5 : 3, background: NEG}} />
-          ))}
-          {Array.from({length: 10}).map((_, i) => (
-            <div key={i} style={{position: 'absolute', top: (i + 1) * 10 * paso - 30, left: 20, fontFamily: 'Bangers', fontSize: 30, letterSpacing: 1, color: NEG, transform: 'rotate(-90deg)', transformOrigin: 'left top', whiteSpace: 'nowrap'}}>
-              {(i + 1) * 10} M
-            </div>
-          ))}
-        </div>
-        {/* etiqueta al costado del final, con el mismo diseño de la cinta */}
-        {etiqueta >= 0 && (
-          <div style={{position: 'absolute', right: 84, top: LARGO - 420, transform: `scale(${interpolate(etiqueta, [0, 4, 7], [0.4, 1.08, 1], clamp)})`, transformOrigin: 'right center', display: 'flex', alignItems: 'center', whiteSpace: 'nowrap'}}>
-            <div style={{background: 'linear-gradient(180deg,#FDE68A,#FACC15)', border: `5px solid ${NEG}`, borderRadius: 10, padding: '6px 18px', fontFamily: 'Bangers', color: NEG, lineHeight: 0.95, textAlign: 'center', boxShadow: '0 8px 0 rgba(0,0,0,0.3)'}}>
-              <div style={{fontSize: 62, letterSpacing: 2}}>100 M</div>
-              <div style={{fontSize: 32, letterSpacing: 2}}>≈ 30 FLOORS</div>
-            </div>
-            <div style={{width: 30, height: 6, background: NEG}} />
+      )}
+      {/* aviso: pastilla AR con la regla */}
+      {etiqueta >= 0 && (
+        <div style={{position: 'absolute', left: 600, top: 560, transform: `scale(${interpolate(etiqueta, [0, 4, 7], [0.4, 1.08, 1], clamp)})`, transformOrigin: 'left center', display: 'flex', alignItems: 'center', gap: 16, background: 'rgba(30,30,36,0.6)', border: '2px solid rgba(255,255,255,0.55)', borderRadius: 44, padding: '12px 30px 12px 14px', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', boxShadow: '0 10px 24px rgba(0,0,0,0.4)', whiteSpace: 'nowrap'}}>
+          <div style={{width: 68, height: 68, borderRadius: 34, background: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 40}}>📏</div>
+          <div style={{lineHeight: 0.95, fontFamily: 'Bangers', letterSpacing: 2}}>
+            <div style={{fontSize: 66, color: '#fff'}}>100 M</div>
+            <div style={{fontSize: 32, color: 'rgba(255,255,255,0.85)'}}>≈ 30 FLOORS</div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </AbsoluteFill>
   );
 };
@@ -646,7 +669,10 @@ function volMusica(f: number) {
 
 export const Survive01v2: React.FC = () => {
   const f = useCurrentFrame();
-  const visibleMedidor = interpolate(f, [MEDIDOR_DESDE, MEDIDOR_DESDE + 6, INI_B - 4, INI_B], [0, 1, 1, 0], clamp);
+  // durante la medida AR las rosquillas se apartan: el pin de arriba está en los pies de Bart, justo debajo de ellas
+  const ar0 = INICIO['02_deep'] - 2;
+  const libreAR = interpolate(f, [ar0 - 4, ar0, M.SO - 2, M.SO + 4], [1, 0, 0, 1], clamp);
+  const visibleMedidor = interpolate(f, [MEDIDOR_DESDE, MEDIDOR_DESDE + 6, INI_B - 4, INI_B], [0, 1, 1, 0], clamp) * libreAR;
   return (
     <AbsoluteFill style={{background: '#000'}}>
       {PLANOS.map((p, i) => (

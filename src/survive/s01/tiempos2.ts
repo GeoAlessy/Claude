@@ -116,7 +116,7 @@ plano({desde: M.AMB - 2, src: 1255.15, vel: 1.0, cx: 0.5, sigue: [[0, 0.6], [1, 
 // 01 · "But could a real human survive this?" cae
 plano({desde: M.BUT - 1, src: 1226.5, vel: 1.05, cx: 0.5, sigue: [[0, 0.5], [0.5, 0.6], [1, 0.6]], cy: 0.2, cy2: 0.85, zoom: [1.2, 1.45]}); // Homero cae al desfiladero: la cámara lo sigue
 // 02 · el acantilado con la cinta métrica 3D
-plano({desde: INICIO['02_deep'] - 2, src: 1218.0, vel: 0.9, cx: 0.52, zoom: [1.0, 1.04]}); // casi quieto: la cinta va pegada al sendero
+plano({desde: INICIO['02_deep'] - 2, src: 1218.2, vel: 0.85, cx: 0.52, zoom: [1.0, 1.04]}); // casi quieto: la medida va pegada al sendero (empieza tras el corte de 1218,17)
 // 02 · "so you'd hit the bottom at a hundred miles an hour"
 plano({desde: M.SO - 1, src: 1221.3, vel: 1.0, cx: 0.5, zoom: [1.0, 1.15]}); // Homero gritando en el aire, centrado
 // 03 · los niños se asoman al borde
