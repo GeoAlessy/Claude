@@ -58,6 +58,7 @@ const Plano: React.FC<{p: (typeof PLANOS)[number]}> = ({p}) => {
   let caja: React.CSSProperties;
   let fondo: React.ReactNode = null;
   const fuente = staticFile(`survive/s01/clips_hd/${archivo}.mp4`); // 3392x1920 (Real-ESRGAN x4 sin reducir)
+  const fuenteFondo = staticFile(`survive/s01/clips_fondo/${archivo}.mp4`); // baja resolución: solo para el fondo desenfocado
   if (p.encaja) {
     // cuadro completo a lo ancho (se ve el cuerpo entero) + el mismo cuadro desenfocado de fondo
     const W = 1080 * zoom;
@@ -65,7 +66,7 @@ const Plano: React.FC<{p: (typeof PLANOS)[number]}> = ({p}) => {
     const cxe = p.sigue ? interpolate(f / Math.max(1, dur), p.sigue.map((k) => k[0]), p.sigue.map((k) => k[1]), clamp) : 0.5;
     caja = {position: 'absolute', left: Math.min(0, Math.max(1080 - W, 540 - cxe * W)) + pan + dx, top: 900 - H / 2 + dy, width: W, height: H, borderRadius: 26, boxShadow: '0 20px 60px rgba(0,0,0,0.6)'};
     const Hf = 1920 * 1.1;
-    fondo = <OffthreadVideo src={fuente} muted trimBefore={trim} playbackRate={p.vel} style={{position: 'absolute', height: Hf, width: Hf * RATIO, left: 540 - (Hf * RATIO) / 2, top: -96, filter: 'blur(28px) brightness(0.55)'}} />;
+    fondo = <OffthreadVideo src={fuenteFondo} muted trimBefore={trim} playbackRate={p.vel} style={{position: 'absolute', height: Hf, width: Hf * RATIO, left: 540 - (Hf * RATIO) / 2, top: -96, filter: 'blur(28px) brightness(0.55)'}} />;
   } else {
     const H = 1920 * zoom;
     const W = H * RATIO;
@@ -77,7 +78,7 @@ const Plano: React.FC<{p: (typeof PLANOS)[number]}> = ({p}) => {
       const borde = 'linear-gradient(to bottom, transparent 0, #000 90px, #000 calc(100% - 90px), transparent 100%)';
       caja = {position: 'absolute', left, top, width: W, height: H, WebkitMaskImage: borde, maskImage: borde};
       const Hf = 1920 * 1.15;
-      fondo = <OffthreadVideo src={fuente} muted trimBefore={trim} playbackRate={p.vel} style={{position: 'absolute', height: Hf, width: Hf * RATIO, left: 540 - p.cx * Hf * RATIO, top: -144, filter: 'blur(30px) brightness(0.6)'}} />;
+      fondo = <OffthreadVideo src={fuenteFondo} muted trimBefore={trim} playbackRate={p.vel} style={{position: 'absolute', height: Hf, width: Hf * RATIO, left: 540 - p.cx * Hf * RATIO, top: -144, filter: 'blur(30px) brightness(0.6)'}} />;
     } else {
       const cyv = p.cy2 !== undefined ? interpolate(f, [0, dur], [p.cy ?? 0.5, p.cy2], clamp) : (p.cy ?? 0.5);
       const top = (1920 - H) * cyv + dy;
@@ -112,19 +113,14 @@ const Brillo: React.FC<{recorte: string; k: number; hasta: number; caja: React.C
   if (k < 0 || hasta <= 0) return null;
   const pop = interpolate(k, [0, 3, 7], [0, 1.25, 1], clamp);
   const sale = interpolate(hasta, [0, 4], [0, 1], clamp);
-  const glow = 18 + 20 * pop;
+  const base = recorte.replace('.png', '');
+  const est = {...caja, boxShadow: undefined, borderRadius: undefined, opacity: sale, transform: `scale(${1 + 0.02 * pop})`};
+  // brillo horneado (scripts/hornear_brillo.py): 5 drop-shadow CSS costaban ≈3,5 s por cuadro
   return (
     <>
       <AbsoluteFill style={{background: 'rgba(0,0,0,0.28)', opacity: Math.min(1, pop) * sale}} />
-      <Img
-        src={staticFile(`survive/s01/clips/${recorte}`)}
-        style={{
-          ...caja,
-          opacity: sale,
-          transform: `scale(${1 + 0.02 * pop})`,
-          filter: `drop-shadow(0 0 3px #fff) drop-shadow(0 0 3px #fff) drop-shadow(0 0 3px #fff) drop-shadow(0 0 ${glow}px ${AM}) drop-shadow(0 0 ${glow * 1.6}px ${AM})`,
-        }}
-      />
+      <Img src={staticFile(`survive/s01/clips/${base}_halo.png`)} style={{...est, opacity: sale * Math.min(1, pop * 1.1)}} />
+      <Img src={staticFile(`survive/s01/clips/${base}_linea.png`)} style={est} />
     </>
   );
 };
