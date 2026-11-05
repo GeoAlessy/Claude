@@ -57,7 +57,7 @@ const Plano: React.FC<{p: (typeof PLANOS)[number]}> = ({p}) => {
   }
   let caja: React.CSSProperties;
   let fondo: React.ReactNode = null;
-  const fuente = staticFile(`survive/s01/clips/${archivo}.mp4`);
+  const fuente = staticFile(`survive/s01/clips_hd/${archivo}.mp4`); // 3392x1920 (Real-ESRGAN x4 sin reducir)
   if (p.encaja) {
     // cuadro completo a lo ancho (se ve el cuerpo entero) + el mismo cuadro desenfocado de fondo
     const W = 1080 * zoom;

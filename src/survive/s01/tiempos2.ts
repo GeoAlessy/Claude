@@ -114,7 +114,7 @@ plano({desde: INICIO['01_hook'] - 1, src: 1224.6, vel: 1.0, cx: 0.5, zoom: [1.55
 // 01 · "The ambulance will." adelanto: la ambulancia que lo hace caer otra vez (se paga al final)
 plano({desde: M.AMB - 2, src: 1255.15, vel: 1.0, cx: 0.5, sigue: [[0, 0.6], [1, 0.55]], zoom: [1.2, 1.32], encaja: true, archivo: 'segunda'}); // la ambulancia se estrella contra el árbol: escena completa
 // 01 · "But could a real human survive this?" cae
-plano({desde: M.BUT - 1, src: 1226.5, vel: 1.05, cx: 0.5, sigue: [[0, 0.5], [0.5, 0.6], [1, 0.6]], cy: 0.2, cy2: 0.85, zoom: [1.2, 1.45]}); // Homero cae al desfiladero: la cámara lo sigue
+plano({desde: M.BUT - 1, src: 1226.5, vel: 1.05, cx: 0.5, sigue: [[0, 0.5], [0.5, 0.6], [1, 0.6]], cy: 0.2, cy2: 0.85, zoom: [1.12, 1.3]}); // Homero cae al desfiladero: la cámara lo sigue
 // 02 · el acantilado con la cinta métrica 3D
 plano({desde: INICIO['02_deep'] - 2, src: 1218.2, vel: 0.85, cx: 0.52, zoom: [1.0, 1.04]}); // casi quieto: la medida va pegada al sendero (empieza tras el corte de 1218,17)
 // 02 · "so you'd hit the bottom at a hundred miles an hour"
@@ -134,7 +134,7 @@ IMPACTO.forEach((imp, i) => {
   plano({desde: M.HIT[i] - 6, src: imp + g.ajuste - 6 / FPS, vel: 1.0, cx: g.x, fy: g.y, zoom: [g.zoom, g.zoom * 1.1], congela: 7, golpe: 'rojo'});
 });
 // 04 · repetición del golpe 4 en cámara lenta
-plano({desde: REPLAY.desde, src: IMPACTO[3] - 0.15, vel: 0.3, cx: 0.27, fy: 0.76, zoom: [1.35, 1.55], golpe: 'replay'});
+plano({desde: REPLAY.desde, src: IMPACTO[3] - 0.15, vel: 0.3, cx: 0.27, fy: 0.76, zoom: [1.28, 1.4], golpe: 'replay'});
 // 05 · el giro
 plano({desde: INICIO['05_twist'] - 2, src: 1232.45, vel: 0.8, cx: 0.45, sigue: [[0, 0.45], [1, 0.33]], zoom: [1.05, 1.15]}); // Homero se clava en el arbusto
 plano({desde: M.EVERY - 2, src: 1233.1, vel: 0.75, cx: 0.3, sigue: [[0, 0.3], [0.5, 0.25], [1, 0.18]], zoom: [1.0, 1.1]}); // patea la roca: cada golpe le quita velocidad
@@ -142,12 +142,12 @@ plano({desde: M.ROCKS - 2, src: 1237.4, vel: 0.55, cx: 0.27, sigue: [[0, 0.27], 
 // 06 · llega al fondo: se congela con brillo en "alive"
 plano({desde: INICIO['06a_alive'] - 2, src: 1239.55, vel: 1.0, cx: 0.5, zoom: [1.12, 1.25], congela: 10, encaja: true}); // cuadro 10 = segundo 1239,9 (el del recorte)
 // C · Lance Murdock en el hospital: "Bones heal, chicks dig scars"
-plano({desde: INI_C - 1, src: ORIG_C.src - 0.1, vel: 1.0, cx: 0.76, zoom: [1.1, 1.3], archivo: 'lance'}); // Lance está a la derecha del cuadro
+plano({desde: INI_C - 1, src: ORIG_C.src - 0.1, vel: 1.0, cx: 0.76, zoom: [1.05, 1.2], archivo: 'lance'}); // Lance está a la derecha del cuadro
 // 06b · caso real: de vuelta a Homero en el fondo (quieto) bajo la tarjeta
 plano({desde: INICIO['06b_real'] - 2, src: 1239.9, vel: 1.0, cx: 0.5, zoom: [1.15, 1.3], congela: 0, encaja: true});
 // 07 · la ambulancia choca y vuelve a caer
 plano({desde: INICIO['07_again'] - 3, src: 1255.1, vel: 1.25, cx: 0.5, sigue: [[0, 0.55], [0.35, 0.58], [0.6, 0.45], [1, 0.3]], zoom: [1.15, 1.3], encaja: true, archivo: 'segunda'}); // choca contra el árbol, se abren las puertas y la camilla con Homero sale rodando: escena completa
-plano({desde: M.AND7 - 2, src: 1234.6, vel: 0.6, cx: 0.2, cy: 0.9, zoom: [1.2, 1.3]}); // vuelve a caer de cabeza
+plano({desde: M.AND7 - 2, src: 1234.6, vel: 0.6, cx: 0.2, cy: 0.9, zoom: [1.15, 1.25]}); // vuelve a caer de cabeza
 plano({desde: M.SAME - 6, src: IMPACTO[3] + 0.1 - 6 / FPS, vel: 1.0, cx: 0.27, fy: 0.76, zoom: [1.25, 1.375], congela: 7, golpe: 'rojo'}); // "Same rocks": las mismas piedras, mismo golpe
 // 08 · hospital
 plano({desde: INICIO['08_verdict'] - 3, src: 1240.9, vel: 0.55, cx: 0.3, zoom: [1.05, 1.15], congela: 70}); // Homero tirado en el fondo: la patineta le cae en la cabeza (golpe en el cuadro 60) y queda congelado
