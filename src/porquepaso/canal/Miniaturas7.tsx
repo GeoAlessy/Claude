@@ -73,8 +73,8 @@ export const M7B: React.FC = () => (
 // C: holograma del vapor sobre el aceite
 export const M7C: React.FC = () => (
   <AbsoluteFill style={{background: '#01040a'}}>
-    <Img src={H7} style={{position: 'absolute', width: 1080, height: 1920}} />
-    <AbsoluteFill style={{background: 'linear-gradient(180deg, rgba(1,4,10,0.95) 0%, rgba(1,4,10,0.1) 30%, rgba(1,4,10,0) 60%, rgba(1,4,10,0.9) 100%)'}} />
+    <Img src={H7} style={{position: 'absolute', width: 1080, height: 1920, top: 120}} />
+    <AbsoluteFill style={{background: 'linear-gradient(180deg, rgba(1,4,10,1) 0%, rgba(1,4,10,0.95) 20%, rgba(1,4,10,0) 36%, rgba(1,4,10,0) 60%, rgba(1,4,10,0.9) 100%)'}} />
     <Grande top={150} color={C.ambar} tam={110}>AGUA + ACEITE</Grande>
     <Grande top={290} color={C.blanco} tam={80}>
       ardiendo = <span style={{color: C.rojo}}>¡BUM!</span>
