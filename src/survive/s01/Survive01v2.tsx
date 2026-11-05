@@ -458,7 +458,7 @@ const Fila: React.FC<{titulo: string; k: number; texto: string; color: string; i
     <div style={{display: 'flex', alignItems: 'center', gap: 22, marginBottom: 30}}>
       <div style={{fontFamily: 'LuckiestGuy', fontSize: 84, color: '#fff', background: 'rgba(14,14,18,0.8)', padding: '12px 32px', borderRadius: 24, border: `5px solid ${NEG}`, ...trazo(4)}}>{titulo}</div>
       {k >= 0 && (
-        <div style={{transform: `scale(${s}) rotate(-4deg)`, opacity: interpolate(k, [0, 3], [0, 1], clamp), fontFamily: 'LuckiestGuy', fontSize: 96, color: '#fff', background: color, padding: '8px 34px', borderRadius: 24, border: `6px solid ${NEG}`, ...trazo(8)}}>
+        <div style={{transform: `scale(${s})`, opacity: interpolate(k, [0, 3], [0, 1], clamp), fontFamily: 'LuckiestGuy', fontSize: 96, color: '#fff', background: color, padding: '8px 34px', borderRadius: 24, border: `6px solid ${NEG}`, ...trazo(8)}}>
           {texto} {icono}
         </div>
       )}
@@ -563,6 +563,28 @@ const TituloEpisodio: React.FC = () => {
             </span>
           );
         })}
+      </div>
+    </div>
+  );
+};
+
+// ---------- Gancho escrito desde el fotograma 0 (debajo del video, mientras habla Homero) ----------
+// Así el espectador sabe en el segundo 0 de qué trata, aunque nuestra voz entre en el 1,9.
+const GanchoTexto: React.FC = () => {
+  const f = useCurrentFrame();
+  const fin = INICIO['01_hook'];
+  if (f > fin) return null;
+  const sale = interpolate(f, [fin - 4, fin], [1, 0], clamp);
+  const pop2 = interpolate(f, [6, 10, 13], [0, 1.15, 1], clamp);
+  const LG: React.CSSProperties = {fontFamily: 'LuckiestGuy'}; // la versión demo de la fuente no trae ' ni .
+  const linea: React.CSSProperties = {fontFamily: 'Simpsonfont', lineHeight: 1.05, whiteSpace: 'nowrap', ...trazo(14), filter: `drop-shadow(0 7px 0 ${NEG})`};
+  return (
+    <div style={{position: 'absolute', top: 1390, width: '100%', textAlign: 'center', opacity: sale}}>
+      <div style={{...linea, fontSize: 66, color: '#fff'}}>
+        THIS FALL WON<span style={LG}>'</span>T KILL YOU<span style={LG}>.</span>
+      </div>
+      <div style={{...linea, fontSize: 80, color: AM, transform: `scale(${pop2})`}}>
+        THE <span style={{color: '#FF5A4E'}}>AMBULANCE</span> WILL<span style={LG}>.</span>
       </div>
     </div>
   );
@@ -692,6 +714,7 @@ export const Survive01v2: React.FC = () => {
       {visibleMedidor > 0 && <VidasEventos eventos={EVENTOS} visible={visibleMedidor} left={40} top={100} escala={0.72} />}
       <Titulo />
       <TituloEpisodio />
+      <GanchoTexto />
       <Subtitulos />
 
       {/* audio */}
