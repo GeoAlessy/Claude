@@ -195,12 +195,16 @@ const Dato: React.FC<{children: React.ReactNode; x: number; y: number; k: number
 };
 
 /** Medición (velocidad): letra Chewy en celeste, como un cartel pintado de la serie. */
-const Medida: React.FC<{valor: number; unidad: string; k: number; hasta: number; x?: number; y?: number}> = ({valor, unidad, k, hasta, x = 770, y = 1030}) => {
+// Acelera = verde con ▲, frena = rojo con ▼
+const SUBE = '#3BE36B';
+const BAJA = '#FF4040';
+const Medida: React.FC<{valor: number; unidad: string; k: number; hasta: number; sube: boolean; x?: number; y?: number}> = ({valor, unidad, k, hasta, sube, x = 770, y = 1030}) => {
   if (k < 0 || hasta <= 0) return null;
   const s = interpolate(k, [0, 4, 7], [0.5, 1.12, 1], clamp);
   const o = interpolate(hasta, [0, 4], [0, 1], clamp);
   return (
-    <div style={{position: 'absolute', left: x, top: y, transform: `translate(-50%,-50%) scale(${s}) rotate(-4deg)`, opacity: o, fontFamily: 'Chewy', color: MEDIDA, whiteSpace: 'nowrap', lineHeight: 0.9, ...trazo(11), filter: SOMBRA}}>
+    <div style={{position: 'absolute', left: x, top: y, transform: `translate(-50%,-50%) scale(${s}) rotate(-4deg)`, opacity: o, fontFamily: 'Chewy', color: sube ? SUBE : BAJA, whiteSpace: 'nowrap', lineHeight: 0.9, ...trazo(11), filter: SOMBRA}}>
+      <span style={{fontSize: 64, verticalAlign: 'middle'}}>{sube ? '▲' : '▼'} </span>
       <span style={{fontSize: 120}}>{Math.round(valor)}</span>
       <span style={{fontSize: 58, color: '#fff'}}> MPH</span>
     </div>
@@ -212,14 +216,14 @@ const Velocidad: React.FC = () => {
   const k = f - M.SO;
   if (k < 0 || f > FIN['02_deep'] + 3) return null;
   const v = interpolate(f, [M.SO, M.HUNDRED + 5], [0, 100], {...clamp, easing: Easing.out(Easing.cubic)});
-  return <Medida valor={v} unidad="MPH" k={k} hasta={FIN['02_deep'] + 3 - f} />;
+  return <Medida valor={v} unidad="MPH" k={k} hasta={FIN['02_deep'] + 3 - f} sube />;
 };
 
 const Velocidad2: React.FC = () => {
   const f = useCurrentFrame();
   if (f < M.EVERY || f > FIN['05_twist'] + 2) return null;
   const v = interpolate(f, [M.EVERY + 6, M.BRAKES + 4], [100, 45], {...clamp, easing: Easing.inOut(Easing.cubic)});
-  return <Medida valor={v} unidad="MPH" k={f - M.EVERY} hasta={FIN['05_twist'] + 2 - f} />;
+  return <Medida valor={v} unidad="MPH" k={f - M.EVERY} hasta={FIN['05_twist'] + 2 - f} sube={false} />;
 };
 
 // ---------- Latido que avanza (sigue vivo) ----------

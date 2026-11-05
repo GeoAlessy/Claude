@@ -40,6 +40,7 @@ import {DemoBarras3, DUR_BARRAS3} from './survive/opciones3';
 import {DemoBarras4, DUR_BARRAS4} from './survive/opciones4';
 import * as OP5 from './survive/opciones5';
 import * as OP6 from './survive/opciones6';
+import * as OP7 from './survive/opciones7';
 import {DemoRosquillas, DUR_DEMO_ROSQ} from './survive/rosquillas';
 import * as M56 from './porquepaso/canal/Miniaturas56';
 import * as M7 from './porquepaso/canal/Miniaturas7';
@@ -57,6 +58,9 @@ export const RemotionRoot: React.FC = () => {
       {['BS1', 'BS2', 'BS3', 'BS4', 'BS5', 'BG1', 'BG2', 'BG3', 'BG4', 'BG5'].map((id) => (
         <Still key={id} id={`Op${id}`} component={(OP5 as any)[id]} width={1080} height={1920} />
       ))}
+      <Still id="HojaReglasA" component={OP7.HojaReglasA} width={2160} height={1536} />
+      <Still id="HojaReglasB" component={OP7.HojaReglasB} width={2160} height={1536} />
+      <Still id="HojaEtiquetas" component={OP7.HojaEtiquetas} width={2160} height={2100} />
       <Still id="HojaAlarmas" component={OP6.HojaAlarmas} width={1600} height={1920} />
       {OP6.AlarmaVista.map((C, i) => (
         <Still key={`v${i}`} id={`OpAlarma${i + 1}`} component={C} width={1080} height={1920} />
