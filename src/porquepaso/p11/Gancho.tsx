@@ -64,7 +64,7 @@ export const Gancho: React.FC = () => {
             textAlign: 'center',
             fontFamily: TITULAR,
             fontWeight: 900,
-            fontSize: 120,
+            fontSize: 100,
             color: C.rojo,
             textShadow: `0 0 40px ${C.rojo}88, 0 6px 0 rgba(0,0,0,0.7)`,
             transform: `scale(${spring({frame: tw, fps, config: {damping: 12, stiffness: 180}})})`,
