@@ -2,7 +2,7 @@ import React from 'react';
 import {AbsoluteFill, OffthreadVideo, Sequence, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
 import {C, MONO, TITULAR} from '../estilo';
 import {Pastilla, Reticula} from '../hud';
-import {A_INI, B_INI, CHOQUE, C_INI, DURACION_GANCHO, FRENO, SEG} from './tiempos';
+import {A_INI, B_INI, CHOQUE, C_INI, DURACION_GANCHO, FRENO, SEG, VEL} from './tiempos';
 export {SEG, DURACION_GANCHO};
 
 // Gancho del video 09: la cámara de seguridad graba cómo la camioneta y el tráiler se van solos… y chocan abajo.
@@ -67,20 +67,20 @@ export const Gancho: React.FC = () => {
       <Reticula centro={aPantalla(250, 215)} radio={95} color={C.ambar} inicio={84} fin={SEG.A.dur - 4} etiqueta="Se mueve sola" ladoEtiqueta="der" />
       {/* el señor salta del tractor y corre detrás */}
       <Sequence from={SEG.B.desde} durationInFrames={SEG.B.dur}>
-        <Monitor desde={B_INI} />
+        <Monitor desde={B_INI} velocidad={VEL} />
       </Sequence>
       {/* zoom al final de la entrada: llega abajo, se dobla y choca */}
       <Sequence from={SEG.C.desde} durationInFrames={SEG.C.dur}>
-        <Monitor clip="C" desde={C_INI} zoom={interpolate(tc, [0, SEG.C.dur], [1, 1.18], clamp)} temblor={temblor} oscuro={interpolate(frame, [CHOQUE + 20, CHOQUE + 36], [0, 0.25], clamp)} />
+        <Monitor clip="C" desde={C_INI} velocidad={VEL} zoom={interpolate(tc, [0, SEG.C.dur], [1, 1.06], clamp)} temblor={temblor} oscuro={interpolate(frame, [CHOQUE + 20, CHOQUE + 36], [0, 0.25], clamp)} />
       </Sequence>
       {enZoom && (
         <div style={{position: 'absolute', left: 40, top: TOP + ALTO - 84, opacity: interpolate(tc, [0, 8], [0, 1], clamp)}}>
           <Pastilla color={C.ambar} punto tam={28}>
-            Zoom ×4 · al final de la entrada
+            Zoom ×3 · al final de la entrada
           </Pastilla>
         </div>
       )}
-      <Reticula centro={[540, TOP + 600]} radio={150} color={C.rojo} inicio={CHOQUE - 3} fin={SEG.C.dur + SEG.C.desde - 6} etiqueta="¡Choca!" ladoEtiqueta="der" />
+      <Reticula centro={[580, TOP + 590]} radio={150} color={C.rojo} inicio={CHOQUE - 3} fin={SEG.C.dur + SEG.C.desde - 6} etiqueta="¡Choca!" ladoEtiqueta="der" />
       <AbsoluteFill style={{background: '#fff', opacity: flash, pointerEvents: 'none'}} />
       {tw >= -2 && (
         <div

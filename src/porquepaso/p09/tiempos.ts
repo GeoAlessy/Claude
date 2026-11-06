@@ -9,7 +9,7 @@ export const FPS = 30;
 const ORDEN: [string, number][] = [
   ['01_sola', 3], // la voz entra desde el inicio: así el bucle empalma con nuestra voz
   ['02_freno', 4],
-  ['03_igual', 45], // deja sonar el choque real antes de seguir
+  ['03_igual', 24], // silencio máximo 0.8 s después de "freno" (pedido del usuario)
   ['04_perno', 8],
   ['05_atras', 6],
   ['06_libres', 5],
@@ -53,19 +53,21 @@ export function marca(id: string, palabra: string): number {
 
 // ---------- Gancho (cámara de seguridad de la casa) ----------
 // A.mp4 = segundos 0–10 del original (franja de video mejorada con ESRGAN).
-// C.mp4 = segundos 14.6–18.8, recorte ampliado ×4 del final de la entrada (donde choca).
+// C.mp4 = segundos 14.6–18.8, recorte ampliado ×3 del final de la entrada (donde choca).
+// B y C van a 1.3× para que no quede silencio después de "freno".
 // El gancho empieza en el cuadro 90 de A (segundo 3.0): los cuadros 0–90 van en la tarjeta final (bucle).
 export const A_INI = 90;
 export const B_INI = 240; // segundo 8.0: el señor salta del tractor y corre detrás
 export const C_INI = 18; // segundo 15.2 (en C.mp4): llega abajo, se dobla y choca
+export const VEL = 1.3;
 export const SEG = {
   A: {desde: 0, dur: 114}, // sube el tractor y todo empieza a rodar
   B: {desde: 114, dur: 60}, // el señor salta y corre
   C: {desde: 174, dur: 0}, // zoom al choque + "¿SIN FRENO?"
 };
-const enC = (segOriginal: number) => SEG.C.desde + Math.round((segOriginal - 15.2) * FPS);
+const enC = (segOriginal: number) => SEG.C.desde + Math.round(((segOriginal - 15.2) * FPS) / VEL);
 export const CHOQUE = enC(16.95); // golpe (el sonido real llega aquí)
-export const SONIDO_REAL = enC(16.5); // desde aquí suena el audio original (el choque)
+export const SONIDO_REAL = CHOQUE - 14; // el audio original (choque.wav empieza en el seg. 16.5) suena a velocidad normal: el golpe coincide con CHOQUE
 export const FRENO = marca('02_freno', 'freno');
 export const INI_HOLO = marca('03_igual', 'aunque') - 4;
 SEG.C.dur = INI_HOLO - SEG.C.desde;

@@ -195,7 +195,7 @@ export const Video09: React.FC = () => {
       ))}
       {/* Sonido real del choque (del video original) */}
       <Sequence from={SONIDO_REAL}>
-        <Audio src={staticFile('porquepaso/p09/choque.wav')} volume={(f) => interpolate(f, [0, 4, 46, 62], [0, 1.6, 1.6, 0], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'})} />
+        <Audio src={staticFile('porquepaso/p09/choque.wav')} volume={(f) => interpolate(f, [0, 4, INICIO['03_igual'] - SONIDO_REAL - 2, INICIO['03_igual'] - SONIDO_REAL + 6, 60, 72], [0, 1.6, 1.6, 0.45, 0.45, 0], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'})} />
       </Sequence>
       {SFX.map(([nombre, desde, vol], i) => (
         <Sequence key={i} from={desde}>
