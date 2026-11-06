@@ -52,8 +52,8 @@ const CAM: ClaveCam[] = [
   [H.TRABA + 10, V(2.6, 2.6, 7.6), V(-1.8, 0.5, 0.6)],
   [H.LIBRES + 22, V(15, 7, 14), V(1, 0.6, 0)],
   [H.GIRAN + 10, V(13, 6, 16), V(0.5, 0.6, 0)],
-  [H.BAJADA + 22, V(3, 2.2, 17), V(1.5, 0.8, 0)],
-  [H.ABAJO, V(2, 2.6, 17.5), V(0.5, 0.7, 0)],
+  [H.BAJADA + 22, V(-2.4, 1.6, 21), V(-3.0, 0.3, 0)],
+  [H.ABAJO, V(-3.2, 2.0, 21.5), V(-3.4, 0.2, 0)],
   [H.TRACTOR + 22, V(21, 8, 15), V(5, 1.2, 0)],
   [H.GOLPE + 6, V(19, 7, 14), V(3, 1, 0)],
   [H.GRAVA + 18, V(4.5, 2.6, 8.5), V(-1.3, 0.5, 0.5)],
@@ -354,12 +354,12 @@ const Calzas: React.FC<{f: number}> = ({f}) => {
 const Horizonte: React.FC<{f: number}> = ({f}) => {
   const op = interpolate(f, [H.BAJA - 10, H.BAJA + 6, H.TRACTOR, H.TRACTOR + 15], [0, 1, 1, 0], clamp);
   if (op <= 0) return null;
-  const y = 10 * Math.sin(PEND);
+  const y = 4 * Math.sin(PEND);
   const out = [];
-  for (let k = 0; k < 18; k++) {
-    out.push(<Holo key={k} geom={caja(0.6, 0.05, 0.05)} color={BLANCO} relleno={0.6 * op} linea={0.8 * op} position={[10 - k * 1.1 - 0.3, y, 3.2]} />);
+  for (let k = 0; k < 16; k++) {
+    out.push(<Holo key={k} geom={caja(0.45, 0.05, 0.05)} color={BLANCO} relleno={0.6 * op} linea={0.8 * op} position={[4 - k * 0.75 - 0.3, y, 3.2]} />);
   }
-  out.push(<Holo key="p" geom={caja(19, 0.06, 0.06)} color={C.ambar} relleno={0.8 * op} linea={op} position={[0.5, 0.5 * Math.sin(PEND), 3.2]} rotation={[0, 0, PEND]} />);
+  out.push(<Holo key="p" geom={caja(12, 0.06, 0.06)} color={C.ambar} relleno={0.8 * op} linea={op} position={[-2, -2 * Math.sin(PEND), 3.2]} rotation={[0, 0, PEND]} />);
   return <group>{out}</group>;
 };
 
