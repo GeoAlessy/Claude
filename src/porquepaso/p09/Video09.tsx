@@ -4,7 +4,7 @@ import {Gancho, Monitor} from './Gancho';
 import {Holograma} from './Holograma';
 import {PALABRAS} from './subtitulos';
 import {C, TITULAR} from '../estilo';
-import {A_INI, FRENO, DURACION_GANCHO, DURACION_P09 as DUR_TOTAL, FIN_CARD, FPS, H, FIN, INICIO, INI_HOLO, VOZ_ORDEN} from './tiempos';
+import {A_INI, CHOQUE, SONIDO_REAL, FRENO, DURACION_GANCHO, DURACION_P09 as DUR_TOTAL, FIN_CARD, FPS, H, FIN, INICIO, INI_HOLO, VOZ_ORDEN} from './tiempos';
 
 
 // =====================================================================
@@ -20,7 +20,8 @@ const VOZ: [string, number, boolean][] = VOZ_ORDEN.map((id) => [id, INICIO[id], 
 // Efectos: [archivo, fotograma, volumen]. Los "fiu" van muy bajos (regla del usuario); sin estática de radio.
 // Sin heridos: la música no baja.
 const SFX: [string, number, number][] = [
-  ['impacto', FRENO - 2, 0.16],
+  ['impacto', FRENO - 2, 0.12],
+  ['impacto', CHOQUE, 0.5], // refuerza el golpe del choque real
   ['escaneo', INI_HOLO - 14, 0.042],
   ['clic', INI_HOLO + H.PERNO_W + 4, 0.8], // el perno cae en la rueda dentada
   ['clic', INI_HOLO + H.TRABA, 0.5],
@@ -69,7 +70,7 @@ const Subtitulos: React.FC = () => {
     });
     const entrada = interpolate((t - b[0][1]) * FPS, [0, 4], [0.85, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.out(Easing.back(2))});
     return (
-      <div style={{position: 'absolute', top: 1540, width: '100%', display: 'flex', justifyContent: 'center'}}>
+      <div style={{position: 'absolute', top: 1620, width: '100%', display: 'flex', justifyContent: 'center'}}>
         <div
           style={{
             transform: `scale(${entrada})`,
@@ -150,8 +151,8 @@ const FirmaCanal: React.FC = () => {
     style={{
       opacity: op,
       position: 'absolute',
-      top: 164,
-      right: 62,
+      top: 36,
+      right: 40,
       fontFamily: "'JetBrains Mono', monospace",
       fontWeight: 700,
       fontSize: 26,
@@ -192,6 +193,10 @@ export const Video09: React.FC = () => {
           <Audio src={staticFile(`porquepaso/p09/voz/${nombre}.mp3`)} volume={1} />
         </Sequence>
       ))}
+      {/* Sonido real del choque (del video original) */}
+      <Sequence from={SONIDO_REAL}>
+        <Audio src={staticFile('porquepaso/p09/choque.wav')} volume={(f) => interpolate(f, [0, 4, 46, 62], [0, 1.6, 1.6, 0], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'})} />
+      </Sequence>
       {SFX.map(([nombre, desde, vol], i) => (
         <Sequence key={i} from={desde}>
           <Audio src={staticFile(`porquepaso/sfx/${nombre}.wav`)} volume={vol} />

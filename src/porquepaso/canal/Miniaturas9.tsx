@@ -6,6 +6,7 @@ import {Simbolo} from './Marca';
 // Miniaturas del video 09 (la camioneta que se fue sola al cargar el tractor)
 const R9 = staticFile('porquepaso/canal/p09_carga.png'); // 1620×1124: el tractor ya en el tráiler
 const R9B = staticFile('porquepaso/canal/p09_real.png'); // 1620×1124: todo rueda cuesta abajo
+const R9C = staticFile('porquepaso/canal/p09_choque.png'); // 1040×1000: el choque al final de la entrada (zoom)
 const H9P = staticFile('porquepaso/canal/p09_holo_patinan.png'); // 1080×1920: las ruedas trabadas patinan
 const H9G = staticFile('porquepaso/canal/p09_holo_perno.png'); // 1080×1920: el perno de Park
 
@@ -53,7 +54,8 @@ export const M9A: React.FC = () => (
 export const M9B: React.FC = () => (
   <AbsoluteFill style={{background: '#000'}}>
     <div style={{position: 'absolute', top: 0, left: 0, width: 1080, height: 960, overflow: 'hidden'}}>
-      <Img src={R9} style={{position: 'absolute', height: 1000, left: -330, top: -20}} />
+      <Img src={R9C} style={{position: 'absolute', width: 1080, left: 0, top: -60}} />
+      <div style={{position: 'absolute', left: 390, top: 370, width: 340, height: 340, borderRadius: 170, border: `8px solid ${C.rojo}`, boxShadow: `0 0 40px ${C.rojo}`}} />
     </div>
     <div style={{position: 'absolute', top: 960, left: 0, width: 1080, height: 960, overflow: 'hidden', background: '#01040a'}}>
       <Img src={H9P} style={{position: 'absolute', width: 1080, left: 0, top: -730}} />

@@ -3,12 +3,12 @@
 
 ## Título (el 1 es el recomendado)
 1. **¿Por qué se fue sola esta camioneta? No fue el freno 🚜**
-2. Subía su tractor al tráiler… y la camioneta se fue sola 🚜
+2. Subía su tractor al tráiler… y la camioneta se fue sola y chocó 🚜
 3. Estaba en Park y aun así se fue: la razón 🚜
 
 ## Descripción (copiar y pegar)
 ```
-¿Cómo puede irse sola una camioneta estacionada? Un señor subía su tractor a un tráiler en la entrada de su casa… y la camioneta, el tráiler y el tractor empezaron a rodar cuesta abajo. Todos dijeron lo mismo: se le olvidó el freno. Pero aunque lo tuviera puesto, pudo pasar igual. En Park, lo que detiene a una camioneta es un pequeño perno de metal dentro de la caja de cambios, y ese perno, igual que el freno de mano, solo traba las ruedas de atrás. Las del frente y las cuatro del tráiler giran libres. La entrada estaba en bajada y, al subir el tractor (más de una tonelada), el empuje cuesta abajo creció de golpe. Sobre grava, dos ruedas trabadas no aguantan: patinan… y todo se va. Te lo mostramos en 3D.
+¿Cómo puede irse sola una camioneta estacionada? Un señor subía su tractor a un tráiler en la entrada de su casa… y la camioneta, el tráiler y el tractor empezaron a rodar cuesta abajo… hasta chocar al final de la entrada. Todos dijeron lo mismo: se le olvidó el freno. Pero aunque lo tuviera puesto, pudo pasar igual. En Park, lo que detiene a una camioneta es un pequeño perno de metal dentro de la caja de cambios, y ese perno, igual que el freno de mano, solo traba las ruedas de atrás. Las del frente y las cuatro del tráiler giran libres. La entrada estaba en bajada y, al subir el tractor (más de una tonelada), el empuje cuesta abajo creció de golpe. Sobre grava, dos ruedas trabadas no aguantan: patinan… y todo se va. Te lo mostramos en 3D.
 
 ✅ Antes de cargar un tractor o una máquina: suelo plano, freno de mano y calzas en las ruedas del tráiler.
 
@@ -25,7 +25,7 @@
 
 ## Etiquetas
 ```
-camioneta se fue sola, camioneta rodando sola, tractor trailer, cargar tractor en trailer, trailer rodando, camioneta en park, parking pawl, perno de estacionamiento, freno de mano, calzas de ruedas, como cargar un tractor, remolque, pickup, truck rolls away, loading tractor on trailer, what could go wrong, whatcouldgowrong, accidentes explicados, fisica, ciencia, por que paso, porquepaso, explicado en 3d
+camioneta se fue sola, camioneta rodando sola, camioneta choca sola, tractor trailer, cargar tractor en trailer, trailer rodando, camioneta en park, parking pawl, perno de estacionamiento, freno de mano, calzas de ruedas, como cargar un tractor, remolque, pickup, truck rolls away, loading tractor on trailer, what could go wrong, whatcouldgowrong, accidentes explicados, fisica, ciencia, por que paso, porquepaso, explicado en 3d
 ```
 
 ## Miniatura

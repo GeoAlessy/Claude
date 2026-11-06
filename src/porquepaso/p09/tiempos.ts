@@ -9,7 +9,7 @@ export const FPS = 30;
 const ORDEN: [string, number][] = [
   ['01_sola', 3], // la voz entra desde el inicio: así el bucle empalma con nuestra voz
   ['02_freno', 4],
-  ['03_igual', 4],
+  ['03_igual', 45], // deja sonar el choque real antes de seguir
   ['04_perno', 8],
   ['05_atras', 6],
   ['06_libres', 5],
@@ -52,19 +52,23 @@ export function marca(id: string, palabra: string): number {
 }
 
 // ---------- Gancho (cámara de seguridad de la casa) ----------
-// A.mp4 = segundos 0–14 del original (recorte de la franja de video, mejorado con ESRGAN).
-// El gancho empieza en su cuadro 90 (segundo 3.0): los cuadros 0–90 van en la tarjeta final (bucle).
+// A.mp4 = segundos 0–10 del original (franja de video mejorada con ESRGAN).
+// C.mp4 = segundos 14.6–18.8, recorte ampliado ×4 del final de la entrada (donde choca).
+// El gancho empieza en el cuadro 90 de A (segundo 3.0): los cuadros 0–90 van en la tarjeta final (bucle).
 export const A_INI = 90;
-export const REPE_INI = 198; // segundo 6.6: la camioneta empieza a rodar y el señor salta del tractor
+export const B_INI = 240; // segundo 8.0: el señor salta del tractor y corre detrás
+export const C_INI = 18; // segundo 15.2 (en C.mp4): llega abajo, se dobla y choca
 export const SEG = {
-  A: {desde: 0, dur: 0}, // sube el tractor y todo empieza a rodar
-  B: {desde: 0, dur: 0}, // repetición en cámara lenta + "¿SIN FRENO?"
+  A: {desde: 0, dur: 114}, // sube el tractor y todo empieza a rodar
+  B: {desde: 114, dur: 60}, // el señor salta y corre
+  C: {desde: 174, dur: 0}, // zoom al choque + "¿SIN FRENO?"
 };
-SEG.B.desde = INICIO['02_freno'] - 2;
-SEG.A.dur = SEG.B.desde;
+const enC = (segOriginal: number) => SEG.C.desde + Math.round((segOriginal - 15.2) * FPS);
+export const CHOQUE = enC(16.95); // golpe (el sonido real llega aquí)
+export const SONIDO_REAL = enC(16.5); // desde aquí suena el audio original (el choque)
 export const FRENO = marca('02_freno', 'freno');
 export const INI_HOLO = marca('03_igual', 'aunque') - 4;
-SEG.B.dur = INI_HOLO - SEG.B.desde;
+SEG.C.dur = INI_HOLO - SEG.C.desde;
 export const DURACION_GANCHO = INI_HOLO;
 
 // ---------- Holograma (relativo a INI_HOLO) ----------
