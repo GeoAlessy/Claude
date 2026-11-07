@@ -38,7 +38,7 @@ export const Gancho: React.FC = () => {
         <Clip desde={REPE_INI} velocidad={0.5} oscuro={interpolate(tb, [0, 12], [0, 0.25], clamp)} zoom={interpolate(tb, [0, SEG.B.dur], [1, 1.12], clamp)} />
       </Sequence>
 
-      <Reticula centro={[650, 520]} radio={100} color={C.ambar} inicio={4} fin={DESTELLO - 6} etiqueta="El cohete" ladoEtiqueta="izq" />
+      <Reticula centro={[690, 640]} radio={100} color={C.ambar} inicio={4} fin={DESTELLO - 6} etiqueta="El cohete" ladoEtiqueta="der" />
       <AbsoluteFill style={{background: '#fff', opacity: flash, pointerEvents: 'none'}} />
       {enRepeticion && (
         <div style={{position: 'absolute', left: 60, top: 480, opacity: interpolate(tb, [0, 8], [0, 1], clamp)}}>
@@ -56,7 +56,7 @@ export const Gancho: React.FC = () => {
             textAlign: 'center',
             fontFamily: TITULAR,
             fontWeight: 900,
-            fontSize: 128,
+            fontSize: 100,
             color: C.rojo,
             textShadow: `0 0 40px ${C.rojo}88, 0 6px 0 rgba(0,0,0,0.7)`,
             transform: `scale(${spring({frame: tw, fps, config: {damping: 12, stiffness: 180}})})`,
