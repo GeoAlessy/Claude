@@ -8,6 +8,15 @@ export {SEG, DURACION_GANCHO};
 // Gancho del video 13: un agente de tránsito viaja agarrado al capó de un auto en marcha (vertical a pantalla completa).
 const clamp = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
 
+// Posición del agente en el clip A (cuadro del gancho, x, y), medida siguiendo su chaleco naranja y suavizada:
+// así el círculo "Sobre el capó" lo acompaña cuando se mueve.
+const PISTA: [number, number, number][] = [[0,534,634], [5,548,695], [10,552,786], [15,459,869], [20,331,921], [25,185,941], [30,170,939], [35,170,889], [40,170,850], [45,191,825], [50,295,829], [55,417,846], [60,424,883], [65,363,922], [70,291,938], [75,253,937], [80,291,914], [85,336,885], [90,357,841], [95,300,800], [100,200,780], [110,170,770]];
+const sigue = (f: number): [number, number] => {
+  const t = PISTA.map((p) => p[0]);
+  const ease = clamp;
+  return [interpolate(f, t, PISTA.map((p) => p[1]), ease), interpolate(f, t, PISTA.map((p) => p[2]), ease)];
+};
+
 export const Clip: React.FC<{clip?: 'A' | 'B'; desde: number; velocidad?: number; oscuro?: number; zoom?: number}> = ({clip = 'A', desde, velocidad = 1, oscuro = 0, zoom = 1}) => (
   <AbsoluteFill>
     <AbsoluteFill style={{transform: `scale(${zoom})`, transformOrigin: '50% 45%'}}>
@@ -37,7 +46,7 @@ export const Gancho: React.FC = () => {
         <Clip clip="B" desde={B_INI} velocidad={0.6} oscuro={interpolate(tb, [0, 12], [0, 0.25], clamp)} zoom={interpolate(tb, [0, SEG.B.dur], [1, 1.12], clamp)} />
       </Sequence>
 
-      <Reticula centro={[330, 760]} radio={190} color={C.ambar} inicio={6} fin={SEG.A.dur - 6} etiqueta="Sobre el capó" ladoEtiqueta="der" />
+      <Reticula centro={sigue(frame)} radio={175} color={C.ambar} inicio={6} fin={100} etiqueta="Sobre el capó" ladoEtiqueta="der" />
       {enRepeticion && (
         <div style={{position: 'absolute', left: 60, top: 480, opacity: interpolate(tb, [0, 8], [0, 1], clamp)}}>
           <Pastilla color={C.ambar} punto tam={28}>
