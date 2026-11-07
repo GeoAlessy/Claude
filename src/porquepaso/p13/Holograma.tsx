@@ -75,7 +75,7 @@ export function camaraEn(f: number) {
   const p = new THREE.Vector3(...([0, 1, 2].map((i) => interpolate(f, fr, CAM.map((k) => k[1][i]), {...clamp, easing: suave})) as [number, number, number]));
   const t = new THREE.Vector3(...([0, 1, 2].map((i) => interpolate(f, fr, CAM.map((k) => k[2][i]), {...clamp, easing: suave})) as [number, number, number]));
   // sigue al auto (salvo en el frenazo, donde se queda mirando al auto fantasma)
-  const w = interpolate(f, [H.FRENAZO, H.FRENAZO + 20, H.ZIGZAG, H.ZIGZAG + 20], [1, 0, 0, 1], {...clamp, easing: suave});
+  const w = interpolate(f, [H.FRENA - 2, H.FRENA, H.ZIGZAG, H.ZIGZAG + 20], [1, 0, 0, 1], clamp);
   const d = new THREE.Vector3(w * autoX(f) + (1 - w) * autoX(H.FRENA), 0, 0);
   p.add(d);
   t.add(d);
