@@ -65,6 +65,7 @@ import * as M9 from './porquepaso/canal/Miniaturas9';
 import * as M10 from './porquepaso/canal/Miniaturas10';
 import * as M11 from './porquepaso/canal/Miniaturas11';
 import * as M12 from './porquepaso/canal/Miniaturas12';
+import * as M13 from './porquepaso/canal/Miniaturas13';
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -144,6 +145,10 @@ export const RemotionRoot: React.FC = () => {
       <Still id="P12MiniB" component={M12.M12B} width={1080} height={1920} />
       <Still id="P12MiniC" component={M12.M12C} width={1080} height={1920} />
       <Still id="P12MiniH" component={M12.M12H} width={1280} height={720} />
+      <Still id="P13MiniA" component={M13.M13A} width={1080} height={1920} />
+      <Still id="P13MiniB" component={M13.M13B} width={1080} height={1920} />
+      <Still id="P13MiniC" component={M13.M13C} width={1080} height={1920} />
+      <Still id="P13MiniH" component={M13.M13H} width={1280} height={720} />
       <Still id="P01MiniA" component={M01.MiniA} width={1080} height={1920} />
       <Still id="P01MiniB" component={M01.MiniB} width={1080} height={1920} />
       <Still id="P01MiniC" component={M01.MiniC} width={1080} height={1920} />

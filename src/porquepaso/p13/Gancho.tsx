@@ -37,7 +37,7 @@ export const Gancho: React.FC = () => {
         <Clip clip="B" desde={B_INI} velocidad={0.6} oscuro={interpolate(tb, [0, 12], [0, 0.25], clamp)} zoom={interpolate(tb, [0, SEG.B.dur], [1, 1.12], clamp)} />
       </Sequence>
 
-      <Reticula centro={[470, 900]} radio={190} color={C.ambar} inicio={6} fin={SEG.A.dur - 6} etiqueta="Sobre el capó" ladoEtiqueta="der" />
+      <Reticula centro={[330, 760]} radio={190} color={C.ambar} inicio={6} fin={SEG.A.dur - 6} etiqueta="Sobre el capó" ladoEtiqueta="der" />
       {enRepeticion && (
         <div style={{position: 'absolute', left: 60, top: 480, opacity: interpolate(tb, [0, 8], [0, 1], clamp)}}>
           <Pastilla color={C.ambar} punto tam={28}>
