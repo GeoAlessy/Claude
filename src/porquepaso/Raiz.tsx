@@ -36,6 +36,9 @@ import {Video11, DURACION_P11} from './p11/Video11';
 import {Gancho as Gancho12, DURACION_GANCHO as DURACION_GANCHO_12} from './p12/Gancho';
 import {Holograma as Holograma12, H as H12} from './p12/Holograma';
 import {Video12, DURACION_P12} from './p12/Video12';
+import {Gancho as Gancho13, DURACION_GANCHO as DURACION_GANCHO_13} from './p13/Gancho';
+import {Holograma as Holograma13, H as H13} from './p13/Holograma';
+import {Video13, DURACION_P13} from './p13/Video13';
 import {Banner, Logo, MarcaAgua} from './canal/Marca';
 import {MiniA, MiniB, MiniC, MiniH} from './canal/Miniaturas02';
 import * as M01 from './canal/Miniaturas01';
@@ -133,6 +136,9 @@ export const RaizPorQuePaso: React.FC = () => {
       <Composition id="P12" component={Video12} durationInFrames={DURACION_P12} fps={30} width={1080} height={1920} />
       <Composition id="P12Holograma" component={Holograma12} durationInFrames={H12.DUR} fps={30} width={1080} height={1920} />
       <Composition id="P12Gancho" component={Gancho12} durationInFrames={DURACION_GANCHO_12} fps={30} width={1080} height={1920} />
+      <Composition id="P13" component={Video13} durationInFrames={DURACION_P13} fps={30} width={1080} height={1920} />
+      <Composition id="P13Holograma" component={Holograma13} durationInFrames={H13.DUR} fps={30} width={1080} height={1920} />
+      <Composition id="P13Gancho" component={Gancho13} durationInFrames={DURACION_GANCHO_13} fps={30} width={1080} height={1920} />
       <Composition id="P03" component={Video03} durationInFrames={DURACION_P03} fps={30} width={1080} height={1920} />
       <Composition id="P03Holograma" component={Holograma03} durationInFrames={H03.DUR} fps={30} width={1080} height={1920} />
       <Composition id="P03Gancho" component={Gancho03} durationInFrames={DURACION_GANCHO_03} fps={30} width={1080} height={1920} />
