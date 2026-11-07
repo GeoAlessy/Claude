@@ -54,16 +54,20 @@ export function marca(id: string, palabra: string): number {
 
 // ---------- Gancho (video vertical a pantalla completa) ----------
 // A.mp4 = segundos 3.0–12.5 del original, sin la franja de arriba (emoji del que lo reposteó), mejorado con ESRGAN (1222×1920).
-// El gancho empieza en su cuadro 90 (segundo 6.0): los cuadros 0–90 van en la tarjeta final (bucle).
-export const A_INI = 90;
+// L.mp4 = segundos 0.5–3.5 del original (el despegue). El gancho abre con el despegue (desde el cuadro L_INI)
+// y corta al momento del rayo (A desde A_INI). La tarjeta final pasa L de 0 a L_INI (bucle).
+export const L_INI = 34; // segundo 1.63: el cohete acaba de despegar
+export const DESPEGUE = 48; // cuadros del gancho con el despegue
+export const A_INI = 138; // segundo 7.6: el cohete ya arriba, 0.8 s antes del rayo
 export const REPE_INI = 150; // segundo 8.0: justo antes del destello
 export const DESTELLO = 72; // el rayo cae (segundo 8.4 del original) en el gancho
 export const SEG = {
-  A: {desde: 0, dur: 0},
+  L: {desde: 0, dur: DESPEGUE},
+  A: {desde: DESPEGUE, dur: 0},
   B: {desde: 0, dur: 0}, // el destello en cámara lenta + "¿IMÁN DE RAYOS?"
 };
 SEG.B.desde = INICIO['02_iman'] - 2;
-SEG.A.dur = SEG.B.desde;
+SEG.A.dur = SEG.B.desde - DESPEGUE;
 export const IMAN = marca('02_iman', 'atrae');
 export const INI_HOLO = marca('03_atajo', 'atajo') - 4;
 SEG.B.dur = INI_HOLO - SEG.B.desde;

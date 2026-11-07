@@ -4,7 +4,7 @@ import {Gancho, Clip} from './Gancho';
 import {Holograma} from './Holograma';
 import {PALABRAS} from './subtitulos';
 import {C, TITULAR} from '../estilo';
-import {A_INI, DESTELLO, IMAN, DURACION_GANCHO, DURACION_P12 as DUR_TOTAL, FIN_CARD, FPS, H, FIN, INICIO, INI_HOLO, VOZ_ORDEN} from './tiempos';
+import {L_INI, DESTELLO, IMAN, DURACION_GANCHO, DURACION_P12 as DUR_TOTAL, FIN_CARD, FPS, H, FIN, INICIO, INI_HOLO, VOZ_ORDEN} from './tiempos';
 
 
 // =====================================================================
@@ -101,7 +101,7 @@ const Cierre: React.FC = () => {
   const texto = interpolate(f, [4, 12, dur - 10, dur - 2], [0, 1, 1, 0], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
   return (
     <AbsoluteFill style={{opacity: op}}>
-      <Clip desde={0} velocidad={A_INI / dur} />
+      <Clip clip="L" desde={0} velocidad={L_INI / dur} zoom={1.35} origen="80% 75%" />
       <AbsoluteFill style={{background: `rgba(0,0,0,${0.45 * texto})`}} />
       <div
         style={{

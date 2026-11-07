@@ -2,15 +2,15 @@ import React from 'react';
 import {AbsoluteFill, OffthreadVideo, Sequence, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
 import {C, MONO, TITULAR} from '../estilo';
 import {Pastilla, Reticula} from '../hud';
-import {A_INI, DESTELLO, DURACION_GANCHO, IMAN, REPE_INI, SEG} from './tiempos';
+import {A_INI, DESPEGUE, DESTELLO, DURACION_GANCHO, IMAN, L_INI, REPE_INI, SEG} from './tiempos';
 export {SEG, DURACION_GANCHO};
 
 // Gancho del video 12: el cohete sube con su cable hacia la tormenta y el rayo baja por su camino (vertical a pantalla completa).
 const clamp = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
 
-export const Clip: React.FC<{clip?: 'A'; desde: number; velocidad?: number; oscuro?: number; zoom?: number}> = ({clip = 'A', desde, velocidad = 1, oscuro = 0, zoom = 1}) => (
+export const Clip: React.FC<{clip?: 'A' | 'L'; desde: number; velocidad?: number; oscuro?: number; zoom?: number; origen?: string}> = ({clip = 'A', desde, velocidad = 1, oscuro = 0, zoom = 1, origen = '50% 45%'}) => (
   <AbsoluteFill>
-    <AbsoluteFill style={{transform: `scale(${zoom})`, transformOrigin: '50% 45%'}}>
+    <AbsoluteFill style={{transform: `scale(${zoom})`, transformOrigin: origen}}>
       <OffthreadVideo src={staticFile(`porquepaso/p12/${clip}.mp4`)} muted trimBefore={desde} playbackRate={velocidad} style={{width: 1222, height: 1920, marginLeft: -71}} />
     </AbsoluteFill>
     <AbsoluteFill style={{background: `rgba(0,0,0,${oscuro})`}} />
@@ -30,7 +30,12 @@ export const Gancho: React.FC = () => {
 
   return (
     <AbsoluteFill style={{background: '#000'}}>
-      <Sequence from={0} durationInFrames={SEG.A.dur}>
+      {/* El despegue (con zoom a la parte de abajo para que se vea el cohete) */}
+      <Sequence from={0} durationInFrames={SEG.L.dur}>
+        <Clip clip="L" desde={L_INI} zoom={1.35} origen="80% 75%" />
+      </Sequence>
+      {/* Corte: el cohete ya arriba y el rayo */}
+      <Sequence from={SEG.A.desde} durationInFrames={SEG.A.dur}>
         <Clip desde={A_INI} />
       </Sequence>
       {/* El destello en cámara lenta */}
@@ -38,7 +43,16 @@ export const Gancho: React.FC = () => {
         <Clip desde={REPE_INI} velocidad={0.5} oscuro={interpolate(tb, [0, 12], [0, 0.25], clamp)} zoom={interpolate(tb, [0, SEG.B.dur], [1, 1.12], clamp)} />
       </Sequence>
 
-      <Reticula centro={[690, 640]} radio={100} color={C.ambar} inicio={4} fin={DESTELLO - 6} etiqueta="El cohete" ladoEtiqueta="der" />
+      <Reticula
+        centro={[interpolate(frame, [0, 24, DESPEGUE], [870, 810, 764], clamp), interpolate(frame, [0, 24, DESPEGUE], [1460, 1262, 1030], clamp)]}
+        radio={100}
+        color={C.ambar}
+        inicio={0}
+        fin={DESPEGUE - 2}
+        etiqueta="El cohete despega"
+        ladoEtiqueta="izq"
+      />
+      <Reticula centro={[690, 640]} radio={100} color={C.ambar} inicio={DESPEGUE} fin={DESTELLO - 6} etiqueta="Ya arriba" ladoEtiqueta="der" />
       <AbsoluteFill style={{background: '#fff', opacity: flash, pointerEvents: 'none'}} />
       {enRepeticion && (
         <div style={{position: 'absolute', left: 60, top: 480, opacity: interpolate(tb, [0, 8], [0, 1], clamp)}}>
