@@ -295,3 +295,11 @@ for t0, fq in [(0.0, 140), (0.18, 420), (0.42, 260), (0.75, 520)]:
     tt = t[: len(t) - i]
     golpes[i:] += (np.sin(2 * np.pi * fq * tt) + 0.6 * np.sin(2 * np.pi * fq * 2.7 * tt)) * np.exp(-tt / 0.06)
 guardar('derrape.wav', 0.8 * roce + golpes, pico=0.8)
+
+# ---------- Video 15 (escalera sobre un bote) ----------
+# Chapuzón: golpe grave + ruido de agua que se apaga, con burbujeo
+t = t_(1.4)
+golpe = np.sin(2 * np.pi * 70 * t) * np.exp(-t / 0.08)
+agua = lp(rng.normal(0, 1, len(t)), 5) * np.exp(-t / 0.35)
+burbujas = sum(np.sin(2 * np.pi * (500 + 900 * rng.random()) * (t - t0)) * np.exp(-np.clip(t - t0, 0, None) / 0.02) * (t > t0) for t0 in 0.15 + 0.9 * rng.random(14))
+guardar('chapuzon.wav', 0.9 * golpe + agua + 0.25 * burbujas * env(len(t), 0.01, 0.4), pico=0.75)

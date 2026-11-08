@@ -45,6 +45,9 @@ import {Video13, DURACION_P13} from './porquepaso/p13/Video13';
 import {Gancho as Gancho14, DURACION_GANCHO as DURACION_GANCHO_14} from './porquepaso/p14/Gancho';
 import {Holograma as Holograma14, H as H14} from './porquepaso/p14/Holograma';
 import {Video14, DURACION_P14} from './porquepaso/p14/Video14';
+import {Gancho as Gancho15, DURACION_GANCHO as DURACION_GANCHO_15} from './porquepaso/p15/Gancho';
+import {Holograma as Holograma15, H as H15} from './porquepaso/p15/Holograma';
+import {Video15, DURACION_P15} from './porquepaso/p15/Video15';
 import {Banner, Logo, MarcaAgua} from './porquepaso/canal/Marca';
 import {MiniA, MiniB, MiniC, MiniH} from './porquepaso/canal/Miniaturas02';
 import * as M01 from './porquepaso/canal/Miniaturas01';
@@ -70,6 +73,7 @@ import * as M11 from './porquepaso/canal/Miniaturas11';
 import * as M12 from './porquepaso/canal/Miniaturas12';
 import * as M13 from './porquepaso/canal/Miniaturas13';
 import * as M14 from './porquepaso/canal/Miniaturas14';
+import * as M15 from './porquepaso/canal/Miniaturas15';
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -157,6 +161,10 @@ export const RemotionRoot: React.FC = () => {
       <Still id="P14MiniB" component={M14.M14B} width={1080} height={1920} />
       <Still id="P14MiniC" component={M14.M14C} width={1080} height={1920} />
       <Still id="P14MiniH" component={M14.M14H} width={1280} height={720} />
+      <Still id="P15MiniA" component={M15.M15A} width={1080} height={1920} />
+      <Still id="P15MiniB" component={M15.M15B} width={1080} height={1920} />
+      <Still id="P15MiniC" component={M15.M15C} width={1080} height={1920} />
+      <Still id="P15MiniH" component={M15.M15H} width={1280} height={720} />
       <Still id="P01MiniA" component={M01.MiniA} width={1080} height={1920} />
       <Still id="P01MiniB" component={M01.MiniB} width={1080} height={1920} />
       <Still id="P01MiniC" component={M01.MiniC} width={1080} height={1920} />
@@ -199,6 +207,9 @@ export const RemotionRoot: React.FC = () => {
       <Composition id="P14" component={Video14} durationInFrames={DURACION_P14} fps={30} width={1080} height={1920} />
       <Composition id="P14Holograma" component={Holograma14} durationInFrames={H14.DUR} fps={30} width={1080} height={1920} />
       <Composition id="P14Gancho" component={Gancho14} durationInFrames={DURACION_GANCHO_14} fps={30} width={1080} height={1920} />
+      <Composition id="P15" component={Video15} durationInFrames={DURACION_P15} fps={30} width={1080} height={1920} />
+      <Composition id="P15Holograma" component={Holograma15} durationInFrames={H15.DUR} fps={30} width={1080} height={1920} />
+      <Composition id="P15Gancho" component={Gancho15} durationInFrames={DURACION_GANCHO_15} fps={30} width={1080} height={1920} />
       <Composition id="P03" component={Video03} durationInFrames={DURACION_P03} fps={30} width={1080} height={1920} />
       <Composition id="P03Holograma" component={Holograma03} durationInFrames={H03.DUR} fps={30} width={1080} height={1920} />
       <Composition id="P03Gancho" component={Gancho03} durationInFrames={DURACION_GANCHO_03} fps={30} width={1080} height={1920} />
