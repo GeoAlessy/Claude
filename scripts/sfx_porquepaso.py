@@ -264,3 +264,34 @@ esp[(fr_ < 80) | (fr_ > 900)] = 0
 viento = np.fft.irfft(esp, len(t))
 viento = viento / np.max(np.abs(viento)) * np.linspace(0.1, 1, len(t)) ** 1.5 * env(len(t), 0.2, 0.6)
 guardar('viento.wav', viento, pico=0.6)
+
+# ---------- Video 14 (moto) ----------
+# Motor de moto acelerando a fondo: tren de pulsos cuya frecuencia sube, con armónicos y ruido de escape
+t = t_(2.2)
+fr = 70 + 150 * (1 - np.exp(-t / 0.9))
+fase = 2 * np.pi * np.cumsum(fr) / SR
+motor = sum((0.9 / k) * np.sin(k * fase + k * 0.7) for k in range(1, 9))
+motor = np.tanh(2.2 * motor) + 0.25 * lp(rng.normal(0, 1, len(t)), 4) * (0.6 + 0.4 * np.sin(fase))
+guardar('moto_acelera.wav', lp(motor, 3) * env(len(t), 0.03, 0.4), pico=0.7)
+
+# Tembleque del manubrio: golpecitos a 8 por segundo que crecen
+t = t_(1.6)
+tem = np.zeros(len(t))
+for k, t0 in enumerate(np.arange(0.05, 1.5, 1 / 8)):
+    i = int(t0 * SR)
+    n = int(0.05 * SR)
+    tt = np.arange(n) / SR
+    g = 0.25 + 0.75 * k / 11
+    tem[i:i + n] += g * (np.sin(2 * np.pi * 180 * tt) + 0.5 * lp(rng.normal(0, 1, n), 3)) * np.exp(-tt / 0.012)
+guardar('tembleque.wav', tem, pico=0.7)
+
+# Derrape y golpe: ruido de roce contra el asfalto + golpes metálicos
+t = t_(1.6)
+roce = lp(rng.normal(0, 1, len(t)), 3) - lp(rng.normal(0, 1, len(t)), 40)
+roce *= np.exp(-t / 0.7) * env(len(t), 0.01, 0.3)
+golpes = np.zeros(len(t))
+for t0, fq in [(0.0, 140), (0.18, 420), (0.42, 260), (0.75, 520)]:
+    i = int(t0 * SR)
+    tt = t[: len(t) - i]
+    golpes[i:] += (np.sin(2 * np.pi * fq * tt) + 0.6 * np.sin(2 * np.pi * fq * 2.7 * tt)) * np.exp(-tt / 0.06)
+guardar('derrape.wav', 0.8 * roce + golpes, pico=0.8)
