@@ -54,6 +54,7 @@ import * as M10 from './canal/Miniaturas10';
 import * as M11 from './canal/Miniaturas11';
 import * as M12 from './canal/Miniaturas12';
 import * as M13 from './canal/Miniaturas13';
+import * as M14 from './canal/Miniaturas14';
 
 // Raíz solo del canal ¿Por qué pasó? (sin los proyectos de otras sesiones, que pueden necesitar archivos locales).
 export const RaizPorQuePaso: React.FC = () => {
@@ -108,6 +109,10 @@ export const RaizPorQuePaso: React.FC = () => {
       <Still id="P13MiniB" component={M13.M13B} width={1080} height={1920} />
       <Still id="P13MiniC" component={M13.M13C} width={1080} height={1920} />
       <Still id="P13MiniH" component={M13.M13H} width={1280} height={720} />
+      <Still id="P14MiniA" component={M14.M14A} width={1080} height={1920} />
+      <Still id="P14MiniB" component={M14.M14B} width={1080} height={1920} />
+      <Still id="P14MiniC" component={M14.M14C} width={1080} height={1920} />
+      <Still id="P14MiniH" component={M14.M14H} width={1280} height={720} />
       <Still id="P01MiniA" component={M01.MiniA} width={1080} height={1920} />
       <Still id="P01MiniB" component={M01.MiniB} width={1080} height={1920} />
       <Still id="P01MiniC" component={M01.MiniC} width={1080} height={1920} />
