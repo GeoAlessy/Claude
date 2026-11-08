@@ -51,7 +51,7 @@ export const M15A: React.FC = () => (
 export const M15B: React.FC = () => (
   <AbsoluteFill style={{background: '#000'}}>
     <div style={{position: 'absolute', top: 0, left: 0, width: 1080, height: 960, overflow: 'hidden'}}>
-      <Img src={R14} style={{position: 'absolute', width: 1080, left: 0, top: -620}} />
+      <Img src={R14} style={{position: "absolute", width: 1080, left: 0, top: -120}} />
     </div>
     <div style={{position: 'absolute', top: 960, left: 0, width: 1080, height: 960, overflow: 'hidden', background: '#01040a'}}>
       <Img src={H14V} style={{position: 'absolute', width: 1080, left: 0, top: -480}} />
@@ -82,7 +82,7 @@ export const M15C: React.FC = () => (
 export const M15H: React.FC = () => (
   <AbsoluteFill style={{background: '#000'}}>
     <div style={{position: 'absolute', left: 0, top: 0, width: 760, height: 720, overflow: 'hidden'}}>
-      <Img src={R14} style={{position: 'absolute', width: 760, left: 0, top: -520}} />
+      <Img src={R14} style={{position: "absolute", width: 760, left: 0, top: -150}} />
     </div>
     <div style={{position: 'absolute', left: 760, top: 0, width: 520, height: 720, overflow: 'hidden', background: '#01040a'}}>
       <Img src={H14V} style={{position: 'absolute', width: 900, left: -190, top: -420}} />
