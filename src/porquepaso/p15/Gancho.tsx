@@ -2,11 +2,11 @@ import React from 'react';
 import {AbsoluteFill, OffthreadVideo, Sequence, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
 import {C, MONO, TITULAR} from '../estilo';
 import {Pastilla, Reticula} from '../hud';
-import {A_INI, B_INI, B_VEL, C_INI, C_VEL, CENSURA, DURACION_GANCHO, RESBALO, SEG} from './tiempos';
+import {A_INI, B_INI, B_VEL, C_INI, C_VEL, CHAPUZON, D_INI, DURACION_GANCHO, RESBALO, SEG} from './tiempos';
 export {SEG, DURACION_GANCHO};
 
 // Gancho del video 15: un trabajador baja por una escalera apoyada en un bote y la escalera se va hacia atrás.
-// La caída no se muestra: la imagen se difumina antes (regla del usuario).
+// La caída se muestra en cámara lenta (el usuario lo pidió); cae al agua y sale bien.
 const clamp = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
 
 // Posición del trabajador (cuadro del gancho, x, y, radio), medida cuadro a cuadro en el clip:
@@ -41,9 +41,7 @@ export const Gancho: React.FC = () => {
   const tw = frame - RESBALO;
   const barrido = interpolate(frame, [DURACION_GANCHO - 16, DURACION_GANCHO], [-80, 2000], clamp);
   const {c, r} = sigue(frame);
-  // censura: la caída nunca se ve
-  const borroso = interpolate(frame, [CENSURA - 4, CENSURA + 8], [0, 28], clamp);
-  const velC = Math.min(C_VEL, (191 - C_INI) / Math.max(1, SEG.C.dur));
+  const td = frame - SEG.D.desde;
 
   return (
     <AbsoluteFill style={{background: '#000'}}>
@@ -53,17 +51,31 @@ export const Gancho: React.FC = () => {
       </Sequence>
       {/* La escalera se va hacia atrás, en cámara lenta */}
       <Sequence from={SEG.B.desde} durationInFrames={SEG.B.dur}>
-        <Clip desde={B_INI} velocidad={B_VEL} zoom={interpolate(tb, [0, SEG.B.dur], [1.1, 1.2], clamp)} borroso={borroso} oscuro={interpolate(borroso, [0, 28], [0, 0.3])} />
+        <Clip desde={B_INI} velocidad={B_VEL} zoom={interpolate(tb, [0, SEG.B.dur], [1.1, 1.2], clamp)} />
       </Sequence>
+      {/* Se suelta y cae: más lento todavía */}
       <Sequence from={SEG.C.desde} durationInFrames={SEG.C.dur}>
-        <Clip desde={C_INI} velocidad={velC} zoom={interpolate(tc, [0, SEG.C.dur], [1.2, 1.28], clamp)} borroso={28} oscuro={0.3} />
+        <Clip desde={C_INI} velocidad={C_VEL} zoom={interpolate(tc, [0, SEG.C.dur], [1.2, 1.22], clamp)} origen={`${interpolate(tc, [0, SEG.C.dur], [50, 30], clamp)}% ${interpolate(tc, [0, SEG.C.dur], [60, 95], clamp)}%`} />
       </Sequence>
+      {/* El chapuzón, a velocidad normal */}
+      <Sequence from={SEG.D.desde} durationInFrames={SEG.D.dur}>
+        <Clip desde={D_INI} zoom={1.22} origen="30% 95%" />
+      </Sequence>
+      {/* destello al tocar el agua */}
+      <AbsoluteFill style={{background: '#fff', opacity: interpolate(frame, [CHAPUZON, CHAPUZON + 2, CHAPUZON + 8], [0, 0.35, 0], clamp), pointerEvents: 'none'}} />
 
-      <Reticula centro={c} radio={r} color={C.ambar} inicio={50} fin={CENSURA - 6} etiqueta="Escalera casi vertical" ladoEtiqueta="der" />
-      {tb >= 0 && frame < CENSURA + 30 && (
-        <div style={{position: 'absolute', left: 60, top: 480, opacity: interpolate(tb, [0, 8], [0, 1], clamp) * interpolate(frame, [CENSURA + 20, CENSURA + 30], [1, 0], clamp)}}>
+      <Reticula centro={c} radio={r} color={C.ambar} inicio={50} fin={SEG.C.desde + 4} etiqueta="Escalera casi vertical" ladoEtiqueta="der" />
+      {tb >= 0 && frame < SEG.D.desde && (
+        <div style={{position: 'absolute', left: 60, top: 480, opacity: interpolate(tb, [0, 8], [0, 1], clamp) * interpolate(frame, [SEG.D.desde - 6, SEG.D.desde], [1, 0], clamp)}}>
           <Pastilla color={C.ambar} punto tam={28}>
             Cámara lenta
+          </Pastilla>
+        </div>
+      )}
+      {td >= 14 && (
+        <div style={{position: 'absolute', left: 60, top: 480, opacity: interpolate(td, [14, 22], [0, 1], clamp)}}>
+          <Pastilla color={C.verde} punto tam={28}>
+            Cayó al agua · salió bien
           </Pastilla>
         </div>
       )}
@@ -71,7 +83,7 @@ export const Gancho: React.FC = () => {
         <div
           style={{
             position: 'absolute',
-            top: 1180,
+            top: 660,
             width: '100%',
             textAlign: 'center',
             fontFamily: TITULAR,

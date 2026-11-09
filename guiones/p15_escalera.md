@@ -1,6 +1,6 @@
 # Video 15 · ¿Por qué se fue hacia atrás la escalera?
 
-Gancho: r/Whatcouldgowrong. El trabajador baja del muelle a la escalera → cámara lenta cuando se va hacia atrás → la caída se difumina (no se muestra). Palabra roja: ¿SE RESBALÓ?
+Gancho: r/Whatcouldgowrong. El trabajador baja del muelle a la escalera → cámara lenta cuando se va hacia atrás → se suelta y cae al agua en cámara más lenta (se muestra, a pedido del usuario) → chapuzón + "Cayó al agua · salió bien". Palabra roja: ¿SE RESBALÓ?
 
 1. Este trabajador bajaba por una escalera hacia un bote… y de repente, la escalera se fue hacia atrás.
 2. Y muchos pensaron lo mismo: se resbaló.

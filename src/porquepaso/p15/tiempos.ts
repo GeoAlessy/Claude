@@ -9,7 +9,7 @@ export const FPS = 30;
 const ORDEN: [string, number][] = [
   ['01_escalera', 3],
   ['02_resbalo', 4],
-  ['03_vertical', 4],
+  ['03_vertical', 66], // pausa larga: se ve la caída y el chapuzón
   ['04_muelle', 8],
   ['05_linea', 5],
   ['06_afuera', 5],
@@ -53,26 +53,30 @@ export function marca(id: string, palabra: string): number {
 }
 
 // ---------- Gancho (video vertical a pantalla completa) ----------
-// A.mp4 = segundos 29.6–36.0 del original (cuadro i del mp4 = segundo 29.6 + i/30).
-//   El trabajador baja del muelle a la escalera (30–120); la escalera se va hacia atrás (120–165).
-//   La caída NO se muestra: desde el cuadro 161 la imagen se difumina (regla del usuario).
+// A.mp4 = segundos 29.6–37.6 del original (cuadro i del mp4 = segundo 29.6 + i/30).
+//   El trabajador baja del muelle a la escalera (30–120); la escalera se va hacia atrás (120–176);
+//   se suelta y manotea (176–194), toca el agua (198); sale a flote (~236).
+//   La caída se muestra (el usuario lo pidió: es lo que llama la atención); cayó al agua y salió bien.
 // El gancho empieza en el cuadro 30 de A: los cuadros 0–30 van en la tarjeta final (bucle).
 export const A_INI = 30;
 export const B_INI = 120; // cámara lenta: la escalera empieza a irse hacia atrás
-export const C_INI = 165;
+export const C_INI = 165; // cámara más lenta: se suelta y cae
+export const D_INI = 196; // velocidad normal: el chapuzón
 export const B_VEL = 0.5;
-export const C_VEL = 0.15;
+export const C_VEL = 0.4;
 export const SEG = {
   A: {desde: 0, dur: B_INI - A_INI},
   B: {desde: B_INI - A_INI, dur: Math.round((C_INI - B_INI) / B_VEL)},
-  C: {desde: 0, dur: 0},
+  C: {desde: 0, dur: Math.round((D_INI - C_INI) / C_VEL)},
+  D: {desde: 0, dur: 0},
 };
 SEG.C.desde = SEG.B.desde + SEG.B.dur;
-// cuadro del gancho en que empieza a taparse la imagen (cuadro 161 de A)
-export const CENSURA = SEG.B.desde + Math.round((161 - B_INI) / B_VEL);
+SEG.D.desde = SEG.C.desde + SEG.C.dur;
+// cuadro del gancho en que toca el agua (cuadro 198 de A)
+export const CHAPUZON = SEG.D.desde + (198 - D_INI);
 export const RESBALO = marca('02_resbalo', 'resbalo');
 export const INI_HOLO = INICIO['03_vertical'] - 2;
-SEG.C.dur = INI_HOLO - SEG.C.desde;
+SEG.D.dur = INI_HOLO - SEG.D.desde;
 export const DURACION_GANCHO = INI_HOLO;
 
 // ---------- Holograma (relativo a INI_HOLO) ----------

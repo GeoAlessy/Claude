@@ -5,7 +5,7 @@ import {Holograma} from './Holograma';
 import {PALABRAS} from './subtitulos';
 import {C, TITULAR} from '../estilo';
 import {SPLASH} from './Holograma';
-import {A_INI, RESBALO, SEG, DURACION_GANCHO, DURACION_P15 as DUR_TOTAL, FIN_CARD, FPS, H, FIN, INICIO, INI_HOLO, VOZ_ORDEN} from './tiempos';
+import {A_INI, CHAPUZON, RESBALO, SEG, DURACION_GANCHO, DURACION_P15 as DUR_TOTAL, FIN_CARD, FPS, H, FIN, INICIO, INI_HOLO, VOZ_ORDEN} from './tiempos';
 
 
 // =====================================================================
@@ -22,6 +22,7 @@ const VOZ: [string, number, boolean][] = VOZ_ORDEN.map((id) => [id, INICIO[id], 
 // Golpes moderados: sin heridos (cayó al agua y lo subieron al bote).
 const SFX: [string, number, number][] = [
   ['impacto', RESBALO - 2, 0.14],
+  ['chapuzon', CHAPUZON - 1, 0.4],
   ['escaneo', INI_HOLO - 14, 0.042],
   ['transicion', INI_HOLO + H.MUELLE, 0.05],
   ['transicion', INI_HOLO + H.LINEA, 0.05],
