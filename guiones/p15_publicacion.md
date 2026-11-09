@@ -1,7 +1,7 @@
 # Video 15 · SEO y publicación
 "¿Por qué se fue hacia atrás la escalera?" (trabajador baja por una escalera casi vertical apoyada en un bote · equilibrio y regla 4 a 1)
 
-> Clip de r/Whatcouldgowrong ("Who needs OSHA"). El trabajador cae al agua y sus compañeros lo suben al bote: no hubo heridos visibles. La caída real **no se muestra** (se difumina); solo se ve en el holograma.
+> Clip de r/Whatcouldgowrong ("Who needs OSHA"). El trabajador cae al agua y sus compañeros lo suben al bote: no hubo heridos visibles. La caída se muestra en cámara lenta (pedido del usuario) y se analiza también en el holograma.
 
 ## Título (el 1 es el recomendado)
 1. **¿Por qué se fue hacia atrás la escalera? No se resbaló 🪜**
